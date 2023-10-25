@@ -126,3 +126,21 @@ git remote -v
 ```sh
 git remote set-url origin '[URL]'
 ```
+
+## Изменение описания последнего commit'а
+
+Если закралась ошибка в описании изменений кода при последнем commit'е, это описание можно изменить при помощи команды:
+
+```sh
+git commit --amend -m 'New commit message.'
+```
+
+Далее, изменённый коммит принудительно отправить на сервер:
+
+```sh
+git push --force '<remoteName>' '<branchName>'
+```
+
+```sh
+git push --force 'origin' '<branchName>'
+```
