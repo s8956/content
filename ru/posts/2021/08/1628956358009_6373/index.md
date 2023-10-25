@@ -138,9 +138,9 @@ git commit --amend -m 'New commit message.'
 Далее, изменённый коммит принудительно отправить на сервер:
 
 ```sh
-git push --force '<remoteName>' '<branchName>'
+git push --force '[remoteName]' '[branchName]'
 ```
 
 ```sh
-git push --force 'origin' '<branchName>'
+git push --force 'origin' 'main'
 ```
