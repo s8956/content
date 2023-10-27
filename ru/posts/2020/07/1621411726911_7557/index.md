@@ -30,8 +30,8 @@ Windows 10 до сих пор вызывает противоречивые чу
 
 Как открыть редактор групповых политик? Очень просто: необходимо нажать сочетание клавиш {{< key "WIN|R" >}}, откроется окно команды "Выполнить" и в текстовом поле набрать gpedit.msc и нажать {{< key "OK" >}}.
 
-- :white_check_mark: - включить (разрешить).
-- :no_entry: - отключить (запретить).
+- {{< emoji ":white_check_mark:" >}} - включить (разрешить).
+- {{< emoji ":no_entry:" >}} - отключить (запретить).
 
 ## Computer Details
 
@@ -39,84 +39,84 @@ Windows 10 до сих пор вызывает противоречивые чу
 
 ### System/Device Installation
 
-- :white_check_mark: **Prevent device metadata retrieval from the Internet**  
+- {{< emoji ":white_check_mark:" >}} **Prevent device metadata retrieval from the Internet**  
   Запретить использование мета-информации для подключённых устройств из Интернета. Политика отвечает за отображение индивидуальных значков принтеров, сканеров и такое прочее. Для отображения подобных значков, Windows лезет в Интернет и загружает мета-данные. Мне подобное не нужно, поэтому я включаю политику (включить = запретить).
-- :white_check_mark: **Specify search order for device driver source locations**  
+- {{< emoji ":white_check_mark:" >}} **Specify search order for device driver source locations**  
   Специальный порядок источников для поиска драйверов в них. А вот эта политика отвечает за автоматическую установку драйверов на видеокарты, звуковые карты, различную периферию и прочее. Здесь можно указать ОС в каких источниках искать драйвера, приложения и прочее. Меня всегда раздражало, когда Windows при подключении к Интернету устанавливает устаревшие драйвера, например, на видеокарту. Зачем, когда я могу скачать свежие версии с сайта производителя? Включаю политику и выбираю опцию, указанную ниже.
   - *Do not search Windows Update*  
     Не использовать Windows Update для поиска драйверов.
 
 ### Windows Components/AutoPlay Policies
 
-- :white_check_mark: *Turn off Autoplay*  
+- {{< emoji ":white_check_mark:" >}} *Turn off Autoplay*  
   Отключить автоматический запуск. Политика позволяет отключить запуск подходящего приложения при втыкании, например, флешки с музыкой или картинками. Ранее (да и сейчас, наверно) таким способом любили запускаться злые вирусы. Включаю политику и выбираю опцию, указанную ниже.
   - All drives  
     У меня отключено на всех устройствах.
 
 ### Windows Components/Cloud Content
 
-- :white_check_mark: **Do not show Windows tips**  
+- {{< emoji ":white_check_mark:" >}} **Do not show Windows tips**  
   Не показывать подсказки Windows. Лично мне подсказки ОС не нужны. Я как нибудь без них обойдусь. Включаю политику.
-- :white_check_mark: **Turn off Microsoft consumer experiences**  
+- {{< emoji ":white_check_mark:" >}} **Turn off Microsoft consumer experiences**  
   Выключить Microsoft Consumer Experience. Компания Microsoft своими рекомендациями навязывает установку таких приложений, как Candy Crush Soda Saga, FarmVille 2, Flipboard, Twitter, Photoshop Express, Minecraft и т.д. Мне они не нужны да и мне чуждо такое навязывание. Неприятно. Включаю политику, тем самым отключая подобную рекламу.
 
 ### Windows Components/Data Collection and Preview Builds
 
-- :white_check_mark: **Allow Telemetry**  
+- {{< emoji ":white_check_mark:" >}} **Allow Telemetry**  
   Разрешить телеметрию. Полностью телеметрию отключить всё равно не получится, что бы там не писали в Интернете. Поэтому, я включаю телеметрию и устанавливаю уровень сбора информации.
   - *0 - Security [Enterprise Only]*  
     Ставлю нулевой уровень. Собирать данные, необходимые для осуществления безопасности. Но это только для операционной системы класса Enterprise.
 
 ### Windows Components/Desktop Gadgets
 
-- :white_check_mark: **Turn off desktop gadgets**  
+- {{< emoji ":white_check_mark:" >}} **Turn off desktop gadgets**  
   Выключить гаджеты рабочего стола. Актуально для Windows Vista / 7. В Windows 10 гаджетов не видел. Может потому что не использовал их никогда. Но политику включаю.
 
 ### Windows Components/Microsoft Defender Antivirus
 
-- :white_check_mark: **Turn off Microsoft Defender Antivirus**  
+- {{< emoji ":white_check_mark:" >}} **Turn off Microsoft Defender Antivirus**  
   Отключить Microsoft Defender Antivirus. Я отключаю себе антивирус. Головы хватает, чтобы не подхватить вирусы. Использую только ограниченный проверенный набор программ. При этом, если необходимо запустить что-то экзотическое, у меня всегда развёрнута виртуальная машина в Hyper-V.
 
 ### Windows Components/OneDrive
 
-- :white_check_mark: **Prevent the usage of OneDrive for file storage**  
+- {{< emoji ":white_check_mark:" >}} **Prevent the usage of OneDrive for file storage**  
   Запретить использование OneDrive как файловое хранилище. Мне не нужен OneDrive. Поэтому я запрещаю использование OneDrive в качестве хранилища файлов.
 
 ### Windows Components/Search
 
-- :no_entry: **Allow Cloud Search**  
+- {{< emoji ":no_entry:" >}} **Allow Cloud Search**  
   Разрешить использование облачного поиска. Мне не нужен в ОС поиск, который будет искать по различным сайтам. Только локальный поиск. Поэтому, я запрещаю политику.
-- :no_entry: **Allow Cortana**  
+- {{< emoji ":no_entry:" >}} **Allow Cortana**  
   Разрешить Cortana. Cortana мне тоже не нужна. Мне не о чём с ней поговорить. Поэтому, я запрещаю Cortana.
 
 ### Windows Components/Store
 
-- :white_check_mark: **Disable all apps from Microsoft Store**  
+- {{< emoji ":white_check_mark:" >}} **Disable all apps from Microsoft Store**  
   Отключить все приложения из Microsoft Store. Для выпиливания приложений, установленных из Microsoft Store в Интернете гуляет скрипт на PowerShell. Но мне лень его использовать, да и мало ли что... Поэтому, я просто отключаю подобные приложения через групповые политики. Они остаются в меню Start, но не используются.
-- :white_check_mark: **Turn off the Store application**  
+- {{< emoji ":white_check_mark:" >}} **Turn off the Store application**  
   Подобно представленной выше политике, эта отключает магазин приложений. Согласно описанию и Интернету, эта политика важнее предыдущей, и включение её отключает не только сам магазин, но и приложения из него.
 
 ### Windows Components/Sync your settings
 
-- :white_check_mark: **Do not sync**  
+- {{< emoji ":white_check_mark:" >}} **Do not sync**  
   Не синхронизировать настройки пользователя. Синхронизация настроек между устройствами мне не нужна. Я включаю политику, тем самым отключаю синхронизацию.
 
 ### Windows Components/Windows Game Recording and Broadcasting
 
-- :no_entry: **Enables or disables Windows Game Recording and Broadcasting**  
+- {{< emoji ":no_entry:" >}} **Enables or disables Windows Game Recording and Broadcasting**  
   Включение или отключение функций Windows Game Recording и Broadcasting. Так как я не играю в игры, для меня подобная функциональность ОС избыточна. Отключаю политику.
 
 ### Windows Components/Windows Update
 
-- :white_check_mark: **Configure Automatic Updates**  
+- {{< emoji ":white_check_mark:" >}} **Configure Automatic Updates**  
   Конфигурация автоматического обновления. Ох, сколько в Интернете страданий по поводу обновлений Windows 10. При включении этой политике, я указываю опции, которые помогут избавится от ряда проблем с автоматическим обновлением.
   - **Configure automatic updating:** *2 - Notify for download and auto install*  
     Я выбираю опцию #2, которая гласит как "Информировать о выпуске новых обновлений".
-  - :white_check_mark: *Install updates for other Microsoft products*  
+  - {{< emoji ":white_check_mark:" >}} *Install updates for other Microsoft products*  
     Также отмечаю галочкой опцию "Устанавливать обновления для других продуктов Microsoft". Таким образом, более-менее свежие версии, например, Microsoft Office будут обновляться через Windows Update вместе с ОС.
-- :white_check_mark: **Do not include drivers with Windows Updates**  
+- {{< emoji ":white_check_mark:" >}} **Do not include drivers with Windows Updates**  
   Не использовать драйвера в Windows Updates. Вот эта опция странная. Может я её не так понимаю, но при включении, Windows Updates всё равно ставит драйвера на устройства. А мне подобное обслуживание не надо.
-- :white_check_mark: **No auto-restart with logged on users for scheduled automatic updates installations**  
+- {{< emoji ":white_check_mark:" >}} **No auto-restart with logged on users for scheduled automatic updates installations**  
   Не использовать автоматическую перезагрузку при вошедшем в систему пользователе, когда обновления установились. Вот эта та самая автоматическая перезагрузка, которая попортила нервишки многим пользователям. Например, когда ты днём много работаешь, а на ночь ставишь компьютер считать различные данные, утром можно обнаружить окно готовности войти в систему. Да, установились обновления и компьютер перезагрузился. Включаем политику, тем самым отключая автоматическую перезагрузку.
 
 ## User Details
@@ -125,12 +125,12 @@ Windows 10 до сих пор вызывает противоречивые чу
 
 ### Windows Components/Attachment Manager
 
-- :white_check_mark: **Do not preserve zone information in file attachments**  
+- {{< emoji ":white_check_mark:" >}} **Do not preserve zone information in file attachments**  
   Не сохранять информацию о зоне в файлах. Суть этой политики такова, что если я скачаю из Интернета, например, какой-нибудь EXE-файл, то файловая система пометит его как небезопасный. Лично мне в этом нет необходимости. Включаю политику.
 
 ### Windows Components/Cloud Content
 
-- :white_check_mark: **Turn off all Windows spotlight features**  
+- {{< emoji ":white_check_mark:" >}} **Turn off all Windows spotlight features**  
   Отключить все возможности Windows Spotlight. Windows Spotlight эта функция ОС, которая позволяет отображать на экране входа в систему различную интерактивную информацию, например, сменяющиеся фоновые изображения, различные предложения (рекламные / не рекламные - не знаю, не видел ни разу). Мне это не надо, поэтому я включаю политику, запрещая использование Windows Spotlight.
 
 На этом всё. Возможно, некоторые параметры групповых политик покажутся спорными, а некоторые вообще странными и ненужными, но мне так удобно работать. Список будет дорабатываться, если найду что-нибудь ещё интересное.
