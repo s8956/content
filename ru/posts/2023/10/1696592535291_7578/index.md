@@ -12,7 +12,6 @@ categories:
   - 'security'
 tags:
   - 'linux'
-  - 'windows'
   - 'bash'
   - 'powershell'
   - 'минцифры'

@@ -11,7 +11,6 @@ categories:
   - 'terminal'
   - 'scripts'
 tags:
-  - 'windows'
   - 'powershell'
 authors:
   - 'KitsuneSolar'

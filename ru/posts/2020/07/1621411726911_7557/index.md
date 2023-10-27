@@ -6,7 +6,6 @@ images:
 categories:
   - 'windows'
 tags:
-  - 'windows'
   - 'gpo'
 authors:
   - 'KitsuneSolar'

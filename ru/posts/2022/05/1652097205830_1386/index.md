@@ -8,7 +8,6 @@ cover:
 categories:
   - 'windows'
 tags:
-  - 'windows'
   - 'server'
   - 'powershell'
 authors:

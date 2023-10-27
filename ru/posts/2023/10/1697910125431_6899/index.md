@@ -10,7 +10,6 @@ categories:
   - 'windows'
   - 'terminal'
 tags:
-  - 'windows'
   - 'powershell'
 authors:
   - 'KitsuneSolar'

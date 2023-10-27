@@ -8,7 +8,6 @@ categories:
   - 'terminal'
   - 'scripts'
 tags:
-  - 'windows'
   - 'cmd'
   - 'adk'
   - 'dism'

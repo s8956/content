@@ -11,7 +11,6 @@ categories:
   - 'terminal'
   - 'scripts'
 tags:
-  - 'windows'
   - 'powershell'
   - 'ffmpeg'
 authors:
@@ -65,13 +64,13 @@ draft: 0
 Конвертировать файлы `file_01.mov`, `file_02.mov` и `file_03.mov` в формат `mp4`:
 
 ```powershell
-.\ffmpeg.video.compress.ps1 -F 'file_01.mov', 'file_02.mov', 'file_03.mov'
+.\pwsh.ffmpeg.video.compress.ps1 -F 'file_01.mov', 'file_02.mov', 'file_03.mov'
 ```
 
 Пакетная конвертация всех файлов с расширением `.mov` в формат `mp4`:
 
 ```powershell
-.\ffmpeg.video.compress.ps1 -F '*.mov'
+.\pwsh.ffmpeg.video.compress.ps1 -F '*.mov'
 ```
 
 ## Алгоритм работы
@@ -84,4 +83,4 @@ draft: 0
 
 ## Скрипт
 
-{{< file "ffmpeg.video.compress.ps1" >}}
+{{< file "pwsh.ffmpeg.video.compress.ps1" >}}

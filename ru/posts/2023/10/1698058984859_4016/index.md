@@ -11,7 +11,6 @@ categories:
   - 'terminal'
   - 'scripts'
 tags:
-  - 'windows'
   - 'powershell'
   - 'hdd'
   - 'ssd'
@@ -58,15 +57,15 @@ draft: 0
 Скрипт, запущенный без параметров, сам спросит необходимые данные:
 
 ```powershell
-.\disk.erase.ps1
+.\pwsh.disk.erase.ps1
 ```
 
 Обнулить диск `3`, новому разделу присвоить букву `E`, форматировать в `NTFS` и указать метку `USB-SSD`:
 
 ```powershell
-.\disk.erase.ps1 -DN 3 -DL 'E' -FS 'NTFS' -FSL 'USB-SSD'
+.\pwsh.disk.erase.ps1 -DN 3 -DL 'E' -FS 'NTFS' -FSL 'USB-SSD'
 ```
 
 ## Скрипт
 
-{{< file "disk.erase.ps1" >}}
+{{< file "pwsh.disk.erase.ps1" >}}

@@ -11,7 +11,6 @@ categories:
   - 'scripts'
   - 'linux'
 tags:
-  - 'linux'
   - 'openssl'
   - 'bash'
   - 'сертификаты'

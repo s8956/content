@@ -10,7 +10,6 @@ categories:
   - 'windows'
   - 'scripts'
 tags:
-  - 'windows'
   - 'office'
   - 'cmd'
   - 'активация'

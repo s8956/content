@@ -11,7 +11,6 @@ categories:
   - 'terminal'
   - 'scripts'
 tags:
-  - 'windows'
   - 'powershell'
 authors:
   - 'KitsuneSolar'
@@ -65,25 +64,25 @@ draft: 0
 Запустить перемещение файлов из `Source` в `Vault` с сохранением структуры директорий:
 
 ```powershell
-.\vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault'
+.\pwsh.vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault'
 ```
 
 Запустить перемещение файлов с временем создания и изменения от 10 дней (`864000`) из `Source` в `Vault` с сохранением структуры директорий:
 
 ```powershell
-.\vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000'
+.\pwsh.vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000'
 ```
 
 Запустить перемещение файлов с временем создания и изменения от 10 дней (`864000`) и размером более 32 мегабайта (`32mb`) из `Source` в `Vault` с сохранением структуры директорий:
 
 ```powershell
-.\vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000' -FS '32mb'
+.\pwsh.vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000' -FS '32mb'
 ```
 
 Запустить перемещение файлов с временем создания и изменения от 10 дней (`864000`), и с перезаписью файлов с одинаковыми названиями (`-O`) из `Source` в `Vault` с сохранением структуры директорий:
 
 ```powershell
-.\vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000' -O
+.\pwsh.vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000' -O
 ```
 
 Параметр `-O` означает, что не нужно архивировать старый файл при перемещении нового с таким же названием. Старый файл в хранилище перезапишется новым.
@@ -98,4 +97,4 @@ draft: 0
 
 ## Скрипт
 
-{{< file "vault.ps1" >}}
+{{< file "pwsh.vault.ps1" >}}

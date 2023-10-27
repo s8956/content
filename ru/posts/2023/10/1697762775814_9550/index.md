@@ -12,7 +12,6 @@ categories:
 tags:
   - 'hdd'
   - 'ssd'
-  - 'windows'
   - 'powershell'
   - 'cmd'
   - 'defrag'
