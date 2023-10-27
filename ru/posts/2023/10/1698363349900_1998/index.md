@@ -1,5 +1,5 @@
 ---
-title: 'PowerShell: Изменение порта для RDP'
+title: 'Изменение порта RDP'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1509483730228-811e47696246'
@@ -16,7 +16,9 @@ tags:
 authors:
   - 'KitsuneSolar'
 sources:
-  - ''
+  - 'https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-itemproperty'
+  - 'https://learn.microsoft.com/en-us/powershell/module/netsecurity/new-netfirewallrule'
+  - 'https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/restart-service'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -66,7 +68,7 @@ draft: 0
 
 Запускается скрипт обычным способом. В параметре `-P` указывается новый номер порта RDP.
 
-```
+```powershell
 .\pwsh.rdp.port.ps1 -P 50102
 ```
 
