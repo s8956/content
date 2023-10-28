@@ -128,7 +128,7 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 .\pwsh.set.env.path.system.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03'
 ```
 
-В параметр `-P` указываются значения, которые необходимо добавить в переменную `Path` системного уровня.
+В параметре `-P` указываются значения, которые необходимо добавить в переменную `Path` системного уровня.
 
 #### Пользовательский уровень
 
@@ -142,7 +142,7 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 .\pwsh.set.env.path.user.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03'
 ```
 
-В параметр `-P` указываются значения, которые необходимо добавить в переменную `Path` пользовательского уровня.
+В параметре `-P` указываются значения, которые необходимо добавить в переменную `Path` пользовательского уровня.
 
 #### Общий скрипт
 
@@ -152,7 +152,11 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызывается скрипт обычным способом:
 
-```terminal {os="windows"}
+```terminal {os="windows", hl="false"}
+.\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
+
+.\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
+.\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
 .\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
 ```
 
