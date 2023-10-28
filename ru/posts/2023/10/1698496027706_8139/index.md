@@ -1,5 +1,5 @@
 ---
-title: 'Работа с переменной PATH в среде пользователя'
+title: 'Работа с переменной среды окружения PATH'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1575600749331-6d13fdfe5323'
