@@ -63,13 +63,13 @@ draft: 0
 
 Конвертировать файлы `file_01.mov`, `file_02.mov` и `file_03.mov` в формат `mp4`:
 
-```powershell
+```terminal {os="windows"}
 .\pwsh.ffmpeg.video.compress.ps1 -F 'file_01.mov', 'file_02.mov', 'file_03.mov'
 ```
 
 Пакетная конвертация всех файлов с расширением `.mov` в формат `mp4`:
 
-```powershell
+```terminal {os="windows"}
 .\pwsh.ffmpeg.video.compress.ps1 -F '*.mov'
 ```
 

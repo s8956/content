@@ -124,7 +124,7 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызов скрипта осуществляется следующим образом:
 
-```powershell
+```terminal {os="windows"}
 .\pwsh.set.env.path.system.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03'
 ```
 
@@ -138,7 +138,7 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызов скрипта осуществляется следующим образом:
 
-```powershell
+```terminal {os="windows"}
 .\pwsh.set.env.path.user.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03'
 ```
 
@@ -152,7 +152,7 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызывается скрипт обычным способом:
 
-```powershell
+```terminal {os="windows"}
 .\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
 ```
 

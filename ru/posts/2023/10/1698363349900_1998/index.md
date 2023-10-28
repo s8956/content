@@ -68,7 +68,7 @@ draft: 0
 
 Запускается скрипт обычным способом. В параметре `-P` указывается новый номер порта RDP.
 
-```powershell
+```terminal {os="windows", mode="root"}
 .\pwsh.rdp.port.ps1 -P 50102
 ```
 

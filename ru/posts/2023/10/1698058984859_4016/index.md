@@ -56,13 +56,13 @@ draft: 0
 
 Скрипт, запущенный без параметров, сам спросит необходимые данные:
 
-```powershell
+```terminal {os="windows", mode="root"}
 .\pwsh.disk.erase.ps1
 ```
 
 Обнулить диск `3`, новому разделу присвоить букву `E`, форматировать в `NTFS` и указать метку `USB-SSD`:
 
-```powershell
+```terminal {os="windows", mode="root"}
 .\pwsh.disk.erase.ps1 -DN 3 -DL 'E' -FS 'NTFS' -FSL 'USB-SSD'
 ```
 
