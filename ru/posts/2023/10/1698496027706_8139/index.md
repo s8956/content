@@ -152,11 +152,7 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызывается скрипт обычным способом:
 
-```terminal {os="windows", hl="false"}
-.\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
-
-.\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
-.\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
+```terminal {os="windows"}
 .\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
 ```
 
