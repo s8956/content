@@ -294,7 +294,7 @@ Expression:
 Переадресация в зависимости от запроса, пришедшего на определённый порт.
 
 {{< accordion >}}
-{{< accordionItem "Переадресовать обращения к любым портам кроме '80' и '443'" >}}
+{{< accordionItem "Переадресовать обращения к любым портам кроме '80' и '443' на порт '443' (HTTPS)" >}}
 `https://example.com:1212` `->` `https://example.com`
 
 When incoming requests match:
