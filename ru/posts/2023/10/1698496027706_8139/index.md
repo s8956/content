@@ -124,7 +124,7 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызов скрипта осуществляется следующим образом:
 
-```terminal {os="windows"}
+```terminal {os="windows",mode="root"}
 .\pwsh.set.env.path.system.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03'
 ```
 
