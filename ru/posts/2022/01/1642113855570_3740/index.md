@@ -72,13 +72,13 @@ draft: 0
 2. Скачивание файла подписи `archive.key` и размещение его в директорию `/etc/apt/trusted.gpg.d` с названием `xanmod-kernel.gpg`.
 3. Обновление информации из репозитория при помощи команды `apt update`.
 
-```sh
+```terminal {os="linux"}
 echo 'deb [signed-by=/etc/apt/trusted.gpg.d/xanmod-kernel.gpg] http://deb.xanmod.org releases main' | tee /etc/apt/sources.list.d/xanmod-kernel.list && curl -fsSL 'https://dl.xanmod.org/archive.key' | gpg --dearmor | tee /etc/apt/trusted.gpg.d/xanmod-kernel.gpg > /dev/null && apt update
 ```
 
 После выполнения вышеприведённой команды, установка ядра XanMod происходит таким образом:
 
-```sh
+```terminal {os="linux"}
 apt install linux-xanmod-[ABI]
 ```
 
@@ -90,31 +90,31 @@ apt install linux-xanmod-[ABI]
 
 Установить ядро XanMod с версией архитектуры `x64v1`:
 
-```sh
+```terminal {os="linux"}
 apt install linux-xanmod-x64v1
 ```
 
 Установить ядро XanMod с версией архитектуры `x64v2`:
 
-```sh
+```terminal {os="linux"}
 apt install linux-xanmod-x64v2
 ```
 
 Установить ядро XanMod с версией архитектуры `x64v3`:
 
-```sh
+```terminal {os="linux"}
 apt install linux-xanmod-x64v3
 ```
 
 Установить ядро XanMod с версией архитектуры `x64v4`:
 
-```sh
+```terminal {os="linux"}
 apt install linux-xanmod-x64v4
 ```
 
 Для установки Mainline-версии ядра команда будет такой:
 
-```sh
+```terminal {os="linux"}
 apt install linux-xanmod-edge-x64v3
 ```
 

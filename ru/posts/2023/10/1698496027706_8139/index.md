@@ -72,7 +72,7 @@ draft: 0
 
 Чтобы добавить свои значения в переменную `Path` на системном уровне, необходимо указать ключ `/m`:
 
-```batch
+```terminal {os="windows" mode="root" hl="batch"}
 setx /m Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 ```
 
@@ -98,7 +98,7 @@ setx /m Path "%Path%C:\MyCustomDir"
 
 Добавить свои значения в переменную `Path` на пользовательском уровне:
 
-```batch
+```terminal {os="windows" hl="batch"}
 setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 ```
 
