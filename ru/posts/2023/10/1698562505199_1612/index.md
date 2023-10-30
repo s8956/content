@@ -155,17 +155,18 @@ CloudFlare предоставляет мощный инструмент по р�
 {{< accordionItem "example.com | www.example.com" >}}
 `https://example.com` `->` `https://www.example.com`
 
-When incoming requests match:
+**When incoming requests match:**
 
 ```lua
 (http.host eq "example.com")
 ```
 
-- Then...
-  - Type: `Dynamic`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Dynamic`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 concat("https://www.", http.host, http.request.uri.path)
@@ -174,17 +175,18 @@ concat("https://www.", http.host, http.request.uri.path)
 {{< accordionItem "www.example.com | example.com" >}}
 `https://www.example.com` `->` `https://example.com`
 
-When incoming requests match:
+**When incoming requests match:**
 
 ```lua
 (http.host eq "www.example.com")
 ```
 
-- Then...
-  - Type: `Dynamic`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Dynamic`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 concat("https://", http.host, http.request.uri.path)
@@ -193,17 +195,18 @@ concat("https://", http.host, http.request.uri.path)
 {{< accordionItem "example.com/path | example.org/path">}}
 `https://example.com/path` `->` `https://example.org/path`
 
-When incoming requests match:
+**When incoming requests match:**
 
 ```lua
 (http.host eq "example.com")
 ```
 
-- Then...
-  - Type: `Dynamic`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Dynamic`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 concat("https://example.org", http.request.uri.path)
@@ -212,17 +215,18 @@ concat("https://example.org", http.request.uri.path)
 {{< accordionItem "example.com | example.org">}}
 `https://example.com` `->` `https://example.org`
 
-When incoming requests match:
+**When incoming requests match:**
 
 ```lua
 (http.host contains "example.com")
 ```
 
-- Then...
-  - Type: `Static`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Static`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 https://example.org/
@@ -231,17 +235,18 @@ https://example.org/
 {{< accordionItem "sub.example.com | example.com/sub">}}
 `https://sub.example.com` `->` `https://example.com/sub`
 
-When incoming requests match:
+**When incoming requests match:**
 
 ```lua
 (http.host eq "sub.example.com")
 ```
 
-- Then...
-  - Type: `Dynamic`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Dynamic`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 concat("https://", http.host, "/sub", http.request.uri.path)
@@ -250,17 +255,18 @@ concat("https://", http.host, "/sub", http.request.uri.path)
 {{< accordionItem "example.com/sub | sub.example.com">}}
 `https://example.com/sub` `->` `https://sub.example.com`
 
-When incoming requests match:
+**When incoming requests match:**
 
 ```lua
 (starts_with(http.request.uri.path, "/sub/"))
 ```
 
-- Then...
-  - Type: `Dynamic`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Dynamic`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 concat("https://sub.", http.host, substring(http.request.uri.path, 6))
@@ -271,17 +277,18 @@ concat("https://sub.", http.host, substring(http.request.uri.path, 6))
 {{< accordionItem "example.com/contact-us/ | example.com/contact/">}}
 `https://example.com/contact-us/` `->` `https://example.com/contact/`
 
-When incoming requests match:
+**When incoming requests match:**
 
 ```lua
 (http.request.uri.path eq "/contact-us/")
 ```
 
-- Then...
-  - Type: `Static`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Static`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 /contacts/
@@ -297,17 +304,18 @@ Expression:
 {{< accordionItem "Переадресовать запрос к любым портам (кроме '80' и '443') на порт '443' (HTTPS)" >}}
 `https://example.com:1212` `->` `https://example.com`
 
-When incoming requests match:
+**When incoming requests match:**
 
 ```lua
 (not (cf.edge.server_port in {80 443}))
 ```
 
-- Then...
-  - Type: `Dynamic`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Dynamic`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 concat("https://", http.host, http.request.uri.path)
@@ -321,34 +329,40 @@ concat("https://", http.host, http.request.uri.path)
 
 {{< accordion >}}
 {{< accordionItem "Переадресовать пользователей из стран RU/BY/UA в директорию '/ru'" >}}
-When incoming requests match:
+`https://example.com` `->` `https://example.com/ru/`
+
+**When incoming requests match:**
 
 ```lua
 (((ip.src.country eq "RU") or (ip.src.country eq "BY") or (ip.src.country eq "UA")) and (http.request.uri.path eq "/"))
 ```
 
-- Then...
-  - Type: `Dynamic`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Dynamic`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 lower(concat("https://", http.host, "/ru/"))
 ```
 {{< /accordionItem >}}
 {{< accordionItem "Переадресовать пользователей НЕ из стран RU/BY/UA в директорию '/en'" >}}
-When incoming requests match:
+`https://example.com` `->` `https://example.com/en/`
+
+**When incoming requests match:**
 
 ```lua
 (((ip.src.country ne "RU") or (ip.src.country ne "BY") or (ip.src.country ne "UA")) and (http.request.uri.path eq "/"))
 ```
 
-- Then...
-  - Type: `Dynamic`
-  - Status code: `301`
+**Then...**
 
-Expression:
+- Type: `Dynamic`
+- Status code: `301`
+
+**URL:**
 
 ```lua
 lower(concat("https://", http.host, "/en/"))
