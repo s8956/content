@@ -11,7 +11,7 @@ tags:
 authors:
   - 'KitsuneSolar'
 sources:
-  - 'https://developers.cloudflare.com/rules/transform/url-rewrite/examples/'
+  - 'https://developers.cloudflare.com/rules/transform/url-rewrite/examples'
 
 date: '2023-10-31T09:16:50+03:00'
 publishDate: '2023-10-31T09:16:50+03:00'
