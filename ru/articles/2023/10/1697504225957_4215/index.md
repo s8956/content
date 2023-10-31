@@ -2,7 +2,7 @@
 title: 'FAQ для IP.Board 2.3'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d'
+  - 'https://images.unsplash.com/photo-1636574879131-5f3cd5c8a8e1'
 cover:
   crop: 'entropy'
   fit: 'crop'
