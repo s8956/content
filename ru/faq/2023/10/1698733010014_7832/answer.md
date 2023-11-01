@@ -22,40 +22,17 @@ regex_replace(http.request.uri.path, "^/pages/", "/posts/")
 ```
 {{< /accordionItem >}}
 
-Однако, функция `regex_replace()`, которая используется в правиле, работает только на платных аккаунтах. То есть, в бесплатной версии ClaudFlare она недоступна. Но есть обходной манёвр.
+Однако, функция `regex_replace()`, которая используется в правиле, работает только на платных аккаунтах. То есть, в бесплатной версии ClaudFlare она недоступна. Но есть обходной манёвр...
 
-## 1. ClaudFlare Redirect Rules
+## ClaudFlare Page Rules
 
-Необходимо в разделе **Redirect Rules** создать следующее правило:
+В разделе **Page Rules** создаём правило:
 
-{{< accordionItem "http.request.uri.path eq '/pages/'" >}}
-**When incoming requests match:**
-
-```
-(http.request.uri.path eq "/pages/")
-```
-
-**Then...**
-
-- Type: `Static`
-- Status code: `301`
-
-**URL:**
-
-```
-/posts/
-```
-{{< /accordionItem >}}
-
-## 2. ClaudFlare Page Rules
-
-Далее в разделе **Page Rules** создаём правило новое правило:
-
-{{< accordionItem "https://lib.onl/ru/pages/*" >}}
+{{< accordionItem "https://domain.com/pages/*" >}}
 **URL (required):**
 
 ```
-https://lib.onl/ru/pages/*
+https://domain.com/pages/*
 ```
 
 **Then the settings are:**
@@ -66,6 +43,8 @@ https://lib.onl/ru/pages/*
 Enter destination URL (required):
 
 ```
-https://lib.onl/ru/posts/$1
+https://domain.com/posts/$1
 ```
 {{< /accordionItem >}}
+
+Замечу, что раздел **Page Rules** объявлен `deprecated` и, возможно, в будущем будет удалён.
