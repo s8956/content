@@ -32,7 +32,7 @@ regex_replace(http.request.uri.path, "^/pages/", "/posts/")
 **URL (required):**
 
 ```
-https://domain.com/pages/*
+domain.com/pages/*
 ```
 
 **Then the settings are:**
