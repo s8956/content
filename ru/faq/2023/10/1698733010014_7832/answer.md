@@ -1,28 +1,4 @@
-В ClaudFlare появился отдельный инструмент под названием **Transform Rules**.
-
-## ClaudFlare Transform Rules
-
-**Transform Rules** позволяет налету изменять URL при запросе клиента. Следующее правило поможет в решении вопроса:
-
-{{< accordionItem "starts_with(http.request.uri.path, '/pages/')" >}}
-**When incoming requests match...**
-
-```
-starts_with(http.request.uri.path, "/pages/")
-```
-
-**Then...**
-
-- Path
-  - `Rewrite to...`
-    - `Dynamic`
-
-```
-regex_replace(http.request.uri.path, "^/pages/", "/posts/")
-```
-{{< /accordionItem >}}
-
-Однако, функция `regex_replace()`, которая используется в правиле, работает только на платных аккаунтах. То есть, в бесплатной версии ClaudFlare она недоступна. Но есть обходной манёвр...
+В ClaudFlare имеется раздел **Page Rules**, в котором можно настроить переадресацию.
 
 ## ClaudFlare Page Rules
 
