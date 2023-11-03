@@ -15,6 +15,8 @@ toc: 1
 comments: 1
 
 date: '2020-07-22T00:15:37+03:00'
+
+type: 'articles'
 hash: '94261403060b17b62bb07a0c07d09af9f1edd121'
 uuid: '94261403-060b-57b6-9bb0-7a0c07d09af9'
 slug: '94261403-060b-57b6-9bb0-7a0c07d09af9'

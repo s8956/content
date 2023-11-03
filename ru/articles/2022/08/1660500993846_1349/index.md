@@ -19,6 +19,8 @@ toc: 1
 comments: 1
 
 date: '2022-08-14T21:16:34+03:00'
+
+type: 'articles'
 hash: 'badb30a90471cdab542285422c0ac61167683b43'
 uuid: 'badb30a9-0471-5dab-a422-85422c0ac611'
 slug: 'badb30a9-0471-5dab-a422-85422c0ac611'

@@ -23,6 +23,8 @@ toc: 1
 comments: 1
 
 date: '2023-09-26T20:17:18+03:00'
+
+type: 'articles'
 hash: 'dd5a3e1a596b20d59070b2a065f99f3283ef3e90'
 uuid: 'dd5a3e1a-596b-50d5-b070-b2a065f99f32'
 slug: 'dd5a3e1a-596b-50d5-b070-b2a065f99f32'

@@ -20,6 +20,8 @@ toc: 1
 comments: 1
 
 date: '2021-09-13T00:36:02+03:00'
+
+type: 'articles'
 hash: '1cf305cd85d09e02aabbe01346bfee0fe29ed687'
 uuid: '1cf305cd-85d0-5e02-aabb-e01346bfee0f'
 slug: '1cf305cd-85d0-5e02-aabb-e01346bfee0f'

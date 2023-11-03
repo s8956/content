@@ -18,6 +18,7 @@ publishDate: '2023-10-31T22:52:35+03:00'
 expiryDate: ''
 lastMod: '2023-10-31T22:52:35+03:00'
 
+type: 'faq'
 hash: 'edf745173e6eee1cda6b8ee0335670b45684e278'
 uuid: 'edf74517-3e6e-5e1c-aa6b-8ee0335670b4'
 slug: 'edf74517-3e6e-5e1c-aa6b-8ee0335670b4'

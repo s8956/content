@@ -15,11 +15,13 @@ toc: 1
 comments: 1
 
 date: '2021-08-20T14:47:38+03:00'
+
+type: 'articles'
 hash: '66ed72386afcb0eb750dc5cbe3c370c7cdbd8c0a'
 uuid: '66ed7238-6afc-50eb-950d-c5cbe3c370c7'
 slug: '66ed7238-6afc-50eb-950d-c5cbe3c370c7'
 
-draft: 1
+draft: 0
 ---
 
 <!--more-->

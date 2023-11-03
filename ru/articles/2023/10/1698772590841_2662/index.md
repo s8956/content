@@ -33,6 +33,7 @@ publishDate: '2023-10-31T20:16:31+03:00'
 expiryDate: ''
 lastMod: '2023-10-31T20:16:31+03:00'
 
+type: 'articles'
 hash: '430b916dfd5cbd445c248b98f41e03558d4e8100'
 uuid: '430b916d-fd5c-5d44-8c24-8b98f41e0355'
 slug: '430b916d-fd5c-5d44-8c24-8b98f41e0355'

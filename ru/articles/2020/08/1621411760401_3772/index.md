@@ -21,6 +21,8 @@ toc: 1
 comments: 1
 
 date: '2020-08-02T01:44:46+03:00'
+
+type: 'articles'
 hash: '1cc2e43f187b75a187eda772bbdcf78ae961c0da'
 uuid: '1cc2e43f-187b-55a1-97ed-a772bbdcf78a'
 slug: '1cc2e43f-187b-55a1-97ed-a772bbdcf78a'

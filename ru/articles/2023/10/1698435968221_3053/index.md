@@ -28,6 +28,7 @@ publishDate: '2023-10-27T22:46:08+03:00'
 expiryDate: ''
 lastMod: '2023-10-27T22:46:08+03:00'
 
+type: 'articles'
 hash: 'fb64d6653e56bfa5b9eb2e2e251949d8dae1abcb'
 uuid: 'fb64d665-3e56-5fa5-a9eb-2e2e251949d8'
 slug: 'fb64d665-3e56-5fa5-a9eb-2e2e251949d8'
