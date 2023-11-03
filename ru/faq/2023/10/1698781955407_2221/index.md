@@ -3,9 +3,6 @@ title: 'Многоточие в выводе PowerShell в табличном ф
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 tags:
   - 'powershell'
 authors:

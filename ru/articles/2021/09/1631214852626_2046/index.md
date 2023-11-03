@@ -3,6 +3,8 @@ title: 'Debian: Wired Networks are Unmanaged'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1554098415-4052459dc340'
+cover:
+  crop: 'bottom'
 categories:
   - 'linux'
 tags:

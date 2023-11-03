@@ -3,9 +3,6 @@ title: 'Читабельные ссылки на темы форума для IP
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1591457217849-d6ec46eceb76'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'cmf'
   - 'inHistory'

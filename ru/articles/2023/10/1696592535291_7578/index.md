@@ -3,9 +3,6 @@ title: 'Установка сертификата НУЦ Минцифры'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1570610159825-ec5d3823660c'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'linux'
   - 'windows'

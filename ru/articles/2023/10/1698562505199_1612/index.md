@@ -3,9 +3,6 @@ title: 'Работа с правилами CloudFlare'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1687488802693-db85cc7783e4'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'inDev'
   - 'network'

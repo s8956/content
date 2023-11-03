@@ -4,8 +4,7 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1554098415-4052459dc340'
 cover:
-  crop: 'entropy'
-  fit: 'crop'
+  crop: 'bottom'
 categories:
   - 'network'
   - 'security'

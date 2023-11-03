@@ -3,6 +3,8 @@ title: 'GnuPG: Создание и работа с ключами шифрова
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1572435555646-7ad9a149ad91'
+cover:
+  crop: 'bottom'
 categories:
   - 'crypto'
   - 'security'

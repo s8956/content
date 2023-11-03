@@ -3,9 +3,6 @@ title: 'Работа с сетевыми интерфейсами в PowerShell'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1597733336794-12d05021d510'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'terminal'

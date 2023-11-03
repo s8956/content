@@ -3,9 +3,6 @@ title: 'Дефрагментация в ОС Windows'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1591913139332-f8172ef511da'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'terminal'

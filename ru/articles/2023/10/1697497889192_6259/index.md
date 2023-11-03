@@ -3,9 +3,6 @@ title: 'Условия в шаблонах IP.Board 2.3'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1537884944318-390069bb8665'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'cmf'
   - 'inHistory'

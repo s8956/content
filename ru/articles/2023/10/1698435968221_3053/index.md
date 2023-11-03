@@ -3,9 +3,6 @@ title: 'Автоматическая настройка Windows Server 2022 по
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1603969409447-ba86143a03f6'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'terminal'

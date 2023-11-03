@@ -3,9 +3,6 @@ title: 'PowerShell: Сжатие видео при помощи FFmpeg'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'terminal'

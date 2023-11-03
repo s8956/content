@@ -3,9 +3,6 @@ title: 'Получение и установка MS Office 2021 LTSC'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1649433391420-542fcd3835ea'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'scripts'

@@ -3,9 +3,6 @@ title: 'SQL запросы IP.Board 3.x'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1662026911591-335639b11db6'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'cmf'
   - 'inHistory'

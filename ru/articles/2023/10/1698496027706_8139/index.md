@@ -3,9 +3,6 @@ title: 'Работа с переменной среды окружения PATH'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1575600749331-6d13fdfe5323'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'terminal'

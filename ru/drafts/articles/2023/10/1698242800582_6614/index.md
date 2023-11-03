@@ -3,9 +3,6 @@ title: 'Изучаем API "ЕИС Закупки"'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1536733203354-a125031aa773'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'linux'
   - 'windows'

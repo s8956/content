@@ -3,6 +3,8 @@ title: 'Разнообразие команд ls*'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d'
+cover:
+  crop: 'bottom'
 categories:
   - 'terminal'
   - 'inDev'

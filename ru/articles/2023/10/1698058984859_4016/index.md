@@ -3,9 +3,6 @@ title: 'PowerShell: Стирание диска'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1646226343350-1ee5021e342a'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'terminal'

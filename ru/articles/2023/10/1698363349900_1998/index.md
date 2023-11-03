@@ -3,9 +3,6 @@ title: 'Изменение порта RDP'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1509483730228-811e47696246'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'terminal'

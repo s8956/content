@@ -3,6 +3,8 @@ title: 'MikroTik и CloudFlare: Динамический IP для домена'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1521542464131-cb30f7398bc6'
+cover:
+  crop: 'bottom'
 categories:
   - 'network'
   - 'scripts'

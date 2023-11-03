@@ -3,9 +3,6 @@ title: 'Создание сертификатов при помощи OpenSSL'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1568057373189-8bf0cf6179e6'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'terminal'
   - 'scripts'

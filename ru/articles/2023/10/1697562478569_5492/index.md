@@ -3,9 +3,6 @@ title: 'Условия в шаблонах для vBulletin 3'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1518773553398-650c184e0bb3'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'cmf'
   - 'inHistory'

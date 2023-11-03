@@ -3,9 +3,6 @@ title: 'Невидимые ссылки для гостей на IP.Board 2.3'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1597237364955-c094c7171326'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'cmf'
   - 'inHistory'

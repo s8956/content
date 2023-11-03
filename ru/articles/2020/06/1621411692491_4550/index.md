@@ -3,6 +3,8 @@ title: 'Запись ISO на USB Flash Drive'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1587145820098-23e484e69816'
+cover:
+  crop: 'bottom'
 categories:
   - 'linux'
 tags:

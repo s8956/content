@@ -3,9 +3,6 @@ title: 'Динамическое "(Powered by Invision Power Board)" на IP.Boa
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1632177693073-f6e62c17ec59'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'cmf'
   - 'inHistory'

@@ -3,9 +3,6 @@ title: 'PowerShell: Полезные функции'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
   - 'terminal'

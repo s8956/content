@@ -4,8 +4,7 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1642176849879-92f85770f212'
 cover:
-  crop: 'entropy'
-  fit: 'crop'
+  crop: 'bottom'
 categories:
   - 'windows'
   - 'terminal'

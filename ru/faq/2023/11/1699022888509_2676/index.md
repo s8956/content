@@ -3,9 +3,6 @@ title: 'Как распаковать Intel SetupChipset.exe?'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 tags:
   - 'intel'
   - 'chipset'

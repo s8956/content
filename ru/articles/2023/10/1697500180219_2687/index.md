@@ -4,8 +4,7 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1535551951406-a19828b0a76b'
 cover:
-  crop: 'entropy'
-  fit: 'crop'
+  crop: 'bottom'
 categories:
   - 'cmf'
   - 'inHistory'

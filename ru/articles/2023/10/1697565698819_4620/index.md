@@ -3,9 +3,6 @@ title: 'Дополнительная страница для vBulletin 4'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1554757387-fa0367573d09'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'cmf'
   - 'inHistory'

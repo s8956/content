@@ -3,9 +3,6 @@ title: 'Дополнительная страница для IP.Board 2.3'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1527176930608-09cb256ab504'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'cmf'
   - 'inHistory'

@@ -3,9 +3,6 @@ title: 'Как при помощи CloudFlare заменить в URL одну �
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 tags:
   - 'cloudflare'
 authors:

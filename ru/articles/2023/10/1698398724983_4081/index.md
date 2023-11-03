@@ -2,10 +2,7 @@
 title: 'Восстановление доверительных отношений между PC и Active Directory'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1477383384651-442903132e79'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
+  - 'https://images.unsplash.com/photo-1551730459-92db2a308d6a'
 categories:
   - 'windows'
   - 'scripts'

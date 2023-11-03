@@ -3,9 +3,6 @@ title: 'Автоматическая установка ОС Windows'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
-cover:
-  crop: 'entropy'
-  fit: 'crop'
 categories:
   - 'windows'
 tags:
