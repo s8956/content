@@ -1,5 +1,6 @@
 ---
 title: 'О проекте'
+description: ''
 images:
   - 'https://images.unsplash.com/photo-1554921027-b91f0beeb07d'
 ---
