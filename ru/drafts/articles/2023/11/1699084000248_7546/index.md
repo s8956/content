@@ -3,38 +3,46 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Как при помощи CloudFlare заменить в URL одну директорию на другую?'
+title: 'Установка и настройка DHCP'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d'
+  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+categories:
+  - 'windows'
+  - 'scripts'
 tags:
-  - 'cloudflare'
+  - 'dhcp'
+  - 'powershell'
 authors:
   - 'KitsuneSolar'
 sources:
-  - 'https://developers.cloudflare.com/rules/transform/url-rewrite/examples'
+  - ''
+license: 'CC-BY-SA-4.0'
+complexity: '0'
+toc: 1
+comments: 1
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Date settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-date: '2023-10-31T09:16:50+03:00'
-publishDate: '2023-10-31T09:16:50+03:00'
+date: '2023-11-04T10:46:40+03:00'
+publishDate: '2023-11-04T10:46:40+03:00'
 expiryDate: ''
-lastMod: '2023-10-31T09:16:50+03:00'
+lastMod: '2023-11-04T10:46:40+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Meta settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-type: 'faq'
-hash: '3c4c670969a664be8404e4b7ede6ab90219c5659'
-uuid: '3c4c6709-69a6-54be-9404-e4b7ede6ab90'
-slug: '3c4c6709-69a6-54be-9404-e4b7ede6ab90'
+type: 'articles'
+hash: '59becb4f4f0d4685d966632c6eff1a1f0773a4a5'
+uuid: '59becb4f-4f0d-5685-8966-632c6eff1a1f'
+slug: '59becb4f-4f0d-5685-8966-632c6eff1a1f'
 
 draft: 0
 ---
 
-Здравствуйте! Страницы сайта переехали в другой раздел. Было `domain.com/[pages]/post_1`, стало `domain.com/[posts]/post_1`. Надо сделать перенаправление. Но как?
-
 <!--more-->
+
+{{< file "pwsh.dhcp.ps1" >}}

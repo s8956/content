@@ -3,38 +3,38 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Как при помощи CloudFlare заменить в URL одну директорию на другую?'
+title: 'Как переименовать компьютер в PowerShell?'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d'
 tags:
-  - 'cloudflare'
+  - 'powershell'
 authors:
   - 'KitsuneSolar'
 sources:
-  - 'https://developers.cloudflare.com/rules/transform/url-rewrite/examples'
+  - 'https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/rename-computer'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Date settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-date: '2023-10-31T09:16:50+03:00'
-publishDate: '2023-10-31T09:16:50+03:00'
+date: '2023-11-04T09:06:25+03:00'
+publishDate: '2023-11-04T09:06:25+03:00'
 expiryDate: ''
-lastMod: '2023-10-31T09:16:50+03:00'
+lastMod: '2023-11-04T09:06:25+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Meta settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 type: 'faq'
-hash: '3c4c670969a664be8404e4b7ede6ab90219c5659'
-uuid: '3c4c6709-69a6-54be-9404-e4b7ede6ab90'
-slug: '3c4c6709-69a6-54be-9404-e4b7ede6ab90'
+hash: 'e153bb1d7cea1bd86cce2dbe63b26c91cef291d9'
+uuid: 'e153bb1d-7cea-5bd8-acce-2dbe63b26c91'
+slug: 'e153bb1d-7cea-5bd8-acce-2dbe63b26c91'
 
 draft: 0
 ---
 
-Здравствуйте! Страницы сайта переехали в другой раздел. Было `domain.com/[pages]/post_1`, стало `domain.com/[posts]/post_1`. Надо сделать перенаправление. Но как?
+Хочу переименовать компьютер через терминал PowerShell. Как это сделать?
 
 <!--more-->
