@@ -51,13 +51,66 @@ draft: 0
 
 <!--more-->
 
-{{< file "auto/alma.srv.bios.ini" >}}
-{{< file "auto/alma.srv.uefi.ini" >}}
-{{< file "auto/debian.srv.bios.ini" >}}
-{{< file "auto/debian.srv.uefi.ini" >}}
-{{< file "auto/fedora.srv.bios.ini" >}}
-{{< file "auto/fedora.srv.uefi.ini" >}}
-{{< file "auto/oracle.srv.bios.ini" >}}
-{{< file "auto/oracle.srv.uefi.ini" >}}
-{{< file "auto/rocky.srv.bios.ini" >}}
-{{< file "auto/rocky.srv.uefi.ini" >}}
+## Запуск автоматической установки
+
+### RHEL / Fedora
+
+```
+url=https://lib.onl/auto/[id].ini
+```
+
+### Debian / Ubuntu
+
+```
+inst.ks=https://lib.onl/auto/[id].ini
+```
+
+## Пользователи по умолчанию
+
+- ROOT
+  - Name: `root`
+  - Password: `cDFy mu2a ML`
+- USER-0000
+  - Name: `user-0000`
+  - Password: `7Jxs 6PKV Ak`
+
+## Скрипт первичной настройки
+
+{{< file "auto/unix.setup.sh" >}}
+
+## Сценарии автоматической установки
+
+### Alma Linux
+
+#### Server
+
+{{< file "auto/alma.srv.bios.ini" "properties" >}}
+{{< file "auto/alma.srv.uefi.ini" "properties" >}}
+
+### Debian
+
+#### Server
+
+{{< file "auto/debian.srv.bios.ini" "properties" >}}
+{{< file "auto/debian.srv.uefi.ini" "properties" >}}
+
+### Fedora Linux
+
+#### Server
+
+{{< file "auto/fedora.srv.bios.ini" "properties" >}}
+{{< file "auto/fedora.srv.uefi.ini" "properties" >}}
+
+### Oracle Linux
+
+#### Server
+
+{{< file "auto/oracle.srv.bios.ini" "properties" >}}
+{{< file "auto/oracle.srv.uefi.ini" "properties" >}}
+
+### Rocky Linux
+
+#### Server
+
+{{< file "auto/rocky.srv.bios.ini" "properties" >}}
+{{< file "auto/rocky.srv.uefi.ini" "properties" >}}
