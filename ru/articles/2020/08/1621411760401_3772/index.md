@@ -57,8 +57,8 @@ draft: 0
 
 На момент публикации статьи я выбрал следующие компоненты, доступные на рынке:
 
-- Веб-камера [Logitech WebCam C615](https://www.logitech.com/en-us/product/hd-webcam-c615).
-- Два настольных микрофона [Maono AU-BM10](https://www.maono.com/products/usb-microphone-bm10/).
+- Веб-камера [Logitech WebCam C615](https://market.yandex.ru/search?text=Logitech%20WebCam%20C615).
+- Два настольных микрофона [Maono AU-BM10](https://market.yandex.ru/search?text=maono%20au-bm10).
 
 {{< imgur name="Yhim15t.jpeg" >}}Набор для организации ВКС-станции.{{< /imgur >}}
 

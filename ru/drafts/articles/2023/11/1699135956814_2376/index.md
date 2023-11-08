@@ -16,7 +16,7 @@ tags:
 authors:
   - 'KitsuneSolar'
 sources:
-  - 'https://www.cyberciti.biz/faq/bash-scripting-using-awk/'
+  - 'https://www.cyberciti.biz/faq/bash-scripting-using-awk'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
