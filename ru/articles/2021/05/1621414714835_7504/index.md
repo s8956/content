@@ -11,8 +11,6 @@ categories:
   - 'terminal'
   - 'linux'
 tags:
-  - 'linux'
-  - 'terminal'
   - 'chmod'
   - 'find'
 authors:

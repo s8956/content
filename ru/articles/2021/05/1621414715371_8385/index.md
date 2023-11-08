@@ -13,8 +13,6 @@ categories:
   - 'terminal'
   - 'linux'
 tags:
-  - 'linux'
-  - 'terminal'
   - 'halt'
   - 'poweroff'
   - 'reboot'

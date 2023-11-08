@@ -14,8 +14,6 @@ categories:
   - 'inDev'
   - 'linux'
 tags:
-  - 'linux'
-  - 'terminal'
   - 'ls'
 authors:
   - 'KitsuneSolar'

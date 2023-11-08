@@ -14,7 +14,6 @@ categories:
   - 'inDev'
 tags:
   - 'git'
-  - 'linux'
 authors:
   - 'KitsuneSolar'
 license: 'CC-BY-SA-4.0'

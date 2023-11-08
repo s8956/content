@@ -12,7 +12,6 @@ cover:
 categories:
   - 'linux'
 tags:
-  - 'linux'
   - 'usb'
 authors:
   - 'KitsuneSolar'

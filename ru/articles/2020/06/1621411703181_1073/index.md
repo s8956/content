@@ -10,7 +10,6 @@ images:
 categories:
   - 'linux'
 tags:
-  - 'linux'
   - 'fedora'
 authors:
   - 'KitsuneSolar'
