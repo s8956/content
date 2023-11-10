@@ -5,6 +5,10 @@
 
 title: 'PowerShell: Автоматическая настройка Windows Server 2022 под Workstation'
 description: ''
+tags:
+  - 'powershell'
+  - 'server'
+  - 'workstation'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Date settings.
