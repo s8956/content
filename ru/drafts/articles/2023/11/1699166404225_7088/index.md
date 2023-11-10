@@ -84,33 +84,33 @@ inst.ks=https://lib.onl/auto/[id].ini
 
 #### Server
 
-{{< file "auto/alma.srv.bios.ini" "properties" >}}
-{{< file "auto/alma.srv.uefi.ini" "properties" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "alma.srv.bios.ini" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "alma.srv.uefi.ini" >}}
 
 ### Debian
 
 #### Server
 
-{{< file "auto/debian.srv.bios.ini" "properties" >}}
-{{< file "auto/debian.srv.uefi.ini" "properties" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "debian.srv.bios.ini" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "debian.srv.uefi.ini" >}}
 
 ### Fedora Linux
 
 #### Server
 
-{{< file "auto/fedora.srv.bios.ini" "properties" >}}
-{{< file "auto/fedora.srv.uefi.ini" "properties" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "fedora.srv.bios.ini" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "fedora.srv.uefi.ini" >}}
 
 ### Oracle Linux
 
 #### Server
 
-{{< file "auto/oracle.srv.bios.ini" "properties" >}}
-{{< file "auto/oracle.srv.uefi.ini" "properties" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "oracle.srv.bios.ini" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "oracle.srv.uefi.ini" >}}
 
 ### Rocky Linux
 
 #### Server
 
-{{< file "auto/rocky.srv.bios.ini" "properties" >}}
-{{< file "auto/rocky.srv.uefi.ini" "properties" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "rocky.srv.bios.ini" >}}
+{{< resource "cb16cbb8-5964-5591-83ab-b2d9c6042dcc" "rocky.srv.uefi.ini" >}}
