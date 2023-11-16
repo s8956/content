@@ -93,4 +93,4 @@ draft: 0
 
 ## Скрипт
 
-{{< file "pwsh.ffmpeg.video.compress.ps1" >}}
+{{< gh-repo "pkgstore/pwsh-ffmpeg" >}}
