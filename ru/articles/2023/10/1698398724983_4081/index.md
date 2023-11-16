@@ -108,4 +108,4 @@ The security database on the server does not have a computer account for this wo
 
 ### Скрипт
 
-{{< resource "422967f1-fed2-5031-bd85-10d6f8556595" "pwsh.csc.repair.ps1" >}}
+{{< file "pwsh.csc.repair.ps1" >}}

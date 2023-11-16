@@ -4,7 +4,7 @@
 
 В разделе **Page Rules** создаём правило:
 
-{{< accordionItem "https://domain.com/pages/*" >}}
+{{< accordion-item "https://domain.com/pages/*" >}}
 **URL (required):**
 
 ```
@@ -21,6 +21,6 @@ Enter destination URL (required):
 ```
 https://domain.com/posts/$1
 ```
-{{< /accordionItem >}}
+{{< /accordion-item >}}
 
 Замечу, что раздел **Page Rules** объявлен `deprecated` и, возможно, в будущем будет удалён.

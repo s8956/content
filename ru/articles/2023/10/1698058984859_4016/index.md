@@ -78,4 +78,4 @@ draft: 0
 
 ## Скрипт
 
-{{< resource "b99eaba1-fea9-54cd-9ac0-0c2d16fe9483" "pwsh.disk.erase.ps1" >}}
+{{< file "pwsh.disk.erase.ps1" >}}

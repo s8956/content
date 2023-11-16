@@ -90,4 +90,4 @@ draft: 0
 
 ### Скрипт
 
-{{< resource "fb1b79c6-6208-54a3-b262-0b6324ddb431" "pwsh.rdp.port.ps1" >}}
+{{< file "pwsh.rdp.port.ps1" >}}

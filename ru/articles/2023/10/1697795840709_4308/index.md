@@ -109,4 +109,4 @@ draft: 0
 
 ## Скрипт
 
-{{< resource "b099a30a-b6a4-529e-9134-6815fae09812" "pwsh.vault.ps1" >}}
+{{< file "pwsh.vault.ps1" >}}

@@ -74,4 +74,4 @@ draft: 0
 
 ### Скрипт
 
-{{< resource "bef14d61-f5df-5813-a830-6c29953707a8" "pwsh.win.srv.ws.ps1" >}}
+{{< file "pwsh.win.srv.ws.ps1" >}}

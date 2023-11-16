@@ -93,4 +93,4 @@ draft: 0
 
 ## Скрипт
 
-{{< resource "808bc1d8-cf94-5b92-86b5-0cb5b635438c" "pwsh.ffmpeg.video.compress.ps1" >}}
+{{< file "pwsh.ffmpeg.video.compress.ps1" >}}
