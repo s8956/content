@@ -37,7 +37,3 @@ draft: 0
 <!--more-->
 
 Это первая запись для тестирования конфигурации и возможностей данного блога. Запись для тестирования функциональности и корректности шаблонов.
-
-{{< gh-repo "tarptaeya/repo-card|pkgstore/hugo-ui-blog-old" >}}
-
-{{< gh-user "tarptaeya|KitsuneSolar|qww" >}}
