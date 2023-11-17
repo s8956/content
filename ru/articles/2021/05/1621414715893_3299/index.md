@@ -36,7 +36,7 @@ hash: '8bdb6bfec516beed99e405003575d2109a5bd949'
 uuid: '8bdb6bfe-c516-5eed-a9e4-05003575d210'
 slug: '8bdb6bfe-c516-5eed-a9e4-05003575d210'
 
-draft: 0
+draft: 1
 ---
 
 <!--more-->

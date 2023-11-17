@@ -33,7 +33,7 @@ hash: '66ed72386afcb0eb750dc5cbe3c370c7cdbd8c0a'
 uuid: '66ed7238-6afc-50eb-950d-c5cbe3c370c7'
 slug: '66ed7238-6afc-50eb-950d-c5cbe3c370c7'
 
-draft: 0
+draft: 1
 ---
 
 <!--more-->
