@@ -3,4 +3,5 @@ title: 'Resources'
 weight: '2'
 ---
 
-- [UNIX AIK](https://uaik.github.io/)
+- [Kitsune Solar](https://kitsune.solar/)
+- [Universal AIK](https://uaik.github.io/)

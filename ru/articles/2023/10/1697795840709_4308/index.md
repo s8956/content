@@ -18,7 +18,7 @@ tags:
 authors:
   - 'KitsuneSolar'
 sources:
-  - ''
+  - 'https://github.com/pkgstore/pwsh-vault'
 license: 'CC-BY-SA-4.0'
 complexity: '1'
 toc: 1
@@ -57,44 +57,44 @@ draft: 0
 
 ## Параметры
 
-- `-M` `-P_Mode` - режим работы скрипта. По умолчанию `'MV'`.
+- `-M` `-Mode` - режим работы скрипта. По умолчанию `'MV'`.
   - `'CP'` - копировать файлы из источника в хранилище.
   - `'MV'` - перемещать файлы из источника в хранилище.
   - `'RM'` - только удалять файлы из источника без копирования или перемещения куда-либо.
-- `-SRC` `-P_Source` - путь к директории откуда перемещать файлы. Например, `-SRC 'C:\Data\Source'`. По умолчанию: `${PSScriptRoot}\Source`.
-- `-DST` `-P_Vault` - путь к директории куда перемещать файлы. Например, `-DST 'C:\Data\Vault'`. По умолчанию: `${PSScriptRoot}\Vault`.
-- `-CT` `-P_CreationTime` - время создания файла в секундах. Например, `-CT 5270400`. По умолчанию: `5270400` (61 день).
-- `-WT` `-P_LastWriteTime` - время изменения файла в секундах. Например, `-WT 5270400`. По умолчанию: `${P_CreationTime}`.
-- `-FS` `-P_FileSize` - размер файла. Например, `-FS '5kb'` или `-FS '12mb'`. По умолчанию: `'0kb'`.
-- `-E` `-P_Exclude` - путь к файлу с исключениями. Например, `-E 'C:\Data\exclude.txt'`. По умолчанию: `${PSScriptRoot}\vault.exclude.txt`.
-- `-L` `-P_Logs` - путь к директории с журналами работы скрипта. Например, `-L 'C:\Data\Logs'`. По умолчанию: `${PSScriptRoot}\Logs`.
-- `-RD` `-P_RemoveDirs` - удалять пустые каталоги.
-- `-O` `-P_Overwrite` - перезаписать файлы в Vault.
+- `-SRC` `-Source` - путь к директории откуда перемещать файлы. Например, `-SRC 'C:\Data\Source'`. По умолчанию: `${PSScriptRoot}\Source`.
+- `-DST` `-Vault` - путь к директории куда перемещать файлы. Например, `-DST 'C:\Data\Vault'`. По умолчанию: `${PSScriptRoot}\Vault`.
+- `-CT` `-CreationTime` - время создания файла в секундах. Например, `-CT 5270400`. По умолчанию: `5270400` (61 день).
+- `-WT` `-LastWriteTime` - время изменения файла в секундах. Например, `-WT 5270400`. По умолчанию: `${P_CreationTime}`.
+- `-FS` `-FileSize` - размер файла. Например, `-FS '5kb'` или `-FS '12mb'`. По умолчанию: `'0kb'`.
+- `-E` `-Exclude` - путь к файлу с исключениями. Например, `-E 'C:\Data\exclude.txt'`. По умолчанию: `${PSScriptRoot}\vault.exclude.txt`.
+- `-L` `-Logs` - путь к директории с журналами работы скрипта. Например, `-L 'C:\Data\Logs'`. По умолчанию: `${PSScriptRoot}\Logs`.
+- `-RD` `-RemoveDirs` - удалять пустые каталоги.
+- `-O` `-Overwrite` - перезаписать файлы в Vault.
 
 ## Примеры
 
 Запустить перемещение файлов из `Source` в `Vault` с сохранением структуры директорий:
 
 ```terminal {os="windows"}
-.\pwsh.vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault'
+Start-Vault -SRC 'C:\Data\Source' -DST 'C:\Data\Vault'
 ```
 
 Запустить перемещение файлов с временем создания и изменения от 10 дней (`864000`) из `Source` в `Vault` с сохранением структуры директорий:
 
 ```terminal {os="windows"}
-.\pwsh.vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000'
+Start-Vault -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000'
 ```
 
 Запустить перемещение файлов с временем создания и изменения от 10 дней (`864000`) и размером более 32 мегабайта (`32mb`) из `Source` в `Vault` с сохранением структуры директорий:
 
 ```terminal {os="windows"}
-.\pwsh.vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000' -FS '32mb'
+Start-Vault -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000' -FS '32mb'
 ```
 
 Запустить перемещение файлов с временем создания и изменения от 10 дней (`864000`), и с перезаписью файлов с одинаковыми названиями (`-O`) из `Source` в `Vault` с сохранением структуры директорий:
 
 ```terminal {os="windows"}
-.\pwsh.vault.ps1 -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000' -O
+Start-Vault -SRC 'C:\Data\Source' -DST 'C:\Data\Vault' -CT '864000' -WT '864000' -O
 ```
 
 Параметр `-O` означает, что не нужно архивировать старый файл при перемещении нового с таким же названием. Старый файл в хранилище перезапишется новым.
@@ -109,4 +109,4 @@ draft: 0
 
 ## Скрипт
 
-{{< file "pwsh.vault.ps1" >}}
+{{< gh-repo "pkgstore/pwsh-vault" >}}
