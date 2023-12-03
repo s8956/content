@@ -15,7 +15,7 @@ tags:
   - 'ips'
   - 'forum'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -50,7 +50,7 @@ draft: 0
 
 {{< alert "info" >}}
 - Автор: GiV.
-- Тестирование (маленькое :)): KitsuneSolar.
+- Тестирование (маленькое :)): z17cx.
 - Исправление ошибок и неточностей: Sannis.
 {{< /alert >}}
 

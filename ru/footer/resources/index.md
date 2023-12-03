@@ -3,5 +3,5 @@ title: 'Ресурсы'
 weight: '2'
 ---
 
-- [Kitsune Solar](https://kitsune.solar/)
+- [z17CX](https://kitsune.solar/)
 - [Universal AIK](https://uaik.github.io/)

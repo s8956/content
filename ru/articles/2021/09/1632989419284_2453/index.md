@@ -15,7 +15,7 @@ tags:
   - 'gdm'
   - 'systemd'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://www.reddit.com/r/gnome/comments/ml0sky/solution_to_a_black_screen_on_boot_problem_after/'
   - 'https://www.reddit.com/r/archlinux/comments/j1ji0o/gdm_login_screen_doesnt_show_until_switching_tty/'

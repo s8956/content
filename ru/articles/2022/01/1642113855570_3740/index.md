@@ -14,7 +14,7 @@ tags:
   - 'xanmod'
   - 'kernel'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://xanmod.org'
 license: 'CC-BY-SA-4.0'

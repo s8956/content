@@ -17,7 +17,7 @@ tags:
   - 'dism'
   - 'интеграция'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 license: 'CC-BY-SA-4.0'
 complexity: '1'
 toc: 1

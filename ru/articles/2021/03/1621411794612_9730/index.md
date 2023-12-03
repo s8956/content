@@ -13,7 +13,7 @@ tags:
   - 'monero'
   - 'systemd'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -41,7 +41,7 @@ draft: 0
 
 <!--more-->
 
-Написал небольшой [systemd unit](https://github.com/KitsuneSolar/xmrig-systemd) для майнера [xmrig](https://github.com/search?q=xmrig). Запускается от имени `root` в отдельной сессии **screen**, но можно запускать от любого пользователя: в командах запуска и остановки необходимо вместо `root` прописывать имя другого пользователя.
+Написал небольшой [systemd unit](https://github.com/z17cx/xmrig-systemd) для майнера [xmrig](https://github.com/search?q=xmrig). Запускается от имени `root` в отдельной сессии **screen**, но можно запускать от любого пользователя: в командах запуска и остановки необходимо вместо `root` прописывать имя другого пользователя.
 
 ## Установка
 

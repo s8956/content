@@ -10,7 +10,7 @@ images:
 tags:
   - 'cloudflare'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://developers.cloudflare.com/rules/transform/url-rewrite/examples'
 

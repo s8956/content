@@ -15,7 +15,7 @@ tags:
   - 'cms'
   - 'cmf'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://xenforo.com/community/resources/5795/'
 license: 'CC-BY-SA-4.0'

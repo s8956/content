@@ -15,7 +15,7 @@ categories:
 tags:
   - 'powershell'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://stackoverflow.com/a/70893061'
 license: 'CC-BY-SA-4.0'

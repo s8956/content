@@ -14,7 +14,7 @@ tags:
   - 'opnsense'
   - 'dot'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://docs.opnsense.org/manual/unbound.html'
 license: 'CC-BY-SA-4.0'

@@ -17,7 +17,7 @@ tags:
   - 'минцифры'
   - 'сертификаты'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://www.gosuslugi.ru/crt'
   - 'https://developers.sber.ru/help/certificates/how-to'

@@ -14,7 +14,7 @@ tags:
   - 'bash'
   - 'awk'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://www.cyberciti.biz/faq/bash-scripting-using-awk'
 license: 'CC-BY-SA-4.0'

@@ -16,7 +16,7 @@ categories:
 tags:
   - 'powershell'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - 'https://github.com/pkgstore/pwsh-vault'
 license: 'CC-BY-SA-4.0'

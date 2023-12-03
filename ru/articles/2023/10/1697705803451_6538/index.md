@@ -17,7 +17,7 @@ tags:
   - 'mikrotik'
   - 'routeros'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'

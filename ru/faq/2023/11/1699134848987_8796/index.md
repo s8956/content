@@ -11,7 +11,7 @@ tags:
   - 'bash'
   - 'awk'
 authors:
-  - 'KitsuneSolar'
+  - 'z17cx'
 sources:
   - ''
 
