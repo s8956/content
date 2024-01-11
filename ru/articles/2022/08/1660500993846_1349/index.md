@@ -51,14 +51,14 @@ draft: 0
 ## Настройка OPNsense
 
 - System / Settings / General
-  - Отключить параметр **Do not use the local DNS service as a nameserver for this system**.
-- Services / DHCPv4 / [LAN]
   - Удалить все записи о DNS, если они имеются.
+  - Отключить параметр **Allow DNS server list to be overridden by DHCP/PPP on WAN**.
+  - Отключить параметр **Do not use the local DNS service as a nameserver for this system**.
 - Services / Unbound DNS / General
   - Включить сервис, поставив галочку напротив **Enable**.
   - Выбрать в параметре **Network Interfaces** пункт локальной сети, в данном случае, *LAN*.
   - Включить **DNSSEC**, поставив галочку напротив парамера **Enable DNSSEC Support**.
-  - Остальные параметры можно выключить.
+  - Остальные параметры можно не трогать.
 - Services / Unbound DNS / DNS over TLS
   - Добавить публичные сервера DNS из списка ниже.
 

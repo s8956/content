@@ -18,15 +18,9 @@ add name=WAN
 add name=LAN
 
 /interface bridge port
-add bridge=$bridge interface=ether2
-add bridge=$bridge interface=ether3
-add bridge=$bridge interface=ether4
-add bridge=$bridge interface=ether5
-add bridge=$bridge interface=ether6
-add bridge=$bridge interface=ether7
-add bridge=$bridge interface=ether8
-add bridge=$bridge interface=ether9
-add bridge=$bridge interface=ether10
+:for i from=2 to=10 do={
+  add bridge=$bridge interface=("ether" . $i)
+}
 
 /interface list member
 add interface=ether1 list=WAN
@@ -48,7 +42,7 @@ add address=10.0.0.1/16 interface=$bridge network=10.0.0.0
 add interface=ether1
 
 /ip dhcp-server lease
-add address=10.0.10.1 mac-address=11:11:11:11:11:11 comment="SERVER01"
+# add address=10.0.10.1 mac-address=11:11:11:11:11:11 comment="SERVER01"
 
 /ip dhcp-server network
 add address=10.0.0.0/16 dns-server=10.0.0.1,1.1.1.1,1.0.0.1 domain=home.lan gateway=10.0.0.1 ntp-server=10.0.0.1
@@ -65,8 +59,8 @@ add action=drop chain=input connection-state=invalid comment="[DROP] Invalid"
 add action=accept chain=input protocol=icmp comment="[ACCEPT] ICMP"
 add action=accept chain=input dst-port=9090,22022 protocol=tcp comment="[ROS] WinBox and SSH"
 add action=drop chain=input in-interface-list=!LAN comment="[DROP] All not coming from LAN"
-add action=accept chain=forward ipsec-policy=in,ipsec comment="[ACCEPT] In IPsec policy"
-add action=accept chain=forward ipsec-policy=out,ipsec comment="[ACCEPT] Out IPsec policy"
+# add action=accept chain=forward ipsec-policy=in,ipsec comment="[ACCEPT] In IPsec policy"
+# add action=accept chain=forward ipsec-policy=out,ipsec comment="[ACCEPT] Out IPsec policy"
 add action=fasttrack-connection chain=forward connection-state=established,related comment="[ROS] FastTrack"
 add action=accept chain=forward connection-state=established,related,untracked comment="[ROS] FastTrack"
 add action=drop chain=forward connection-state=invalid comment="[DROP] Invalid"
