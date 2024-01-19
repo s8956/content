@@ -14,7 +14,7 @@ tags:
   - 'tpm'
   - 'unattend'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-automation-overview'
 license: 'CC-BY-SA-4.0'

@@ -1,5 +1,5 @@
 # @package    MikroTik / RouterOS
-# @author     z17CX <mail@z17.cx>
+# @author     Kai Kimera <mail@kai.kim>
 # @copyright  2023 Library Online
 # @license    MIT
 # @version    0.1.0

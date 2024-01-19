@@ -15,7 +15,7 @@ tags:
   - 'cms'
   - 'cmf'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://xenforo.com/community/resources/5795/'
 license: 'CC-BY-SA-4.0'

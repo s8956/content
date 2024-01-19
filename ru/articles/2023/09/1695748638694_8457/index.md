@@ -15,7 +15,7 @@ tags:
   - 'cmd'
   - 'активация'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://learn.microsoft.com/en-us/office/troubleshoot/installation/how-to-download-office-install-not-in-vlsc'
 license: 'CC-BY-SA-4.0'

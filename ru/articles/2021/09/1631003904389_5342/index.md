@@ -14,7 +14,7 @@ tags:
   - 'dhcp'
   - 'dhclient'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://bugzilla.redhat.com/show_bug.cgi?id=560361'
 license: 'CC-BY-SA-4.0'

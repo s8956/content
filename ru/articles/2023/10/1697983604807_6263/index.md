@@ -15,7 +15,7 @@ tags:
   - 'powershell'
   - 'ffmpeg'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://github.com/pkgstore/pwsh-ffmpeg'
   - 'https://trac.ffmpeg.org/wiki'

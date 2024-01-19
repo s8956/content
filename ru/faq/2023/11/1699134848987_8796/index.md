@@ -11,7 +11,7 @@ tags:
   - 'bash'
   - 'awk'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - ''
 

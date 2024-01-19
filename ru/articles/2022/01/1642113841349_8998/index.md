@@ -14,7 +14,7 @@ tags:
   - 'vivaldi'
   - 'browser'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://help.vivaldi.com/desktop/install-update/manual-setup-vivaldi-linux-repositories/'
 license: 'CC-BY-SA-4.0'

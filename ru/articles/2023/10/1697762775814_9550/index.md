@@ -17,7 +17,7 @@ tags:
   - 'cmd'
   - 'defrag'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://learn.microsoft.com/en-us/powershell/module/storage/optimize-volume'
   - 'https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/defrag'

@@ -15,7 +15,7 @@ tags:
   - 'powershell'
   - 'rdp'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-itemproperty'
   - 'https://learn.microsoft.com/en-us/powershell/module/netsecurity/new-netfirewallrule'

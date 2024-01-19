@@ -15,7 +15,7 @@ categories:
 tags:
   - 'powershell'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://learn.microsoft.com/en-us/powershell/module/netadapter/get-netadapter'
   - 'https://learn.microsoft.com/en-us/powershell/module/netconnection/get-netconnectionprofile'

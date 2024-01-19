@@ -10,7 +10,7 @@ images:
 tags:
   - 'powershell'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://stackoverflow.com/a/49481797'
 

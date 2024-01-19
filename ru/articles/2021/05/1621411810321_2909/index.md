@@ -15,7 +15,7 @@ tags:
   - 'inkscape'
   - 'convert'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1

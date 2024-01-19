@@ -15,7 +15,7 @@ tags:
   - 'ips'
   - 'forum'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -50,7 +50,7 @@ draft: 0
 
 {{< alert "info" >}}
 - Автор: GiV.
-- Тестирование (маленькое :)): z17cx.
+- Тестирование (маленькое :)): KaiKimera.
 - Исправление ошибок и неточностей: Sannis.
 {{< /alert >}}
 

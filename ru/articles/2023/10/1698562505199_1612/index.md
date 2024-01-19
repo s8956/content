@@ -14,7 +14,7 @@ tags:
   - 'rule'
   - 'cloudflare'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://developers.cloudflare.com/rules/url-forwarding/single-redirects/examples'
   - 'https://community.cloudflare.com/t/508780'

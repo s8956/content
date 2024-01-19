@@ -17,7 +17,7 @@ tags:
   - 'network'
   - 'network-manager'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://wiki.debian.org/NetworkManager'
 license: 'CC-BY-SA-4.0'

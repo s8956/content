@@ -17,7 +17,7 @@ tags:
   - 'powershell'
   - 'path'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://learn.microsoft.com/ru-ru/windows-server/administration/windows-commands/setx'
   - 'https://learn.microsoft.com/en-us/dotnet/api/system.environment.getenvironmentvariables'

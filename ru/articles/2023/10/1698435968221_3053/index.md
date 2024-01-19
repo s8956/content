@@ -16,7 +16,7 @@ tags:
   - 'workstation'
   - 'server'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'

@@ -1,7 +1,7 @@
 ---
-title: 'z17CX'
+title: 'Kai Kimera'
 info:
-  alternateName: 'z17CX'
+  alternateName: 'Kai Kimera'
   gender: 'Male'
   birthDate: '1987-03-13'
   birthPlace:
@@ -13,18 +13,17 @@ info:
     region: 'Moscow Region'
     country: 'Russia'
   job: 'System administrator'
-  email: 'mail@z17.cx'
+  email: 'mail@kai.kim'
   telephone: '+7 (000) 000-0000'
-  url: 'https://z17.cx/'
+  url: 'https://kai.kim/'
   awards:
     - 'Грамота АО Институт ЭНЕРГОСЕТЬПРОЕКТ'
   sameAs:
-    - 'https://github.com/z17cx'
-    - 'https://gitlab.com/z17cx'
-    - 'https://instagram.com/z17cx'
-    - 'https://twitter.com/z17cx'
-    - 'https://vk.com/z17cx'
-    - 'https://youtube.com/@z17cx'
+    - 'https://github.com/KaiKimera'
+    - 'https://instagram.com/KaiKimera'
+    - 'https://twitter.com/KaiKimera'
+    - 'https://vk.com/KaiKimera'
+    - 'https://youtube.com/@KaiKimera'
 ---
 
 System administrator and web developer. I'm writing articles on system administration and development of various systems, applications and servers.

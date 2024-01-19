@@ -3,5 +3,5 @@ title: 'Resources'
 weight: '2'
 ---
 
-- [z17CX](https://z17.cx/)
+- [Kai Kimera](https://kai.kim/)
 - [Universal AIK](https://uaik.github.io/)

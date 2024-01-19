@@ -15,7 +15,7 @@ categories:
 tags:
   - 'powershell'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://stackoverflow.com/a/70893061'
 license: 'CC-BY-SA-4.0'

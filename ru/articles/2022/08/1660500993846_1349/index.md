@@ -14,7 +14,7 @@ tags:
   - 'opnsense'
   - 'dot'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://docs.opnsense.org/manual/unbound.html'
 license: 'CC-BY-SA-4.0'

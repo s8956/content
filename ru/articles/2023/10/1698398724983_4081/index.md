@@ -16,7 +16,7 @@ tags:
   - 'domain'
   - 'ad'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel'
   - 'https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/troubleshoot-broken-secure-channel'

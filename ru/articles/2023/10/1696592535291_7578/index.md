@@ -17,7 +17,7 @@ tags:
   - 'минцифры'
   - 'сертификаты'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://www.gosuslugi.ru/crt'
   - 'https://developers.sber.ru/help/certificates/how-to'

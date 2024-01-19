@@ -14,7 +14,7 @@ tags:
   - 'proxmox'
   - 'debian'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://pve.proxmox.com/wiki/Install_Proxmox_VE_on_Debian_11_Bullseye'
   - 'https://pve.proxmox.com/wiki/Network_Configuration'

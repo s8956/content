@@ -14,7 +14,7 @@ tags:
   - 'xanmod'
   - 'kernel'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://xanmod.org'
 license: 'CC-BY-SA-4.0'

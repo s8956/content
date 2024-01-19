@@ -10,7 +10,7 @@ images:
 tags:
   - 'powershell'
 authors:
-  - 'z17cx'
+  - 'KaiKimera'
 sources:
   - 'https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/rename-computer'
 
