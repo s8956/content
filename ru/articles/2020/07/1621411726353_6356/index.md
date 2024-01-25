@@ -261,7 +261,7 @@ gpg --delete-secret-and-public-key 'JTM4BAVLPI8F0XHR'
 Эти параметры указываются друг за другом в строгом порядке:
 
 ```terminal {os="linux"}
-bash bash.gpg.gen.sh key 'john.doe@example.com' 'John Doe' '<PASSPHRASE>'
+bash bash.gpg.gen.sh key 'John Doe' 'john.doe@example.com' '<PASSPHRASE>'
 ```
 
 После отработки скрипта, в директории где он запускался появятся два файла с публичным и приватным ключами.
