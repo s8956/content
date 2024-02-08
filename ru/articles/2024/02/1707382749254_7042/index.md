@@ -56,7 +56,7 @@ draft: 0
 1. Запросить обновления:
 
 ```
-freebsd-update fetch install
+freebsd-update fetch
 ```
 
 2. Применить обновления:
