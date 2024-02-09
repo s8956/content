@@ -50,7 +50,7 @@ slug: '430b916d-fd5c-5d44-8c24-8b98f41e0355'
 draft: 0
 ---
 
-Разберём основные команды, которые пригодятся нам при настройке сети в ОС Windows через PowerShell.
+Разберём основные команды, которые пригодятся нам при настройке сети в ОС {{< tag "Windows" >}} через {{< tag "PowerShell" >}}.
 
 <!--more-->
 
@@ -152,7 +152,7 @@ Get-NetAdapter -InterfaceIndex 5 | Remove-NetRoute -Confirm:$false
 
 ## Настройка DNS
 
-Установить IP-адреса серверов DNS на интерфейсе `5`:
+Установить IP-адреса серверов {{< tag "DNS" >}} на интерфейсе `5`:
 
 ```powershell
 Get-NetAdapter -InterfaceIndex 5 | Set-DNSClientServerAddress –ServerAddresses ('192.168.0.2','192.168.1.2')
@@ -164,7 +164,7 @@ Get-NetAdapter -InterfaceIndex 5 | Set-DNSClientServerAddress –ServerAddresses
 Get-NetAdapter -InterfaceIndex 5 | Set-DnsClientServerAddress -ResetServerAddresses
 ```
 
-Очистить кэш DNS:
+Очистить кэш {{< tag "DNS" >}}:
 
 ```powershell
 Clear-DnsClientCache
@@ -172,13 +172,13 @@ Clear-DnsClientCache
 
 ## Настройка DHCP
 
-Включить DHCP на интерфейсе `5`:
+Включить {{< tag "DHCP" >}} на интерфейсе `5`:
 
 ```powershell
 Get-NetAdapter -InterfaceIndex 5 | Set-NetIPInterface -Dhcp 'Enabled'
 ```
 
-Перезапустить интерфейс с именем `Ethernet` для получения параметров от DHCP:
+Перезапустить интерфейс с именем `Ethernet` для получения параметров от {{< tag "DHCP" >}}:
 
 ```powershell
 Get-NetAdapter -InterfaceIndex 5 | Restart-NetAdapter

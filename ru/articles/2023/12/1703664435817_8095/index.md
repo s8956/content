@@ -43,7 +43,7 @@ slug: 'b6c7c5cd-1b0d-5fcd-8dd2-f28f87a5064c'
 draft: 0
 ---
 
-Небольшая заметка по настройке DNS over HTTPS (DoH) на MikroTik.
+Небольшая заметка по настройке DNS over HTTPS ({{< tag "DoH" >}}) на {{< tag "MikroTik" >}}.
 
 <!--more-->
 

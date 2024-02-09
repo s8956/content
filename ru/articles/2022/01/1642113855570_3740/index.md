@@ -43,13 +43,13 @@ slug: '06ef2fab-2ae2-5356-9154-7ca1e486d27d'
 draft: 0
 ---
 
-Приветствую! В этой небольшой заметке приведу команду, при помощи которой можно добавить репозиторий ядра XanMod в Debian.
+Приветствую! В этой небольшой заметке приведу команду, при помощи которой можно добавить репозиторий ядра {{< tag "XanMod" >}} в {{< tag "Debian" >}}.
 
 <!--more-->
 
 ## Что такое ядро XanMod?
 
-Ядро **XanMod** имеет ряд патчей и оптимизаций. Список изменений по сравнению с ванильным ядром, я взял с [официального сайта](https://xanmod.org):
+Ядро {{< tag "XanMod" >}} имеет ряд патчей и оптимизаций. Список изменений по сравнению с ванильным ядром, я взял с [официального сайта](https://xanmod.org):
 
 - Caching, Virtual Memory Manager and CPUFreq Governor improvements.
 - Full multi-core block layer runqueue requests for high I/O throughput.
@@ -75,11 +75,11 @@ draft: 0
 - Generic packages for compatibility with most Debian & Ubuntu based distributions. Builts on the latest LLVM 12.0.1, GCC 11.2 and Binutils 2.37.
 - GPLv2 license. Can be built for any distribution or purpose.
 
-Стоит заметить, что ядро XanMod не единственное, которое интегрирует в себя оптимизации. Есть ещё ядро [**Liquorix**](https://liquorix.net), которое занимается практически тем же самым. Но, посмотрев [обзор и тесты](https://www.phoronix.com/scan.php?page=article&item=ryzen5-xanmod-liquorix) на Phoronix'е, я сделал выбор в пользу XanMod.
+Стоит заметить, что ядро {{< tag "XanMod" >}} не единственное, которое интегрирует в себя оптимизации. Есть ещё ядро [**Liquorix**](https://liquorix.net), которое занимается практически тем же самым. Но, посмотрев [обзор и тесты](https://www.phoronix.com/scan.php?page=article&item=ryzen5-xanmod-liquorix) на Phoronix'е, я сделал выбор в пользу {{< tag "XanMod" >}}.
 
 ## Установка XanMod
 
-Однострочная команда по добавлению ядра XanMod в репозиторий Debian'а приведена ниже. Она дробится на следующие под-команды:
+Однострочная команда по добавлению ядра {{< tag "XanMod" >}} в репозиторий {{< tag "Debian" >}}'а приведена ниже. Она дробится на следующие под-команды:
 
 1. Добавление файла `xanmod-kernel.list` в директорию `/etc/apt/sources.list.d`.
 2. Скачивание файла подписи `archive.key` и размещение его в директорию `/etc/apt/trusted.gpg.d` с названием `xanmod-kernel.gpg`.
@@ -89,7 +89,7 @@ draft: 0
 echo 'deb [signed-by=/etc/apt/trusted.gpg.d/xanmod-kernel.gpg] http://deb.xanmod.org releases main' | tee /etc/apt/sources.list.d/xanmod-kernel.list && curl -fsSL 'https://dl.xanmod.org/archive.key' | gpg --dearmor | tee /etc/apt/trusted.gpg.d/xanmod-kernel.gpg > /dev/null && apt update
 ```
 
-После выполнения вышеприведённой команды, установка ядра XanMod происходит таким образом:
+После выполнения вышеприведённой команды, установка ядра {{< tag "XanMod" >}} происходит таким образом:
 
 ```terminal {os="linux"}
 apt install linux-xanmod-[ABI]
@@ -101,25 +101,25 @@ apt install linux-xanmod-[ABI]
 
 ### Примеры
 
-Установить ядро XanMod с версией архитектуры `x64v1`:
+Установить ядро {{< tag "XanMod" >}} с версией архитектуры `x64v1`:
 
 ```terminal {os="linux"}
 apt install linux-xanmod-x64v1
 ```
 
-Установить ядро XanMod с версией архитектуры `x64v2`:
+Установить ядро {{< tag "XanMod" >}} с версией архитектуры `x64v2`:
 
 ```terminal {os="linux"}
 apt install linux-xanmod-x64v2
 ```
 
-Установить ядро XanMod с версией архитектуры `x64v3`:
+Установить ядро {{< tag "XanMod" >}} с версией архитектуры `x64v3`:
 
 ```terminal {os="linux"}
 apt install linux-xanmod-x64v3
 ```
 
-Установить ядро XanMod с версией архитектуры `x64v4`:
+Установить ядро {{< tag "XanMod" >}} с версией архитектуры `x64v4`:
 
 ```terminal {os="linux"}
 apt install linux-xanmod-x64v4

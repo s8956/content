@@ -39,7 +39,7 @@ slug: '36058650-3f35-5ed5-9565-0aa7d8800c28'
 draft: 0
 ---
 
-В этой небольшой заметке я расскажу, как перенастроить серверную версию ОС Windows для работы на обычном стационарном ПК.
+В этой небольшой заметке я расскажу, как перенастроить серверную версию ОС {{< tag "Windows" >}} для работы на обычном стационарном ПК.
 
 <!--more-->
 
@@ -69,7 +69,7 @@ draft: 0
 
 ## Отключение строгой системы безопасности IE
 
-Сервер использует строгие параметры системы безопасности IE. Но на рабочей станции в этих параметрах нет необходимости и они будут только мешать. Отключаем их.
+Сервер использует строгие параметры системы безопасности {{< tag "IE" >}}. Но на рабочей станции в этих параметрах нет необходимости и они будут только мешать. Отключаем их.
 
 - Server Manager / Local Server
   - IE Enhanced Security Configuration
@@ -85,14 +85,14 @@ draft: 0
 
 ## Отключение DEP
 
-По умолчанию, [Data Execution Prevention (DEP)](https://docs.microsoft.com/en-us/windows/win32/memory/data-execution-prevention) включена абсолютно для всех программ и сервисов. Такая излишняя защита на рабочей станции не нужна. Поэтому, переключаем выполнение DEP только для программ и сервисов самой ОС Windows.
+По умолчанию, [Data Execution Prevention (DEP)](https://docs.microsoft.com/en-us/windows/win32/memory/data-execution-prevention) включена абсолютно для всех программ и сервисов. Такая излишняя защита на рабочей станции не нужна. Поэтому, переключаем выполнение {{< tag "DEP" >}} только для программ и сервисов самой ОС Windows.
 
 - System / Advanced System Settings / Advanced / Performance / Data Execution Prevention
   - Turn on DEP for essential Windows programs and services only
 
 ## Включение Memory Compression, Operation API и PageCombining
 
-В ОС Windows для обычных компьютеров включены Memory Compression, Operation API и PageCombining. Поэтому, перенастраиваем серверную версию ОС на такую же конфигурацию. Для этого запускаем PowerShell от имени Администратора и выполняем команду:
+В ОС {{< tag "Windows" >}} для обычных компьютеров включены Memory Compression, Operation API и PageCombining. Поэтому, перенастраиваем серверную версию ОС на такую же конфигурацию. Для этого запускаем {{< tag "PowerShell" >}} от имени Администратора и выполняем команду:
 
 ```powershell
 Enable-MMAgent -MemoryCompression -OperationAPI -PageCombining

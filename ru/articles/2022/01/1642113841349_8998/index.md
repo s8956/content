@@ -40,13 +40,13 @@ slug: 'ddddd243-d182-5e26-a161-d2ea7812214a'
 draft: 0
 ---
 
-Привет всем! В этой небольшой заметке я приведу команду, при помощи которой можно добавить репозиторий браузера **Vivaldi** в Debian.
+Привет всем! В этой небольшой заметке я приведу команду, при помощи которой можно добавить репозиторий браузера {{< tag "Vivaldi" >}} в {{< tag "Debian" >}}.
 
 <!--more-->
 
-Установочный пакет **Vivaldi** уже выполняет указанные действия, но для этого он задействует утилиту `apt-key`, которая в **Debian 11** имеет статус `deprecated`.
+Установочный пакет {{< tag "Vivaldi" >}} уже выполняет указанные действия, но для этого он задействует утилиту `apt-key`, которая в {{< tag "Debian" >}} 11 имеет статус `deprecated`.
 
-Однострочная команда по добавлению **Vivaldi** в репозиторий Debian'а приведена ниже. Она дробится на следующие под-команды:
+Однострочная команда по добавлению {{< tag "Vivaldi" >}} в репозиторий {{< tag "Debian" >}}'а приведена ниже. Она дробится на следующие под-команды:
 
 1. Добавление файла `vivaldi-archive.list` в директорию `/etc/apt/sources.list.d`.
 2. Скачивание файла подписи `linux_signing_key.pub` и размещение его в директорию `/etc/apt/trusted.gpg.d` с названием `vivaldi-browser.gpg`.
@@ -56,7 +56,7 @@ draft: 0
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/vivaldi-browser.gpg arch=$(dpkg --print-architecture)] https://repo.vivaldi.com/archive/deb/ stable main" | tee /etc/apt/sources.list.d/vivaldi-archive.list && curl -fsSL 'https://repo.vivaldi.com/archive/linux_signing_key.pub' | gpg --dearmor | tee /etc/apt/trusted.gpg.d/vivaldi-browser.gpg > /dev/null && apt update
 ```
 
-После выполнения команды, установка **Vivaldi** происходит таким образом:
+После выполнения команды, установка {{< tag "Vivaldi" >}} происходит таким образом:
 
 ```terminal {os="linux"}
 apt install vivaldi-stable

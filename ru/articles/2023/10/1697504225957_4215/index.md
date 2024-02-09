@@ -45,7 +45,7 @@ slug: 'a0756cae-ae3c-59ff-b587-ee8c7f3247c8'
 draft: 0
 ---
 
-Сборник вопросов и ответов по форумному движку **IP.Board 2.3**.
+Сборник вопросов и ответов по форумному движку {{< tag "IPB" >}} 2.3.
 
 <!--more-->
 
@@ -117,13 +117,13 @@ $cp = "";
 this.ipb_code=function(){var _text=this.get_selection();this.wrap_tags('code',false,_text);};
 ```
 
-Эта строка отвечает за BB-код CODE. Копируем её к себе в редактор и заменяем в ней слово code на свой BB-код (например, у меня будет это `[i]spoiler[/i]`):
+Эта строка отвечает за BB-код `CODE`. Копируем её к себе в редактор и заменяем в ней слово code на свой BB-код (например, у меня будет это `[i]spoiler[/i]`):
 
 ```js
 this.ipb_spoiler=function(){var _text=this.get_selection();this.wrap_tags('spoiler',false,_text);};
 ```
 
-После этого вставляем её обратно в файл `./jscripts/ips_text_editor_lite.js`, НО уже после скопированной нами ранее строки с BB-кодом CODE. Получается вот так:
+После этого вставляем её обратно в файл `./jscripts/ips_text_editor_lite.js`, НО уже после скопированной нами ранее строки с BB-кодом `CODE`. Получается вот так:
 
 ```js
 this.ipb_code=function(){var _text=this.get_selection();this.wrap_tags('code',false,_text);};this.ipb_spoiler=function(){var _text=this.get_selection();this.wrap_tags('spoiler',false,_text);};
@@ -142,7 +142,7 @@ this.ipb_code=function(){var _text=this.get_selection();this.wrap_tags('code',fa
 <td><div class="rte-normal" id="fast-reply_cmd_ipb_code"><img src="style_images/<#IMG_DIR#>/folder_editor_images/rte-code-button.png"  alt="{$this->ipsclass->lang['js_rte_lite_code']}" title="{$this->ipsclass->lang['js_rte_lite_code']}"></div></td>
 ```
 
-Копируем этот участок и вставляем ниже. Теперь нужно отредактировать вставленный нами участок. Слово code заменяем на свой тег. Напомню, что у меня это - spoiler. Вот пример:
+Копируем этот участок и вставляем ниже. Теперь нужно отредактировать вставленный нами участок. Слово `code` заменяем на свой тег. Напомню, что у меня это - `spoiler`. Вот пример:
 
 ```html
 <td><div class="rte-normal" id="fast-reply_cmd_ipb_spoiler"><img src="style_images/<#IMG_DIR#>/folder_editor_images/rte-spoiler-button.png"  alt="Спойлер" title="Спойлер"></div></td>
@@ -172,7 +172,7 @@ this.ipb_youtube = function()
   };
 ```
 
-После этого необходимо отредактировать шаблон skin_editors (редактор сообщений) > ips_editor, чтобы добавить кнопку в расширенный ответ. Находим:
+После этого необходимо отредактировать шаблон `skin_editors` (редактор сообщений) / `ips_editor`, чтобы добавить кнопку в расширенный ответ. Находим:
 
 ```html
 <td><div class="rte-normal"  id="{$editor_id}_cmd_ipb_code"><img  src="{$images_path}rte-code-button.png"   alt="{$this->ipsclass->lang['js_rte_lite_code']}"  title="{$this->ipsclass->lang['js_rte_lite_code']}"></div></td>
@@ -184,7 +184,7 @@ this.ipb_youtube = function()
 <td><div class="rte-normal" id="{$editor_id}_cmd_ipb_youtube"><img src="{$images_path}rte-code-tube.png"  alt="Youtube" title="YouTube"></div></td>
 ```
 
-Не забудьте загрузить кнопку для своего тега в папку ./style_images/папка_стиля/folder_editor_images.
+Не забудьте загрузить кнопку для своего тега в папку `./style_images/папка_стиля/folder_editor_images`.
 
 ## Возникает ошибка Fatal error: Allowed memory size of xxx bytes exhausted (tried to allocate yyy bytes). Что это такое?
 
@@ -202,7 +202,7 @@ Fatal error: Allowed memory size of 50331648 bytes exhausted (tried to allocate 
 
 Это означает, что для выполнения скрипта требуется больше памяти, чем предоставляет PHP. Необходимо увеличить количество выделяемой PHP памяти. Сделать это можно одним из следующих способов:
 
-1. В `.htaccess` добавить строку (при условии, что PHP работает под Apache):
+1. В `.htaccess` добавить строку (при условии, что {{< tag "PHP" >}} работает под Apache):
 
 ```
 php_value memory_limit 32M
