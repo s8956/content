@@ -13,6 +13,7 @@ tags:
   - 'dns'
   - 'opnsense'
   - 'dot'
+  - 'nat'
 authors:
   - 'KaiKimera'
 sources:
