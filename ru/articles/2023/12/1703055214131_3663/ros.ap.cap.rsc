@@ -3,7 +3,7 @@
 # @copyright  2023 Library Online
 # @license    MIT
 # @version    0.1.0
-# @link
+# @link       https://lib.onl/ru/articles/2023/12/0f3478b3-9fde-59aa-a424-ff160431fa35/
 # -------------------------------------------------------------------------------------------------------------------- #
 
 /ip service
