@@ -11,4 +11,4 @@
     - Включить **Enable VT100 line drawing even in UTF-8 mode**.
 - Connection
   - Data
-    - Terminal-type string, указать `putty`.
+    - Terminal-type string, указать `putty` (или `xterm`).
