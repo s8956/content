@@ -39,7 +39,7 @@ draft: 0
 
 <!--more-->
 
-```terminal {os=windows}
+```terminal {os="windows"}
 Get-Service -DisplayName 'win*'
 
 Status   Name               DisplayName
