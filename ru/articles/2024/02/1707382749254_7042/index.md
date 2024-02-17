@@ -90,22 +90,12 @@ pkg update -f && pkg upgrade
 
 ### Установка сервиса обновления микрокода CPU
 
-1. Установить пакет:
+1. Установить пакет.
+2. Добавить в `rc.conf` автозапуск сервиса.
+3. Запустить сервис.
 
 ```
-pkg install cpu-microcode
-```
-
-2. Добавить в `rc.conf` автозапуск сервиса:
-
-```
-sysrc microcode_update_enable=YES
-```
-
-3. Запустить сервис:
-
-```
-service microcode_update start
+pkg install cpu-microcode && sysrc microcode_update_enable=YES && service microcode_update start
 ```
 
 ### Установка дополнительных пакетов
