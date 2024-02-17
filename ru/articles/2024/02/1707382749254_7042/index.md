@@ -32,7 +32,7 @@ comments: 1
 date: '2024-02-08T11:59:09+03:00'
 publishDate: '2024-02-08T11:59:09+03:00'
 expiryDate: ''
-lastMod: '2024-02-08T11:59:09+03:00'
+lastMod: '2024-02-17T04:49:00+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Meta settings.
@@ -125,7 +125,7 @@ service microcode_update start
 Для работы на сервере, я устанавливаю следующие пакеты:
 
 ```
-pkg install bash curl git gnupg htop mc nano wget zsh
+pkg install bash ca_root_nss curl git gnupg htop mc nano wget zsh
 ```
 
 ## Настройка ядра
