@@ -54,30 +54,18 @@ draft: 0
 
 После установки базовой системы, рекомендуется запустить обновление.
 
-1. Запросить обновления:
+1. Запросить и применить обновления:
 
 ```
-freebsd-update fetch
-```
-
-2. Применить обновления:
-
-```
-freebsd-update install
+freebsd-update fetch && freebsd-update install
 ```
 
 ## Обновление пакетов
 
-1. Запросить обновления пакетов:
+1. Запросить и применить обновления пакетов:
 
 ```
-pkg update -f
-```
-
-2. Применить обновления пакетов:
-
-```
-pkg upgrade
+pkg update -f && pkg upgrade
 ```
 
 ## Переключение ветки пакетов
@@ -90,10 +78,10 @@ pkg upgrade
 mkdir -p /usr/local/etc/pkg/repos && echo 'FreeBSD: { url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest" }' > /usr/local/etc/pkg/repos/FreeBSD.conf
 ```
 
-2. Обновить базу данных пакетов:
+2. Обновить базу данных пакетов и обновить пакеты:
 
 ```
-pkg update -f
+pkg update -f && pkg upgrade
 ```
 
 ## Установка пакетов
