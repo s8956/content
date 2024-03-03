@@ -103,7 +103,7 @@ pkg install cpu-microcode && sysrc microcode_update_enable=YES && service microc
 Для работы на сервере, я устанавливаю следующие пакеты:
 
 ```
-pkg install bash ca_root_nss curl git gnupg htop mc nano wget zsh
+pkg install bash ca_root_nss curl git gnupg htop mc nano smartmontools wget zsh
 ```
 
 ## Настройка ядра
