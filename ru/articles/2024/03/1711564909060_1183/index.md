@@ -78,7 +78,7 @@ draft: 0
 - Посмотреть текущую версию {{< tag "IOS" >}}:
 
 ```
-# sh ver
+# show version
 ```
 
 - Сделать резервную копию текущего образа {{< tag "IOS" >}} на TFTP:
@@ -88,6 +88,11 @@ draft: 0
 # copy flash:IOS_FW.bin tftp://192.168.1.2
 ```
 
+Где:
+
+- `flash:IOS_FW.bin` - источник, файл текущего образа {{< tag "IOS" >}} на flash-карте (`IOS_FW.bin`).
+- `tftp://192.168.1.2` - назначение, IP-адрес TFTP-сервера.
+
 ## Загрузка нового образа IOS
 
 - Записать на Flash-карту новый образ {{< tag "IOS" >}}:
@@ -96,12 +101,21 @@ draft: 0
 # copy tftp://192.168.1.2/IOS_FW.bin flash:
 ```
 
-- Верифицировать новый образ {{< tag "IOS" >}}:
+Где:
+
+ - `tftp://192.168.1.2/IOS_FW.bin` - источник, адрес TFTP-сервера и путь к файлу с образом {{< tag "IOS" >}} (`IOS_FW.bin`).
+ - `flash:` - назначение, flash-карта.
+
+## Верификация нового образа IOS
 
 ```
 # show flash: | include .bin
 # verify /md5 flash:IOS_FW.bin
 ```
+
+Где:
+
+- `flash:IOS_FW.bin` - образ {{< tag "IOS" >}} (`IOS_FW.bin`) на flash-карте.
 
 ## Обновление IOS
 
@@ -114,10 +128,16 @@ draft: 0
 # reload
 ```
 
+Где:
+
+- `flash:IOS_FW.bin` - образ {{< tag "IOS" >}} (`IOS_FW.bin`) на flash-карте.
+
+## Проверка новой версии IOS
+
 - Посмотреть версию {{< tag "IOS" >}} после перезагрузки:
 
 ```
-# sh ver
+# show version
 ```
 
 - Готово!
