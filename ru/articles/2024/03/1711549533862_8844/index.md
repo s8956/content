@@ -43,7 +43,7 @@ hash: 'bd4f198b907ebc14f0c6a7c032891ce085bf80aa'
 uuid: 'bd4f198b-907e-5c14-90c6-a7c032891ce0'
 slug: 'bd4f198b-907e-5c14-90c6-a7c032891ce0'
 
-draft: 0
+draft: 1
 ---
 
 
