@@ -28,6 +28,9 @@ set enabled=yes
 set enabled=yes manycast=yes multicast=yes
 
 /system ntp client servers
+add address=0.ru.pool.ntp.org
+add address=1.ru.pool.ntp.org
+add address=time.google.com
 add address=time.cloudflare.com
 
 /tool bandwidth-server
@@ -40,4 +43,4 @@ set allowed-interface-list=none
 set enabled=no
 
 /user
-set [find name="admin"] password="cDFymu2aML"
+set [find name="admin"] password="pa$$word"
