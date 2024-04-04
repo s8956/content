@@ -3,19 +3,19 @@
 
 1. Создать группу, например, `shared`:
 
-```terminal {os="linux", mode="root"}
+```sh
 groupadd 'shared'
 ```
 
 2. Добавить эту группу к пользователям:
 
-```terminal {os="linux", mode="root"}
+```sh
 for i in 'user_01' 'user_02' 'user_03'; do usermod -a -G 'shared' "${i}"; done;
 ```
 
 3. Создать директорию `shared_dir` и применить к ней права:
 
-```terminal {os="linux", mode="root"}
+```sh
 dir='shared_dir'; mkdir "${dir}" && chgrp 'shared' "${dir}" && chmod 2775 "${dir}";
 ```
 

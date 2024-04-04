@@ -6,15 +6,15 @@
 title: 'Установка и настройка Asterisk'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1606513778362-946ffc98a3d7'
 categories:
-  - 'cat_01'
-  - 'cat_02'
+  - 'inDev'
+  - 'network'
   - 'cat_03'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'debian'
+  - 'asterisk'
+  - 'voip'
 authors:
   - 'KaiKimera'
 sources:
@@ -122,4 +122,54 @@ sed -i 's|;runuser = asterisk|runuser = asterisk|g' '/etc/asterisk/asterisk.conf
 
 ```sh
 systemctl enable --now asterisk
+```
+
+```terminal {os="linux",mode="root",hl="text"}
+systemctl status asterisk
+
+● asterisk.service - LSB: Asterisk PBX
+     Loaded: loaded (/etc/init.d/asterisk; generated)
+     Active: active (running) since Thu 2024-04-04 11:51:43 UTC; 2h 5min ago
+       Docs: man:systemd-sysv-generator(8)
+    Process: 791 ExecStart=/etc/init.d/asterisk start (code=exited, status=0/SUCCESS)
+      Tasks: 35 (limit: 1013)
+     Memory: 61.1M
+        CPU: 36.239s
+     CGroup: /system.slice/asterisk.service
+             └─871 /usr/sbin/asterisk -U asterisk -G asterisk
+
+Apr 04 11:51:42 phone systemd[1]: Starting LSB: Asterisk PBX...
+Apr 04 11:51:43 phone asterisk[791]:  * Starting Asterisk PBX: asterisk
+Apr 04 11:51:43 phone asterisk[791]:    ...done.
+Apr 04 11:51:43 phone systemd[1]: Started LSB: Asterisk PBX.
+```
+
+```terminal {os="linux",mode="root",hl="text"}
+asterisk -rvv
+
+Asterisk 20.7.0, Copyright (C) 1999 - 2022, Sangoma Technologies Corporation and others.
+Created by Mark Spencer <markster@digium.com>
+Asterisk comes with ABSOLUTELY NO WARRANTY; type 'core show warranty' for details.
+This is free software, with components licensed under the GNU General Public
+License version 2 and other licenses; you are welcome to redistribute it under
+certain conditions. Type 'core show license' for details.
+=========================================================================
+Running as user 'asterisk'
+Running under group 'asterisk'
+Connected to Asterisk 20.7.0 currently running on phone (pid = 871)
+phone*CLI>
+```
+
+
+```sh
+export ossl_ec='prime256v1'
+export ossl_sig_hash='sha256'
+export ossl_days='3650'
+export ossl_country='RU'
+export ossl_state='Russia'
+export ossl_city='Moscow'
+export ossl_org='RiK'
+export ossl_host='example.com'
+
+openssl ecparam -genkey -name ${ossl_ec} -out "${ossl_host}.key" && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl req -x509 -${ossl_sig_hash} -days ${ossl_days} -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
 ```
