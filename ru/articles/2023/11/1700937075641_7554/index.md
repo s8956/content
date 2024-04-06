@@ -52,27 +52,15 @@ draft: 0
 
 Перед переходом на новый релиз, необходимо обновить все пакеты на текущей системе. Для этого выполняем последовательно ниже приведённые команды.
 
-1. Обновление базы пакетов:
+1. Обновление базы пакетов, пакетов и системы в целом:
 
-```terminal {os="linux",mode="root"}
-apt update
+```sh
+apt update && apt upgrade && apt full-upgrade
 ```
 
-2. Обновление пакетов:
+2. Удаление не используемых пакетов:
 
-```terminal {os="linux",mode="root"}
-apt upgrade
-```
-
-3. Обновление системы:
-
-```terminal {os="linux",mode="root"}
-apt full-upgrade
-```
-
-4. Удаление не используемых пакетов:
-
-```terminal {os="linux",mode="root"}
+```sh
 apt --purge autoremove
 ```
 
@@ -80,41 +68,35 @@ apt --purge autoremove
 
 После завершения полного обновления пакетов, нужно перезаписать пути к репозиториям, указав имя нового релиза:
 
-```terminal {os="linux",mode="root"}
-sed -i 's/NAME_OLD/NAME_NEW/g' /etc/apt/sources.list
+```sh
+sed -i 's|RELEASE_OLD|RELEASE_NEW|g' '/etc/apt/sources.list'
 ```
 
 Где:
 
-- `NAME_OLD` - старое имя релиза.
-- `NAME_NEW` - новое имя релиза.
+- `RELEASE_OLD` - старое имя релиза.
+- `RELEASE_NEW` - новое имя релиза.
 
 ## Обновление системны на новую версию
 
 Теперь пришло время перейти на новый релиз. Выполняем шаги последовательно.
 
-1. Обновление базы пакетов:
+1. Обновление базы пакетов и обновление пакетов в минимальном варианте:
 
-```terminal {os="linux",mode="root"}
-apt update
-```
-
-2. Обновление пакетов в минимальном варианте:
-
-```terminal {os="linux",mode="root"}
-apt upgrade --without-new-pkgs
+```sh
+apt update && apt upgrade --without-new-pkgs
 ```
 
 На запрос "Restart services during package upgrades without asking?" отвечаем {{< btn "Yes" >}}.
 
-3. Обновление всей системы:
+2. Обновление всей системы:
 
-```terminal {os="linux",mode="root"}
+```sh
 apt full-upgrade
 ```
 
-4. Проверка обновлённого релиза:
+3. Проверка обновлённого релиза:
 
-```terminal {os="linux",mode="root"}
+```sh
 cat /etc/debian_version
 ```
