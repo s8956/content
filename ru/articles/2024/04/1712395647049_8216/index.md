@@ -6,9 +6,7 @@
 title: 'MikroTik: Настройка WireGuard + OSPF'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1561299705-a89543236904'
-cover:
-  crop: 'left'
+  - 'https://images.unsplash.com/photo-1565733123432-c83666fe4521'
 categories:
   - 'network'
   - 'inDev'
@@ -21,7 +19,7 @@ authors:
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
-complexity: '0'
+complexity: '1'
 toc: 1
 comments: 1
 
@@ -68,9 +66,9 @@ draft: 0
 ### Router #1
 
 - Создаём интерфейс {{< tag "WireGuard" >}}:
-  - Номер порта: `51820`
-  - Название интерфейса: `wireguard1`
-  - Комментарий: `WireGuard #1`
+  - Номер порта: `51820`.
+  - Название интерфейса: `wireguard1`.
+  - Комментарий: `WireGuard #1`.
 
 ```
 /interface wireguard
