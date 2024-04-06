@@ -104,7 +104,7 @@ make basic-pbx
 ### Настройка пользователя
 
 ```sh
-groupadd asterisk && useradd -r -d /var/lib/asterisk -g asterisk asterisk && usermod -aG audio,dialout asterisk && chown -R asterisk:asterisk /etc/asterisk && chown -R asterisk:asterisk /var/{lib,log,spool}/asterisk && chown -R asterisk:asterisk /usr/lib/asterisk
+u='asterisk'; groupadd ${u} && useradd -r -d /var/lib/${u} -g ${u} ${u} && usermod -aG audio,dialout ${u} && chown -R ${u}:${u} /etc/${u} && chown -R ${u}:${u} /var/{lib,log,spool}/${u} && chown -R ${u}:${u} /usr/lib/${u}
 ```
 
 ### Редактирование конфигурации
@@ -118,7 +118,6 @@ sed -i 's|;runuser = asterisk|runuser = asterisk|g' '/etc/asterisk/asterisk.conf
 ```
 
 ## Запуск Asterisk
-
 
 ```sh
 systemctl enable --now asterisk
@@ -160,16 +159,6 @@ Connected to Asterisk 20.7.0 currently running on phone (pid = 871)
 phone*CLI>
 ```
 
-
 ```sh
-export ossl_ec='prime256v1'
-export ossl_sig_hash='sha256'
-export ossl_days='3650'
-export ossl_country='RU'
-export ossl_state='Russia'
-export ossl_city='Moscow'
-export ossl_org='RiK'
-export ossl_host='example.com'
-
-openssl ecparam -genkey -name ${ossl_ec} -out "${ossl_host}.key" && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl req -x509 -${ossl_sig_hash} -days ${ossl_days} -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
+ossl_ec='prime256v1'; ossl_sig_hash='sha256'; ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; ossl_org='RiK'; ossl_host='example.com'; openssl ecparam -genkey -name ${ossl_ec} -out "${ossl_host}.key" && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl req -x509 -${ossl_sig_hash} -days ${ossl_days} -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
 ```

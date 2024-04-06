@@ -11,8 +11,8 @@
 
 :local rosAdminPassword "pa$$word"
 :local rosBridgeName "bridge1"
-:local rosRouterName "GW"
-:local rosGwDomain "gw.lan"
+:local rosRouterName "GW1"
+:local rosGwDomain "gw1.lan"
 :local rosNwDomain "home.lan"
 :local rosIcmpKnockSize 100
 
@@ -31,6 +31,12 @@ add name=LAN
 /interface list member
 add interface=ether1 list=WAN
 add interface="$rosBridgeName" list=LAN
+
+/ip ipsec profile
+set [ find default=yes ] dh-group=ecp384 enc-algorithm=aes-256 hash-algorithm=sha256
+
+/ip ipsec proposal
+set [ find default=yes ] auth-algorithms=sha256 enc-algorithms=aes-256-cbc pfs-group=ecp384
 
 /ip pool
 add name=dhcp ranges=10.1.200.1-10.1.200.254
@@ -73,9 +79,9 @@ add action=accept chain=input dst-port=9090,22022 protocol=tcp src-address-list=
   comment="[ROS] WinBox and SSH"
 add action=drop chain=input in-interface-list=!LAN \
   comment="[ROS] All not coming from LAN"
-add action=accept chain=forward ipsec-policy=in,ipsec \
+add action=accept chain=forward ipsec-policy=in,ipsec disabled=yes \
   comment="[ROS] In IPsec policy"
-add action=accept chain=forward ipsec-policy=out,ipsec \
+add action=accept chain=forward ipsec-policy=out,ipsec disabled=yes \
   comment="[ROS] Out IPsec policy"
 add action=fasttrack-connection chain=forward connection-state=established,related \
   comment="[ROS] FastTrack"

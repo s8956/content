@@ -3,7 +3,7 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Настройка DoH на MikroTik'
+title: 'MikroTik: Настройка DoH'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1639322537504-6427a16b0a28'

@@ -31,7 +31,7 @@ comments: 1
 date: '2023-10-18T02:42:31+03:00'
 publishDate: '2023-10-18T02:42:31+03:00'
 expiryDate: ''
-lastMod: '2023-10-18T02:42:31+03:00'
+lastMod: '2024-04-05T14:57:00+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Meta settings.
@@ -54,11 +54,7 @@ draft: 0
 При помощи корневого сертификата, мы будем подписывать сертификаты клиентские. Создаём сертификат центра сертификации...
 
 ```sh
-openssl req -x509 \
-  -newkey ec:<( openssl ecparam -name 'secp384r1' ) \
-  -nodes -days '3650' \
-  -keyform 'PEM' -outform 'PEM' \
-  -keyout 'ca.root.key' -out 'ca.root.crt'
+openssl req -x509 -newkey ec:<( openssl ecparam -name 'secp384r1' ) -nodes -days '3650' -keyout 'ca.root.key' -out 'ca.root.crt'
 ```
 
 Где:
@@ -280,3 +276,26 @@ bash bash.openssl.ca.sh cert
 2. Файл каждого клиентского сертификата генерируется с названием вида `[TS].[SFX].[EXE]`, где `[TS]` - это временная метка в микросекундах, `[SFX]` - числовой суффикс, а `[EXE]` - расширение файлов.
 
 На этом всё. Не исключаю факта присутствия ошибок или неточностей. Если что, жду предложения в электронную почту. {{< emoji ":smile:" >}}
+
+## Быстрое создание само-подписанного сертификата
+
+Для быстрого создания само-подписанного сертификата, я написал небольшую команду.
+
+```sh
+ossl_ec='prime256v1'; ossl_sig_hash='sha256'; ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; ossl_org='RiK'; ossl_host='example.com'; openssl ecparam -genkey -name ${ossl_ec} -out "${ossl_host}.key" && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl req -x509 -${ossl_sig_hash} -days ${ossl_days} -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
+```
+
+Где:
+
+- `ossl_ec` - название эллиптический кривых.
+- `ossl_sig_hash` - хэш подписи.
+- `ossl_days` - количество дней валидности сертификата.
+- `ossl_country` - страна.
+- `ossl_state` - штат.
+- `ossl_city` - город.
+- `ossl_org` - организация.
+- `ossl_host` - хост.
+
+```sh
+ossl_rsa='2048'; ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; ossl_org='RiK'; ossl_host='example.com'; openssl genrsa -out "${ossl_host}.key" ${ossl_rsa} && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl req -x509 -sha256 -days ${ossl_days} -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt"
+```
