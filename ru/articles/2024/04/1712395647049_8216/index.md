@@ -110,9 +110,9 @@ add action=accept chain=forward dst-address=10.2.0.0/16 src-address=10.1.0.0/16 
 ### Router #2
 
 - Создаём интерфейс {{< tag "WireGuard" >}}:
-  - Номер порта: `51820`
-  - Название интерфейса: `wireguard1`
-  - Комментарий: `WireGuard #1`
+  - Номер порта: `51820`.
+  - Название интерфейса: `wireguard1`.
+  - Комментарий: `WireGuard #1`.
 
 ```
 /interface wireguard 
