@@ -7,22 +7,22 @@
 # -------------------------------------------------------------------------------------------------------------------- #
 
 # Connection interface.
-:local ipsEth "ether1"
+:local ipsWan "WAN"
 
 # Common name.
-:local ipsName "RemoteGateway"
+:local ipsName "ipsec-sts"
 
 # Secret phrase.
 :local ipsSecret "pa$$word"
 
 # Local network address.
-:local ipsSrcAddress "192.168.1.0/24"
+:local ipsSrcAddress "10.1.0.0/16"
 
 # Remote network address.
-:local ipsDstAddress "192.168.2.0/24"
+:local ipsDstAddress "10.2.0.0/16"
 
 # Remote peer address.
-:local ipsPeerAddress "192.168.2.1"
+:local ipsPeerAddress "gw1.example.com"
 
 # -------------------------------------------------------------------------------------------------------------------- #
 
@@ -46,9 +46,9 @@ add chain=srcnat action=accept src-address=$ipsSrcAddress dst-address=$ipsDstAdd
   comment="[IPsec] $ipsName"
 
 /ip firewall filter
-add action=accept chain=input dst-port=500,4500 in-interface=$ipsEth protocol=udp \
+add action=accept chain=input dst-port=500,4500 in-interface-list=$ipsWan protocol=udp \
   comment="[ROS] IPsec"
-add action=accept chain=input in-interface=$ipsEth protocol=ipsec-esp \
+add action=accept chain=input in-interface-list=$ipsWan protocol=ipsec-esp \
   comment="[ROS] IPsec"
 
 # Use IP/Firewall/Raw to bypass connection tracking, that way eliminating need of filter rules and reducing load on CPU

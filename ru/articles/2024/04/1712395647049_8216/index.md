@@ -3,13 +3,13 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'MikroTik: Настройка WireGuard + OSPF'
+title: 'MikroTik: Туннель WireGuard (Site-to-Site) + OSPF'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1565733123432-c83666fe4521'
 categories:
-  - 'network'
   - 'inDev'
+  - 'network'
 tags:
   - 'mikrotik'
   - 'wireguard'
@@ -44,7 +44,7 @@ slug: '146e83d5-f571-5273-9a29-172bf5dc10fe'
 draft: 0
 ---
 
-Рассмотрим настройку по объединению двух маршрутизаторов между собой при помощи туннеля {{< tag "WireGuard" >}}. При этом, обмениваться маршрутами эти маршрутизаторы будут через протокол {{< tag "OSPF" >}}.
+Объединение двух маршрутизаторов между собой при помощи туннеля {{< tag "WireGuard" >}}. При этом, обмениваться маршрутами эти маршрутизаторы будут через протокол {{< tag "OSPF" >}}.
 
 <!--more-->
 
@@ -85,9 +85,9 @@ add listen-port=51820 name=wireguard1 comment="WireGuard #1"
 add address=10.255.255.1/24 interface=wireguard1 comment="[WG] WireGuard #1"
 ```
 
-- Указываем маршрут до локальной сети `R2`:
-  - Адрес удалённой сети: `10.2.0.0/16`.
-  - Шлюз: `wireguard1`.
+- Указываем маршрут до удалённой сети `R2`:
+  - Адрес удалённой сети `R2`: `10.2.0.0/16`.
+  - Шлюз `R1`: `wireguard1`.
   - Комментарий: `[WG] GW1-GW2`.
 
 ```
@@ -97,14 +97,14 @@ add dst-address=10.2.0.0/16 gateway=wireguard1 comment="[WG] GW1-GW2"
 
 - Настраиваем фильтры брандмауэра:
   - Открыть порт `51820`.
-  - Перенаправить трафик из сети `10.1.0.0/16` в `10.2.0.0/16`.
-  - Перенаправить трафик из сети `10.2.0.0/16` в `10.1.0.0/16`.
+  - Разрешить трафик из удалённой сети `R2` `10.2.0.0/16` в локальную сеть `R1` `10.1.0.0/16`.
+  - Разрешить трафик из локальной сети `R1` `10.1.0.0/16` в удалённую сеть `R2` `10.2.0.0/16`.
 
 ```
 /ip firewall filter
 add action=accept chain=input dst-port=51820 in-interface-list=WAN protocol=udp comment="[WG] WireGuard #1"
-add action=accept chain=forward dst-address=10.1.0.0/16 src-address=10.2.0.0/16 comment="[WG] GW1-GW2"
-add action=accept chain=forward dst-address=10.2.0.0/16 src-address=10.1.0.0/16 comment="[WG] GW1-GW2"
+add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[WG] GW1-GW2"
+add action=accept chain=forward src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[WG] GW1-GW2"
 ```
 
 ### Router #2
@@ -129,9 +129,9 @@ add listen-port=51820 name=wireguard1 comment="WireGuard #1"
 add address=10.255.255.2/24 interface=wireguard1 comment="WireGuard #1"
 ```
 
-- Указываем маршрут до локальной сети `R1`:
-  - Адрес удалённой сети: `10.1.0.0/16`.
-  - Шлюз: `wireguard1`.
+- Указываем маршрут до удалённой сети `R1`:
+  - Адрес удалённой сети `R1`: `10.1.0.0/16`.
+  - Шлюз `R2`: `wireguard1`.
   - Комментарий: `[WG] GW2-GW1`.
 
 ```
@@ -141,21 +141,21 @@ add dst-address=10.1.0.0/16 gateway=wireguard1 comment="[WG] GW2-GW1"
 
 - Настраиваем фильтры брандмауэра:
   - Открыть порт `51820`.
-  - Перенаправить трафик из сети `10.2.0.0/16` в `10.1.0.0/16`.
-  - Перенаправить трафик из сети `10.1.0.0/16` в `10.2.0.0/16`.
+  - Разрешить трафик из удалённой сети `R1` `10.1.0.0/16` в локальную сеть `R2` `10.2.0.0/16`.
+  - Разрешить трафик из локальной сети `R2` `10.2.0.0/16` в удалённую сеть `R1` `10.1.0.0/16`.
 
 ```
 /ip firewall filter
 add action=accept chain=input dst-port=51820 in-interface-list=WAN protocol=udp comment="[WG] WireGuard #1"
-add action=accept chain=forward dst-address=10.2.0.0/16 src-address=10.1.0.0/16 comment="[WG] GW2-GW1"
-add action=accept chain=forward dst-address=10.1.0.0/16 src-address=10.2.0.0/16 comment="[WG] GW2-GW1"
+add action=accept chain=forward src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[WG] GW2-GW1"
+add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[WG] GW2-GW1"
 ```
 
 ## Добавление Peers
 
 ### Router #1
 
-- Добавить маршрутизатор `R2` в Peers:
+- Добавить маршрутизатор `R2` в **Peers**:
   - Интерфейс: `wireguard1`.
   - Публичный ключ маршрутизатора `R2`: `<public-key>`.  
     *Публичный ключ берём от маршрутизатора `R2`.*
@@ -175,7 +175,7 @@ add allowed-address=10.2.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw
 
 ### Router #2
 
-- Добавить маршрутизатор `R1` в Peers:
+- Добавить маршрутизатор `R1` в **Peers**:
   - Интерфейс: `wireguard1`.
   - Публичный ключ маршрутизатора `R1`: `<public-key>`.  
     *Публичный ключ берём от маршрутизатора `R1`.*
