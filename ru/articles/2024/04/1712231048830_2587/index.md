@@ -75,12 +75,6 @@ bash contrib/scripts/get_mp3_source.sh && bash contrib/scripts/install_prereq in
 make && make install && make basic-pbx && make config && ldconfig
 ```
 
-### Удаление временных файлов
-
-```sh
-make distclean
-```
-
 ## Настройка Asterisk
 
 ### Настройка пользователя
