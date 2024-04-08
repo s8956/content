@@ -45,13 +45,13 @@ draft: 0
 
 1. Устанавливаем плагин обновления системы:
 
-```terminal {os="linux", mode="root"}
+```sh
 dnf install dnf-plugin-system-upgrade
 ```
 
 2. Скачивание актуальной версии системы:
 
-```terminal {os="linux", mode="root"}
+```sh
 dnf system-upgrade download --releasever=34
 ```
 
@@ -59,7 +59,7 @@ dnf system-upgrade download --releasever=34
 
 3. Запуск обновления системы на актуальную версию:
 
-```terminal {os="linux", mode="root"}
+```sh
 dnf system-upgrade reboot
 ```
 
