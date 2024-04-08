@@ -57,46 +57,28 @@ apt update && apt --yes upgrade && apt --yes install git curl wget subversion bu
 
 ## Установка Asterisk
 
-### Установка библиотеки декодера MP3
+### Установка компонентов
 
 ```sh
-bash contrib/scripts/get_mp3_source.sh
-```
-
-### Установка требуемых для сборки пакетов
-
-```sh
-bash contrib/scripts/install_prereq install
+bash contrib/scripts/get_mp3_source.sh && bash contrib/scripts/install_prereq install
 ```
 
 ### Конфигурация сборки
 
 ```sh
-./configure
+./configure && make menuselect.makeopts && menuselect/menuselect --enable CORE-SOUNDS-RU-GSM menuselect.makeopts
 ```
-
-### Выбор компонентов Asterisk
-
-```sh
-make menuselect
-```
-
-Выбрать:
-
-- Applications
-  - `app_macro`
-- Core Sound Packages
-  - `CORE-SOUNDS-EN-GSM`
-  - `CORE-SOUNDS-RU-GSM`
 
 ### Сборка и установка Asterisk
 
 ```sh
-make && make install && make config && ldconfig
+make && make install && make basic-pbx && make config && ldconfig
 ```
 
+### Удаление временных файлов
+
 ```sh
-make basic-pbx
+make distclean
 ```
 
 ## Настройка Asterisk
@@ -159,6 +141,20 @@ Connected to Asterisk 20.7.0 currently running on phone (pid = 871)
 phone*CLI>
 ```
 
-```sh
-ossl_ec='prime256v1'; ossl_sig_hash='sha256'; ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; ossl_org='RiK'; ossl_host='example.com'; openssl ecparam -genkey -name ${ossl_ec} -out "${ossl_host}.key" && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl req -x509 -${ossl_sig_hash} -days ${ossl_days} -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
+## TLS
+
+```
+mkdir /etc/asterisk/keys
+```
+
+`pjsip.conf`
+
+```ini
+[transport-tls]
+type=transport
+protocol=tls
+bind=0.0.0.0:5061
+cert_file=/etc/asterisk/keys/asterisk.crt
+priv_key_file=/etc/asterisk/keys/asterisk.key
+method=sslv23
 ```

@@ -196,7 +196,7 @@ add allowed-address=10.2.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw
 
 ```
 /interface wireguard peers
-add allowed-address=10.1.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw1.example.com endpoint-port=51820 interface=wireguard1 public-key="" comment="[WG] GW1"
+add allowed-address=10.1.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw1.example.com endpoint-port=51820 interface=wireguard1 public-key="<public-key>" comment="[WG] GW1"
 ```
 
 ## Настройка OSPF
