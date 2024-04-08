@@ -10,6 +10,7 @@ images:
 categories:
   - 'inDev'
   - 'network'
+  - 'scripts'
 tags:
   - 'mikrotik'
   - 'ipsec'
