@@ -85,9 +85,9 @@ add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
 add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=ecp384
 ```
 
-- Добавляем {{< tag "IPsec" >}} Peer:
+- Добавляем {{< tag "IPsec" >}} peer:
   - Имя peer'а: `GW2`.
-  - Внешний адрес R2: `gw2.example.com`.
+  - Внешний адрес `R2`: `gw2.example.com`.
   - Профиль: `ipsec-sts`.
   - Режим обмена: `ike2`.
   - Комментарий: `GW2`.
@@ -175,9 +175,9 @@ add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
 add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=ecp384
 ```
 
-- Добавляем {{< tag "IPsec" >}} Peer:
+- Добавляем {{< tag "IPsec" >}} peer:
   - Имя peer'а: `GW1`.
-  - Внешний адрес R2: `gw1.example.com`.
+  - Внешний адрес `R1`: `gw1.example.com`.
   - Профиль: `ipsec-sts`.
   - Режим обмена: `ike2`.
   - Комментарий: `GW1`.
@@ -241,3 +241,7 @@ add action=accept chain=input in-interface-list=WAN protocol=ipsec-esp comment="
 add action=notrack chain=prerouting src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[IPsec] GW1-GW2"
 add action=notrack chain=prerouting src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[IPsec] GW2-GW1"
 ```
+
+## Автоматизация
+
+{{< file "ros.ipsec.rsc" text >}}
