@@ -90,22 +90,22 @@ add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=e
   - Внешний адрес R2: `gw2.example.com`.
   - Профиль: `ipsec-sts`.
   - Режим обмена: `ike2`.
-  - Комментарий: `[IPsec] GW2`.
+  - Комментарий: `GW2`.
 
 ```
 /ip ipsec peer
-add address="gw2.example.com" exchange-mode=ike2 name=GW2 profile=ipsec-sts comment="[IPsec] GW2"
+add address="gw2.example.com" exchange-mode=ike2 name=GW2 profile=ipsec-sts comment="GW2"
 ```
 
 - Добавляем идентификацию:
   - Peer: `GW2`.
   - Секретная фраза: `pa$$word`.  
     *Секретная фраза должна быть одинаковой на обоих маршрутизаторах.*
-  - Комментарий: `[IPsec] GW2`.
+  - Комментарий: `GW2`.
 
 ```
 /ip ipsec identity
-add peer=GW2 secret="pa$$word" comment="[IPsec] GW2"
+add peer=GW2 secret="pa$$word" comment="GW2"
 ```
 
 - Добавляем политику {{< tag "IPsec" >}}:
@@ -115,11 +115,11 @@ add peer=GW2 secret="pa$$word" comment="[IPsec] GW2"
   - Адрес удалённой сети `R2`: `10.2.0.0/16`.
   - Действие: `encrypt`.
   - Представление: `ipsec-sts`.
-  - Комментарий: `[IPsec] GW1-GW2`.
+  - Комментарий: `GW1-GW2`.
 
 ```
 /ip ipsec policy
-add src-address=10.1.0.0/16 dst-address=10.2.0.0/16 tunnel=yes action=encrypt proposal=ipsec-sts peer=GW2 comment="[IPsec] GW1-GW2"
+add src-address=10.1.0.0/16 dst-address=10.2.0.0/16 tunnel=yes action=encrypt proposal=ipsec-sts peer=GW2 comment="GW1-GW2"
 ```
 
 - Исключаем обработку трафика {{< tag "IPsec" >}}:
@@ -180,22 +180,22 @@ add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=e
   - Внешний адрес R2: `gw1.example.com`.
   - Профиль: `ipsec-sts`.
   - Режим обмена: `ike2`.
-  - Комментарий: `[IPsec] GW1`.
+  - Комментарий: `GW1`.
 
 ```
 /ip ipsec peer
-add address="gw1.example.com" exchange-mode=ike2 name=GW1 profile=ipsec-sts comment="[IPsec] GW1"
+add address="gw1.example.com" exchange-mode=ike2 name=GW1 profile=ipsec-sts comment="GW1"
 ```
 
 - Добавляем идентификацию:
   - Peer: `GW1`.
   - Секретная фраза: `pa$$word`.  
     *Секретная фраза должна быть одинаковой на обоих маршрутизаторах.*
-  - Комментарий: `[IPsec] GW1`.
+  - Комментарий: `GW1`.
 
 ```
 /ip ipsec identity
-add peer=GW1 secret="pa$$word" comment="[IPsec] GW1"
+add peer=GW1 secret="pa$$word" comment="GW1"
 ```
 
 - Добавляем политику {{< tag "IPsec" >}}:
@@ -205,11 +205,11 @@ add peer=GW1 secret="pa$$word" comment="[IPsec] GW1"
   - Адрес удалённой сети `R1`: `10.1.0.0/16`.
   - Действие: `encrypt`.
   - Представление: `ipsec-sts`.
-  - Комментарий: `[IPsec] GW2-GW1`.
+  - Комментарий: `GW2-GW1`.
 
 ```
 /ip ipsec policy
-add src-address=10.2.0.0/16 dst-address=10.1.0.0/16 tunnel=yes action=encrypt proposal=ipsec-sts peer=GW1 comment="[IPsec] GW2-GW1"
+add src-address=10.2.0.0/16 dst-address=10.1.0.0/16 tunnel=yes action=encrypt proposal=ipsec-sts peer=GW1 comment="GW2-GW1"
 ```
 
 - Исключаем обработку трафика {{< tag "IPsec" >}}:
