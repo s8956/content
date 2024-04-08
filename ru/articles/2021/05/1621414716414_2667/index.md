@@ -122,7 +122,7 @@ DNS1="192.168.12.1"
 
 После указания всех параметров, необходимо перезапустить интерфейс:
 
-```terminal {os="linux", mode="root"}
+```sh
 nmcli con down enp1s0 && nmcli con up enp1s0
 ```
 
@@ -130,30 +130,30 @@ nmcli con down enp1s0 && nmcli con up enp1s0
 
 Установка {{< tag "IP" >}} адреса:
 
-```terminal {os="linux", mode="root"}
+```sh
 nmcli con mod enp1s0 ipv4.addresses '192.168.10.55/24'
 ```
 
 Установка шлюза:
 
-```terminal {os="linux", mode="root"}
+```sh
 nmcli con mod enp1s0 ipv4.gateway '192.168.10.1'
 ```
 
 Установка {{< tag "DNS" >}}:
 
-```terminal {os="linux", mode="root"}
+```sh
 nmcli con mod enp1s0 ipv4.dns '192.168.11.1'
 ```
 
 Установка **BOOTPROTO** в `none`:
 
-```terminal {os="linux", mode="root"}
+```sh
 nmcli con mod enp1s0 ipv4.method 'manual'
 ```
 
 Перезапуск интерфейса:
 
-```terminal {os="linux", mode="root"}
+```sh
 nmcli con down enp1s0 && nmcli con up enp1s0
 ```

@@ -94,25 +94,25 @@ MS {{< tag "Office" >}} 2021 LTSC просто так не купить, это 
 
 1. Указать адрес KMS-сервера для клиента MS Office:
 
-```terminal {os="windows"}
+```powershell
 cscript ospp.vbs /sethst:kms.example.com
 ```
 
 2. Указать нестандартный порт (`1689`) KMS-сервера:
 
-```terminal {os="windows"}
+```powershell
 cscript ospp.vbs /setprt:1689
 ```
 
 3. Выполнить активацию MS Office на KMS-сервере:
 
-```terminal {os="windows"}
+```powershell
 cscript ospp.vbs /act
 ```
 
 4. Узнать текущий статус активации MS Office:
 
-```terminal {os="windows"}
+```powershell
 cscript ospp.vbs /dstatusall
 ```
 

@@ -53,12 +53,12 @@ draft: 0
 
 - Запуск:
 
-```terminal {os="linux", mode="root"}
+```sh
 systemctl enable --now xmrig@root
 ```
 
 - Остановка:
 
-```terminal {os="linux", mode="root"}
+```sh
 systemctl disable --now xmrig@root
 ```
