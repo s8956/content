@@ -12,6 +12,7 @@ categories:
   - 'network'
 tags:
   - 'mikrotik'
+  - 'routeros'
   - 'wireguard'
   - 'ospf'
 authors:

@@ -13,6 +13,7 @@ categories:
   - 'scripts'
 tags:
   - 'mikrotik'
+  - 'routeros'
   - 'ipsec'
 authors:
   - 'KaiKimera'

@@ -12,6 +12,7 @@ categories:
   - 'network'
 tags:
   - 'mikrotik'
+  - 'routeros'
   - 'gre'
   - 'ipsec'
 authors:
@@ -63,14 +64,14 @@ draft: 1
 
 ### Router #1
 
-- Создаём интерфейс GRE:
+- Создаём интерфейс {{< tag "GRE">}}:
   - Имя интерфейса: `gre-gw1-gw2`.
   - Секретная фраза для IPsec: `pa$$word`.
   - WAN IP-адрес локального маршрутизатора `R1`: `1.1.1.1`.
   - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
   - Комментарий: `HOST: gw2.example.com`.
 
-```
+```qw
 /interface gre
 add allow-fast-path=no ipsec-secret="pa$$word" name=gre-gw1-gw2 local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
 ```
@@ -97,7 +98,7 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
 
 ### Router #2
 
-- Создаём интерфейс GRE:
+- Создаём интерфейс {{< tag "GRE">}}:
   - Имя интерфейса: `gre-gw2-gw1`.
   - Секретная фраза для IPsec: `pa$$word`.
   - WAN IP-адрес локального маршрутизатора `R2`: `2.2.2.2`.
