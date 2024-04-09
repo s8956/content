@@ -71,7 +71,7 @@ draft: 1
   - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
   - Комментарий: `HOST: gw2.example.com`.
 
-```qw
+```
 /interface gre
 add allow-fast-path=no ipsec-secret="pa$$word" name=gre-gw1-gw2 local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
 ```
