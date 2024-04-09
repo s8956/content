@@ -21,7 +21,7 @@
 :local greLocalAddress "55.44.33.22"
 
 # Название интерфейса GRE локального маршрутизатора.
-:local greName "gre-gw"
+:local greName "gre-gw1-gw2"
 
 # IP-адрес интерфейса GRE локального маршрутизатора.
 :local greIpAddress "10.255.255.1/24"

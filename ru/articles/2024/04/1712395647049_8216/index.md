@@ -87,12 +87,12 @@ add address=10.255.255.1/24 interface=wireguard1 comment="[WG] WireGuard #1"
 
 - Указываем маршрут до удалённой сети `R2`:
   - Адрес удалённой сети `R2`: `10.2.0.0/16`.
-  - Шлюз `R1`: `wireguard1`.
+  - Шлюз `R2`: `10.255.255.2`.
   - Комментарий: `[WG] GW1-GW2`.
 
 ```
 /ip route
-add dst-address=10.2.0.0/16 gateway=wireguard1 comment="[WG] GW1-GW2"
+add dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[WG] GW1-GW2"
 ```
 
 - Настраиваем фильтры брандмауэра:
@@ -131,12 +131,12 @@ add address=10.255.255.2/24 interface=wireguard1 comment="WireGuard #1"
 
 - Указываем маршрут до удалённой сети `R1`:
   - Адрес удалённой сети `R1`: `10.1.0.0/16`.
-  - Шлюз `R2`: `wireguard1`.
+  - Шлюз `R1`: `10.255.255.1`.
   - Комментарий: `[WG] GW2-GW1`.
 
 ```
 /ip route
-add dst-address=10.1.0.0/16 gateway=wireguard1 comment="[WG] GW2-GW1"
+add dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[WG] GW2-GW1"
 ```
 
 - Настраиваем фильтры брандмауэра:

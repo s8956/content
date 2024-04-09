@@ -63,15 +63,32 @@ draft: 1
 
 ### Router #1
 
+- Создаём интерфейс GRE:
+  - Имя интерфейса: `gre-gw1-gw2`.
+  - Секретная фраза для IPsec: `pa$$word`.
+  - WAN IP-адрес локального маршрутизатора `R1`: `1.1.1.1`.
+  - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
+  - Комментарий: `HOST: gw2.example.com`.
+
 ```
 /interface gre
 add allow-fast-path=no ipsec-secret="pa$$word" name=gre-gw1-gw2 local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
 ```
 
+- Прописываем интерфейсу IP-адрес `10.255.255.1/24`:
+  - Адрес интерфейса: `10.255.255.1/24`.
+  - Интерфейс: `gre-gw1-gw2`.
+  - Комментарий: `[GRE] GRE-GW1-GW2`.
+
 ```
 /ip address
-add address=10.255.255.1/24 interface=gre-gw1 network=10.255.255.0 comment="[GRE] GRE-GW1-GW2"
+add address=10.255.255.1/24 interface=gre-gw1-gw2 comment="[GRE] GRE-GW1-GW2"
 ```
+
+- Указываем маршрут до удалённой сети `R2`:
+  - Адрес удалённой сети `R2`: `10.2.0.0/16`.
+  - Шлюз `R2`: `10.255.255.2`.
+  - Комментарий: `[GRE] GW2`.
 
 ```
 /ip route
@@ -80,19 +97,36 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
 
 ### Router #2
 
+- Создаём интерфейс GRE:
+  - Имя интерфейса: `gre-gw2-gw1`.
+  - Секретная фраза для IPsec: `pa$$word`.
+  - WAN IP-адрес локального маршрутизатора `R2`: `2.2.2.2`.
+  - WAN IP-адрес удалённого маршрутизатора `R1`: `1.1.1.1`.
+  - Комментарий: `HOST: gw1.example.com`.
+
 ```
 /interface gre
 add allow-fast-path=no ipsec-secret="pa$$word" name=gre-gw2-gw1 local-address=2.2.2.2 remote-address=1.1.1.1 comment="HOST: gw1.example.com"
 ```
 
+- Прописываем интерфейсу IP-адрес `10.255.255.2/24`:
+  - Адрес интерфейса: `10.255.255.2/24`.
+  - Интерфейс: `gre-gw2-gw1`.
+  - Комментарий: `[GRE] GRE-GW2-GW1`.
+
 ```
 /ip address
-add address=10.255.255.2/24 interface=gre-gw02 network=10.255.255.0 comment="[GRE] GW2-GW1"
+add address=10.255.255.2/24 interface=gre-gw2-gw1 comment="[GRE] GW2-GW1"
 ```
+
+- Указываем маршрут до удалённой сети `R1`:
+  - Адрес удалённой сети `R1`: `10.1.0.0/16`.
+  - Шлюз `R1`: `10.255.255.1`.
+  - Комментарий: `[GRE] GW1`.
 
 ```
 /ip route
-add distance=1 dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[GRE] GW01"
+add distance=1 dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[GRE] GW1"
 ```
 
 ### Динамический IP
