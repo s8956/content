@@ -6,7 +6,7 @@
 title: 'MikroTik: GRE/IPsec'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1486881809698-a59614a9ac7e'
 categories:
   - 'inDev'
   - 'network'
