@@ -72,37 +72,37 @@ openssl req -x509 -newkey ec:<( openssl ecparam -name 'secp384r1' ) -nodes -days
 Для начала создаём приватный ключ.
 
 ```sh
-openssl ecparam -name 'prime256v1' -genkey -noout -out 'client.key.private.pem'
+openssl ecparam -name 'prime256v1' -genkey -noout -out 'client.private.key'
 ```
 
 Где:
 
-- `-out 'client.key.private.pem'` - название создаваемого файла с клиентским приватным ключом.
+- `-out 'client.private.key'` - название создаваемого файла с клиентским приватным ключом.
 
 ### Создание публичного ключа
 
 Создание публичного ключа будет не лишним.
 
 ```sh
-openssl ec -in 'client.key.private.pem' -pubout -out 'client.key.public.pem'
+openssl ec -in 'client.private.key' -pubout -out 'client.public.key'
 ```
 
 Где:
 
-- `-in 'client.key.private.pem'` - файл c клиентским приватным ключом.
-- `-out 'client.key.public.pem'` - название создаваемого файла с клиентским публичным ключом.
+- `-in 'client.private.key'` - файл c клиентским приватным ключом.
+- `-out 'client.public.key'` - название создаваемого файла с клиентским публичным ключом.
 
 ### Создание запроса на подпись сертификата
 
 Выполняем запрос на сертификат.
 
 ```sh
-openssl req -new -key 'client.key.private.pem' -out 'client.csr'
+openssl req -new -key 'client.private.key' -out 'client.csr'
 ```
 
 Где:
 
-- `-key 'client.key.private.pem'` - файл с приватным ключом клиентского сертификата.
+- `-key 'client.private.key'` - файл с приватным ключом клиентского сертификата.
 - `-out 'client.csr'` - название создаваемого файла с запросом на подпись клиентского сертификата.
 
 При выполнении запроса будет предложено ввести актуальные данные для будущего сертификата:
@@ -124,9 +124,7 @@ openssl req -new -key 'client.key.private.pem' -out 'client.csr'
 В заключительной части остаётся только создать сам сертификат и подписать его.
 
 ```sh
-openssl x509 -req -in 'client.csr' \
-  -CA 'ca.crt' -CAkey 'ca.key' -days '3650' \
-  -outform 'PEM' -out 'client.crt'
+openssl x509 -req -in 'client.csr' -CA 'ca.crt' -CAkey 'ca.key' -days '3650' -out 'client.crt'
 ```
 
 Где:
@@ -142,14 +140,12 @@ openssl x509 -req -in 'client.csr' \
 Для того, чтобы импортировать сертификат на клиентские устройства, его необходимо экспортировать в формат `P12`. `P12` является контейнером, в котором содержится приватный ключ сертификата и сам сертификат.
 
 ```sh
-openssl pkcs12 -export \
-  -inkey 'client.key.private.pem' \
-  -in 'client.crt' -out 'client.p12'
+openssl pkcs12 -export -inkey 'client.private.key' -in 'client.crt' -out 'client.p12'
 ```
 
 Где:
 
-- `-inkey 'client.key.private.pem'` - файл с приватным клиентским ключом.
+- `-inkey 'client.private.key'` - файл с приватным клиентским ключом.
 - `-in 'client.crt'` - файл с клиентским сертификатом.
 - `-out 'client.p12'` - название создаваемого файла-контейнера с приватным ключом и сертификатом.
 

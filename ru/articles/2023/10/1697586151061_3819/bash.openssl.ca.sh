@@ -51,8 +51,7 @@ ca() {
   local ec='secp384r1'
 
   echo "" && echo "--- [SSL] Certificate Authority" && echo ""
-  ${ossl} req -x509 -newkey ec:<( openssl ecparam -name "${ec}" ) \
-    -nodes -sha384 -days "${days}" \
+  ${ossl} req -x509 -newkey ec:<( openssl ecparam -name "${ec}" ) -nodes -sha384 -days "${days}" \
     -keyout "${ca_key}" -out "${ca_crt}" \
     && ${ossl} x509 -in "${ca_crt}" -text -noout
 }
