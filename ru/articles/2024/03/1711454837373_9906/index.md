@@ -63,8 +63,8 @@ draft: 0
 > en
 # copy startup-config running-config
 # config t
-(config)# en secret PA$$W0RD
-(config)# username USER privilege 15 secret PA$$W0RD
+(config)# en secret PassWord
+(config)# username USER privilege 15 secret PassWord
 ```
 
 - Переключить регистр с `0x2142` на `0x2102`:
