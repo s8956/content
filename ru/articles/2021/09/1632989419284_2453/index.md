@@ -77,9 +77,9 @@ After=systemd-udev-trigger.service systemd-udev-settle.service
 
 Но это не совсем корректное исправление (хотя исправление, изложенное выше, тоже трудно назвать правильным), так как после применения этих строк, появляется ошибка:
 
-```terminal {os="linux"}
+{{< terminal >}}
 Dec 27 22:23:48 oleksandr-xps15 udevadm[260]: systemd-udev-settle.service is deprecated. Please fix gdm.service not to pull it in.
-```
+{{< /terminal >}}
 
 ## Указание порядка инициализации графической подсистемы
 

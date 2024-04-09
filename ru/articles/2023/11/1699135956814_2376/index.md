@@ -154,7 +154,7 @@ awk 'BEGIN {printf "%.3f\n", 2005.50 / 3}'
 
 Показать 10 часто используемых команд:
 
-```terminal {os="linux"}
+{{< terminal >}}
 history | awk '{print $2}' | sort | uniq -c | sort -rn | head
 
    172 ls
@@ -167,14 +167,14 @@ history | awk '{print $2}' | sort | uniq -c | sort -rn | head
      28 netstat
      21 mysql
      20 cat
-```
+{{< /terminal >}}
 
 Определение даты истечения срока действия домена:
 
-```terminal {os="linux"}
+{{< terminal >}}
 whois 'cyberciti.com' | awk '/Registry Expiry Date:/ { print $4 }'
 2018-07-31T18:42:58Z
-```
+{{< /terminal >}}
 
 Можно записать все команды AWK в файл и вызывать их в терминале:
 

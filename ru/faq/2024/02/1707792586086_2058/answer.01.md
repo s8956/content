@@ -1,6 +1,6 @@
 Работу {{< tag "Postfix" >}} можно проверить при помощи {{< tag "Telnet" >}}, подключившись к `25` порту. При успешном подключении, должен прийти ответ с кодом `220`.
 
-```terminal
+{{< terminal os="windows" >}}
 telnet localhost 25
 
 Trying 127.0.0.1...
@@ -22,9 +22,9 @@ This is the body of the Email
 quit
 221 2.0.0 Bye
 Connection closed by foreign host.
-```
+{{< /terminal >}}
 
-```terminal
+{{< terminal os="windows" >}}
 telnet mail.zimbra.local 25
 
 220 mail.zimbra.local ESMTP Postfix
@@ -48,4 +48,4 @@ Subject: My Test Email
 This is the body of the EMAIL Message!
 .
 250 2.0.0 Ok: queued as 538BB9C1AD
-```
+{{< /terminal >}}

@@ -74,15 +74,15 @@ draft: 0
 
 Конвертировать файлы `file_01.mov`, `file_02.mov` и `file_03.mov` в формат `mp4`:
 
-```terminal {os="windows"}
+{{< terminal os="windows" >}}
 Compress-Video -F 'file_01.mov', 'file_02.mov', 'file_03.mov'
-```
+{{< /terminal >}}
 
 Пакетная конвертация всех файлов с расширением `.mov` в формат `mp4`:
 
-```terminal {os="windows"}
+{{< terminal os="windows" >}}
 Compress-Video -F '*.mov'
-```
+{{< /terminal >}}
 
 ## Алгоритм работы
 

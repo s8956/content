@@ -82,7 +82,7 @@ draft: 0
 
 Чтобы добавить свои значения в переменную `Path` на системном уровне, необходимо указать ключ `/m`:
 
-```batch
+```bat
 setx /m Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 ```
 
@@ -91,7 +91,7 @@ setx /m Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Правильная команда должны быть такой:
 
-```batch
+```bat
 setx /m Path "%Path%C:\MyCustomDir"
 ```
 
@@ -108,7 +108,7 @@ setx /m Path "%Path%C:\MyCustomDir"
 
 Добавить свои значения в переменную `Path` на пользовательском уровне:
 
-```batch
+```bat
 setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 ```
 
@@ -134,9 +134,9 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызов скрипта осуществляется следующим образом:
 
-```terminal {os="windows",mode="root"}
+{{< terminal os="windows" mode="root" >}}
 .\pwsh.set.env.path.system.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03'
-```
+{{< /terminal >}}
 
 В параметре `-P` указываются значения, которые необходимо добавить в переменную `Path` системного уровня.
 
@@ -148,9 +148,9 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызов скрипта осуществляется следующим образом:
 
-```terminal {os="windows"}
+{{< terminal os="windows" >}}
 .\pwsh.set.env.path.user.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03'
-```
+{{< /terminal >}}
 
 В параметре `-P` указываются значения, которые необходимо добавить в переменную `Path` пользовательского уровня.
 
@@ -162,9 +162,9 @@ setx Path "%Path%C:\Apps\App_01;C:\Apps\App_02"
 
 Вызывается скрипт обычным способом:
 
-```terminal {os="windows"}
+{{< terminal os="windows" >}}
 .\pwsh.set.env.path.ps1 -P 'C:\Apps\App_01', 'C:\Apps\App_02', 'C:\Apps\App_03' -T 'User'
-```
+{{< /terminal >}}
 
 Но отличается от выше приведённых скриптов дополнительным параметром `-T`, который указывает уровень переменной `Path` и может принимать следующие значения:
 

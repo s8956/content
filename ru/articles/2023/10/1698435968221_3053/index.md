@@ -59,9 +59,9 @@ draft: 0
 
 Скрипт требует административных прав доступа, поэтому его необходимо запускать под аккаунтом администратора.
 
-```terminal {os="windows", mode="root"}
+{{< terminal os="windows" mode="root" >}}
 .\pwsh.win.srv.ws.ps1
-```
+{{< /terminal >}}
 
 ### Алгоритм работы
 

@@ -2,7 +2,7 @@
 2. Запустить терминал и в терминале перейти в директорию, где лежит `SetupChipset.exe`.
 3. Ввести команду:
 
-```batch
+```bat
 SetupChipset.exe -extract "%UserProfile%\Downloads\IntelSetupChipset"
 ```
 

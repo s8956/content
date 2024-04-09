@@ -72,10 +72,10 @@ function Get-Architecture {
 
 ### Результат
 
-```terminal {os="windows"}
+{{< terminal os="windows" >}}
 .\arch.ps1
 64
-```
+{{< /terminal >}}
 
 ## Разрядность ОС и PowerShell
 
@@ -113,10 +113,10 @@ function Get-Architecture {
 
 ### Результат
 
-```terminal {os="windows"}
+{{< terminal os="windows" >}}
 .\arch.ps1
 
 ProcessArchitecture WindowsArchitecture
 ------------------- -------------------
 64 bit              64 bit
-```
+{{< /terminal >}}

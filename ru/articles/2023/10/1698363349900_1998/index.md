@@ -78,9 +78,9 @@ draft: 0
 
 Запускается скрипт обычным способом. В параметре `-P` указывается новый номер порта {{< tag "RDP" >}}.
 
-```terminal {os="windows", mode="root"}
+{{< terminal os="windows" mode="root" >}}
 .\pwsh.rdp.port.ps1 -P 50102
-```
+{{< /terminal >}}
 
 ### Алгоритм работы
 

@@ -70,7 +70,7 @@ draft: 0
 
 ### Пример использования
 
-```terminal {os="linux"}
+{{< terminal >}}
 lscpu
 
 Architecture:                    x86_64
@@ -96,7 +96,7 @@ L1d cache:                       192 KiB
 L1i cache:                       192 KiB
 L2 cache:                        1.5 MiB
 L3 cache:                        12 MiB
-```
+{{< /terminal >}}
 
 ## lspci
 
@@ -104,7 +104,7 @@ L3 cache:                        12 MiB
 
 ### Пример использования
 
-```terminal {os="linux"}
+{{< terminal >}}
 lspci
 
 00:00.0 Host bridge: Intel Corporation Comet Lake-S 6c Host Bridge/DRAM Controller (rev 05)
@@ -124,7 +124,7 @@ lspci
 00:1f.6 Ethernet controller: Intel Corporation Ethernet Connection (11) I219-V
 01:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Baffin [Radeon RX 550 640SP / RX 560/560X] (rev cf)
 01:00.1 Audio device: Advanced Micro Devices, Inc. [AMD/ATI] Baffin HDMI/DP Audio [Radeon RX 550 640SP / RX 560/560X]
-```
+{{< /terminal >}}
 
 ## lsblk
 
@@ -132,7 +132,7 @@ lspci
 
 ### Пример использования
 
-```terminal {os="linux"}
+{{< terminal >}}
 lsblk
 
 NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
@@ -151,7 +151,7 @@ sdd      8:48   1  59.8G  0 disk
 ├─sdd1   8:49   1  59.7G  0 part /run/media/user-0001/Ventoy
 └─sdd2   8:50   1    32M  0 part /run/media/user-0001/VTOYEFI
 zram0  252:0    0     4G  0 disk [SWAP]
-```
+{{< /terminal >}}
 
 ## lsmod
 
@@ -159,7 +159,7 @@ zram0  252:0    0     4G  0 disk [SWAP]
 
 ### Пример использования
 
-```terminal {os="linux"}
+{{< terminal >}}
 lsmod
 
 Module                  Size  Used by
@@ -183,4 +183,4 @@ tun                    57344  1
 bridge                294912  0
 stp                    16384  1 bridge
 llc                    16384  2 bridge,stp
-```
+{{< /terminal >}}

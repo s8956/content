@@ -97,7 +97,7 @@ Dism /Get-ImageInfo /ImageFile:"C:\BuildFarm\WIM\install.wim"
 
 Введённая команда предоставит примерно такой выхлоп:
 
-```terminal {os="windows",mode="root"}
+{{< terminal os="windows" mode="root" >}}
 Dism /Get-ImageInfo /ImageFile:"C:\BuildFarm\WIM\install.wim"
 
 Details for image : C:\BuildFarm\WIM\install.wim
@@ -129,7 +129,7 @@ Size : 15,658,943,281 bytes
 
 <...>
 Extract Specific Windows Index from Windows 10 Multiple Edition ISO
-```
+{{< /terminal >}}
 
 ### Монтирование WIM-образа
 
@@ -148,19 +148,19 @@ Dism /Mount-Image /ImageFile:"C:\BuildFarm\WIM\install.wim" /MountDir:"C:\BuildF
 {{< alert "tip" >}}
 Если что-то пошло не так, размонтировать образ без сохранения можно следующей командой:
 
-```batch
+```bat
 Dism /Unmount-Image /MountDir:"C:\BuildFarm\MNT" /Discard
 ```
 
 Проверить список примонтированных образов можно следующей командой:
 
-```batch
+```bat
 Dism /Get-MountedImageInfo
 ```
 
 Если после размонтирования образ всё ещё остаётся подключённым к системе и является повреждённым, следующая команда можешь помочь:
 
-```batch
+```bat
 Dism /Cleanup-Mountpoints
 ```
 

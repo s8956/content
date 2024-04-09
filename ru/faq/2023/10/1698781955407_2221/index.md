@@ -39,7 +39,7 @@ draft: 0
 
 <!--more-->
 
-```terminal {os="windows"}
+{{< terminal os="windows" >}}
 Get-Service -DisplayName 'win*'
 
 Status   Name               DisplayName
@@ -59,4 +59,4 @@ Stopped  perceptionsimulat… Windows Perception Simulation Service
 Stopped  PushToInstall      Windows PushToInstall Service
 Stopped  SDRSVC             Windows Backup
 Running  SecurityHealthSer… Windows Security Service
-```
+{{< /terminal >}}

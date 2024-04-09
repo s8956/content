@@ -47,7 +47,7 @@ draft: 0
 
 Смотрим текущие сетевые устройства и соединения:
 
-```terminal {os="linux", mode="root"}
+{{< terminal mode="root" >}}
 ip a
 
 1: lo: <loopback,up,lower_up> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -56,13 +56,13 @@ ip a
 2: enp1s0: <broadcast,multicast,up,lower_up> mtu 1500 qdisc fq_codel state UP group default qlen 1000
   link/ether xx:xx:xx:xx:xx:xx brd ff:ff:ff:ff:ff:ff
   inet 192.168.10.123/24 brd 192.168.10.255 scope global dynamic noprefixroute enp1s0
-```
+{{< /terminal >}}
 
 ## Настройка IP в RHEL-based дистрибутивах
 
 В директории `/etc/sysconfig/network-scripts` находятся конфигурационные файлы для сетевых интерфейсов. Имя файла состоит из префикса `ifcfg` и имени интерфейса. Например, содержимое файла для интерфейса `enp1s0`:
 
-```terminal {os="linux", mode="root"}
+{{< terminal mode="root" >}}
 cat /etc/sysconfig/network-scripts/ifcfg-enp1s0
 
 TYPE="Ethernet"
@@ -80,7 +80,7 @@ NAME="enp1s0"
 UUID="<DEVICE_ID>"
 DEVICE="enp1s0"
 ONBOOT="yes"
-```
+{{< /terminal >}}
 
 Обратим внимание на опцию **BOOTPROTO**. По умолчанию, в опции **BOOTPROTO** прописано `dhcp`. Это означает, что сетевой интерфейс получает информацию о сети автоматически от {{< tag "DHCP" >}}. Сама опция **BOOTPROTO** может принимать следующие значения:
 

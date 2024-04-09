@@ -1,6 +1,6 @@
 При вводе команды, необходимо добавить к `Format-Table` параметр `-AutoSize`. Тогда PowerShell будет подстраивать ширину столбца под размер содержимого.
 
-```terminal {os="windows"}
+{{< terminal os="windows" >}}
 Get-Service -DisplayName 'win*' | Format-Table -AutoSize
 
 Status  Name                  DisplayName
@@ -20,4 +20,4 @@ Stopped perceptionsimulation  Windows Perception Simulation Service
 Stopped PushToInstall         Windows PushToInstall Service
 Stopped SDRSVC                Windows Backup
 Running SecurityHealthService Windows Security Service
-```
+{{< /terminal >}}
