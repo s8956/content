@@ -132,4 +132,4 @@ add distance=1 dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[GRE] GW1"
 
 ### Динамический IP
 
-{{< file "ros.gre.dip.rsc" text >}}
+{{< file "ros.gre.dip.rsc" >}}

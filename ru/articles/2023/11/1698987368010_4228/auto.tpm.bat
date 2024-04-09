@@ -1,4 +1,4 @@
-:: Bypassing system requirements checks (Windows 11).
+rem Bypassing system requirements checks (Windows 11).
 
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v "BypassNRO" /f /t "REG_DWORD" /d "1"
 reg add "HKLM\SYSTEM\Setup\LabConfig" /v "BypassCPUCheck" /f /t "REG_DWORD" /d "1"

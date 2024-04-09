@@ -64,4 +64,4 @@ draft: 1
 
 ### Скрипт конфигурации
 
-{{< file "ros.router.rsc" "text" >}}
+{{< file "ros.router.rsc" >}}

@@ -169,7 +169,7 @@ curl -X GET "https://api.cloudflare.com/client/v4/zones/<...>/dns_records" -H "A
 
 ## Скрипт
 
-{{< file "cf.ddns.rsc" "bash" >}}
+{{< file "cf.ddns.rsc" >}}
 
 ### Настройка
 

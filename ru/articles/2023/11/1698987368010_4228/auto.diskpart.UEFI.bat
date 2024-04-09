@@ -1,4 +1,4 @@
-:: Disk Partitions (UEFI).
+rem Disk Partitions (UEFI).
 
 echo SELECT DISK=0 >> "X:\auto.diskpart.txt"
 echo CLEAN >> "X:\auto.diskpart.txt"

@@ -1,4 +1,4 @@
-:: Disk Partitions (BIOS).
+rem Disk Partitions (BIOS).
 
 echo SELECT DISK=0 >> "X:\auto.diskpart.txt"
 echo CLEAN >> "X:\auto.diskpart.txt"
