@@ -9,7 +9,7 @@
 # /interface ethernet set [ find default-name="ether1" ] mac-address="00:00:00:00:00:00"
 # -------------------------------------------------------------------------------------------------------------------- #
 
-:local rosAdminPassword "pa$$word"
+:local rosAdminPassword "PassWord"
 :local rosBridgeName "bridge1"
 :local rosRouterName "GW1"
 :local rosGwDomain "gw1.lan"

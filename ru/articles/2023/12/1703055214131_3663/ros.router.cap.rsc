@@ -8,7 +8,7 @@
 
 :local name "common"
 :local ssid "GW01"
-:local password "pa$$word"
+:local password "PassWord"
 :local bridge "bridge1"
 
 /ip firewall filter

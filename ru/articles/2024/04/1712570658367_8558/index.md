@@ -66,14 +66,14 @@ draft: 1
 
 - Создаём интерфейс {{< tag "GRE">}}:
   - Имя интерфейса: `gre-gw1-gw2`.
-  - Секретная фраза для IPsec: `pa$$word`.
+  - Секретная фраза для IPsec: `PassWord`.
   - WAN IP-адрес локального маршрутизатора `R1`: `1.1.1.1`.
   - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
   - Комментарий: `HOST: gw2.example.com`.
 
 ```
 /interface gre
-add allow-fast-path=no ipsec-secret="pa$$word" name=gre-gw1-gw2 local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
+add allow-fast-path=no ipsec-secret="PassWord" name=gre-gw1-gw2 local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
 ```
 
 - Прописываем интерфейсу IP-адрес `10.255.255.1/24`:
@@ -100,14 +100,14 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
 
 - Создаём интерфейс {{< tag "GRE">}}:
   - Имя интерфейса: `gre-gw2-gw1`.
-  - Секретная фраза для IPsec: `pa$$word`.
+  - Секретная фраза для IPsec: `PassWord`.
   - WAN IP-адрес локального маршрутизатора `R2`: `2.2.2.2`.
   - WAN IP-адрес удалённого маршрутизатора `R1`: `1.1.1.1`.
   - Комментарий: `HOST: gw1.example.com`.
 
 ```
 /interface gre
-add allow-fast-path=no ipsec-secret="pa$$word" name=gre-gw2-gw1 local-address=2.2.2.2 remote-address=1.1.1.1 comment="HOST: gw1.example.com"
+add allow-fast-path=no ipsec-secret="PassWord" name=gre-gw2-gw1 local-address=2.2.2.2 remote-address=1.1.1.1 comment="HOST: gw1.example.com"
 ```
 
 - Прописываем интерфейсу IP-адрес `10.255.255.2/24`:

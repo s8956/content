@@ -43,4 +43,4 @@ set allowed-interface-list=none
 set enabled=no
 
 /user
-set [find name="admin"] password="pa$$word"
+set [find name="admin"] password="PassWord"

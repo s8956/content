@@ -101,13 +101,13 @@ add address="gw2.example.com" exchange-mode=ike2 name=GW2 profile=ipsec-sts comm
 
 - Добавляем идентификацию:
   - Peer: `GW2`.
-  - Секретная фраза: `pa$$word`.  
+  - Секретная фраза: `PassWord`.  
     *Секретная фраза должна быть одинаковой на обоих маршрутизаторах.*
   - Комментарий: `GW2`.
 
 ```
 /ip ipsec identity
-add peer=GW2 secret="pa$$word" comment="GW2"
+add peer=GW2 secret="PassWord" comment="GW2"
 ```
 
 - Добавляем политику {{< tag "IPsec" >}}:
@@ -191,13 +191,13 @@ add address="gw1.example.com" exchange-mode=ike2 name=GW1 profile=ipsec-sts comm
 
 - Добавляем идентификацию:
   - Peer: `GW1`.
-  - Секретная фраза: `pa$$word`.  
+  - Секретная фраза: `PassWord`.  
     *Секретная фраза должна быть одинаковой на обоих маршрутизаторах.*
   - Комментарий: `GW1`.
 
 ```
 /ip ipsec identity
-add peer=GW1 secret="pa$$word" comment="GW1"
+add peer=GW1 secret="PassWord" comment="GW1"
 ```
 
 - Добавляем политику {{< tag "IPsec" >}}:
