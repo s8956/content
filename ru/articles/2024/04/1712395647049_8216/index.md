@@ -103,7 +103,7 @@ add dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[WG] GW1-GW2"
 {{< code >}}
 /ip firewall filter
 add action=accept chain=input dst-port=51820 in-interface-list=WAN protocol=udp comment="[WG] WireGuard (Site-to-Site)"
-add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[WG] GW1-GW2"
+add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[WG] GW2-GW1"
 add action=accept chain=forward src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[WG] GW1-GW2"
 {{< /code >}}
 
@@ -147,7 +147,7 @@ add dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[WG] GW2-GW1"
 {{< code >}}
 /ip firewall filter
 add action=accept chain=input dst-port=51820 in-interface-list=WAN protocol=udp comment="[WG] WireGuard (Site-to-Site)"
-add action=accept chain=forward src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[WG] GW2-GW1"
+add action=accept chain=forward src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[WG] GW1-GW2"
 add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[WG] GW2-GW1"
 {{< /code >}}
 
