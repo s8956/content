@@ -7,16 +7,16 @@ awk -F '<FIELD>' '{ print $1 }'
 
 Вывод первого поля:
 
-{{< terminal >}}
+```terminal
 echo '169659_2535291_7578' | awk -F '_' '{ print $1 }'
 
 169659
-{{< /terminal >}}
+```
 
 Вывод первого и второго полей:
 
-{{< terminal >}}
+```terminal
 echo '169659_2535291_7578' | awk -F '_' '{ print $1, $2 }'
 
 169659 2535291
-{{< /terminal >}}
+```

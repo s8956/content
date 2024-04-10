@@ -66,9 +66,9 @@ find "/home/user" -type f -mtime +3 -print0 | xargs -0 rm -f
 
 В скрипте я вынес некоторые значения в переменные для удобной перенастройки. Вызывается скрипт следующем образом:
 
-{{< terminal >}}
+```terminal
 delete-files.sh "3" "/path/to/storage"
-{{< /terminal >}}
+```
 
 Где:
 

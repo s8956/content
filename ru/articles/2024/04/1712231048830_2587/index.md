@@ -98,7 +98,7 @@ sed -i 's|;runuser = asterisk|runuser = asterisk|g' '/etc/asterisk/asterisk.conf
 systemctl enable --now asterisk
 ```
 
-{{< terminal mode="root" >}}
+```terminal {mode="root"}
 systemctl status asterisk
 
 ● asterisk.service - LSB: Asterisk PBX
@@ -116,9 +116,9 @@ Apr 04 11:51:42 phone systemd[1]: Starting LSB: Asterisk PBX...
 Apr 04 11:51:43 phone asterisk[791]:  * Starting Asterisk PBX: asterisk
 Apr 04 11:51:43 phone asterisk[791]:    ...done.
 Apr 04 11:51:43 phone systemd[1]: Started LSB: Asterisk PBX.
-{{< /terminal >}}
+```
 
-{{< terminal mode="root" >}}
+```terminal {mode="root"}
 asterisk -rvv
 
 Asterisk 20.7.0, Copyright (C) 1999 - 2022, Sangoma Technologies Corporation and others.
@@ -132,7 +132,7 @@ Running as user 'asterisk'
 Running under group 'asterisk'
 Connected to Asterisk 20.7.0 currently running on phone (pid = 871)
 phone*CLI>
-{{< /terminal >}}
+```
 
 ## TLS
 

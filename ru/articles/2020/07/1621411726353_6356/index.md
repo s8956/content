@@ -70,7 +70,7 @@ gpg --expert --full-gen-key
 
 Команда вернёт следующий результат:
 
-{{< terminal >}}
+```terminal
 gpg --expert --full-gen-key
 
 gpg (GnuPG) 2.2.20; Copyright (C) 2020 Free Software Foundation, Inc.
@@ -90,11 +90,11 @@ Please select what kind of key you want:
   (13) Existing key
   (14) Existing key from card
 Your selection?
-{{< /terminal >}}
+```
 
 Здесь спрашивается, какой конкретно ключ мы хотим получить. Вводим `9`. Получаем:
 
-{{< terminal os="linux" >}}
+```terminal
 gpg --expert --full-gen-key
 
 Please select which elliptic curve you want:
@@ -104,11 +104,11 @@ Please select which elliptic curve you want:
    (5) NIST P-521
    (9) secp256k1
 Your selection?
-{{< /terminal >}}
+```
 
 А здесь уже предстоит выбрать алгоритм шифрования. Вводим `1`. Получаем:
 
-{{< terminal os="linux" >}}
+```terminal
 gpg --expert --full-gen-key
 
 Please specify how long the key should be valid.
@@ -118,7 +118,7 @@ Please specify how long the key should be valid.
       <n>m = key expires in n months
       <n>y = key expires in n years
 Key is valid for? (0)
-{{< /terminal >}}
+```
 
 На последнем шаге настройки ключа спрашивается время действия ключа. Обычно, личные ключи генерируются с безлимитным временем действия. Вводим `0` (этот пункт идёт по умолчанию).
 
@@ -139,14 +139,14 @@ gpg --list-keys --keyid-format LONG --with-fingerprint
 
 Команда вернёт следующий результат:
 
-{{< terminal os="linux" >}}
+```terminal
 gpg --list-keys --keyid-format LONG --with-fingerprint
 
 pub   ed25519/JTM4BAVLPI8F0XHR 2020-02-17 [SC]
       Key fingerprint = XXXX XXXX XXXX XXXX XXXX  XXXX XXXX XXXX XXXX XXXX
 uid                 [ultimate] John Doe <john.doe@example.com>
 sub   cv25519/AI9NEDUOWRF016Y2 2020-02-17 [E]
-{{< /terminal >}}
+```
 
 Где:
 - `JTM4BAVLPI8F0XHR` - идентификатор ключа. Он потребуется для каких-либо действий с ключом (редактирование / удаление / и т.п.).
@@ -260,8 +260,8 @@ gpg --delete-secret-and-public-key 'JTM4BAVLPI8F0XHR'
 
 Эти параметры указываются друг за другом в строгом порядке:
 
-{{< terminal os="linux" >}}
+```terminal
 bash bash.gpg.gen.sh key 'John Doe' 'john.doe@example.com' '<PASSPHRASE>'
-{{< /terminal >}}
+```
 
 После отработки скрипта, в директории где он запускался появятся два файла с публичным и приватным ключами.

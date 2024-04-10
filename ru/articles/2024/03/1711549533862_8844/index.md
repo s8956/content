@@ -58,9 +58,9 @@ draft: 1
 dig example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal
 dig google.com
-{{< /terminal >}}
+```
 
 ### Drill
 
@@ -68,7 +68,7 @@ dig google.com
 drill example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal
 drill google.com
 
 ;; ->>HEADER<<- opcode: QUERY, rcode: NOERROR, id: 45117
@@ -87,7 +87,7 @@ google.com.     184     IN      A       216.58.210.142
 ;; SERVER: 10.1.0.1
 ;; WHEN: Wed Mar 27 17:41:27 2024
 ;; MSG SIZE  rcvd: 44
-{{< /terminal >}}
+```
 
 ### NSLookUp
 
@@ -95,9 +95,9 @@ google.com.     184     IN      A       216.58.210.142
 nslookup example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 nslookup google.com
-{{< /terminal >}}
+```
 
 ## Отдельные записи DNS домена
 
@@ -107,9 +107,9 @@ nslookup google.com
 dig mx example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 dig mx google.com
-{{< /terminal >}}
+```
 
 ### Drill
 
@@ -117,7 +117,7 @@ dig mx google.com
 drill mx example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 drill mx google.com
 
 ;; ->>HEADER<<- opcode: QUERY, rcode: NOERROR, id: 51703
@@ -141,7 +141,7 @@ smtp.google.com.        30      IN      A       142.250.150.26
 ;; SERVER: 10.1.0.1
 ;; WHEN: Wed Mar 27 17:41:53 2024
 ;; MSG SIZE  rcvd: 136
-{{< /terminal >}}
+```
 
 ### NSLookUp
 
@@ -149,7 +149,7 @@ smtp.google.com.        30      IN      A       142.250.150.26
 nslookup -type=mx example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 nslookup -type=mx google.com
 
 Server:  gw1.lan
@@ -163,7 +163,7 @@ smtp.google.com internet address = 173.194.222.27
 smtp.google.com internet address = 173.194.222.26
 smtp.google.com internet address = 74.125.205.27
 smtp.google.com internet address = 173.194.220.26
-{{< /terminal >}}
+```
 
 ## Трассировка
 
@@ -173,9 +173,9 @@ smtp.google.com internet address = 173.194.220.26
 dig +trace example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 dig +trace google.com
-{{< /terminal >}}
+```
 
 ### Drill
 
@@ -183,7 +183,7 @@ dig +trace google.com
 drill -TD example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 drill -TD google.com
 
 Warning: No trusted keys were given. Will not be able to verify authenticity!
@@ -210,7 +210,7 @@ google.com.     300     IN      A       108.177.14.138
 google.com.     300     IN      A       108.177.14.100
 google.com.     300     IN      A       108.177.14.139
 ;;[S] self sig OK; [B] bogus; [T] trusted; [U] unsigned
-{{< /terminal >}}
+```
 
 ### Drill
 
@@ -218,7 +218,7 @@ google.com.     300     IN      A       108.177.14.139
 drill -T example.com
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 drill -T google.com
 
 .       518400  IN      NS      a.root-servers.net.
@@ -257,7 +257,7 @@ google.com.     300     IN      A       108.177.14.138
 google.com.     300     IN      A       108.177.14.100
 google.com.     300     IN      A       108.177.14.101
 google.com.     300     IN      A       108.177.14.113
-{{< /terminal >}}
+```
 
 ## Запись PTR домена
 
@@ -267,9 +267,9 @@ google.com.     300     IN      A       108.177.14.113
 dig +short -x IP_ADDRESS
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 dig +short -x 108.177.14.100
-{{< /terminal >}}
+```
 
 ### Drill
 
@@ -277,7 +277,7 @@ dig +short -x 108.177.14.100
 drill -x IP_ADDRESS
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 drill -x 108.177.14.100
 
 ;; ->>HEADER<<- opcode: QUERY, rcode: NOERROR, id: 55533
@@ -296,7 +296,7 @@ drill -x 108.177.14.100
 ;; SERVER: 10.1.0.1
 ;; WHEN: Wed Mar 27 17:44:49 2024
 ;; MSG SIZE  rcvd: 79
-{{< /terminal >}}
+```
 
 ### NSLookUp
 
@@ -304,7 +304,7 @@ drill -x 108.177.14.100
 nslookup -debug IP_ADDRESS
 ```
 
-{{< terminal lang="dns" >}}
+```terminal {lang="dns"}
 nslookup -debug 108.177.14.100
 
 ------------
@@ -346,4 +346,4 @@ Got answer:
 ------------
 Name:    lt-in-f100.1e100.net
 Address:  108.177.14.100
-{{< /terminal >}}
+```

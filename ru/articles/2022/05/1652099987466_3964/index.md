@@ -97,7 +97,7 @@ Dism /Get-ImageInfo /ImageFile:"C:\BuildFarm\WIM\install.wim"
 
 Введённая команда предоставит примерно такой выхлоп:
 
-{{< terminal os="windows" mode="root" >}}
+```terminal {os="windows",mode="root"}
 Dism /Get-ImageInfo /ImageFile:"C:\BuildFarm\WIM\install.wim"
 
 Details for image : C:\BuildFarm\WIM\install.wim
@@ -129,7 +129,7 @@ Size : 15,658,943,281 bytes
 
 <...>
 Extract Specific Windows Index from Windows 10 Multiple Edition ISO
-{{< /terminal >}}
+```
 
 ### Монтирование WIM-образа
 

@@ -90,15 +90,15 @@ The security database on the server does not have a computer account for this wo
 
 Восстановить доверительные отношения с доменом по умолчанию:
 
-{{< terminal os="windows" mode="root" >}}
+```terminal {os="windows",mode="root"}
 .\pwsh.csc.repair.ps1
-{{< /terminal >}}
+```
 
 Восстановить доверительные отношения с доменом `DC-server.domain.com`:
 
-{{< terminal os="windows" mode="root" >}}
+```terminal {os="windows",mode="root"}
 .\pwsh.csc.repair.ps1 -DC 'DC-server.domain.com'
-{{< /terminal >}}
+```
 
 ### Алгоритм работы
 

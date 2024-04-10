@@ -170,7 +170,7 @@ openssl x509 -in 'client.crt' -text
 
 При выполнении команды, терминал покажет информацию со всеми основными сведениями о сертификате (пример ниже).
 
-{{< terminal >}}
+```terminal
 openssl x509 -in 'client.crt' -text
 
 Certificate:
@@ -202,7 +202,7 @@ Certificate:
          54:dc:45:ed:ef:21:58:ea:c7:b6:63:db:a2:d9:71:fe:3d:b3:
          d6:1e:15:82:7b:c8:e8:08:33:d5:2f:d5:f2:8f:3b:41:ea:53:
          1e:2d:a9:1e:9e:25:9c:fb:a7:12:f9:ec
-{{< /terminal >}}
+```
 
 ### Просмотр запроса на подпись сертификата
 
@@ -216,7 +216,7 @@ openssl req -in 'client.csr' -text
 
 Команда выдаст информацию по запросу на подпись клиентского сертификата (пример ниже).
 
-{{< terminal >}}
+```terminal
 openssl req -in 'client.csr' -text
 
 Certificate Request:
@@ -242,7 +242,7 @@ Certificate Request:
          37:ae:f4:89:30:47:11:89:db:c4:1b:1d:9b:82:b9:64:ea:c7:
          02:21:00:f8:00:70:4e:e6:db:99:78:cf:25:22:c0:8d:c6:b1:
          f3:f0:d8:68:3b:c2:51:21:a5:b3:fa:97:f9:85:c6:9c:49
-{{< /terminal >}}
+```
 
 ## Автоматизация
 
@@ -256,15 +256,15 @@ Certificate Request:
 
 1. Создать ключ и сертификат центра сертификации:
 
-{{< terminal >}}
+```terminal
 bash bash.openssl.ca.sh ca
-{{< /terminal >}}
+```
 
 2. Создать клиентские ключи и сертификаты:
 
-{{< terminal >}}
+```terminal
 bash bash.openssl.ca.sh cert
-{{< /terminal >}}
+```
 
 Немного расскажу про алгоритм генерации сертификатов.
 
