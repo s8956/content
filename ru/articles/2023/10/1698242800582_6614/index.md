@@ -61,7 +61,7 @@ https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?se
 
 URL довольно большой, поэтому для удобства я каждый параметр перенёс на отдельную строку:
 
-```
+{{< code >}}
 https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?searchString=7719167509
 &strictEqual=true
 &pageNumber=1
@@ -76,7 +76,7 @@ https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?se
 &ca=on
 &pc=on
 &pa=on
-```
+{{< /code >}}
 
 Когда стало поудобнее, рассмотрим параметры по отдельности.
 

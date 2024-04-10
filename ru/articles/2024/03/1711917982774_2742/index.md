@@ -70,10 +70,10 @@ draft: 0
   - Группа Diffie-Hellman (стойкость шифрования): `ecp384`.
   - Алгоритм шифрования: `aes-256`.
 
-```
+{{< code >}}
 /ip ipsec profile
 add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
-```
+{{< /code >}}
 
 - Добавляем представление {{< tag "IPsec" >}}:
   - Имя представления: `ipsec-sts`.
@@ -81,10 +81,10 @@ add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
   - Алгоритм шифрования: `aes-256-cbc`.
   - Группа Diffie-Hellman (стойкость шифрования): `ecp384`.
 
-```
+{{< code >}}
 /ip ipsec proposal
 add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=ecp384
-```
+{{< /code >}}
 
 - Добавляем {{< tag "IPsec" >}} peer:
   - Имя peer'а: `GW2`.
@@ -93,10 +93,10 @@ add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=e
   - Режим обмена: `ike2`.
   - Комментарий: `GW2`.
 
-```
+{{< code >}}
 /ip ipsec peer
 add address="gw2.example.com" exchange-mode=ike2 name=GW2 profile=ipsec-sts comment="GW2"
-```
+{{< /code >}}
 
 - Добавляем идентификацию:
   - Peer: `GW2`.
@@ -104,10 +104,10 @@ add address="gw2.example.com" exchange-mode=ike2 name=GW2 profile=ipsec-sts comm
     *Секретная фраза должна быть одинаковой на обоих маршрутизаторах.*
   - Комментарий: `GW2`.
 
-```
+{{< code >}}
 /ip ipsec identity
 add peer=GW2 secret="PassWord" comment="GW2"
-```
+{{< /code >}}
 
 - Добавляем политику {{< tag "IPsec" >}}:
   - Peer: `GW2`.
@@ -118,40 +118,40 @@ add peer=GW2 secret="PassWord" comment="GW2"
   - Представление: `ipsec-sts`.
   - Комментарий: `GW1-GW2`.
 
-```
+{{< code >}}
 /ip ipsec policy
 add src-address=10.1.0.0/16 dst-address=10.2.0.0/16 tunnel=yes action=encrypt proposal=ipsec-sts peer=GW2 comment="GW1-GW2"
-```
+{{< /code >}}
 
 - Исключаем обработку трафика {{< tag "IPsec" >}}:
   - Адрес локальной сети `R1`: `10.1.0.0/16`.
   - Адрес удалённой сети `R2`: `10.2.0.0/16`.
   - Комментарий: `[IPsec] GW1-GW2`.
 
-```
+{{< code >}}
 /ip firewall nat
 add chain=srcnat action=accept src-address=10.1.0.0/16 dst-address=10.2.0.0/16 place-before=0 comment="[IPsec] GW1-GW2"
-```
+{{< /code >}}
 
 - Настраивает фильтры брандмауэра:
   - Открыть порты `500` и `4500` по протоколу `UDP`.
   - Разрешить трафик по протоколу `ipsec-esp`.
 
-```
+{{< code >}}
 /ip firewall filter
 add action=accept chain=input dst-port=500,4500 in-interface-list=WAN protocol=udp comment="[ROS] IPsec"
 add action=accept chain=input in-interface-list=WAN protocol=ipsec-esp comment="[ROS] IPsec"
-```
+{{< /code >}}
 
 - Настраиваем обход отслеживания соединений {{< tag "IPsec" >}} для снижения нагрузки на CPU маршрутизатора:
   - Пакеты из удалённой сети `R2` `10.2.0.0/16` в локальную сеть `R1` `10.1.0.0/16`.
   - Пакеты из локальной сети `R1` `10.1.0.0/16` в удалённую сеть `R2` `10.2.0.0/16`.
 
-```
+{{< code >}}
 /ip firewall raw
 add action=notrack chain=prerouting src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[IPsec] GW2-GW1"
 add action=notrack chain=prerouting src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[IPsec] GW1-GW2"
-```
+{{< /code >}}
 
 ### Router #2
 
@@ -160,10 +160,10 @@ add action=notrack chain=prerouting src-address=10.1.0.0/16 dst-address=10.2.0.0
   - Группа Diffie-Hellman (стойкость шифрования): `ecp384`.
   - Алгоритм шифрования: `aes-256`.
 
-```
+{{< code >}}
 /ip ipsec profile
 add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
-```
+{{< /code >}}
 
 - Добавляем представление {{< tag "IPsec" >}}:
   - Имя представления: `ipsec-sts`.
@@ -171,10 +171,10 @@ add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
   - Алгоритм шифрования: `aes-256-cbc`.
   - Группа Diffie-Hellman (стойкость шифрования): `ecp384`.
 
-```
+{{< code >}}
 /ip ipsec proposal
 add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=ecp384
-```
+{{< /code >}}
 
 - Добавляем {{< tag "IPsec" >}} peer:
   - Имя peer'а: `GW1`.
@@ -183,10 +183,10 @@ add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=e
   - Режим обмена: `ike2`.
   - Комментарий: `GW1`.
 
-```
+{{< code >}}
 /ip ipsec peer
 add address="gw1.example.com" exchange-mode=ike2 name=GW1 profile=ipsec-sts comment="GW1"
-```
+{{< /code >}}
 
 - Добавляем идентификацию:
   - Peer: `GW1`.
@@ -194,10 +194,10 @@ add address="gw1.example.com" exchange-mode=ike2 name=GW1 profile=ipsec-sts comm
     *Секретная фраза должна быть одинаковой на обоих маршрутизаторах.*
   - Комментарий: `GW1`.
 
-```
+{{< code >}}
 /ip ipsec identity
 add peer=GW1 secret="PassWord" comment="GW1"
-```
+{{< /code >}}
 
 - Добавляем политику {{< tag "IPsec" >}}:
   - Peer: `GW1`.
@@ -208,40 +208,40 @@ add peer=GW1 secret="PassWord" comment="GW1"
   - Представление: `ipsec-sts`.
   - Комментарий: `GW2-GW1`.
 
-```
+{{< code >}}
 /ip ipsec policy
 add src-address=10.2.0.0/16 dst-address=10.1.0.0/16 tunnel=yes action=encrypt proposal=ipsec-sts peer=GW1 comment="GW2-GW1"
-```
+{{< /code >}}
 
 - Исключаем обработку трафика {{< tag "IPsec" >}}:
   - Адрес локальной сети `R2`: `10.2.0.0/16`.
   - Адрес удалённой сети `R1`: `10.1.0.0/16`.
   - Комментарий: `[IPsec] GW2-GW1`.
 
-```
+{{< code >}}
 /ip firewall nat
 add chain=srcnat action=accept src-address=10.2.0.0/16 dst-address=10.1.0.0/16 place-before=0 comment="[IPsec] GW2-GW1"
-```
+{{< /code >}}
 
 - Настраивает фильтры брандмауэра:
   - Открыть порты `500` и `4500` по протоколу `UDP`.
   - Разрешить трафик по протоколу `ipsec-esp`.
 
-```
+{{< code >}}
 /ip firewall filter
 add action=accept chain=input dst-port=500,4500 in-interface-list=WAN protocol=udp comment="[ROS] IPsec"
 add action=accept chain=input in-interface-list=WAN protocol=ipsec-esp comment="[ROS] IPsec"
-```
+{{< /code >}}
 
 - Настраиваем обход отслеживания соединений {{< tag "IPsec" >}} для снижения нагрузки на CPU маршрутизатора:
   - Пакеты из удалённой сети `R1` `10.1.0.0/16` в локальную сеть `R2` `10.2.0.0/16`.
   - Пакеты из локальной сети `R2` `10.2.0.0/16` в удалённую сеть `R1` `10.1.0.0/16`.
 
-```
+{{< code >}}
 /ip firewall raw
 add action=notrack chain=prerouting src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[IPsec] GW1-GW2"
 add action=notrack chain=prerouting src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[IPsec] GW2-GW1"
-```
+{{< /code >}}
 
 ## Автоматизация
 
