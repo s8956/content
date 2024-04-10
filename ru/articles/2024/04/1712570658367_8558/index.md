@@ -3,7 +3,7 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'MikroTik: GRE/IPsec'
+title: 'MikroTik: GRE/IPsec (Site-to-Site)'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1486881809698-a59614a9ac7e'
