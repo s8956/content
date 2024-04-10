@@ -1,9 +1,9 @@
-# @package    MikroTik / RouterOS / GRE
+# @package    MikroTik / RouterOS / GRE / Dynamic IP
 # @author     Kai Kimera <mail@kai.kim>
 # @copyright  2024 Library Online
 # @license    MIT
 # @version    0.1.0
-# @link
+# @link       https://lib.onl/ru/articles/2024/04/326618af-d950-5001-8114-57c66bb8a5af/
 # -------------------------------------------------------------------------------------------------------------------- #
 
 :local wanInterface "ether1"
@@ -31,10 +31,11 @@
 
   :if ($greRemoteAddressNew != $greRemoteAddressOld) do={
     /interface gre set $i remote-address=$greRemoteAddressNew
-    :log info ("Updating " . $greComment . " from " . $greRemoteAddressOld . " to " . $greRemoteAddressNew . ".")
+    :log info ("Updating GRE remote address (" . $greComment . ") from " . $greRemoteAddressOld . " to " . $greRemoteAddressNew . ".")
   }
 
   :if ($wanAddress != $greLocalAddress) do={
     /interface gre set $i local-address=$wanAddress
+    :log info ("Updating GRE local address from " . $greLocalAddress . " to " . $wanAddress . ".")
   }
 }

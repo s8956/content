@@ -59,7 +59,7 @@ draft: 0
   - DNS: `8.8.8.8`.
 - Настроить сетевой интерфейс {{< tag "Cisco" >}} со следующими параметрами:
 
-```
+```text
 > en
 # conf t
 (config)# int fa0/1
@@ -77,13 +77,13 @@ draft: 0
 
 - Посмотреть текущую версию {{< tag "IOS" >}}:
 
-```
+```text
 # show version
 ```
 
 - Сделать резервную копию текущего образа {{< tag "IOS" >}} на TFTP-сервер:
 
-```
+```text
 # show flash: | include .bin
 # copy flash:IOS_FW.bin tftp://192.168.1.2
 ```
@@ -97,7 +97,7 @@ draft: 0
 
 - Записать на Flash-карту новый образ {{< tag "IOS" >}}:
 
-```
+```text
 # copy tftp://192.168.1.2/IOS_FW.bin flash:
 ```
 
@@ -108,7 +108,7 @@ draft: 0
 
 ## Верификация нового образа IOS
 
-```
+```text
 # show flash: | include .bin
 # verify /md5 flash:IOS_FW.bin
 ```
@@ -121,7 +121,7 @@ draft: 0
 
 - Прописать в конфигурации {{< tag "Cisco" >}} загрузку нового образа {{< tag "IOS" >}}:
 
-```
+```text
 # conf t
 (config)# boot system flash:IOS_FW.bin
 (config)# exit
@@ -136,7 +136,7 @@ draft: 0
 
 - Посмотреть версию {{< tag "IOS" >}} после перезагрузки:
 
-```
+```text
 # show version
 ```
 

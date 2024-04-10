@@ -52,14 +52,14 @@ draft: 0
 - Загрузиться в **ROMMON** (при старте {{< tag "Cisco" >}} нажать клавишу {{< key "Break" >}}).
 - Переключить регистр с `0x2102` на `0x2142` и перезагрузить:
 
-```
+```text
 > confreg 0x2142
 > reset
 ```
 
 - Сбросить пароль:
 
-```
+```text
 > en
 # copy startup-config running-config
 # config t
@@ -69,7 +69,7 @@ draft: 0
 
 - Переключить регистр с `0x2142` на `0x2102`:
 
-```
+```text
 (config)# config-register 0x2102
 (config)# exit
 # copy running-config startup-config
