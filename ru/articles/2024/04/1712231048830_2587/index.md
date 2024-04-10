@@ -50,9 +50,9 @@ draft: 1
 
 ## Обновление ОС и установка пакетов
 
-```sh
+{{< code "sh" >}}
 apt update && apt --yes upgrade && apt --yes install git curl wget subversion build-essential
-```
+{{< /code >}}
 
 ## Установка Asterisk
 
