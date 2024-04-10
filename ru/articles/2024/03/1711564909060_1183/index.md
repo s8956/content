@@ -60,13 +60,13 @@ draft: 0
 
 ```text
 > en
-# conf t
-(config)# int fa0/1
-(config-if)# ip address 192.168.1.1 255.255.255.0
-(config-if)# no shutdown
-(config-if)# exit
-(config)# exit
-#
+Router# conf t
+Router(config)# int fa0/1
+Router(config-if)# ip address 192.168.1.1 255.255.255.0
+Router(config-if)# no shutdown
+Router(config-if)# exit
+Router(config)# exit
+Router#
 ```
 
 - Подключить сетевой интерфейс компьютера к сетевому интерфейсу {{< tag "Cisco" >}} `FE0/1`.
@@ -77,14 +77,14 @@ draft: 0
 - Посмотреть текущую версию {{< tag "IOS" >}}:
 
 ```text
-# show version
+Router# show version
 ```
 
 - Сделать резервную копию текущего образа {{< tag "IOS" >}} на TFTP-сервер:
 
 ```text
-# show flash: | include .bin
-# copy flash:IOS_FW.bin tftp://192.168.1.2
+Router# show flash: | include .bin
+Router# copy flash:IOS_FW.bin tftp://192.168.1.2
 ```
 
 Где:
@@ -97,7 +97,7 @@ draft: 0
 - Записать на Flash-карту новый образ {{< tag "IOS" >}}:
 
 ```text
-# copy tftp://192.168.1.2/IOS_FW.bin flash:
+Router# copy tftp://192.168.1.2/IOS_FW.bin flash:
 ```
 
 Где:
@@ -108,8 +108,8 @@ draft: 0
 ## Верификация нового образа IOS
 
 ```text
-# show flash: | include .bin
-# verify /md5 flash:IOS_FW.bin
+Router# show flash: | include .bin
+Router# verify /md5 flash:IOS_FW.bin
 ```
 
 Где:
@@ -121,10 +121,10 @@ draft: 0
 - Прописать в конфигурации {{< tag "Cisco" >}} загрузку нового образа {{< tag "IOS" >}}:
 
 ```text
-# conf t
-(config)# boot system flash:IOS_FW.bin
-(config)# exit
-# reload
+Router# conf t
+Router(config)# boot system flash:IOS_FW.bin
+Router(config)# exit
+Router# reload
 ```
 
 Где:
@@ -136,7 +136,7 @@ draft: 0
 - Посмотреть версию {{< tag "IOS" >}} после перезагрузки:
 
 ```text
-# show version
+Router# show version
 ```
 
 - Готово!

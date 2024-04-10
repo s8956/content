@@ -53,27 +53,27 @@ draft: 0
 - Переключить регистр с `0x2102` на `0x2142` и перезагрузить:
 
 ```text
-> confreg 0x2142
-> reset
+rommon> confreg 0x2142
+rommon> reset
 ```
 
 - Сбросить пароль:
 
 ```text
-> en
-# copy startup-config running-config
-# config t
-(config)# en secret PassWord
-(config)# username USER privilege 15 secret PassWord
+Router> en
+Router# copy startup-config running-config
+Router# config t
+Router(config)# en secret PassWord
+Router(config)# username USER privilege 15 secret PassWord
 ```
 
 - Переключить регистр с `0x2142` на `0x2102`:
 
 ```text
-(config)# config-register 0x2102
-(config)# exit
-# copy running-config startup-config
-# reload
+Router(config)# config-register 0x2102
+Router(config)# exit
+Router# copy running-config startup-config
+Router# reload
 ```
 
 - Готово!
