@@ -10,7 +10,6 @@ images:
 categories:
   - 'inDev'
   - 'network'
-  - 'cat_03'
 tags:
   - 'debian'
   - 'asterisk'
