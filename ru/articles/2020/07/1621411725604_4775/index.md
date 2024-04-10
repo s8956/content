@@ -79,7 +79,7 @@ curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
 
 При выполнении, команда вернёт следующий результат:
 
-{{< terminal os="linux" >}}
+{{< terminal >}}
 curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" -H "Authorization: Bearer <...>" -H "Content-Type: application/json" | python3 -mjson.tool
 
 {
@@ -122,7 +122,7 @@ curl -X GET "https://api.cloudflare.com/client/v4/zones/ZONE_ID/dns_records" \
 
 Сформировав правильную команду с корректными данными и выполнив её, команда вернёт результат в формате {{< tag "JSON" >}}. Результат будет содержать набор всех ресурсных записей конкретного домена. У меня это выглядит так:
 
-{{< terminal os="linux" >}}
+{{< terminal >}}
 curl -X GET "https://api.cloudflare.com/client/v4/zones/<...>/dns_records" -H "Authorization: Bearer <...>" -H "Content-Type: application/json" | python3 -mjson.tool
 
 {

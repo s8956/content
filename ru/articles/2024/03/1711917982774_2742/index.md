@@ -8,7 +8,6 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1591711584791-455de896b1e9'
 categories:
-  - 'inDev'
   - 'network'
   - 'scripts'
 tags:

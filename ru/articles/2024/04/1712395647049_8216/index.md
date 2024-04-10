@@ -8,7 +8,6 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1565733123432-c83666fe4521'
 categories:
-  - 'inDev'
   - 'network'
 tags:
   - 'mikrotik'

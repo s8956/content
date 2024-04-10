@@ -9,7 +9,6 @@ images:
   - 'https://images.unsplash.com/photo-1606765962248-7ff407b51667'
 categories:
   - 'network'
-  - 'inDev'
   - 'terminal'
 tags:
   - 'cisco'
