@@ -50,53 +50,53 @@ draft: 1
 
 ## Обновление ОС и установка пакетов
 
-{{< code "bash" >}}
+```bash
 apt update && apt --yes upgrade && apt --yes install git curl wget subversion build-essential
-{{< /code >}}
+```
 
 ## Установка Asterisk
 
 ### Установка компонентов
 
-{{< code "bash" >}}
+```bash
 bash contrib/scripts/get_mp3_source.sh && bash contrib/scripts/install_prereq install
-{{< /code >}}
+```
 
 ### Конфигурация сборки
 
-{{< code "bash" >}}
+```bash
 ./configure && make menuselect.makeopts && menuselect/menuselect --enable CORE-SOUNDS-RU-GSM menuselect.makeopts
-{{< /code >}}
+```
 
 ### Сборка и установка Asterisk
 
-{{< code "bash" >}}
+```bash
 make && make install && make basic-pbx && make config && ldconfig
-{{< /code >}}
+```
 
 ## Настройка Asterisk
 
 ### Настройка пользователя
 
-{{< code "bash" >}}
+```bash
 u='asterisk'; groupadd ${u} && useradd -r -d /var/lib/${u} -g ${u} ${u} && usermod -aG audio,dialout ${u} && chown -R ${u}:${u} /etc/${u} && chown -R ${u}:${u} /var/{lib,log,spool}/${u} && chown -R ${u}:${u} /usr/lib/${u}
-{{< /code >}}
+```
 
 ### Редактирование конфигурации
 
-{{< code "bash" >}}
+```bash
 sed -i 's|#AST_USER="asterisk"|AST_USER="asterisk"|g' '/etc/default/asterisk' && sed -i 's|#AST_GROUP="asterisk"|AST_GROUP="asterisk"|g' '/etc/default/asterisk'
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 sed -i 's|;runuser = asterisk|runuser = asterisk|g' '/etc/asterisk/asterisk.conf' && sed -i 's|;rungroup = asterisk|rungroup = asterisk|g' '/etc/asterisk/asterisk.conf'
-{{< /code >}}
+```
 
 ## Запуск Asterisk
 
-{{< code "bash" >}}
+```bash
 systemctl enable --now asterisk
-{{< /code >}}
+```
 
 {{< terminal mode="root" >}}
 systemctl status asterisk
@@ -136,13 +136,13 @@ phone*CLI>
 
 ## TLS
 
-{{< code >}}
+```
 mkdir /etc/asterisk/keys
-{{< /code >}}
+```
 
 `pjsip.conf`
 
-{{< code "ini" >}}
+```ini
 [transport-tls]
 type=transport
 protocol=tls
@@ -150,4 +150,4 @@ bind=0.0.0.0:5061
 cert_file=/etc/asterisk/keys/asterisk.crt
 priv_key_file=/etc/asterisk/keys/asterisk.key
 method=sslv23
-{{< /code >}}
+```

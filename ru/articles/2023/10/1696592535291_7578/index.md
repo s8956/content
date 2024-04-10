@@ -76,9 +76,9 @@ draft: 0
 - `Import-Certificate` - импортирует сертификат в указанное хранилище.
 - `${DIR}` - переменная, определяющая директорию `Downloads` (`Загрузки`) для текущего пользователя.
 
-{{< code "powershell" >}}
+```powershell
 ${CERT_ROOT} = 'russian_trusted_root_ca.cer'; ${CERT_SUB} = 'russian_trusted_sub_ca.cer'; ${DIR} = (New-Object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path; Invoke-WebRequest "https://gu-st.ru/content/Other/doc/${CERT_ROOT}" -OutFile "${DIR}\${CERT_ROOT}"; Import-Certificate -FilePath "${DIR}\${CERT_ROOT}" -CertStoreLocation 'Cert:\CurrentUser\Root'; Invoke-WebRequest "https://gu-st.ru/content/Other/doc/${CERT_SUB}" -OutFile "${DIR}\${CERT_SUB}"; Import-Certificate -FilePath "${DIR}\${CERT_SUB}" -CertStoreLocation 'Cert:\CurrentUser\CA';
-{{< /code >}}
+```
 
 ## Linux
 
@@ -101,12 +101,12 @@ ${CERT_ROOT} = 'russian_trusted_root_ca.cer'; ${CERT_SUB} = 'russian_trusted_sub
 
 #### DEB-based дистрибутивы
 
-{{< code "bash" >}}
+```bash
 CERT='russiantrustedca.pem'; curl -o "/usr/local/share/ca-certificates/${CERT}" "https://gu-st.ru/content/Other/doc/${CERT}" && update-ca-certificates --fresh;
-{{< /code >}}
+```
 
 #### RHEL-based дистрибутивы
 
-{{< code "bash" >}}
+```bash
 CERT='russiantrustedca.pem'; curl -o "/etc/pki/ca-trust/source/anchors/${CERT}" "https://gu-st.ru/content/Other/doc/${CERT}" && update-ca-trust force-enable && update-ca-trust extract;
-{{< /code >}}
+```

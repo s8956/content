@@ -46,7 +46,7 @@ draft: 0
 2. Отмонтировать ВСЕ разделы с {{< tag "USB" >}}-накопителя командой `umount /dev/sdX*`, где `X` - буква накопителя (например, `umount /dev/sdc*`).
 3. Загрузить {{< tag "ISO" >}} на {{< tag "USB" >}}-накопитель:
 
-{{< code "bash" >}}
+```bash
 # Отмонтировать и очистить USB-накопитель.
 umount /dev/sdX* && sgdisk -Z /dev/sdX
 
@@ -55,4 +55,4 @@ dd if=image.iso of=/dev/sdX bs=4M oflag=direct status=progress; sync
 
 # Извлечь USB-накопитель.
 eject /dev/sdX
-{{< /code >}}
+```

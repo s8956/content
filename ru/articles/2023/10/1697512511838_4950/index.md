@@ -58,16 +58,16 @@ draft: 0
 
 Открыть файл `./sources/action_public/topic.php`, найти:
 
-{{< code "php" >}}
+```php
 //-----------------------------------------
 // Highlight...
 //-----------------------------------------
-{{< /code >}}
+```
 
 
 Заменить на:
 
-{{< code "php" >}}
+```php
 if (!$this->ipsclass->member['id']) {
   //-----------------------------------------
   // Clear links for guests
@@ -75,23 +75,23 @@ if (!$this->ipsclass->member['id']) {
 
   $row['post'] = preg_replace("#<a href=[\"'].+?[\"'].+?>.+?</a>#", "<i>ссылка</i>", $row['post']);
 }
-{{< /code >}}
+```
 
 Открыть файл `./sources/classes/class_post.php`, найти:
 
-{{< code "php" >}}
+```php
 $extra = "";
 
 if ( $tmp_post )
 {
   $raw_post .= "[quote name='".$this->parser->make_quote_safe($tp['author_name'])."' date='".$this->parser->make_quote_safe($this->ipsclass->get_date( $tp['post_date'], 'LONG', 1 ))."' post='".$tp['pid']."']\n$tmp_post\n".$extra.'[/quote]'."\n\n\n";
 }
-{{< /code >}}
+```
 
 
 Заменить на:
 
-{{< code "php" >}}
+```php
 if (!$this->ipsclass->member['id']) {
   //-----------------------------------------
   // Clear links for guests
@@ -101,4 +101,4 @@ if (!$this->ipsclass->member['id']) {
   $tmp_post = preg_replace("#\[url\s*=\s*\"\;\s*(\S+?)\s*\"\;\s*\](.*?)\[\/url\]#i", "\\2", $tmp_post);
   $tmp_post = preg_replace("#\[url\s*=\s*(\S+?)\s*\](.*?)\[\/url\]#i", "\\2", $tmp_post);
 }
-{{< /code >}}
+```

@@ -42,60 +42,60 @@ draft: 0
 
 ## Включение графического режима
 
-{{< code "text" >}}
+```text
 systemctl set-default graphical.target
-{{< /code >}}
+```
 
 ## Создание пользователя
 
 - Добавить пользователя:
 
-{{< code "bash" >}}
+```bash
 useradd -mc "User 0001" user-0001
-{{< /code >}}
+```
 
 - Установить пароль для пользователя:
 
-{{< code "bash" >}}
+```bash
 passwd user-0001
-{{< /code >}}
+```
 
 ## Отключение пользователя
 
-{{< code "bash" >}}
+```bash
 usermod -L user-0000
-{{< /code >}}
+```
 
 ## Перемещение пользователя
 
-{{< code "text" >}}
+```text
 usermod -md /new_home/user-0001 user-0001
-{{< /code >}}
+```
 
 ## Работа с диском
 
 Чтобы создать на новом диске раздел, необходимо войти в программу `parted`:
 
-{{< code "text" >}}
+```text
 parted -a optimal /dev/sdb
-{{< /code >}}
+```
 
 Выполнить следующие команды:
 
-{{< code "text" >}}
+```text
 (parted) mklabel gpt
 (parted) mkpart primary 0% 100%
 (parted) quit
-{{< /code >}}
+```
 
 Создать файловую систему:
 
-{{< code "text" >}}
+```text
 mkfs.xfs /dev/sdb1
-{{< /code >}}
+```
 
 Настроить автоматическое монтирование раздела в `/etc/fstab`:
 
-{{< code "text" >}}
+```text
 /dev/sdb1 /home/storage xfs defaults 0 0
-{{< /code >}}
+```

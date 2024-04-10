@@ -94,6 +94,6 @@ draft: 0
 
 В ОС {{< tag "Windows" >}} для обычных компьютеров включены Memory Compression, Operation API и PageCombining. Поэтому, перенастраиваем серверную версию ОС на такую же конфигурацию. Для этого запускаем {{< tag "PowerShell" >}} от имени Администратора и выполняем команду:
 
-{{< code "powershell" >}}
+```powershell
 Enable-MMAgent -MemoryCompression -OperationAPI -PageCombining
-{{< /code >}}
+```

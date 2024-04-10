@@ -44,9 +44,9 @@ draft: 0
 
 Изменение прав доступа осуществляется при помощи команды `chmod`, рекурсивное при добавлении опции `-R`:
 
-{{< code "bash" >}}
+```bash
 chmod -R MODE DIR
-{{< /code >}}
+```
 
 - `-R` - рекурсивный обход директорий и файлов.
 - `MODE` - набор прав доступа для их установки.
@@ -54,29 +54,29 @@ chmod -R MODE DIR
 
 В итоге, команда должна выглядеть так:
 
-{{< code "bash" >}}
+```bash
 chmod -R 755 /var/www/html
-{{< /code >}}
+```
 
 Но, стоит учитывать, что таким образом директории и файлы примут одинаковые права доступа. Чтобы избежать этого, можно воспользоваться командой `find`, которая отфильтрует директории и файлы друг от друга:
 
-{{< code "bash" >}}
+```bash
 find /var/www/html -type d -exec chmod 755 {} \;
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 find /var/www/html -type f -exec chmod 644 {} \;
-{{< /code >}}
+```
 
 Команда `find` ищет директории (`-type d`) и файлы (`-type f`) и скармливает их команде `chmod`, а та, в свою очередь, уже расставляет права доступа. При использовании `-exec`, `chmod` выполняется для каждого найденного элемента поочерёдно. Можно оптимизировать и записать с использованием `xargs`:
 
-{{< code "bash" >}}
+```bash
 find /var/www/html -type d -print0 | xargs -0 chmod 755
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 find /var/www/html -type f -print0 | xargs -0 chmod 644
-{{< /code >}}
+```
 
 При `xargs`, `chmod` выполняется сразу для нескольких записей одновременно, как сообщает **Daniel Miessler**:
 
@@ -86,10 +86,10 @@ This is where -exec breaks down and xargs shows its superiority. When you use -e
 
 Если необходимо запустить рекурсивное изменение прав доступа начиная с текущей директории, то `/var/www/html` необходимо поменять на точку:
 
-{{< code "bash" >}}
+```bash
 find . -type d -print0 | xargs -0 chmod 755
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 find . -type f -print0 | xargs -0 chmod 644
-{{< /code >}}
+```

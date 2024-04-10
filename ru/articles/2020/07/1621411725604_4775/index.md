@@ -71,11 +71,11 @@ draft: 0
 
 По окончании создания токена, {{< tag "CloudFlare" >}} переместит нас на страницу проверки токена. На этой странице будут наш созданный токен (его необходимо сохранить) и команда, которой при помощи утилиты `curl` можно проверить корректность токена:
 
-{{< code "bash" >}}
+```bash
 curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
 -H "Authorization: Bearer TOKEN" \
 -H "Content-Type:application/json" | python3 -mjson.tool
-{{< /code >}}
+```
 
 При выполнении, команда вернёт следующий результат:
 
@@ -105,11 +105,11 @@ curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" -H "Author
 
 Когда у нас есть токен, можно полноценно работать с {{< tag "CloudFlare" >}} {{< tag "API" >}}. Нам нужно получить ID ресурсной записи домена. Получать будем следующей командой:
 
-{{< code "bash" >}}
+```bash
 curl -X GET "https://api.cloudflare.com/client/v4/zones/ZONE_ID/dns_records" \
 -H "Authorization: Bearer TOKEN" \
 -H "Content-Type: application/json" | python3 -mjson.tool
-{{< /code >}}
+```
 
 Обратите внимание на следующие заглушки в команде:
 

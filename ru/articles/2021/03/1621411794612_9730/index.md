@@ -53,12 +53,12 @@ draft: 0
 
 - Запуск:
 
-{{< code "bash" >}}
+```bash
 systemctl enable --now xmrig@root
-{{< /code >}}
+```
 
 - Остановка:
 
-{{< code "bash" >}}
+```bash
 systemctl disable --now xmrig@root
-{{< /code >}}
+```

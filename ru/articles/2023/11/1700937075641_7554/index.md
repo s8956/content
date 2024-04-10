@@ -54,23 +54,23 @@ draft: 0
 
 1. Обновление базы пакетов, пакетов и системы в целом:
 
-{{< code "bash" >}}
+```bash
 apt update && apt upgrade && apt full-upgrade
-{{< /code >}}
+```
 
 2. Удаление не используемых пакетов:
 
-{{< code "bash" >}}
+```bash
 apt --purge autoremove
-{{< /code >}}
+```
 
 ## Обновление файла `sources.list`
 
 После завершения полного обновления пакетов, нужно перезаписать пути к репозиториям, указав имя нового релиза:
 
-{{< code "bash" >}}
+```bash
 sed -i 's|RELEASE_OLD|RELEASE_NEW|g' '/etc/apt/sources.list'
-{{< /code >}}
+```
 
 Где:
 
@@ -83,20 +83,20 @@ sed -i 's|RELEASE_OLD|RELEASE_NEW|g' '/etc/apt/sources.list'
 
 1. Обновление базы пакетов и обновление пакетов в минимальном варианте:
 
-{{< code "bash" >}}
+```bash
 apt update && apt upgrade --without-new-pkgs
-{{< /code >}}
+```
 
 На запрос "Restart services during package upgrades without asking?" отвечаем {{< btn "Yes" >}}.
 
 2. Обновление всей системы:
 
-{{< code "bash" >}}
+```bash
 apt full-upgrade
-{{< /code >}}
+```
 
 3. Проверка обновлённого релиза:
 
-{{< code "bash" >}}
+```bash
 cat /etc/debian_version
-{{< /code >}}
+```

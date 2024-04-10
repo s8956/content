@@ -51,80 +51,80 @@ draft: 0
 
 1. Показать информацию для одной или нескольких групп пользователей.
 
-{{< code "html" >}}
+```html
 <if condition="is_member_of($bbuserinfo, X, Y, Z)">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 2. Показать информацию только для одного пользователя.
 
-{{< code "html" >}}
+```html
 <if condition="$bbuserinfo[userid] == X">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 3. Показать информацию только для нескольких пользователей.
 
-{{< code "html" >}}
+```html
 <if condition="in_array($bbuserinfo[userid], array(X,Y,Z))">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 4. Скрыть информацию для одной группы пользователей.
 
-{{< code "html" >}}
+```html
 <if condition="!is_member_of($bbuserinfo, X)">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 5. Скрыть информацию для нескольких групп пользователей.
 
-{{< code "html" >}}
+```html
 <if condition="!is_member_of($bbuserinfo, X, Y, Z)">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 6. Скрыть информацию от нескольких пользователей.
 
-{{< code "html" >}}
+```html
 <if condition="!in_array($bbuserinfo[userid], array(X,Y,Z))">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 7. Показать информацию только в определённом форуме.
 
-{{< code "html" >}}
+```html
 <if condition="$forumid == X">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 8. Показать информацию в нескольких форумах.
 
-{{< code "html" >}}
+```html
 <if condition="in_array($forumid, array(X,Y,Z))">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 9. Скрыть информацию в определённом форуме.
 
-{{< code "html" >}}
+```html
 <if condition="$forumid != X">
   <!-- информация -->
 </if>
-{{< /code >}}
+```
 
 10. Скрыть информацию в нескольких форумах.
 
-{{< code "html" >}}
+```html
 <if condition="!in_array($forumid, array(X,Y,Z))">
   <!-- информация -->
 </if>
-{{< /code >}}
+```

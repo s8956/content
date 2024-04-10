@@ -46,16 +46,16 @@ draft: 0
 
 Пример кодирования:
 
-{{< code "bash" >}}
+```bash
 echo "ext_$(date +%s%N | sha512sum | fold -w 8 | head -n 1)"
-{{< /code >}}
+```
 
 Вывод: `ext_96824896`
 
 Если необходимо, можно конвертировать в верхний регистр:
 
-{{< code "bash" >}}
+```bash
 echo "EXT_$(date +%s%N | sha512sum | fold -w 8 | head -n 1 | tr '[:lower:]' '[:upper:]')"
-{{< /code >}}
+```
 
 Вывод: `EXT_950E60E1`

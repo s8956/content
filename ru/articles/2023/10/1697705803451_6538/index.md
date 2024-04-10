@@ -56,9 +56,9 @@ draft: 0
 
 Файл [cacert.pem](https://curl.se/docs/caextract.html) с сайта [curl.se](https://curl.se/) переодически обновляется и содержит в себе корневые сертификаты центров сертификации. Откроем терминал в {{< tag "RouterOS" >}} и скачаем сразу на роутер командой:
 
-{{< code >}}
+```
 /tool fetch url="https://curl.se/ca/cacert.pem" dst-path="ros.cacert.pem"
-{{< /code >}}
+```
 
 Где:
 
@@ -69,9 +69,9 @@ draft: 0
 
 Теперь когда файл на роутере, нужно импортировать его содержимое в репозиторий сертификатов. Делается это следующей командой:
 
-{{< code >}}
+```
 /certificate import file-name="ros.cacert.pem" passphrase="" name="ROS"
-{{< /code >}}
+```
 
 Где:
 

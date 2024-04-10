@@ -69,9 +69,9 @@ draft: 0
 
 ### Анализ тома
 
-{{< code "powershell" >}}
+```powershell
 Optimize-Volume -DriveLetter C -Analyze
-{{< /code >}}
+```
 
 Где:
 
@@ -80,9 +80,9 @@ Optimize-Volume -DriveLetter C -Analyze
 
 ### Дефрагментация
 
-{{< code "powershell" >}}
+```powershell
 Optimize-Volume -DriveLetter C -Defrag
-{{< /code >}}
+```
 
 Где:
 
@@ -92,9 +92,9 @@ Optimize-Volume -DriveLetter C -Defrag
 
 ### TRIM-операция для SSD
 
-{{< code "powershell" >}}
+```powershell
 Optimize-Volume -DriveLetter C -ReTrim
-{{< /code >}}
+```
 
 Где:
 
@@ -123,9 +123,9 @@ Optimize-Volume -DriveLetter C -ReTrim
 
 Анализ тома, с отображением хода выполнения и выводом результатов в подробном формате:
 
-{{< code "cmd" >}}
+```cmd
 defrag c: /u /a
-{{< /code >}}
+```
 
 Где:
 
@@ -137,9 +137,9 @@ defrag c: /u /a
 
 Параллельная дефрагментация томов `C:` и `D:` в фоновом режиме:
 
-{{< code "cmd" >}}
+```cmd
 defrag c: d: /m
-{{< /code >}}
+```
 
 Где:
 
@@ -151,9 +151,9 @@ defrag c: d: /m
 
 Выполнить дефрагментацию на всех локальных томах с нормальным приоритетом:
 
-{{< code "cmd" >}}
+```cmd
 defrag /u /c /h
-{{< /code >}}
+```
 
 Где:
 
@@ -163,9 +163,9 @@ defrag /u /c /h
 
 ### TRIM-операция для SSD
 
-{{< code "cmd" >}}
+```cmd
 defrag /u /c /l
-{{< /code >}}
+```
 
 Где:
 

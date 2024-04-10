@@ -45,22 +45,22 @@ draft: 0
 
 1. Устанавливаем плагин обновления системы:
 
-{{< code "bash" >}}
+```bash
 dnf install dnf-plugin-system-upgrade
-{{< /code >}}
+```
 
 2. Скачивание актуальной версии системы:
 
-{{< code "bash" >}}
+```bash
 dnf system-upgrade download --releasever=34
-{{< /code >}}
+```
 
 - `releasever` - номер актуальной версии системы.
 
 3. Запуск обновления системы на актуальную версию:
 
-{{< code "bash" >}}
+```bash
 dnf system-upgrade reboot
-{{< /code >}}
+```
 
 Вот и всё. Система обновит пакетную базу и перезагрузится.

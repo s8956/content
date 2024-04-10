@@ -55,13 +55,13 @@ draft: 1
 
 Собственно, сам URL:
 
-{{< code >}}
+```
 https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?searchString=7719167509&strictEqual=true&pageNumber=1&recordsPerPage=_10&sortDirection=false&sortBy=PUBLISH_DATE&fz44=on&fz223=on&ppRf615=on&fz94=on&af=on&ca=on&pc=on&pa=on
-{{< /code >}}
+```
 
 URL довольно большой, поэтому для удобства я каждый параметр перенёс на отдельную строку:
 
-{{< code >}}
+```
 https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?searchString=7719167509
 &strictEqual=true
 &pageNumber=1
@@ -76,7 +76,7 @@ https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?se
 &ca=on
 &pc=on
 &pa=on
-{{< /code >}}
+```
 
 Когда стало поудобнее, рассмотрим параметры по отдельности.
 
@@ -137,7 +137,7 @@ https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?se
 
 При работе в Linux можно применить утилиту `curl` для отправки запроса на сервер закупок:
 
-{{< code "bash" >}}
+```bash
 curl -X GET -A 'Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/119.0' \
 'https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?searchString=7719167509' \
 -d 'strictEqual=true' \
@@ -153,7 +153,7 @@ curl -X GET -A 'Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/1
 -d 'pc=on' \
 -d 'pa=on' \
 -o 'orders.json'
-{{< /code >}}
+```
 
 Сервер даст ответ, который сохраниться в файле под именем `orders.json`.
 
@@ -161,7 +161,7 @@ curl -X GET -A 'Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/1
 
 В ОС Windows нет необходимости применять сторонние утилиты, можно воспользоваться встроенным cmdlet'ом `Invoke-WebRequest`:
 
-{{< code "powershell" >}}
+```powershell
 $URL = 'https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?searchString=7719167509' +
 '&strictEqual=true' +
 '&sortDirection=false' +
@@ -177,7 +177,7 @@ $URL = 'https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results
 '&pa=on'
 
 Invoke-WebRequest "${URL}" -OutFile 'orders.json'
-{{< /code >}}
+```
 
 Сервер даст ответ, который сохранится в файле под именем `orders.json`.
 
@@ -191,26 +191,26 @@ Invoke-WebRequest "${URL}" -OutFile 'orders.json'
 
 Получение имени закупки:
 
-{{< code "bash" >}}
+```bash
 cat 'orders.json' | jq -r '.list[] | .name'
-{{< /code >}}
+```
 
 Получение номера закупки:
 
-{{< code "bash" >}}
+```bash
 cat 'orders.json' | jq -r '.list[] | .number'
-{{< /code >}}
+```
 
 ### MS Windows
 
 Получение имени закупки:
 
-{{< code "powershell" >}}
+```powershell
 (Get-Content 'orders.json' | ConvertFrom-Json).list.name
-{{< /code >}}
+```
 
 Получение номера закупки:
 
-{{< code "powershell" >}}
+```powershell
 (Get-Content 'orders.json' | ConvertFrom-Json).list.number
-{{< /code >}}
+```

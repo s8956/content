@@ -52,7 +52,7 @@ draft: 0
 
 Разрядность ОС можно определить следующей функцией:
 
-{{< code "powershell" >}}
+```powershell
 function Get-Architecture {
   # What bitness does Windows use.
   switch ([Environment]::Is64BitOperatingSystem) { # Needs '.NET 4'.
@@ -66,7 +66,7 @@ function Get-Architecture {
     }
   }
 }
-{{< /code >}}
+```
 
 Можно записать эту функцию в файл и запустить файл в терминале, или же внедрить в крупный проект и вызывать по имени `Get-Architecture`.
 
@@ -81,7 +81,7 @@ function Get-Architecture {
 
 Расширенная версия, которая позволяет определить разрядность ОС и процесса PowerShell, под которым выполняется функция.
 
-{{< code "powershell" >}}
+```powershell
 function Get-Architecture {
   # What bitness does Windows use.
   $windowsBitness = switch ([Environment]::Is64BitOperatingSystem) { # Needs '.NET 4'.
@@ -107,7 +107,7 @@ function Get-Architecture {
     'WindowsArchitecture' = "{0} bit" -f $windowsBitness
   }
 }
-{{< /code >}}
+```
 
 Можно записать эту функцию в файл и запустить файл в терминале, или же внедрить в крупный проект и вызывать по имени `Get-Architecture`.
 

@@ -55,7 +55,7 @@ draft: 0
   - DNS: `8.8.8.8`.
 - Настроить сетевой интерфейс {{< tag "Cisco" >}} со следующими параметрами:
 
-{{< code "text" >}}
+```text
 Router> en
 Router# conf t
 Router(config)# int fa0/1
@@ -64,7 +64,7 @@ Router(config-if)# no shutdown
 Router(config-if)# exit
 Router(config)# exit
 Router#
-{{< /code >}}
+```
 
 - Подключить сетевой интерфейс компьютера к сетевому интерфейсу {{< tag "Cisco" >}} `FE0/1`.
 - Запустить TFTP-сервер на компьютере c IP `192.168.1.2`.
@@ -73,9 +73,9 @@ Router#
 
 Для того, чтобы загрузить конфигурацию с TFTP-сервера, необходимо выполнить следующую команду:
 
-{{< code "text" >}}
+```text
 Router# copy tftp://192.168.1.2/BACKUP_CONF_FILE startup-config
-{{< /code >}}
+```
 
 Где:
 
@@ -86,9 +86,9 @@ Router# copy tftp://192.168.1.2/BACKUP_CONF_FILE startup-config
 
 Для выгрузки конфигурации {{< tag "Cisco" >}} на внешний TFTP-сервер, можно воспользоваться следующей командой:
 
-{{< code "text" >}}
+```text
 Router# copy startup-config tftp://192.168.1.2/BACKUP_CONF_FILE
-{{< /code >}}
+```
 
 Где:
 

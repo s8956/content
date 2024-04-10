@@ -49,15 +49,15 @@ draft: 0
 
 1. Указать своё имя:
 
-{{< code "bash" >}}
+```bash
 git config --global user.name "John Doe"
-{{< /code >}}
+```
 
 2. Указать свой адрес e-mail:
 
-{{< code "bash" >}}
+```bash
 git config --global user.email "johndoe@example.com"
-{{< /code >}}
+```
 
 ## Настройка подписи
 
@@ -65,95 +65,95 @@ git config --global user.email "johndoe@example.com"
 
 1. Выяснить какие ключи установлены в системе (о создании ключей я публиковал заметку {{< uuid "7a204545-daa8-58ce-ba35-75e732e1bcc0" >}}):
 
-{{< code "bash" >}}
+```bash
 gpg --list-secret-keys --keyid-format=long
-{{< /code >}}
+```
 
 2. Указать {{< tag "Git" >}}'у всегда подписывать каждый commit:
 
-{{< code "bash" >}}
+```bash
 git config --global commit.gpgsign true
-{{< /code >}}
+```
 
 3. Указать {{< tag "Git" >}}'у идентификатор ключа для подписи commit'а:
 
-{{< code "bash" >}}
+```bash
 git config --global user.signingkey 3AA5C34371567BD2
-{{< /code >}}
+```
 
 ## Хранилище паролей
 
 {{< tag "Git" >}} по умолчанию не сохраняет регистрационные данные для репозиториев. Эта настройка позволяет указать {{< tag "Git" >}}'у использовать для хранения регистрационных данных текстовый файл `~/.git-credentials`:
 
-{{< code "bash" >}}
+```bash
 git config --global credential.helper store
-{{< /code >}}
+```
 
 ## Отмена изменений
 
 Отмена конкретного commit'а:
 
-{{< code "bash" >}}
+```bash
 git revert [commit]
-{{< /code >}}
+```
 
 Отмена 2-х commit'ов подряд:
 
-{{< code "bash" >}}
+```bash
 git revert HEAD~2
-{{< /code >}}
+```
 
 ## Модули
 
 Добавление модуля:
 
-{{< code "bash" >}}
+```bash
 git submodule add https://github.com/[MODULE] [MODULE]
-{{< /code >}}
+```
 
 Рекурсивное обновление всех модулей:
 
-{{< code "bash" >}}
+```bash
 git submodule update --recursive --remote --merge
-{{< /code >}}
+```
 
 Удаление модуля:
 
-{{< code "bash" >}}
+```bash
 git submodule deinit -f [MODULE]  \
   && git rm -r --cached [MODULE]  \
   && rm -rf .git/modules/[MODULE] \
   && rm -rf [MODULE]
-{{< /code >}}
+```
 
 ## Изменение адреса репозитория
 
 Показать текущий адрес:
 
-{{< code "bash" >}}
+```bash
 git remote -v
-{{< /code >}}
+```
 
 Установить новый адрес:
 
-{{< code "bash" >}}
+```bash
 git remote set-url origin '[URL]'
-{{< /code >}}
+```
 
 ## Изменение описания последнего commit'а
 
 Если закралась ошибка в описании изменений кода при последнем commit'е, это описание можно изменить при помощи команды:
 
-{{< code "bash" >}}
+```bash
 git commit --amend -m 'New commit message.'
-{{< /code >}}
+```
 
 Далее, изменённый коммит принудительно отправить на сервер:
 
-{{< code "bash" >}}
+```bash
 git push --force '[remoteName]' '[branchName]'
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 git push --force 'origin' 'main'
-{{< /code >}}
+```

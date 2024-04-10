@@ -43,11 +43,11 @@ draft: 1
 
 ## Системные часы
 
-{{< code "bash" >}}
+```bash
 timedatectl status
-{{< /code >}}
+```
 
-{{< code "text" >}}
+```text
                Local time: Sat 2021-05-15 19:44:40 MSK
            Universal time: Sat 2021-05-15 16:44:40 UTC
                  RTC time: Sat 2021-05-15 16:44:40
@@ -55,42 +55,42 @@ timedatectl status
 System clock synchronized: yes
               NTP service: active
           RTC in local TZ: no
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 timedatectl set-ntp true
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 systemctl status systemd-timesyncd
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 systemctl enable systemd-timesyncd --now
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 timedatectl list-timezones
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 timedatectl set-timezone Europe/Moscow
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 timedatectl set-time "yyyy-MM-dd hh:mm:ss"
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 timedatectl set-time "2014-05-26 11:13:54"
-{{< /code >}}
+```
 
 ## Аппаратные часы
 
-{{< code "bash" >}}
+```bash
 hwclock --show
-{{< /code >}}
+```
 
-{{< code "bash" >}}
+```bash
 hwclock --systohc
-{{< /code >}}
+```

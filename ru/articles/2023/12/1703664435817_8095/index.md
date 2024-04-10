@@ -51,9 +51,9 @@ draft: 0
 
 Для работы DoH необходимо наличие сертификатов в базе MikroTik. Пакет сертификатов я беру с сайта `curl.se`:
 
-{{< code >}}
+```
 /tool fetch url="https://curl.se/ca/cacert.pem" dst-path="ros.cacert.pem"; /certificate import file-name="ros.cacert.pem" passphrase="" name="ROS"
-{{< /code >}}
+```
 
 ## Настройка DoH
 
@@ -61,9 +61,9 @@ draft: 0
 
 ### Стандартные DNS
 
-{{< code >}}
+```
 /ip dns set allow-remote-requests=yes servers=1.1.1.1,1.0.0.1 use-doh-server="https://cloudflare-dns.com/dns-query" verify-doh-cert=yes
-{{< /code >}}
+```
 
 В этой команде присутствуют следующие параметры:
 
@@ -73,9 +73,9 @@ draft: 0
 
 ### DNS с блокировкой вредоносного ПО
 
-{{< code >}}
+```
 /ip dns set allow-remote-requests=yes servers=1.1.1.2,1.0.0.2 use-doh-server="https://security.cloudflare-dns.com/dns-query" verify-doh-cert=yes
-{{< /code >}}
+```
 
 В этой команде присутствуют следующие параметры:
 
@@ -85,9 +85,9 @@ draft: 0
 
 ### DNS с блокировкой вредоносного ПО и контента для взрослых
 
-{{< code >}}
+```
 /ip dns set allow-remote-requests=yes servers=1.1.1.3,1.0.0.3 use-doh-server="https://family.cloudflare-dns.com/dns-query" verify-doh-cert=yes
-{{< /code >}}
+```
 
 В этой команде присутствуют следующие параметры:
 
