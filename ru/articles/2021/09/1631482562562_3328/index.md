@@ -63,19 +63,19 @@ draft: 0
 
 Добавим репозиторий {{< tag "Proxmox" >}} VE:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 echo "deb [arch=amd64] http://download.proxmox.com/debian/pve bullseye pve-no-subscription" > /etc/apt/sources.list.d/pve.list
 {{< /code >}}
 
 Скачаем и установим ключ репозитория:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 curl 'https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg' -o /etc/apt/trusted.gpg.d/pve.gpg
 {{< /code >}}
 
 Обновим базу пакетов {{< tag "APT" >}} и саму систему:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 apt update && apt full-upgrade
 {{< /code >}}
 
@@ -83,7 +83,7 @@ apt update && apt full-upgrade
 
 Начнём установку пакетов командой:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 apt install proxmox-ve postfix open-iscsi
 {{< /code >}}
 

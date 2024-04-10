@@ -45,13 +45,13 @@ draft: 0
 
 1. Устанавливаем плагин обновления системы:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 dnf install dnf-plugin-system-upgrade
 {{< /code >}}
 
 2. Скачивание актуальной версии системы:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 dnf system-upgrade download --releasever=34
 {{< /code >}}
 
@@ -59,7 +59,7 @@ dnf system-upgrade download --releasever=34
 
 3. Запуск обновления системы на актуальную версию:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 dnf system-upgrade reboot
 {{< /code >}}
 

@@ -53,7 +53,7 @@ draft: 0
 
 При помощи корневого сертификата, мы будем подписывать сертификаты клиентские. Создаём сертификат центра сертификации...
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl req -x509 -newkey ec:<( openssl ecparam -name 'secp384r1' ) -nodes -days '3650' -keyout 'ca.root.key' -out 'ca.root.crt'
 {{< /code >}}
 
@@ -71,7 +71,7 @@ openssl req -x509 -newkey ec:<( openssl ecparam -name 'secp384r1' ) -nodes -days
 
 Для начала создаём приватный ключ.
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl ecparam -name 'prime256v1' -genkey -noout -out 'client.private.key'
 {{< /code >}}
 
@@ -83,7 +83,7 @@ openssl ecparam -name 'prime256v1' -genkey -noout -out 'client.private.key'
 
 Создание публичного ключа будет не лишним.
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl ec -in 'client.private.key' -pubout -out 'client.public.key'
 {{< /code >}}
 
@@ -96,7 +96,7 @@ openssl ec -in 'client.private.key' -pubout -out 'client.public.key'
 
 Выполняем запрос на сертификат.
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl req -new -key 'client.private.key' -out 'client.csr'
 {{< /code >}}
 
@@ -123,7 +123,7 @@ openssl req -new -key 'client.private.key' -out 'client.csr'
 
 В заключительной части остаётся только создать сам сертификат и подписать его.
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl x509 -req -in 'client.csr' -CA 'ca.crt' -CAkey 'ca.key' -days '3650' -out 'client.crt'
 {{< /code >}}
 
@@ -139,7 +139,7 @@ openssl x509 -req -in 'client.csr' -CA 'ca.crt' -CAkey 'ca.key' -days '3650' -ou
 
 Для того, чтобы импортировать сертификат на клиентские устройства, его необходимо экспортировать в формат `P12`. `P12` является контейнером, в котором содержится приватный ключ сертификата и сам сертификат.
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl pkcs12 -export -inkey 'client.private.key' -in 'client.crt' -out 'client.p12'
 {{< /code >}}
 
@@ -151,7 +151,7 @@ openssl pkcs12 -export -inkey 'client.private.key' -in 'client.crt' -out 'client
 
 ### Верификация сертификата
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl verify -CAfile 'ca.crt' 'client.crt'
 {{< /code >}}
 
@@ -160,7 +160,7 @@ openssl verify -CAfile 'ca.crt' 'client.crt'
 
 ### Просмотр сертификата
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl x509 -in 'client.crt' -text
 {{< /code >}}
 
@@ -206,7 +206,7 @@ Certificate:
 
 ### Просмотр запроса на подпись сертификата
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 openssl req -in 'client.csr' -text
 {{< /code >}}
 
@@ -279,7 +279,7 @@ bash bash.openssl.ca.sh cert
 
 ### ECC (Elliptic Curve Cryptography)
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; ossl_org='RiK'; ossl_host='example.com'; openssl ecparam -genkey -name 'prime256v1' -out "${ossl_host}.key" && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl req -x509 -sha256 -days ${ossl_days} -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
 {{< /code >}}
 
@@ -294,7 +294,7 @@ ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; os
 
 ### RSA (Rivest-Shamir-Adleman)
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; ossl_org='RiK'; ossl_host='example.com'; openssl genrsa -out "${ossl_host}.key" 2048 && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl req -x509 -sha256 -days ${ossl_days} -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
 {{< /code >}}
 

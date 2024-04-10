@@ -51,7 +51,7 @@ draft: 0
 
 Итак, установим Network Manager при помощи пакетного менеджера {{< tag "APT" >}}:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 apt install network-manager
 {{< /code >}}
 
@@ -59,7 +59,7 @@ apt install network-manager
 
 Далее, перезапустить службу:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 service NetworkManager restart
 {{< /code >}}
 

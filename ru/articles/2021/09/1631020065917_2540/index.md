@@ -45,11 +45,11 @@ draft: 0
 
 Ниже приведены две команды, которые позволяют отключить установку рекомендуемых (Recommends) и дополнительных (Suggests) пакетов.
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 echo 'APT::Install-Recommends "false";' > /etc/apt/apt.conf.d/00InstallRecommends
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 echo 'APT::Install-Suggests "false";' > /etc/apt/apt.conf.d/00InstallSuggests
 {{< /code >}}
 

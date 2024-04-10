@@ -54,7 +54,7 @@ draft: 1
 
 ### Dig
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 dig example.com
 {{< /code >}}
 
@@ -64,7 +64,7 @@ dig google.com
 
 ### Drill
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 drill example.com
 {{< /code >}}
 
@@ -91,7 +91,7 @@ google.com.     184     IN      A       216.58.210.142
 
 ### NSLookUp
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 nslookup example.com
 {{< /code >}}
 
@@ -103,7 +103,7 @@ nslookup google.com
 
 ### Dig
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 dig mx example.com
 {{< /code >}}
 
@@ -113,7 +113,7 @@ dig mx google.com
 
 ### Drill
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 drill mx example.com
 {{< /code >}}
 
@@ -145,7 +145,7 @@ smtp.google.com.        30      IN      A       142.250.150.26
 
 ### NSLookUp
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 nslookup -type=mx example.com
 {{< /code >}}
 
@@ -169,7 +169,7 @@ smtp.google.com internet address = 173.194.220.26
 
 ### Dig
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 dig +trace example.com
 {{< /code >}}
 
@@ -179,7 +179,7 @@ dig +trace google.com
 
 ### Drill
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 drill -TD example.com
 {{< /code >}}
 
@@ -214,7 +214,7 @@ google.com.     300     IN      A       108.177.14.139
 
 ### Drill
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 drill -T example.com
 {{< /code >}}
 
@@ -263,7 +263,7 @@ google.com.     300     IN      A       108.177.14.113
 
 ### Dig
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 dig +short -x IP_ADDRESS
 {{< /code >}}
 
@@ -273,7 +273,7 @@ dig +short -x 108.177.14.100
 
 ### Drill
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 drill -x IP_ADDRESS
 {{< /code >}}
 
@@ -300,7 +300,7 @@ drill -x 108.177.14.100
 
 ### NSLookUp
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 nslookup -debug IP_ADDRESS
 {{< /code >}}
 

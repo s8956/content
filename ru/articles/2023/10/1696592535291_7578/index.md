@@ -101,12 +101,12 @@ ${CERT_ROOT} = 'russian_trusted_root_ca.cer'; ${CERT_SUB} = 'russian_trusted_sub
 
 #### DEB-based дистрибутивы
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 CERT='russiantrustedca.pem'; curl -o "/usr/local/share/ca-certificates/${CERT}" "https://gu-st.ru/content/Other/doc/${CERT}" && update-ca-certificates --fresh;
 {{< /code >}}
 
 #### RHEL-based дистрибутивы
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 CERT='russiantrustedca.pem'; curl -o "/etc/pki/ca-trust/source/anchors/${CERT}" "https://gu-st.ru/content/Other/doc/${CERT}" && update-ca-trust force-enable && update-ca-trust extract;
 {{< /code >}}

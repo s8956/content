@@ -50,7 +50,7 @@ draft: 1
 
 ## Обновление ОС и установка пакетов
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 apt update && apt --yes upgrade && apt --yes install git curl wget subversion build-essential
 {{< /code >}}
 
@@ -58,19 +58,19 @@ apt update && apt --yes upgrade && apt --yes install git curl wget subversion bu
 
 ### Установка компонентов
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 bash contrib/scripts/get_mp3_source.sh && bash contrib/scripts/install_prereq install
 {{< /code >}}
 
 ### Конфигурация сборки
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 ./configure && make menuselect.makeopts && menuselect/menuselect --enable CORE-SOUNDS-RU-GSM menuselect.makeopts
 {{< /code >}}
 
 ### Сборка и установка Asterisk
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 make && make install && make basic-pbx && make config && ldconfig
 {{< /code >}}
 
@@ -78,23 +78,23 @@ make && make install && make basic-pbx && make config && ldconfig
 
 ### Настройка пользователя
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 u='asterisk'; groupadd ${u} && useradd -r -d /var/lib/${u} -g ${u} ${u} && usermod -aG audio,dialout ${u} && chown -R ${u}:${u} /etc/${u} && chown -R ${u}:${u} /var/{lib,log,spool}/${u} && chown -R ${u}:${u} /usr/lib/${u}
 {{< /code >}}
 
 ### Редактирование конфигурации
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 sed -i 's|#AST_USER="asterisk"|AST_USER="asterisk"|g' '/etc/default/asterisk' && sed -i 's|#AST_GROUP="asterisk"|AST_GROUP="asterisk"|g' '/etc/default/asterisk'
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 sed -i 's|;runuser = asterisk|runuser = asterisk|g' '/etc/asterisk/asterisk.conf' && sed -i 's|;rungroup = asterisk|rungroup = asterisk|g' '/etc/asterisk/asterisk.conf'
 {{< /code >}}
 
 ## Запуск Asterisk
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 systemctl enable --now asterisk
 {{< /code >}}
 

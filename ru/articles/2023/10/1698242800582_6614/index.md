@@ -137,7 +137,7 @@ https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?se
 
 При работе в Linux можно применить утилиту `curl` для отправки запроса на сервер закупок:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 curl -X GET -A 'Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/119.0' \
 'https://zakupki.gov.ru/api/mobile/proxy/epz/order/extendedsearch/results.html?searchString=7719167509' \
 -d 'strictEqual=true' \
@@ -191,13 +191,13 @@ Invoke-WebRequest "${URL}" -OutFile 'orders.json'
 
 Получение имени закупки:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 cat 'orders.json' | jq -r '.list[] | .name'
 {{< /code >}}
 
 Получение номера закупки:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 cat 'orders.json' | jq -r '.list[] | .number'
 {{< /code >}}
 

@@ -157,7 +157,7 @@ wget -O ~/.zshrc.grml https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 2. Открываем файл `~/.zshrc` и добавляем следующие строки:
 
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 . "${HOME}/.zshrc.grml"
 export GPG_TTY=$(tty)
 {{< /code >}}

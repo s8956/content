@@ -52,12 +52,12 @@ draft: 0
 2. Скачивание файла подписи `linux_signing_key.pub` и размещение его в директорию `/etc/apt/trusted.gpg.d` с названием `vivaldi-browser.gpg`.
 3. Обновление информации из репозитория при помощи команды `apt update`.
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/vivaldi-browser.gpg arch=$(dpkg --print-architecture)] https://repo.vivaldi.com/archive/deb/ stable main" | tee /etc/apt/sources.list.d/vivaldi-archive.list && curl -fsSL 'https://repo.vivaldi.com/archive/linux_signing_key.pub' | gpg --dearmor | tee /etc/apt/trusted.gpg.d/vivaldi-browser.gpg > /dev/null && apt update
 {{< /code >}}
 
 После выполнения команды, установка {{< tag "Vivaldi" >}} происходит таким образом:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 apt install vivaldi-stable
 {{< /code >}}

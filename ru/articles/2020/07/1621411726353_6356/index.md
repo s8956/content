@@ -52,19 +52,19 @@ draft: 0
 
 - CentOS 8 / Fedora:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 dnf install gnupg
 {{< /code >}}
 
 - Debian:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 apt install gnupg
 {{< /code >}}
 
 После того, как пакет установлен, можно начать создание ключа командой:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --expert --full-gen-key
 {{< /code >}}
 
@@ -128,7 +128,7 @@ Key is valid for? (0)
 
 Посмотреть установленные в системе ключи можно командой:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --list-keys --keyid-format LONG --with-fingerprint
 {{< /code >}}
 
@@ -161,13 +161,13 @@ sub   cv25519/AI9NEDUOWRF016Y2 2020-02-17 [E]
 
 1. Экспорт публичного ключа:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --armor --output 'JohnDoe.public.asc' --export 'JTM4BAVLPI8F0XHR'
 {{< /code >}}
 
 2. Экспорт приватного ключа:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --armor --output 'JohnDoe.private.asc' --export-secret-keys 'JTM4BAVLPI8F0XHR'
 {{< /code >}}
 
@@ -183,13 +183,13 @@ gpg --armor --output 'JohnDoe.private.asc' --export-secret-keys 'JTM4BAVLPI8F0XH
 
 1. Импорт публичного ключа:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --import 'JohnDoe.public.asc'
 {{< /code >}}
 
 2. Импорт приватного ключа:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --import 'JohnDoe.private.asc'
 {{< /code >}}
 
@@ -199,7 +199,7 @@ gpg --import 'JohnDoe.private.asc'
 
 Следующая команда позволяет отредактировать ключ:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --edit-key 'JTM4BAVLPI8F0XHR'
 {{< /code >}}
 
@@ -218,7 +218,7 @@ gpg --edit-key 'JTM4BAVLPI8F0XHR'
 
 1. Удаление приватного ключа:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --delete-secret-key 'JTM4BAVLPI8F0XHR'
 {{< /code >}}
 
@@ -228,7 +228,7 @@ gpg --delete-secret-key 'JTM4BAVLPI8F0XHR'
 
 2. Удаление публичного ключа:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --delete-key 'JTM4BAVLPI8F0XHR'
 {{< /code >}}
 
@@ -238,7 +238,7 @@ gpg --delete-key 'JTM4BAVLPI8F0XHR'
 
 Эти две команды можно объединить в одну при помощи параметра `--delete-secret-and-public-key`:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 gpg --delete-secret-and-public-key 'JTM4BAVLPI8F0XHR'
 {{< /code >}}
 

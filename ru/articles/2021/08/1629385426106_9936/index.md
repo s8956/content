@@ -46,7 +46,7 @@ draft: 0
 
 Скрипт для удаления устаревших файлов очень прост, написан на {{< tag "bash" >}}'е и основывается на утилите `find`. Утилита `find` имеет опцию `-mtime`, при помощи которого можно сделать выборку файлов по времени изменения:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 find "/home/user" -type f -mtime +3
 {{< /code >}}
 
@@ -54,7 +54,7 @@ find "/home/user" -type f -mtime +3
 
 Далее, конструируем конвейер, и при помощи `xargs` указываем команду удаления `rm -f`:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 find "/home/user" -type f -mtime +3 -print0 | xargs -0 rm -f
 {{< /code >}}
 
@@ -79,7 +79,7 @@ delete-files.sh "3" "/path/to/storage"
 
 Осталось добавить выполнение скрипта по {{< tag "cron" >}}'у. Я указал время `23:59`, когда нагрузка на файловое хранилище минимальна:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 # Check & remove old files in 23:59 every day.
 59 23 * * * [username] /usr/bin/bash /path/to/delete-files.sh "3" "/path/to/storage" > /dev/null 2>&1
 {{< /code >}}

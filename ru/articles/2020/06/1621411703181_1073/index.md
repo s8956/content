@@ -48,7 +48,7 @@ systemctl set-default graphical.target
 
 ## Создание пользователя
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 # Добавить пользователя.
 useradd -mc "User 0001" user-0001
 
@@ -58,7 +58,7 @@ passwd user-0001
 
 ## Отключение пользователя
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 # Отключить пользователя.
 usermod -L user-0000
 {{< /code >}}

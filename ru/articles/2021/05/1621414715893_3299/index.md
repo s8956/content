@@ -43,7 +43,7 @@ draft: 1
 
 ## Системные часы
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 timedatectl status
 {{< /code >}}
 
@@ -57,40 +57,40 @@ System clock synchronized: yes
           RTC in local TZ: no
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 timedatectl set-ntp true
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 systemctl status systemd-timesyncd
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 systemctl enable systemd-timesyncd --now
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 timedatectl list-timezones
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 timedatectl set-timezone Europe/Moscow
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 timedatectl set-time "yyyy-MM-dd hh:mm:ss"
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 timedatectl set-time "2014-05-26 11:13:54"
 {{< /code >}}
 
 ## Аппаратные часы
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 hwclock --show
 {{< /code >}}
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 hwclock --systohc
 {{< /code >}}

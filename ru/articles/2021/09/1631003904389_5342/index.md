@@ -52,6 +52,6 @@ send dhcp-client-identifier = hardware;
 
 Тоже самое при помощи команды:
 
-{{< code "sh" >}}
+{{< code "bash" >}}
 echo 'send dhcp-client-identifier = hardware;' >> /etc/dhcp/dhclient.conf
 {{< /code >}}
