@@ -53,29 +53,29 @@ draft: 0
 
 Открыть файл `init.php`, найти:
 
-```php
+{{< code "php" >}}
 define( 'IPB_MAKE_PORTAL_HOMEPAGE', 0 );
-```
+{{< /code >}}
 
 Заменить на:
 
-```php
+{{< code "php" >}}
 define( 'IPB_MAKE_PORTAL_HOMEPAGE', 1 );
-```
+{{< /code >}}
 
 ## Как удалить (Powered by Invision Power Board) из title?
 
 Открыть файл `./sources/action_public/boards.php`, найти:
 
-```php
+{{< code "php" >}}
 $cp = " (Powered by Invision Power Board)";
-```
+{{< /code >}}
 
 Заменить на:
 
-```php
+{{< code "php" >}}
 $cp = "";
-```
+{{< /code >}}
 
 ## Как убрать текст в просмотре темы под аватаром?
 
@@ -86,7 +86,7 @@ $cp = "";
 
 Код, отвечающий за поля пользователя в сообщении:
 
-```php
+{{< code "php" >}}
 {$author['avatar']}<br /><br />
 {$author['title']}<br />
 {$author['member_rank_img']}<br /><br />
@@ -95,7 +95,7 @@ $cp = "";
 {$author['member_joined']}<br />
 {$author['member_location']}
 {$author['member_number']}<br />
-```
+{{< /code >}}
 
 Где:
 
@@ -113,21 +113,21 @@ $cp = "";
 
 Открываем `./jscripts/ips_text_editor_lite.js`, находим строчку:
 
-```js
+{{< code "js" >}}
 this.ipb_code=function(){var _text=this.get_selection();this.wrap_tags('code',false,_text);};
-```
+{{< /code >}}
 
 Эта строка отвечает за BB-код `CODE`. Копируем её к себе в редактор и заменяем в ней слово code на свой BB-код (например, у меня будет это `[i]spoiler[/i]`):
 
-```js
+{{< code "js" >}}
 this.ipb_spoiler=function(){var _text=this.get_selection();this.wrap_tags('spoiler',false,_text);};
-```
+{{< /code >}}
 
 После этого вставляем её обратно в файл `./jscripts/ips_text_editor_lite.js`, НО уже после скопированной нами ранее строки с BB-кодом `CODE`. Получается вот так:
 
-```js
+{{< code "js" >}}
 this.ipb_code=function(){var _text=this.get_selection();this.wrap_tags('code',false,_text);};this.ipb_spoiler=function(){var _text=this.get_selection();this.wrap_tags('spoiler',false,_text);};
-```
+{{< /code >}}
 
 Сохраняем!
 
@@ -138,15 +138,15 @@ this.ipb_code=function(){var _text=this.get_selection();this.wrap_tags('code',fa
 
 Открываем шаблон, находим:
 
-```html
+{{< code "html" >}}
 <td><div class="rte-normal" id="fast-reply_cmd_ipb_code"><img src="style_images/<#IMG_DIR#>/folder_editor_images/rte-code-button.png"  alt="{$this->ipsclass->lang['js_rte_lite_code']}" title="{$this->ipsclass->lang['js_rte_lite_code']}"></div></td>
-```
+{{< /code >}}
 
 Копируем этот участок и вставляем ниже. Теперь нужно отредактировать вставленный нами участок. Слово `code` заменяем на свой тег. Напомню, что у меня это - `spoiler`. Вот пример:
 
-```html
+{{< code "html" >}}
 <td><div class="rte-normal" id="fast-reply_cmd_ipb_spoiler"><img src="style_images/<#IMG_DIR#>/folder_editor_images/rte-spoiler-button.png"  alt="Спойлер" title="Спойлер"></div></td>
-```
+{{< /code >}}
 
 Не забудьте загрузить кнопку для своего тега в папку `./style_images/папка_стиля/folder_editor_images`.
 
@@ -156,33 +156,33 @@ this.ipb_code=function(){var _text=this.get_selection();this.wrap_tags('code',fa
 
 Открываем `./jscripts/ips_text_editor.js`, находим:
 
-```js
+{{< code "js" >}}
 this.ipb_quote = function()
   {
     this.wrap_tags_lite(  '[quote]', '[/quote]', 0)
   };
-```
+{{< /code >}}
 
 Добавить ниже:
 
-```js
+{{< code "js" >}}
 this.ipb_youtube = function()
   {
     this.wrap_tags_lite(  '[spoiler]', '[/spoiler]', 0)
   };
-```
+{{< /code >}}
 
 После этого необходимо отредактировать шаблон `skin_editors` (редактор сообщений) / `ips_editor`, чтобы добавить кнопку в расширенный ответ. Находим:
 
-```html
+{{< code "html" >}}
 <td><div class="rte-normal"  id="{$editor_id}_cmd_ipb_code"><img  src="{$images_path}rte-code-button.png"   alt="{$this->ipsclass->lang['js_rte_lite_code']}"  title="{$this->ipsclass->lang['js_rte_lite_code']}"></div></td>
-```
+{{< /code >}}
 
 Добавляем выше:
 
-```html
+{{< code "html" >}}
 <td><div class="rte-normal" id="{$editor_id}_cmd_ipb_youtube"><img src="{$images_path}rte-code-tube.png"  alt="Youtube" title="YouTube"></div></td>
-```
+{{< /code >}}
 
 Не забудьте загрузить кнопку для своего тега в папку `./style_images/папка_стиля/folder_editor_images`.
 
@@ -204,27 +204,27 @@ Fatal error: Allowed memory size of 50331648 bytes exhausted (tried to allocate 
 
 1. В `.htaccess` добавить строку (при условии, что {{< tag "PHP" >}} работает под Apache):
 
-```
+{{< code >}}
 php_value memory_limit 32M
-```
+{{< /code >}}
 
 2. В `php.ini` (при условии, что Вы можете его редактировать) изменить значение параметра `memory_limit`:
 
-```
+{{< code >}}
 memory_limit 32M
-```
+{{< /code >}}
 
 3. Добавив в `index.php` после:
 
-```
+{{< code >}}
 <?php
-```
+{{< /code >}}
 
 следующий код:
 
-```php
+{{< code "php" >}}
 ini_set('memory_limit', '32M');
-```
+{{< /code >}}
 
 Если ни один из предложенных вариантов не подошел, обратитесь за помощью к хостеру с указанием описания ошибки.
 
@@ -232,21 +232,21 @@ ini_set('memory_limit', '32M');
 
 Если у вас несколько доменов, но ОДНА база данных, то в `conf_global.php` нужно изменить строчку:
 
-```php
+{{< code "php" >}}
 $INFO['board_url'] = 'http://domain.com';
-```
+{{< /code >}}
 
 На такую:
 
-```php
+{{< code "php" >}}
 $INFO['board_url'] = "http://".$_SERVER["HTTP_HOST"];
-```
+{{< /code >}}
 
 Однако, если форум установлен в под-директорию, например, `http://domain.com/forum`, то необходимо изменить строчку на следующую:
 
-```php
+{{< code "php" >}}
 $INFO['board_url'] = "http://".$_SERVER["HTTP_HOST"]."/forum";
-```
+{{< /code >}}
 Где:
 
 - `forum` - папка форума.
@@ -255,20 +255,20 @@ $INFO['board_url'] = "http://".$_SERVER["HTTP_HOST"]."/forum";
 
 Для этого необходимо открыть файл `./ips_kernel/class_upload.php`, найти:
 
-```php
+{{< code "php" >}}
 //-------------------------------------------------
 // Make the uploaded file safe
 //-------------------------------------------------
 
 $FILE_NAME = preg_replace( "/[^\w\.]/", "_", $FILE_NAME );
-```
+{{< /code >}}
 
 Заменить на:
 
-```php
+{{< code "php" >}}
 //-------------------------------------------------
 // Make the uploaded file safe
 //-------------------------------------------------
 
 $FILE_NAME = preg_replace( "/[^a-zA-Z0-9а-яА-Я\-\.\_]/", "_", $FILE_NAME );
-```
+{{< /code >}}

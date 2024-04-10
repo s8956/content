@@ -51,16 +51,16 @@ draft: 0
 
 Итак, установим Network Manager при помощи пакетного менеджера {{< tag "APT" >}}:
 
-```sh
+{{< code "sh" >}}
 apt install network-manager
-```
+{{< /code >}}
 
 Но этого недостаточно. Система будет говорить, что "Wired Networks are Unmanaged", потому что всё ещё сетевой конфигурацией управляет не Network Manager. Для исправления этой ситуации, необходимо в `/etc/NetworkManager/NetworkManager.conf` изменить `managed=false` на `managed=true`.
 
 Далее, перезапустить службу:
 
-```sh
+{{< code "sh" >}}
 service NetworkManager restart
-```
+{{< /code >}}
 
 На этом всё. Теперь сетевой конфигурацией управляет Network Manager.

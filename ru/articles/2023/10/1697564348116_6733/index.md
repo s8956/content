@@ -52,9 +52,9 @@ draft: 0
 
 Дополнительная страница (или Custom Pages) - это страница, "совмещённая" со стилем форума и находится по адресу:
 
-```
+{{< code >}}
 http://example.com/index.php?autocom=название_страницы
-```
+{{< /code >}}
 
 Объект `название_страницы` представляет собой название файла `.php` дополнительной страницы.
 
@@ -62,7 +62,7 @@ http://example.com/index.php?autocom=название_страницы
 
 Создаём файл `.php` следующего содержания:
 
-```php
+{{< code "php" >}}
 <?php
 class component_public
 {
@@ -86,7 +86,7 @@ class component_public
     $this->ipsclass->print->do_output(array('TITLE' => "{$this->ipsclass->vars['board_name']} - {$this->pagetitle}", 'JS' => 0, 'NAV' => $this->nav));
   }
 }
-```
+{{< /code >}}
 В самом коде установлены комментарии, так что вы без труда разберётесь что к чему.
 
 После создания этого PHP-файла, вы должны поместить его в папку `./sources/components_public`.

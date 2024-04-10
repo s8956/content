@@ -43,14 +43,14 @@ draft: 0
 
 Для того, чтобы отключить выбор режима {{< tag "Wayland" >}} в {{< tag "GDM" >}}, необходимо в файле `/etc/gdm3/daemon.conf` раскомментировать строку:
 
-```ini
+{{< code "ini" >}}
 # WaylandEnable=false
-```
+{{< /code >}}
 
 Должно получится так:
 
-```ini
+{{< code "ini" >}}
 WaylandEnable=false
-```
+{{< /code >}}
 
 Таким образом даём понять {{< tag "GDM" >}}, что мы не желаем использовать {{< tag "Wayland" >}}.

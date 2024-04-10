@@ -97,7 +97,7 @@ ONBOOT="yes"
 
 Например:
 
-```ini
+{{< code "ini" >}}
 TYPE="Ethernet"
 PROXY_METHOD="none"
 BROWSER_ONLY="no"
@@ -118,42 +118,42 @@ PREFIX="24"
 GATEWAY="192.168.10.1"
 DNS1="192.168.11.1"
 DNS1="192.168.12.1"
-```
+{{< /code >}}
 
 После указания всех параметров, необходимо перезапустить интерфейс:
 
-```sh
+{{< code "sh" >}}
 nmcli con down enp1s0 && nmcli con up enp1s0
-```
+{{< /code >}}
 
 ## Настройка IP при помощи Network Manager CLI (nmcli)
 
 Установка {{< tag "IP" >}} адреса:
 
-```sh
+{{< code "sh" >}}
 nmcli con mod enp1s0 ipv4.addresses '192.168.10.55/24'
-```
+{{< /code >}}
 
 Установка шлюза:
 
-```sh
+{{< code "sh" >}}
 nmcli con mod enp1s0 ipv4.gateway '192.168.10.1'
-```
+{{< /code >}}
 
 Установка {{< tag "DNS" >}}:
 
-```sh
+{{< code "sh" >}}
 nmcli con mod enp1s0 ipv4.dns '192.168.11.1'
-```
+{{< /code >}}
 
 Установка **BOOTPROTO** в `none`:
 
-```sh
+{{< code "sh" >}}
 nmcli con mod enp1s0 ipv4.method 'manual'
-```
+{{< /code >}}
 
 Перезапуск интерфейса:
 
-```sh
+{{< code "sh" >}}
 nmcli con down enp1s0 && nmcli con up enp1s0
-```
+{{< /code >}}

@@ -56,17 +56,17 @@ draft: 0
 
 1. Запросить и применить обновления:
 
-```
+{{< code >}}
 freebsd-update fetch && freebsd-update install
-```
+{{< /code >}}
 
 ## Обновление пакетов
 
 1. Запросить и применить обновления пакетов:
 
-```
+{{< code >}}
 pkg update -f && pkg upgrade
-```
+{{< /code >}}
 
 ## Переключение ветки пакетов
 
@@ -74,15 +74,15 @@ pkg update -f && pkg upgrade
 
 1. Создать файл `/usr/local/etc/pkg/repos/FreeBSD.conf`:
 
-```
+{{< code >}}
 mkdir -p /usr/local/etc/pkg/repos && echo 'FreeBSD: { url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest" }' > /usr/local/etc/pkg/repos/FreeBSD.conf
-```
+{{< /code >}}
 
 2. Обновить базу данных пакетов и обновить пакеты:
 
-```
+{{< code >}}
 pkg update -f && pkg upgrade
-```
+{{< /code >}}
 
 ## Установка пакетов
 
@@ -94,17 +94,17 @@ pkg update -f && pkg upgrade
 2. Добавить в `rc.conf` автозапуск сервиса.
 3. Запустить сервис.
 
-```
+{{< code >}}
 pkg install cpu-microcode && sysrc microcode_update_enable=YES && service microcode_update start
-```
+{{< /code >}}
 
 ### Установка дополнительных пакетов
 
 Для работы на сервере, я устанавливаю следующие пакеты:
 
-```
+{{< code >}}
 pkg install bash ca_root_nss curl git gnupg htop mc nano smartmontools wget zsh
-```
+{{< /code >}}
 
 ## Настройка ядра
 
@@ -112,16 +112,16 @@ pkg install bash ca_root_nss curl git gnupg htop mc nano smartmontools wget zsh
 
 У меня используется синхронизация данных при помощи {{< tag "Syncthing" >}}, данных много. Иногда случается ступор из-за лимита на дескрипторы файлов. Открываем `/etc/sysctl.conf`, добавляем:
 
-```ini
+{{< code "ini" >}}
 kern.maxfiles=500000
 kern.maxfilesperproc=500000
-```
+{{< /code >}}
 
 Перезагружаем систему:
 
-```
+{{< code >}}
 shutdown -r now
-```
+{{< /code >}}
 
 ## Настройка терминала
 
@@ -131,15 +131,15 @@ shutdown -r now
 
 1. Изменить стандартную оболочку на {{< tag "Zsh" >}} для **root**:
 
-```
+{{< code >}}
 chsh -s zsh root
-```
+{{< /code >}}
 
 2. Изменить стандартную оболочку на {{< tag "Zsh" >}} для **обычного пользователя**:
 
-```
+{{< code >}}
 chsh -s zsh user
-```
+{{< /code >}}
 
 Где:
 - `user` - логин пользователя.
@@ -150,17 +150,17 @@ chsh -s zsh user
 
 1. Скачиваем конфигурацию:
 
-```
+{{< code >}}
 wget -O ~/.zshrc.grml https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
-```
+{{< /code >}}
 
 2. Открываем файл `~/.zshrc` и добавляем следующие строки:
 
 
-```sh
+{{< code "sh" >}}
 . "${HOME}/.zshrc.grml"
 export GPG_TTY=$(tty)
-```
+{{< /code >}}
 
 Я работаю на ОС Windows и к серверам подключаюсь через {{< tag "KiTTY" >}}. При работе с {{< tag "GPG" >}}, она иногда не понимает куда ей выбрасывать запрос на парольную фразу. Поэтому, у меня здесь добавлен фикс `export GPG_TTY=$(tty)`.
 
@@ -170,9 +170,9 @@ export GPG_TTY=$(tty)
 
 `atime` это время доступа к файлу. В обычной работе такая метрика бесполезна. На диск могут быть тысячи файлов и для каждого файла ядро ОС будет фиксировать и обновлять время доступа. Подобная операция весьма дорогая.
 
-```
+{{< code >}}
 zfs set atime=off zroot
-```
+{{< /code >}}
 
 Где:
 - `zroot` - пул файловой системы {{< tag "ZFS" >}}.

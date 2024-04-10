@@ -58,13 +58,13 @@ draft: 0
 
 Открыть файл `./sources/classes/bbcode/class_bbcode_core.php`, найти:
 
-```php
+{{< code "php" >}}
 $show = $url['show'];
-```
+{{< /code >}}
 
 Добавить **после**:
 
-```php
+{{< code "php" >}}
 if (strpos($show, $this->ipsclass->base_url) !== false) {
   $match = array();
 
@@ -84,19 +84,19 @@ if (strpos($show, $this->ipsclass->base_url) !== false) {
     $show = $url['show'];
   }
 } else
-```
+{{< /code >}}
 
 Найти:
 
-```php
+{{< code "php" >}}
 /*-------------------------------------------------------------------------*/
 // Remove sessions in a nice way
 /*-------------------------------------------------------------------------*/
-```
+{{< /code >}}
 
 Добавить **перед**:
 
-```php
+{{< code "php" >}}
 function _getUrlLocalName($from = '', $for = '')
 {
   // Сколько раз разбирали ссылки.
@@ -139,4 +139,4 @@ function _getUrlLocalName($from = '', $for = '')
 
   return false;
 }
-```
+{{< /code >}}

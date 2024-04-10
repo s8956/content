@@ -54,9 +54,9 @@ draft: 1
 
 ### Dig
 
-```sh
+{{< code "sh" >}}
 dig example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 dig google.com
@@ -64,9 +64,9 @@ dig google.com
 
 ### Drill
 
-```sh
+{{< code "sh" >}}
 drill example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 drill google.com
@@ -91,9 +91,9 @@ google.com.     184     IN      A       216.58.210.142
 
 ### NSLookUp
 
-```sh
+{{< code "sh" >}}
 nslookup example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 nslookup google.com
@@ -103,9 +103,9 @@ nslookup google.com
 
 ### Dig
 
-```sh
+{{< code "sh" >}}
 dig mx example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 dig mx google.com
@@ -113,9 +113,9 @@ dig mx google.com
 
 ### Drill
 
-```sh
+{{< code "sh" >}}
 drill mx example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 drill mx google.com
@@ -145,9 +145,9 @@ smtp.google.com.        30      IN      A       142.250.150.26
 
 ### NSLookUp
 
-```sh
+{{< code "sh" >}}
 nslookup -type=mx example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 nslookup -type=mx google.com
@@ -169,9 +169,9 @@ smtp.google.com internet address = 173.194.220.26
 
 ### Dig
 
-```sh
+{{< code "sh" >}}
 dig +trace example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 dig +trace google.com
@@ -179,9 +179,9 @@ dig +trace google.com
 
 ### Drill
 
-```sh
+{{< code "sh" >}}
 drill -TD example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 drill -TD google.com
@@ -214,9 +214,9 @@ google.com.     300     IN      A       108.177.14.139
 
 ### Drill
 
-```sh
+{{< code "sh" >}}
 drill -T example.com
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 drill -T google.com
@@ -263,9 +263,9 @@ google.com.     300     IN      A       108.177.14.113
 
 ### Dig
 
-```sh
+{{< code "sh" >}}
 dig +short -x IP_ADDRESS
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 dig +short -x 108.177.14.100
@@ -273,9 +273,9 @@ dig +short -x 108.177.14.100
 
 ### Drill
 
-```sh
+{{< code "sh" >}}
 drill -x IP_ADDRESS
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 drill -x 108.177.14.100
@@ -300,9 +300,9 @@ drill -x 108.177.14.100
 
 ### NSLookUp
 
-```sh
+{{< code "sh" >}}
 nslookup -debug IP_ADDRESS
-```
+{{< /code >}}
 
 {{< terminal lang="dns" >}}
 nslookup -debug 108.177.14.100

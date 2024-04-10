@@ -94,26 +94,26 @@ MS {{< tag "Office" >}} 2021 LTSC просто так не купить, это 
 
 1. Указать адрес KMS-сервера для клиента MS Office:
 
-```powershell
+{{< code "powershell" >}}
 cscript ospp.vbs /sethst:kms.example.com
-```
+{{< /code >}}
 
 2. Указать нестандартный порт (`1689`) KMS-сервера:
 
-```powershell
+{{< code "powershell" >}}
 cscript ospp.vbs /setprt:1689
-```
+{{< /code >}}
 
 3. Выполнить активацию MS Office на KMS-сервере:
 
-```powershell
+{{< code "powershell" >}}
 cscript ospp.vbs /act
-```
+{{< /code >}}
 
 4. Узнать текущий статус активации MS Office:
 
-```powershell
+{{< code "powershell" >}}
 cscript ospp.vbs /dstatusall
-```
+{{< /code >}}
 
 В интернете можно найти открытые KMS-серверы для нелегальной активации MS Office. Но подобные действия имеют противоправный характер. {{< emoji ":winking_face_with_tongue:" >}}

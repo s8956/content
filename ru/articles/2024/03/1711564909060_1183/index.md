@@ -58,7 +58,7 @@ draft: 0
   - DNS: `8.8.8.8`.
 - Настроить сетевой интерфейс {{< tag "Cisco" >}} со следующими параметрами:
 
-```text
+{{< code "text" >}}
 > en
 Router# conf t
 Router(config)# int fa0/1
@@ -67,7 +67,7 @@ Router(config-if)# no shutdown
 Router(config-if)# exit
 Router(config)# exit
 Router#
-```
+{{< /code >}}
 
 - Подключить сетевой интерфейс компьютера к сетевому интерфейсу {{< tag "Cisco" >}} `FE0/1`.
 - Запустить TFTP-сервер на компьютере c IP `192.168.1.2`.
@@ -76,16 +76,16 @@ Router#
 
 - Посмотреть текущую версию {{< tag "IOS" >}}:
 
-```text
+{{< code "text" >}}
 Router# show version
-```
+{{< /code >}}
 
 - Сделать резервную копию текущего образа {{< tag "IOS" >}} на TFTP-сервер:
 
-```text
+{{< code "text" >}}
 Router# show flash: | include .bin
 Router# copy flash:IOS_FW.bin tftp://192.168.1.2
-```
+{{< /code >}}
 
 Где:
 
@@ -96,9 +96,9 @@ Router# copy flash:IOS_FW.bin tftp://192.168.1.2
 
 - Записать на Flash-карту новый образ {{< tag "IOS" >}}:
 
-```text
+{{< code "text" >}}
 Router# copy tftp://192.168.1.2/IOS_FW.bin flash:
-```
+{{< /code >}}
 
 Где:
 
@@ -107,10 +107,10 @@ Router# copy tftp://192.168.1.2/IOS_FW.bin flash:
 
 ## Верификация нового образа IOS
 
-```text
+{{< code "text" >}}
 Router# show flash: | include .bin
 Router# verify /md5 flash:IOS_FW.bin
-```
+{{< /code >}}
 
 Где:
 
@@ -120,12 +120,12 @@ Router# verify /md5 flash:IOS_FW.bin
 
 - Прописать в конфигурации {{< tag "Cisco" >}} загрузку нового образа {{< tag "IOS" >}}:
 
-```text
+{{< code "text" >}}
 Router# conf t
 Router(config)# boot system flash:IOS_FW.bin
 Router(config)# exit
 Router# reload
-```
+{{< /code >}}
 
 Где:
 
@@ -135,8 +135,8 @@ Router# reload
 
 - Посмотреть версию {{< tag "IOS" >}} после перезагрузки:
 
-```text
+{{< code "text" >}}
 Router# show version
-```
+{{< /code >}}
 
 - Готово!

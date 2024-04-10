@@ -52,9 +52,9 @@ draft: 0
 
 Пакет `.deb` архивируется при помощи [ar](https://en.wikipedia.org/wiki/Ar_(Unix)). Соответственно, распаковать пакет тоже следует через данный архиватор:
 
-```sh
+{{< code "sh" >}}
 ar x example.deb
-```
+{{< /code >}}
 
 
 - `debian-binary` – файл, содержащий версию формата `.deb`.
@@ -66,11 +66,11 @@ ar x example.deb
 
 Пакет `.rpm` содержит архив `cpio`. Имеется удобная утилита `rpm2cpio`, которая преобразует `.rpm` в архив `cpio`.
 
-```sh
+{{< code "sh" >}}
 rpm2cpio myrpmfile.rpm
 rpm2cpio - < myrpmfile.rpm
 rpm2cpio myrpmfile.rpm | cpio -idmv
-```
+{{< /code >}}
 
 Опции `rpm2cpio`:
 

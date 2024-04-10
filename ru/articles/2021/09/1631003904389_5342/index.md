@@ -46,12 +46,12 @@ draft: 0
 
 Чтобы указать {{< tag "dhclient" >}}'у отправлять обычный {{< tag "MAC" >}}, необходимо в `/etc/dhcp/dhclient.conf` прописать строку:
 
-```ini
+{{< code "ini" >}}
 send dhcp-client-identifier = hardware;
-```
+{{< /code >}}
 
 Тоже самое при помощи команды:
 
-```sh
+{{< code "sh" >}}
 echo 'send dhcp-client-identifier = hardware;' >> /etc/dhcp/dhclient.conf
-```
+{{< /code >}}

@@ -51,9 +51,9 @@ draft: 0
 
 Дополнительная страница (или Custom Pages) - это страница, "совмещённая" со стилем форума и находится по адресу:
 
-```
+{{< code >}}
 http://example.com/misc.php?do=page&template=название_страницы
-```
+{{< /code >}}
 
 ## Как сделать дополнительную страницу?
 
@@ -61,7 +61,7 @@ http://example.com/misc.php?do=page&template=название_страницы
 
 После этого в тело шаблона вставляем следующий код:
 
-```html
+{{< code "html" >}}
 $stylevar[htmldoctype]
 <html dir="$stylevar[textdirection]" lang="$stylevar[languagecode]">
   <head>
@@ -75,6 +75,6 @@ $stylevar[htmldoctype]
     $footer
   </body>
 </html>
-```
+{{< /code >}}
 
 Вот и всё!

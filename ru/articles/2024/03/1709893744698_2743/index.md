@@ -53,73 +53,73 @@ draft: 1
 
 ### Stripe (RAID0)
 
-```
+{{< code >}}
 zpool create -f <pool_name> <dev_0> <dev_1>
-```
+{{< /code >}}
 
 ### Mirror (RAID1)
 
-```
+{{< code >}}
 zpool create -f <pool_name> mirror <dev_0> <dev_1>
-```
+{{< /code >}}
 
 ### RAIDZ-1 (RAID5)
 
-```
+{{< code >}}
 zpool create -f <pool_name> raidz <dev_0> <dev_1> <dev_2>
-```
+{{< /code >}}
 
 ### RAIDZ-2 (RAID6)
 
-```
+{{< code >}}
 zpool create -f <pool_name> raidz2 <dev_0> <dev_1> <dev_2> <dev_3>
-```
+{{< /code >}}
 
 ### RAIDZ-3
 
-```
+{{< code >}}
 zpool create -f <pool_name> raidz3 <dev_0> <dev_1> <dev_2> <dev_3> <dev_4>
-```
+{{< /code >}}
 
 ### RAID10
 
-```
+{{< code >}}
 zpool create -f <pool_name> mirror <dev_0> <dev_1> mirror <dev_2> <dev_3>
-```
+{{< /code >}}
 
 ## Cache / Log
 
 ### Cache
 
-```
+{{< code >}}
 zpool add -f <pool_name> cache <dev_0>
-```
+{{< /code >}}
 
 ### Log
 
-```
+{{< code >}}
 zpool add -f <pool_name> log <dev_0>
-```
+{{< /code >}}
 
 ## Status
 
-```
+{{< code >}}
 zpool status -v <pool_name>
-```
+{{< /code >}}
 
 ## List
 
-```
+{{< code >}}
 zpool list
-```
+{{< /code >}}
 
-```
+{{< code >}}
 zfs list
-```
+{{< /code >}}
 
 ## Destroy
 
 
-```
+{{< code >}}
 zpool destroy -f <pool_name>
-```
+{{< /code >}}

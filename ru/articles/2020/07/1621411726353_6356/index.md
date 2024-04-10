@@ -52,21 +52,21 @@ draft: 0
 
 - CentOS 8 / Fedora:
 
-```sh
+{{< code "sh" >}}
 dnf install gnupg
-```
+{{< /code >}}
 
 - Debian:
 
-```sh
+{{< code "sh" >}}
 apt install gnupg
-```
+{{< /code >}}
 
 После того, как пакет установлен, можно начать создание ключа командой:
 
-```sh
+{{< code "sh" >}}
 gpg --expert --full-gen-key
-```
+{{< /code >}}
 
 Команда вернёт следующий результат:
 
@@ -128,9 +128,9 @@ Key is valid for? (0)
 
 Посмотреть установленные в системе ключи можно командой:
 
-```sh
+{{< code "sh" >}}
 gpg --list-keys --keyid-format LONG --with-fingerprint
-```
+{{< /code >}}
 
 Где:
 - `--list-keys` - показать список ключей.
@@ -161,15 +161,15 @@ sub   cv25519/AI9NEDUOWRF016Y2 2020-02-17 [E]
 
 1. Экспорт публичного ключа:
 
-```sh
+{{< code "sh" >}}
 gpg --armor --output 'JohnDoe.public.asc' --export 'JTM4BAVLPI8F0XHR'
-```
+{{< /code >}}
 
 2. Экспорт приватного ключа:
 
-```sh
+{{< code "sh" >}}
 gpg --armor --output 'JohnDoe.private.asc' --export-secret-keys 'JTM4BAVLPI8F0XHR'
-```
+{{< /code >}}
 
 Где:
 - `--armor` - экспорт ключа в формате **ASCII** (текстовый формат).
@@ -183,15 +183,15 @@ gpg --armor --output 'JohnDoe.private.asc' --export-secret-keys 'JTM4BAVLPI8F0XH
 
 1. Импорт публичного ключа:
 
-```sh
+{{< code "sh" >}}
 gpg --import 'JohnDoe.public.asc'
-```
+{{< /code >}}
 
 2. Импорт приватного ключа:
 
-```sh
+{{< code "sh" >}}
 gpg --import 'JohnDoe.private.asc'
-```
+{{< /code >}}
 
 После импорта ключ приобретает **стандартный уровень доверия**. Для повышения или понижения уровня доверия, ключ необходимо отредактировать.
 
@@ -199,9 +199,9 @@ gpg --import 'JohnDoe.private.asc'
 
 Следующая команда позволяет отредактировать ключ:
 
-```sh
+{{< code "sh" >}}
 gpg --edit-key 'JTM4BAVLPI8F0XHR'
-```
+{{< /code >}}
 
 Где:
 - `--edit-key 'JTM4BAVLPI8F0XHR'` - редактирование ключа с идентификатором `JTM4BAVLPI8F0XHR`.
@@ -218,9 +218,9 @@ gpg --edit-key 'JTM4BAVLPI8F0XHR'
 
 1. Удаление приватного ключа:
 
-```sh
+{{< code "sh" >}}
 gpg --delete-secret-key 'JTM4BAVLPI8F0XHR'
-```
+{{< /code >}}
 
 Где:
 
@@ -228,9 +228,9 @@ gpg --delete-secret-key 'JTM4BAVLPI8F0XHR'
 
 2. Удаление публичного ключа:
 
-```sh
+{{< code "sh" >}}
 gpg --delete-key 'JTM4BAVLPI8F0XHR'
-```
+{{< /code >}}
 
 Где:
 
@@ -238,9 +238,9 @@ gpg --delete-key 'JTM4BAVLPI8F0XHR'
 
 Эти две команды можно объединить в одну при помощи параметра `--delete-secret-and-public-key`:
 
-```sh
+{{< code "sh" >}}
 gpg --delete-secret-and-public-key 'JTM4BAVLPI8F0XHR'
-```
+{{< /code >}}
 
 Где:
 

@@ -53,51 +53,51 @@ draft: 0
 
 1. Удалить всех модераторов.
 
-```sql
+{{< code "sql" >}}
 DELETE FROM moderators;
-```
+{{< /code >}}
 
 2. Удалить все подписи.
 
-```sql
+{{< code "sql" >}}
 DELETE FROM content_cache_sigs;
-```
+{{< /code >}}
 
-```sql
+{{< code "sql" >}}
 UPDATE profile_portal SET signature='';
-```
+{{< /code >}}
 
 3. Массовый перенос пользователей c определённым количеством сообщений из одной группы в другую.
 
-```sql
+{{< code "sql" >}}
 UPDATE members SET member_group_id=Б WHERE member_group_id=А AND posts > 0;
-```
+{{< /code >}}
 
 4. Полный пересчет репутации сообщений и пользователей после ручной правки `ibf_reputation_index`.
 
-```sql
+{{< code "sql" >}}
 TRUNCATE ibf_reputation_cache;
-```
+{{< /code >}}
 
-```sql
+{{< code "sql" >}}
 INSERT INTO ibf_reputation_cache (app, type, type_id, rep_points) SELECT app, type, type_id, SUM(rep_rating) FROM ibf_reputation_index GROUP BY type_id;
-```
+{{< /code >}}
 
-```sql
+{{< code "sql" >}}
 UPDATE ibf_profile_portal pp SET pp.pp_reputation_points = (SELECT SUM(r.rep_points) FROM ibf_posts p LEFT JOIN ibf_reputation_cache r ON r.type_id = p.pid WHERE p.author_id = pp.pp_member_id);
-```
+{{< /code >}}
 
 5. Удаление или замена ненужного мусора из сообщений, например, куски от старых BBCODE.
 
-```sql
+{{< code "sql" >}}
 UPDATE ibf_posts SET post = REPLACE(post,"original","replace");
-```
+{{< /code >}}
 
 6. Удаление или замена информации из подписей пользователей.
 
-```sql
+{{< code "sql" >}}
 UPDATE ibf_profile_portal SET signature = REPLACE(signature,"original","replace");
-```
+{{< /code >}}
 
 ## Благодарности
 

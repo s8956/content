@@ -167,9 +167,9 @@ draft: 0
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (http.host eq "example.com")
-```
+{{< /code >}}
 
 **Then...**
 
@@ -178,18 +178,18 @@ draft: 0
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 concat("https://www.", http.host, http.request.uri.path)
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< accordion-item "www.example.com | example.com" >}}
 `https://www.example.com` `->` `https://example.com`
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (http.host eq "www.example.com")
-```
+{{< /code >}}
 
 **Then...**
 
@@ -198,18 +198,18 @@ concat("https://www.", http.host, http.request.uri.path)
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 concat("https://", http.host, http.request.uri.path)
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< accordion-item "example.com/path | example.org/path">}}
 `https://example.com/path` `->` `https://example.org/path`
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (http.host eq "example.com")
-```
+{{< /code >}}
 
 **Then...**
 
@@ -218,18 +218,18 @@ concat("https://", http.host, http.request.uri.path)
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 concat("https://example.org", http.request.uri.path)
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< accordion-item "example.com | example.org">}}
 `https://example.com` `->` `https://example.org`
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (http.host contains "example.com")
-```
+{{< /code >}}
 
 **Then...**
 
@@ -238,18 +238,18 @@ concat("https://example.org", http.request.uri.path)
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 https://example.org/
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< accordion-item "sub.example.com | example.com/sub">}}
 `https://sub.example.com` `->` `https://example.com/sub`
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (http.host eq "sub.example.com")
-```
+{{< /code >}}
 
 **Then...**
 
@@ -258,18 +258,18 @@ https://example.org/
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 concat("https://", http.host, "/sub", http.request.uri.path)
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< accordion-item "example.com/sub | sub.example.com">}}
 `https://example.com/sub` `->` `https://sub.example.com`
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (starts_with(http.request.uri.path, "/sub/"))
-```
+{{< /code >}}
 
 **Then...**
 
@@ -278,9 +278,9 @@ concat("https://", http.host, "/sub", http.request.uri.path)
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 concat("https://sub.", http.host, substring(http.request.uri.path, 6))
-```
+{{< /code >}}
 
 Число в функции `substring()` - это количество символов в названии директории `sub` + 1 символ.
 {{< /accordion-item >}}
@@ -289,9 +289,9 @@ concat("https://sub.", http.host, substring(http.request.uri.path, 6))
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (http.request.uri.path eq "/contact-us/")
-```
+{{< /code >}}
 
 **Then...**
 
@@ -300,9 +300,9 @@ concat("https://sub.", http.host, substring(http.request.uri.path, 6))
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 /contacts/
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< /accordion >}}
 
@@ -316,9 +316,9 @@ concat("https://sub.", http.host, substring(http.request.uri.path, 6))
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (not (cf.edge.server_port in {80 443}))
-```
+{{< /code >}}
 
 **Then...**
 
@@ -327,9 +327,9 @@ concat("https://sub.", http.host, substring(http.request.uri.path, 6))
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 concat("https://", http.host, http.request.uri.path)
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< /accordion >}}
 
@@ -343,9 +343,9 @@ concat("https://", http.host, http.request.uri.path)
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (((ip.src.country eq "RU") or (ip.src.country eq "BY") or (ip.src.country eq "UA")) and (http.request.uri.path eq "/"))
-```
+{{< /code >}}
 
 **Then...**
 
@@ -354,18 +354,18 @@ concat("https://", http.host, http.request.uri.path)
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 lower(concat("https://", http.host, "/ru/"))
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< accordion-item "Переадресовать пользователей НЕ из стран RU/BY/UA в директорию '/en'" >}}
 `https://example.com` `->` `https://example.com/en/`
 
 **When incoming requests match:**
 
-```lua
+{{< code "lua" >}}
 (((ip.src.country ne "RU") or (ip.src.country ne "BY") or (ip.src.country ne "UA")) and (http.request.uri.path eq "/"))
-```
+{{< /code >}}
 
 **Then...**
 
@@ -374,8 +374,8 @@ lower(concat("https://", http.host, "/ru/"))
 
 **URL:**
 
-```lua
+{{< code "lua" >}}
 lower(concat("https://", http.host, "/en/"))
-```
+{{< /code >}}
 {{< /accordion-item >}}
 {{< /accordion >}}

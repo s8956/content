@@ -57,7 +57,7 @@ draft: 0
 
 Необходимо создать шаблон `custom_ШАБЛОН`, содержимое которого представляет собой следующий код:
 
-```html
+{{< code "html" >}}
 {vb:stylevar htmldoctype}
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{vb:stylevar textdirection}" lang="{vb:stylevar languagecode}" id="vbulletin_html">
 <head>
@@ -79,10 +79,10 @@ draft: 0
   {vb:raw footer}
 </body>
 </html>
-```
+{{< /code >}}
 
 Страница будет располагаться по адресу:
 
-```
+{{< code >}}
 https://example.com/misc.php?do=page&template=ШАБЛОН
-```
+{{< /code >}}

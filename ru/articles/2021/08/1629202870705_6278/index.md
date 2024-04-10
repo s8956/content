@@ -51,474 +51,474 @@ draft: 0
 
 1. Отображение информации только администраторам.
 
-```html
+{{< code "html" >}}
 <xf:if is="$xf.visitor.is_admin">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 2. Отображение информации только модераторам.
 
-```html
+{{< code "html" >}}
 <xf:if is="$xf.visitor.is_moderator">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 3. Отображение информации только администраторам и модераторам.
 
-```html
+{{< code "html" >}}
 <xf:if is="$xf.visitor.is_admin OR $xf.visitor.is_moderator">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 4. Отображение информации только зарегистрированному пользователю
 
-```html
+{{< code "html" >}}
 <xf:if is="$xf.visitor.user_id">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 5. Отображение информации гостю.
 
-```html
+{{< code "html" >}}
 <xf:if is="!$xf.visitor.user_id">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 6. Отображение разной информации зарегистрированному пользователю и гостю.
 
-```html
+{{< code "html" >}}
 <xf:if is="!$xf.visitor.user_id">
   <!-- content for members -->
 <xf:else />
   <!-- content for guests -->
 </xf:if>
-```
+{{< /code >}}
 
 7. Отображение информации только заблокированным пользователям.
 
-```html
+{{< code "html" >}}
 <xf:if is="$user.is_banned">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 8. Отображение информации только если у пользователя симпатий больше определённого количества.
 
-```html
+{{< code "html" >}}
 <xf:if is="$user.like_count|number > X">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 9. Отображение информации только если у пользователя сообщений больше определённого количества.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.message_count|number} > X">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 10. Отображение информации только если у пользователя очков больше определённого количества.
 
-```html
+{{< code "html" >}}
 <xf:if is="$user.trophy_points|number > X">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 11. Отображение информации определённому пользователю.
 
-```html
+{{< code "html" >}}
 <xf:if is="$xf.visitor.user_id == X">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 12. Отображение информации определённым пользователям.
 
-```html
+{{< code "html" >}}
 <xf:if is="in_array($xf.visitor.user_id, [X, Y, Z])">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 13. (1) Отображение информации определённым группам пользователей.
 
-```html
+{{< code "html" >}}
 <xf:if is="{{$xf.visitor.isMemberOf([X, Y])}}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 13. (2) Отображение информации определённой группе пользователей.
 
-```html
+{{< code "html" >}}
 <xf:if is="{{$xf.visitor.isMemberOf(X)}}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 14. (1) Скрытие информации от определённых групп пользователей.
 
-```html
+{{< code "html" >}}
 <xf:if is="{{!$xf.visitor.isMemberOf([X, Y])}}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 14. (2) Скрытие информации от определённой группы пользователей.
 
-```html
+{{< code "html" >}}
 <xf:if is="{{!$xf.visitor.isMemberOf(X)}}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 15. (1) Отображение информации после первого сообщения в теме.
 
-```html
+{{< code "html" >}}
 <xf:if is="$post.position % $xf.options.messagesPerPage == 0">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 15. (2) Отображение информации через определённое количества сообщений.
 
-```html
+{{< code "html" >}}
 <xf:if is="$post.position % $xf.options.messagesPerPage == X">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 16. Отображение информации на странице, на которой присутствует боковая панель.
 
-```html
+{{< code "html" >}}
 <xf:if is="$sidebar">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 17. Отображение информации на главной (домашней) странице форума.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'forum_list'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 18. Скрытие информации только с главной (домашней) странице форума.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template !== 'forum_list'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 19. Отображение информации на странице создания новой темы.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'forum_post_thread'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 20. Скрытие информации на странице создания новой темы.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'forum_post_thread'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 21. Отображение информации на странице создания нового ресурса.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'xfrm_category_add_resource'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 22. Скрытие информации на странице создания нового ресурса.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'xfrm_category_add_resource'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 23. Отображение информации на странице поисковой формы.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'search_form'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 24. Скрытие информации на странице поисковой формы.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'search_form'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 25. Отображение информации на странице "Что нового?".
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'whats_new'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 26. Скрытие информации на странице "Что нового?".
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'whats_new'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 27. Отображение информации на странице просмотра личной переписки.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'conversation_view'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 28. Скрытие информации на странице просмотра личной переписки.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'conversation_view'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 29. Отображение информации на странице просмотра списка личных переписок.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'conversation_list'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 30. Скрытие информации на странице просмотра списка личных переписок.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'conversation_list'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 31. Отображение информации на главной странице ресурсов.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'xfrm_overview'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 32. Скрытие информации на главной странице ресурсов.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'xfrm_overview'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 33. Отображение информации на странице просмотра ресурса.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'xfrm_resource_view'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 34. Скрытие информации на странице просмотра ресурса.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'xfrm_resource_view'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 35. Отображение информации на странице просмотра темы.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template == 'thread_view'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 36. Скрытие информации на странице просмотра темы.
 
-```html
+{{< code "html" >}}
 <xf:if is="$template !='thread_view'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 37. Отображение информации на странице просмотра форума (раздела).
 
-```html
+{{< code "html" >}}
 <xf:if is="$template =='forum_view'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 38. Скрытие информации на странице просмотра форума (раздела).
 
-```html
+{{< code "html" >}}
 <xf:if is="$template != 'forum_view'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 39. Отображение информации "наказанным" пользователям.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.Option.is_discouraged}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 40. Отображение информации пользователям, которые имеют Gravatar.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.gravatar}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 41. Отображение информации пользователям поддержки форума.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.is_staff}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 42. Отображение информации пользователям без подтверждённого адреса e-mail.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.isAwaitingEmailConfirmation()}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 43. Отображение информации в нескольких форумах (разделах).
 
-```html
+{{< code "html" >}}
 <xf:if is="in_array({$forum.node_id}, [X, Y, Z])">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 44. Скрытие информации в нескольких форумах (разделах).
 
-```html
+{{< code "html" >}}
 <xf:if is="in_array($forum.node_id, [X, Y, Z])">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 45. Отображение информации в определённом форуме (разделе).
 
-```html
+{{< code "html" >}}
 <xf:if is="$forum.node_id == X">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 46. Скрытие информации в определённом форуме (разделе).
 
-```html
+{{< code "html" >}}
 <xf:if is="$forum.node_id != 3">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 47. Отображение информации только после первого сообщения в каждой теме.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$post.position} % {$xf.options.messagesPerPage} == 1">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 48. Отображение информации только внутри первого сообщения в каждой теме.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$post.position} % {$xf.options.messagesPerPage} == 0">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 49. Отображение информации только при заполненном поле местоположения.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.location}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 50. Отображение информации только при заполненном поле веб-сайта.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.website}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 51. Отображение информации при указанной подписи.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.signature}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 52. Отображение информации только активированным пользователям.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.user_state} == 'valid'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 53. Отображение информации только пользователям, ожидающим подтверждения адреса e-mail.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.user_state} == 'email_confirm_edit'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 54. Отображение информации только пользователям с проблемным адресом e-mail.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$xf.visitor.user_state} == 'email_bounce'">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 55. Отображение информации, если ID пользователя = ID автора темы.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$__globals.thread} AND {$__globals.thread.user_id} == {$user.user_id}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}
 
 56. Отображение информации пользователю, который является автором темы.
 
-```html
+{{< code "html" >}}
 <xf:if is="{$thread.user_id} == {$xf.visitor.user_id}">
   <!-- content -->
 </xf:if>
-```
+{{< /code >}}

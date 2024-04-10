@@ -58,131 +58,131 @@ draft: 0
 
 Получить список сетевых адаптеров и их интерфейсов:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter
-```
+{{< /code >}}
 
 Получить список обычных и скрытых сетевых адаптеров:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter –IncludeHidden
-```
+{{< /code >}}
 
 Получить конфигурацию по интерфейсу `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Get-NetIPConfiguration
-```
+{{< /code >}}
 
 Получить детальную конфигурацию по интерфейсу `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Get-NetIPConfiguration -Detailed
-```
+{{< /code >}}
 
 Отключить адаптер с интерфейсом `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Disable-NetAdapter
-```
+{{< /code >}}
 
 ## Сетевые профили
 
 Вывести информацию по текущим сетевым профилям:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetConnectionProfile
-```
+{{< /code >}}
 
 Получить информацию только по профилю сети интерфейса `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Get-NetConnectionProfile
-```
+{{< /code >}}
 
 Изменить профиль сети интерфейса `5` на публичный (`Public`).
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Set-NetConnectionProfile -NetworkCategory 'Public'
-```
+{{< /code >}}
 
 Изменить профиль сети интерфейса `5` на приватный (`Private`).
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Set-NetConnectionProfile -NetworkCategory 'Private'
-```
+{{< /code >}}
 
 Изменить профиль сети интерфейса `5` на доменный (`DomainAuthenticated`).
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Set-NetConnectionProfile -NetworkCategory 'DomainAuthenticated'
-```
+{{< /code >}}
 
 ## Настройка IP-адреса
 
 Отключить DHCP на интерфейсе `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Set-NetIPInterface -Dhcp 'Disabled'
-```
+{{< /code >}}
 
 Установить новый IP-адрес и шлюз на интерфейсе `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | New-NetIPAddress –IPAddress '192.168.0.10' -PrefixLength '24' -DefaultGateway '192.168.0.1'
-```
+{{< /code >}}
 
 Изменить IP-адрес на интерфейсе `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Set-NetIPAddress -IPAddress '192.168.0.12'
-```
+{{< /code >}}
 
 Удалить IP-адрес на интерфейсе `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Remove-NetIPAddress -Confirm:$false
-```
+{{< /code >}}
 
 Удаление шлюза на интерфейсе `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Remove-NetRoute -Confirm:$false
-```
+{{< /code >}}
 
 ## Настройка DNS
 
 Установить IP-адреса серверов {{< tag "DNS" >}} на интерфейсе `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Set-DNSClientServerAddress –ServerAddresses ('192.168.0.2','192.168.1.2')
-```
+{{< /code >}}
 
 Сбросить IP-адреса серверов DNS на параметры по умолчанию на интерфейсе `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Set-DnsClientServerAddress -ResetServerAddresses
-```
+{{< /code >}}
 
 Очистить кэш {{< tag "DNS" >}}:
 
-```powershell
+{{< code "powershell" >}}
 Clear-DnsClientCache
-```
+{{< /code >}}
 
 ## Настройка DHCP
 
 Включить {{< tag "DHCP" >}} на интерфейсе `5`:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Set-NetIPInterface -Dhcp 'Enabled'
-```
+{{< /code >}}
 
 Перезапустить интерфейс с именем `Ethernet` для получения параметров от {{< tag "DHCP" >}}:
 
-```powershell
+{{< code "powershell" >}}
 Get-NetAdapter -InterfaceIndex 5 | Restart-NetAdapter
-```
+{{< /code >}}
 
 ## Автоматизация
 

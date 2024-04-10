@@ -72,43 +72,43 @@ draft: 1
 
 ## Вывести содержимое текстового файла
 
-```bash
+{{< code "bash" >}}
 awk '{ print }' /etc/passwd
-```
+{{< /code >}}
 
 ...или...
 
-```bash
+{{< code "bash" >}}
 awk '{ print $0 }' /etc/passwd
-```
+{{< /code >}}
 
 ## Вывести определённое поле
 
 Параметром `-F` задаётся разделитель для разбивки на поля (столбцы). Вывести первое (`$1`) поле:
 
-```bash
+{{< code "bash" >}}
 awk -F':' '{ print $1 }' '/etc/passwd'
-```
+{{< /code >}}
 
 Отсортировать вывод:
 
-```bash
+{{< code "bash" >}}
 awk -F':' '{ print $1 }' '/etc/passwd' | sort
-```
+{{< /code >}}
 
 ## Сопоставление с шаблоном
 
 Можно вывести строки файла, которые соответствуют заданному шаблону. Например, вывести все строки из лога Apache HTTPD, если код ошибки HTTP равен 500 (код ошибки в 9-ом поле на каждой строке запроса HTTP):
 
-```bash
+{{< code "bash" >}}
 awk '$9 == 500 { print $0 }' '/var/log/httpd/access.log'
-```
+{{< /code >}}
 
 Часть, которая находится за пределами скобок `{ ... }` называется шаблоном, а часть внутри скобок `{ ... }` - действием. Можно использовать следующие операторы сравнения:
 
-```bash
+{{< code "bash" >}}
 == != < > <= >= ?:
-```
+{{< /code >}}
 
 Стоит обратить внимание на особенности работы с шаблонами:
 
@@ -118,37 +118,37 @@ awk '$9 == 500 { print $0 }' '/var/log/httpd/access.log'
 
 Поэтому, следующие команды эквивалентны:
 
-```bash
+{{< code "bash" >}}
 awk '$9 == 500' '/var/log/httpd/access.log'
 awk '$9 == 500 { print }' '/var/log/httpd/access.log'
 awk '$9 == 500 { print $0 }' '/var/log/httpd/access.log'
-```
+{{< /code >}}
 
 ## Вывести строки с Tom, Jerry и Vivek
 
-```bash
+{{< code "bash" >}}
 awk '/tom|jerry|vivek/' '/etc/passwd'
-```
+{{< /code >}}
 
 ## Вывести первую строку файла
 
-```bash
+{{< code "bash" >}}
 awk "NR==1{ print; exit }" '/etc/resolv.conf'
-```
+{{< /code >}}
 
 ## Использование математики
 
 Сумма всех чисел в поле:
 
-```bash
+{{< code "bash" >}}
 awk '{total += $1} END {print total}' 'earnings.txt'
-```
+{{< /code >}}
 
 Командная оболочка не может вычислять числа с плавающей запятой, но AWK может:
 
-```bash
+{{< code "bash" >}}
 awk 'BEGIN {printf "%.3f\n", 2005.50 / 3}'
-```
+{{< /code >}}
 
 ## Работа с конвейером
 
@@ -178,6 +178,6 @@ whois 'cyberciti.com' | awk '/Registry Expiry Date:/ { print $4 }'
 
 Можно записать все команды AWK в файл и вызывать их в терминале:
 
-```bash
+{{< code "bash" >}}
 awk -f 'mypgoram.awk' 'input.txt'
-```
+{{< /code >}}

@@ -56,24 +56,24 @@ draft: 0
 
 В терминале нужно ввести от root'а команду `systemctl edit gdm.service`, откроется редактор сервиса {{< tag "GDM" >}}. В нем необходимо добавить строку `ExecStartPre=/bin/sleep 2`, которая создаёт задержку перед запуском самого {{< tag "GDM" >}}. Примерно вот так:
 
-```ini
+{{< code "ini" >}}
 ### Anything between here and the comment below will become the new contents of the file
 
 [Service]
 ExecStartPre=/bin/sleep 2
 
 ### Lines below this comment will be discarded
-```
+{{< /code >}}
 
 Таким образом GDM начинает запускаться после того, как инициализируется графическая подсистема.
 
 Ещё одно исправление [предложили](https://gitlab.gnome.org/GNOME/gdm/-/issues/662#note_993169) в баг-трекере {{< tag "GNOME" >}} / {{< tag "GDM" >}}. Вместо торможения загрузки GDM, необходимо добавить следующие строки:
 
-```ini
+{{< code "ini" >}}
 [Unit]
 Wants=systemd-udev-trigger.service systemd-udev-settle.service
 After=systemd-udev-trigger.service systemd-udev-settle.service
-```
+{{< /code >}}
 
 Но это не совсем корректное исправление (хотя исправление, изложенное выше, тоже трудно назвать правильным), так как после применения этих строк, появляется ошибка:
 
@@ -85,9 +85,9 @@ Dec 27 22:23:48 oleksandr-xps15 udevadm[260]: systemd-udev-settle.service is dep
 
 Этот вариант решения проблемы подходит для **Arch Linux**. Необходимо в файле `/etc/mkinitcpio.conf` добавить в массив `MODULES` свою графическую подсистему, чтобы та запускалась раньше, чем {{< tag "GDM" >}}. Например:
 
-```text
+{{< code "text" >}}
 MODULES=(amdgpu)
-```
+{{< /code >}}
 
 Можно указать другие графические подсистемы, всё зависит от видеокарты, установленной в ПК:
 

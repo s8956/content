@@ -45,12 +45,12 @@ draft: 0
 
 Ниже приведены две команды, которые позволяют отключить установку рекомендуемых (Recommends) и дополнительных (Suggests) пакетов.
 
-```sh
+{{< code "sh" >}}
 echo 'APT::Install-Recommends "false";' > /etc/apt/apt.conf.d/00InstallRecommends
-```
+{{< /code >}}
 
-```sh
+{{< code "sh" >}}
 echo 'APT::Install-Suggests "false";' > /etc/apt/apt.conf.d/00InstallSuggests
-```
+{{< /code >}}
 
 Стоит заметить, что при установке {{< tag "Debian" >}} на завершающем этапе можно отключить рекомендуемые пакеты (в {{< tag "preseed" >}} этот параметр именуется как `d-i base-installer/install-recommends boolean false`). При этом, после установки, {{< tag "Debian" >}} сам создаст файл `00InstallRecommends` в `/etc/apt/apt.conf.d` с соответствующим содержанием.

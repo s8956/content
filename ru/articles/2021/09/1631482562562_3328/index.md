@@ -49,13 +49,13 @@ draft: 0
 
 Для начала необходимо отредактировать файл `/etc/hosts`, прописав туда {{< tag "IP" >}} сервера, на который будет устанавливаться наш {{< tag "Proxmox" >}} VE:
 
-```text
+{{< code "text" >}}
 127.0.0.1   localhost
 127.0.1.1   localhost.localdomain     localhost
 
 # Proxmox
 10.0.1.1    srv-vm.home.local         srv-vm
-```
+{{< /code >}}
 
 Для проверки, можно выполнить команду `hostname --ip-address`, которая вернёт {{< tag "IP" >}} сервера, указанного в `/etc/hosts` выше.
 
@@ -63,29 +63,29 @@ draft: 0
 
 Добавим репозиторий {{< tag "Proxmox" >}} VE:
 
-```sh
+{{< code "sh" >}}
 echo "deb [arch=amd64] http://download.proxmox.com/debian/pve bullseye pve-no-subscription" > /etc/apt/sources.list.d/pve.list
-```
+{{< /code >}}
 
 Скачаем и установим ключ репозитория:
 
-```sh
+{{< code "sh" >}}
 curl 'https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg' -o /etc/apt/trusted.gpg.d/pve.gpg
-```
+{{< /code >}}
 
 Обновим базу пакетов {{< tag "APT" >}} и саму систему:
 
-```sh
+{{< code "sh" >}}
 apt update && apt full-upgrade
-```
+{{< /code >}}
 
 ## Установка пакетов
 
 Начнём установку пакетов командой:
 
-```sh
+{{< code "sh" >}}
 apt install proxmox-ve postfix open-iscsi
-```
+{{< /code >}}
 
 Стоит заметить, что устанавливается {{< tag "Postfix" >}}, он необходим для отправки писем от {{< tag "Proxmox" >}} VE. Но мне в локальной сети такая функция не нужна. При установке, {{< tag "Postfix" >}} спросит в каком режиме ему необходимо будет работать. Я выбираю **local only**.
 
@@ -97,7 +97,7 @@ apt install proxmox-ve postfix open-iscsi
 
 Для исправления ошибки `lvm2-activation-generator: lvmconfig failed`, необходимо в файле `/etc/lvm/lvm.conf` изменить параметр `event_activation`, а именно рас-комментировать и установить в `0`:
 
-```text
+{{< code "text" >}}
 global {
   <...>
   # Configuration option global/event_activation.
@@ -112,9 +112,9 @@ global {
   # event_activation = 1
   <...>
 }
-```
+{{< /code >}}
 
-```text
+{{< code "text" >}}
 global {
   <...>
   # Configuration option global/event_activation.
@@ -129,13 +129,13 @@ global {
   event_activation = 0
   <...>
 }
-```
+{{< /code >}}
 
 ### Не поднимается  интерфейс
 
 После установки, у меня перестал автоматически подниматься сетевой интерфейс. Может быть, в отдельном образе {{< tag "ISO" >}} {{< tag "Proxmox" >}} VE такой проблемы нет, потому что при установке с отдельного образа {{< tag "ISO" >}}, он запрашивает у администратора параметры сети. Но если устанавливать {{< tag "Proxmox" >}} VE через пакетную систему Debian, то никаких запросов не появляется. В общем, я сделал так (`/etc/network/interfaces`):
 
-```text
+{{< code "text" >}}
 auto lo
 iface lo inet loopback
 
@@ -148,11 +148,11 @@ iface vmbr0 inet static
   bridge-ports enp3s0
   bridge-stp off
   bridge-fd 0
-```
+{{< /code >}}
 
 Конкретно, тут я добавил блок виртуального соединения:
 
-```text
+{{< code "text" >}}
 auto vmbr0
 iface vmbr0 inet static
   address 10.0.1.1/16
@@ -160,7 +160,7 @@ iface vmbr0 inet static
   bridge-ports enp3s0
   bridge-stp off
   bridge-fd 0
-```
+{{< /code >}}
 
 Где указал мост с физической картой `enp3s0`. Саму же карту `enp3s0` я перевёл в режим `manual`. После этого, сетевой интерфейс на сервере заработал в штатном режиме.
 

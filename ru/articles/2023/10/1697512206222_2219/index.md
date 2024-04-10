@@ -52,13 +52,13 @@ draft: 0
 
 Открыть файл `./sources/action_public/boards.php`, найти:
 
-```php
+{{< code "php" >}}
 $cp = " (Powered by Invision Power Board)";
-```
+{{< /code >}}
 
 Заменить на:
 
-```php
+{{< code "php" >}}
 $cp_phrases = array(
   '0' => ' - CYBER-CITY: Поддержка',
   '1' => ' - CYBER-CITY: Разработка',
@@ -67,6 +67,6 @@ $cp_phrases = array(
 
 $cp_rand = rand(0, 2);
 $cp = $cp_phrases[$cp_rand];
-```
+{{< /code >}}
 
 Не забудьте, если у вас больше фраз, чем 3, то измените `rand(0, 2)`, где `0` - первая фраза, `2` - последняя.
