@@ -58,7 +58,7 @@ draft: 1
 dig example.com
 ```
 
-```terminal
+```terminal {lang="dns"}
 dig google.com
 ```
 
@@ -68,7 +68,7 @@ dig google.com
 drill example.com
 ```
 
-```terminal
+```terminal {lang="dns"}
 drill google.com
 
 ;; ->>HEADER<<- opcode: QUERY, rcode: NOERROR, id: 45117
