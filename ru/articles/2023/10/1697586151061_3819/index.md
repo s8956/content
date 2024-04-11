@@ -54,14 +54,14 @@ draft: 0
 При помощи корневого сертификата, мы будем подписывать сертификаты клиентские. Создаём сертификат центра сертификации...
 
 ```bash
-openssl req -x509 -newkey ec:<( openssl ecparam -name 'secp384r1' ) -nodes -days '3650' -keyout 'ca.root.key' -out 'ca.root.crt'
+openssl ecparam -genkey -name 'secp384r1' | openssl ec -aes256 -out "_CA.key" && openssl req -new -sha384 -key "_CA.key" -out "_CA.csr" && openssl x509 -req -sha384 -days 3650 -key "_CA.key" -in "_CA.csr" -out "_CA.crt"
 ```
 
 Где:
 
 - `-days '3650'` - количество дней, по прошествии которого сертификат центра сертификации станет недействительным.
-- `-keyout 'ca.root.key'` - название создаваемого файла с ключом центра сертификации.
-- `-out 'ca.root.crt'` - название создаваемого файла с сертификатом центра сертификации.
+- `'_CA.key'` - название создаваемого файла с ключом центра сертификации.
+- `'_CA.crt'` - название создаваемого файла с сертификатом центра сертификации.
 
 ## Создание клиентского сертификата
 
@@ -72,37 +72,24 @@ openssl req -x509 -newkey ec:<( openssl ecparam -name 'secp384r1' ) -nodes -days
 Для начала создаём приватный ключ.
 
 ```bash
-openssl ecparam -name 'prime256v1' -genkey -noout -out 'client.private.key'
+openssl ecparam -genkey -name 'prime256v1' | openssl ec -out 'client.key'
 ```
 
 Где:
 
-- `-out 'client.private.key'` - название создаваемого файла с клиентским приватным ключом.
-
-### Создание публичного ключа
-
-Создание публичного ключа будет не лишним.
-
-```bash
-openssl ec -in 'client.private.key' -pubout -out 'client.public.key'
-```
-
-Где:
-
-- `-in 'client.private.key'` - файл c клиентским приватным ключом.
-- `-out 'client.public.key'` - название создаваемого файла с клиентским публичным ключом.
+- `-out 'client.key'` - название создаваемого файла с клиентским приватным ключом.
 
 ### Создание запроса на подпись сертификата
 
 Выполняем запрос на сертификат.
 
 ```bash
-openssl req -new -key 'client.private.key' -out 'client.csr'
+openssl req -new -key 'client.key' -out 'client.csr'
 ```
 
 Где:
 
-- `-key 'client.private.key'` - файл с приватным ключом клиентского сертификата.
+- `-key 'client.key'` - файл с приватным ключом клиентского сертификата.
 - `-out 'client.csr'` - название создаваемого файла с запросом на подпись клиентского сертификата.
 
 При выполнении запроса будет предложено ввести актуальные данные для будущего сертификата:
@@ -124,14 +111,14 @@ openssl req -new -key 'client.private.key' -out 'client.csr'
 В заключительной части остаётся только создать сам сертификат и подписать его.
 
 ```bash
-openssl x509 -req -in 'client.csr' -CA 'ca.crt' -CAkey 'ca.key' -days '3650' -out 'client.crt'
+openssl x509 -req -days 3650 -in 'client.csr' -CA '_CA.crt' -CAkey '_CA.key' -out 'client.crt'
 ```
 
 Где:
 
 - `-in 'client.csr'` - файл с запросом клиентского сертификата.
-- `-CA 'ca.crt'` - файл с сертификатом центра сертификации.
-- `-CAkey 'ca.key'` - файл с ключом центра сертификации.
+- `-CA '_CA.crt'` - файл с сертификатом центра сертификации.
+- `-CAkey '_CA.key'` - файл с ключом центра сертификации.
 - `-days '3650'` - количество дней, по прошествии которого клиентский сертификат станет недействительным.
 - `-out 'client.crt'` - название создаваемого файла с клиентским сертификатом.
 
@@ -140,22 +127,22 @@ openssl x509 -req -in 'client.csr' -CA 'ca.crt' -CAkey 'ca.key' -days '3650' -ou
 Для того, чтобы импортировать сертификат на клиентские устройства, его необходимо экспортировать в формат `P12`. `P12` является контейнером, в котором содержится приватный ключ сертификата и сам сертификат.
 
 ```bash
-openssl pkcs12 -export -inkey 'client.private.key' -in 'client.crt' -out 'client.p12'
+openssl pkcs12 -export -inkey 'client.key' -in 'client.crt' -out 'client.p12'
 ```
 
 Где:
 
-- `-inkey 'client.private.key'` - файл с приватным клиентским ключом.
+- `-inkey 'client.key'` - файл с приватным клиентским ключом.
 - `-in 'client.crt'` - файл с клиентским сертификатом.
 - `-out 'client.p12'` - название создаваемого файла-контейнера с приватным ключом и сертификатом.
 
 ### Верификация сертификата
 
 ```bash
-openssl verify -CAfile 'ca.crt' 'client.crt'
+openssl verify -CAfile '_CA.crt' 'client.crt'
 ```
 
-- `-CAfile 'ca.crt'` - файл с сертификатом центра сертификации.
+- `-CAfile '_CA.crt'` - файл с сертификатом центра сертификации.
 - `'client.crt'` - файл с клиентским сертификатом.
 
 ### Просмотр сертификата
