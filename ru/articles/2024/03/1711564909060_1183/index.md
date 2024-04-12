@@ -58,8 +58,8 @@ draft: 0
   - DNS: `8.8.8.8`.
 - Настроить сетевой интерфейс {{< tag "Cisco" >}} со следующими параметрами:
 
-```text
-> en
+```cisco-cli
+Router> en
 Router# conf t
 Router(config)# int fa0/1
 Router(config-if)# ip address 192.168.1.1 255.255.255.0
@@ -76,13 +76,13 @@ Router#
 
 - Посмотреть текущую версию {{< tag "IOS" >}}:
 
-```text
+```cisco-cli
 Router# show version
 ```
 
 - Сделать резервную копию текущего образа {{< tag "IOS" >}} на TFTP-сервер:
 
-```text
+```cisco-cli
 Router# show flash: | include .bin
 Router# copy flash:IOS_FW.bin tftp://192.168.1.2
 ```
@@ -96,7 +96,7 @@ Router# copy flash:IOS_FW.bin tftp://192.168.1.2
 
 - Записать на Flash-карту новый образ {{< tag "IOS" >}}:
 
-```text
+```cisco-cli
 Router# copy tftp://192.168.1.2/IOS_FW.bin flash:
 ```
 
@@ -107,7 +107,7 @@ Router# copy tftp://192.168.1.2/IOS_FW.bin flash:
 
 ## Верификация нового образа IOS
 
-```text
+```cisco-cli
 Router# show flash: | include .bin
 Router# verify /md5 flash:IOS_FW.bin
 ```
@@ -120,7 +120,7 @@ Router# verify /md5 flash:IOS_FW.bin
 
 - Прописать в конфигурации {{< tag "Cisco" >}} загрузку нового образа {{< tag "IOS" >}}:
 
-```text
+```cisco-cli
 Router# conf t
 Router(config)# boot system flash:IOS_FW.bin
 Router(config)# exit
@@ -135,7 +135,7 @@ Router# reload
 
 - Посмотреть версию {{< tag "IOS" >}} после перезагрузки:
 
-```text
+```cisco-cli
 Router# show version
 ```
 

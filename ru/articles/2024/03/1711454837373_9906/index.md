@@ -52,14 +52,14 @@ draft: 0
 - Загрузиться в **ROMMON** (при старте {{< tag "Cisco" >}} нажать клавишу {{< key "Break" >}}).
 - Переключить регистр с `0x2102` на `0x2142` и перезагрузить:
 
-```text
+```cisco-cli
 rommon> confreg 0x2142
 rommon> reset
 ```
 
 - Сбросить пароль:
 
-```text
+```cisco-cli
 Router> en
 Router# copy startup-config running-config
 Router# config t
@@ -69,7 +69,7 @@ Router(config)# username USER privilege 15 secret PassWord
 
 - Переключить регистр с `0x2142` на `0x2102`:
 
-```text
+```cisco-cli
 Router(config)# config-register 0x2102
 Router(config)# exit
 Router# copy running-config startup-config
