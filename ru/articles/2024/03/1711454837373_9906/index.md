@@ -61,35 +61,35 @@ rommon> reset
 После перезагрузки оборудования, можно сбросить пароль. Переходим  режим конфигурирования:
 
 ```cisco-cli
-Router> en
+> en
 ```
 
 Импортируем стартовую конфигурацию в текущую:
 
 ```cisco-cli
-Router# copy startup-config running-config
+# copy startup-config running-config
 ```
 
 Отлично. Сейчас мы находимся в режиме полного контроля и в конфигурации, к которой ранее не было доступа. Теперь сбрасываем пароль у необходимого пользователя:
 
 ```cisco-cli
-Router# config t
-Router(config)# en secret PassWord
-Router(config)# username USER privilege 15 secret PassWord
+# config t
+(config)# en secret PassWord
+(config)# username USER privilege 15 secret PassWord
 ```
 
 Далее, нужно не забыть переключить регистр обратно, с `0x2142` на `0x2102`:
 
 ```cisco-cli
-Router(config)# config-register 0x2102
-Router(config)# exit
+(config)# config-register 0x2102
+(config)# exit
 ```
 
 Теперь экспортируем текущую конфигурацию обратно в стартовую:
 
 ```cisco-cli
-Router# copy running-config startup-config
-Router# reload
+# copy running-config startup-config
+# reload
 ```
 
 Таким образом мы "обманули" Cisco. Мы загрузились в чистую конфигурацию под администратором и импортировали в неё стартовую конфигурацию, к которой у нас не было доступа. Поменяли пароль и экспортировали текущую конфигурацию обратно в стартовую.
