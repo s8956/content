@@ -3,7 +3,7 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Обновление Cisco IOS'
+title: 'Cisco: Обновление IOS'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1606765962248-7ff407b51667'
@@ -18,7 +18,7 @@ tags:
 authors:
   - 'KaiKimera'
 sources:
-  - ''
+  - 'https://ciscotips.ru/cisco-ios-versions'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -51,40 +51,39 @@ draft: 0
 
 ## Общая настройка
 
-- Настроить сетевой интерфейс компьютера со следующими параметрами:
-  - IP-адрес: `192.168.1.2`.
-  - Маска подсети: `255.255.255.0`.
-  - Шлюз: `192.168.1.1`.
-  - DNS: `8.8.8.8`.
-- Настроить сетевой интерфейс {{< tag "Cisco" >}} со следующими параметрами:
+Необходимо предварительно настроить сетевой интерфейс компьютера со следующими параметрами:
+- IP-адрес: `192.168.1.2`.
+- Маска подсети: `255.255.255.0`.
+- Шлюз: `192.168.1.1`.
+- DNS: `8.8.8.8`.
+
+Теперь настроим сетевой интерфейс `FE0/1` на {{< tag "Cisco" >}}:
 
 ```cisco-cli
-Router> en
-Router# conf t
-Router(config)# int fa0/1
-Router(config-if)# ip address 192.168.1.1 255.255.255.0
-Router(config-if)# no shutdown
-Router(config-if)# exit
-Router(config)# exit
-Router#
+# conf t
+(config)# int fa0/1
+(config-if)# ip address 192.168.1.1 255.255.255.0
+(config-if)# no shutdown
+(config-if)# exit
+(config)# exit
+#
 ```
 
-- Подключить сетевой интерфейс компьютера к сетевому интерфейсу {{< tag "Cisco" >}} `FE0/1`.
-- Запустить TFTP-сервер на компьютере c IP `192.168.1.2`.
+После предварительных настроек, подключим сетевой интерфейс компьютера к сетевому интерфейсу {{< tag "Cisco" >}} `FE0/1` и запустим TFTP-сервер на компьютере c IP `192.168.1.2`.
 
 ## Резервное копирование текущего образа IOS
 
-- Посмотреть текущую версию {{< tag "IOS" >}}:
+Смотрим текущую версию {{< tag "IOS" >}}:
 
 ```cisco-cli
-Router# show version
+# show version
 ```
 
-- Сделать резервную копию текущего образа {{< tag "IOS" >}} на TFTP-сервер:
+На всякий случай, делаем резервную копию текущего образа {{< tag "IOS" >}} на TFTP-сервер:
 
 ```cisco-cli
-Router# show flash: | include .bin
-Router# copy flash:IOS_FW.bin tftp://192.168.1.2
+# show flash: | include .bin
+# copy flash:IOS_FW.bin tftp://192.168.1.2
 ```
 
 Где:
@@ -94,10 +93,10 @@ Router# copy flash:IOS_FW.bin tftp://192.168.1.2
 
 ## Загрузка нового образа IOS
 
-- Записать на Flash-карту новый образ {{< tag "IOS" >}}:
+Загружаем на флэш-карту новый образ {{< tag "IOS" >}}:
 
 ```cisco-cli
-Router# copy tftp://192.168.1.2/IOS_FW.bin flash:
+# copy tftp://192.168.1.2/IOS_FW.bin flash:
 ```
 
 Где:
@@ -107,9 +106,11 @@ Router# copy tftp://192.168.1.2/IOS_FW.bin flash:
 
 ## Верификация нового образа IOS
 
+Проверяем контрольную сумму загруженного образа {{< tag "IOS" >}}:
+
 ```cisco-cli
-Router# show flash: | include .bin
-Router# verify /md5 flash:IOS_FW.bin
+# show flash: | include .bin
+# verify /md5 flash:IOS_FW.bin
 ```
 
 Где:
@@ -118,13 +119,13 @@ Router# verify /md5 flash:IOS_FW.bin
 
 ## Обновление IOS
 
-- Прописать в конфигурации {{< tag "Cisco" >}} загрузку нового образа {{< tag "IOS" >}}:
+Прописываем в конфигурации {{< tag "Cisco" >}} загрузку нового образа {{< tag "IOS" >}} и перезагружаем оборудование:
 
 ```cisco-cli
-Router# conf t
-Router(config)# boot system flash:IOS_FW.bin
-Router(config)# exit
-Router# reload
+# conf t
+(config)# boot system flash:IOS_FW.bin
+(config)# exit
+# reload
 ```
 
 Где:
@@ -133,10 +134,10 @@ Router# reload
 
 ## Проверка новой версии IOS
 
-- Посмотреть версию {{< tag "IOS" >}} после перезагрузки:
+После перезагрузки смотрим версию {{< tag "IOS" >}}:
 
 ```cisco-cli
-Router# show version
+# show version
 ```
 
-- Готово!
+Готово!
