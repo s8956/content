@@ -136,11 +136,13 @@ phone*CLI>
 
 ## TLS
 
-```
+```bash
 mkdir /etc/asterisk/keys
 ```
 
-`pjsip.conf`
+```bash
+nano /etc/asterisk/pjsip.conf
+```
 
 ```ini
 [transport-tls]
@@ -149,5 +151,4 @@ protocol=tls
 bind=0.0.0.0:5061
 cert_file=/etc/asterisk/keys/asterisk.crt
 priv_key_file=/etc/asterisk/keys/asterisk.key
-method=sslv23
 ```
