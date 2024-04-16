@@ -76,7 +76,7 @@ draft: 0
   - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
   - Комментарий: `HOST: gw2.example.com`.
 
-```
+```routeros
 /interface gre
 add allow-fast-path=no ipsec-secret="PassWord" name=gre-gw1-gw2 local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
 ```
@@ -86,7 +86,7 @@ add allow-fast-path=no ipsec-secret="PassWord" name=gre-gw1-gw2 local-address=1.
   - Интерфейс: `gre-gw1-gw2`.
   - Комментарий: `[GRE] GRE-GW1-GW2`.
 
-```
+```routeros
 /ip address
 add address=10.255.255.1/24 interface=gre-gw1-gw2 comment="[GRE] GRE-GW1-GW2"
 ```
@@ -96,7 +96,7 @@ add address=10.255.255.1/24 interface=gre-gw1-gw2 comment="[GRE] GRE-GW1-GW2"
   - Шлюз `R2`: `10.255.255.2`.
   - Комментарий: `[GRE] GW2`.
 
-```
+```routeros
 /ip route
 add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
 ```
@@ -114,7 +114,7 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
   - WAN IP-адрес удалённого маршрутизатора `R1`: `1.1.1.1`.
   - Комментарий: `HOST: gw1.example.com`.
 
-```
+```routeros
 /interface gre
 add allow-fast-path=no ipsec-secret="PassWord" name=gre-gw2-gw1 local-address=2.2.2.2 remote-address=1.1.1.1 comment="HOST: gw1.example.com"
 ```
@@ -124,7 +124,7 @@ add allow-fast-path=no ipsec-secret="PassWord" name=gre-gw2-gw1 local-address=2.
   - Интерфейс: `gre-gw2-gw1`.
   - Комментарий: `[GRE] GRE-GW2-GW1`.
 
-```
+```routeros
 /ip address
 add address=10.255.255.2/24 interface=gre-gw2-gw1 comment="[GRE] GW2-GW1"
 ```
@@ -134,7 +134,7 @@ add address=10.255.255.2/24 interface=gre-gw2-gw1 comment="[GRE] GW2-GW1"
   - Шлюз `R1`: `10.255.255.1`.
   - Комментарий: `[GRE] GW1`.
 
-```
+```routeros
 /ip route
 add distance=1 dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[GRE] GW1"
 ```
