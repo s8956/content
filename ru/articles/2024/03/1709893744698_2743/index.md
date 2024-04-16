@@ -53,37 +53,37 @@ draft: 1
 
 ### Stripe (RAID0)
 
-```
+```bash
 zpool create -f <pool_name> <dev_0> <dev_1>
 ```
 
 ### Mirror (RAID1)
 
-```
+```bash
 zpool create -f <pool_name> mirror <dev_0> <dev_1>
 ```
 
 ### RAIDZ-1 (RAID5)
 
-```
+```bash
 zpool create -f <pool_name> raidz <dev_0> <dev_1> <dev_2>
 ```
 
 ### RAIDZ-2 (RAID6)
 
-```
+```bash
 zpool create -f <pool_name> raidz2 <dev_0> <dev_1> <dev_2> <dev_3>
 ```
 
 ### RAIDZ-3
 
-```
+```bash
 zpool create -f <pool_name> raidz3 <dev_0> <dev_1> <dev_2> <dev_3> <dev_4>
 ```
 
 ### RAID10
 
-```
+```bash
 zpool create -f <pool_name> mirror <dev_0> <dev_1> mirror <dev_2> <dev_3>
 ```
 
@@ -91,35 +91,35 @@ zpool create -f <pool_name> mirror <dev_0> <dev_1> mirror <dev_2> <dev_3>
 
 ### Cache
 
-```
+```bash
 zpool add -f <pool_name> cache <dev_0>
 ```
 
 ### Log
 
-```
+```bash
 zpool add -f <pool_name> log <dev_0>
 ```
 
 ## Status
 
-```
+```bash
 zpool status -v <pool_name>
 ```
 
 ## List
 
-```
+```bash
 zpool list
 ```
 
-```
+```bash
 zfs list
 ```
 
 ## Destroy
 
 
-```
+```bash
 zpool destroy -f <pool_name>
 ```

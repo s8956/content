@@ -70,7 +70,7 @@ draft: 0
   - Название интерфейса: `wireguard-sts`.
   - Комментарий: `WireGuard (Site-to-Site)`.
 
-```
+```routeros
 /interface wireguard
 add listen-port=51820 name=wireguard-sts comment="WireGuard (Site-to-Site)"
 ```

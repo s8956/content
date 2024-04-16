@@ -204,19 +204,19 @@ Fatal error: Allowed memory size of 50331648 bytes exhausted (tried to allocate 
 
 1. В `.htaccess` добавить строку (при условии, что {{< tag "PHP" >}} работает под Apache):
 
-```
+```apache
 php_value memory_limit 32M
 ```
 
 2. В `php.ini` (при условии, что Вы можете его редактировать) изменить значение параметра `memory_limit`:
 
-```
+```ini
 memory_limit 32M
 ```
 
 3. Добавив в `index.php` после:
 
-```
+```php
 <?php
 ```
 

@@ -56,7 +56,7 @@ draft: 0
 
 1. Запросить и применить обновления:
 
-```
+```bash
 freebsd-update fetch && freebsd-update install
 ```
 
@@ -64,7 +64,7 @@ freebsd-update fetch && freebsd-update install
 
 1. Запросить и применить обновления пакетов:
 
-```
+```bash
 pkg update -f && pkg upgrade
 ```
 
@@ -74,13 +74,13 @@ pkg update -f && pkg upgrade
 
 1. Создать файл `/usr/local/etc/pkg/repos/FreeBSD.conf`:
 
-```
+```bash
 mkdir -p /usr/local/etc/pkg/repos && echo 'FreeBSD: { url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest" }' > /usr/local/etc/pkg/repos/FreeBSD.conf
 ```
 
 2. Обновить базу данных пакетов и обновить пакеты:
 
-```
+```bash
 pkg update -f && pkg upgrade
 ```
 
@@ -94,7 +94,7 @@ pkg update -f && pkg upgrade
 2. Добавить в `rc.conf` автозапуск сервиса.
 3. Запустить сервис.
 
-```
+```bash
 pkg install cpu-microcode && sysrc microcode_update_enable=YES && service microcode_update start
 ```
 
@@ -102,7 +102,7 @@ pkg install cpu-microcode && sysrc microcode_update_enable=YES && service microc
 
 Для работы на сервере, я устанавливаю следующие пакеты:
 
-```
+```bash
 pkg install bash ca_root_nss curl git gnupg htop mc nano smartmontools wget zsh
 ```
 
@@ -119,7 +119,7 @@ kern.maxfilesperproc=500000
 
 Перезагружаем систему:
 
-```
+```bash
 shutdown -r now
 ```
 
@@ -131,13 +131,13 @@ shutdown -r now
 
 1. Изменить стандартную оболочку на {{< tag "Zsh" >}} для **root**:
 
-```
+```bash
 chsh -s zsh root
 ```
 
 2. Изменить стандартную оболочку на {{< tag "Zsh" >}} для **обычного пользователя**:
 
-```
+```bash
 chsh -s zsh user
 ```
 
@@ -150,7 +150,7 @@ chsh -s zsh user
 
 1. Скачиваем конфигурацию:
 
-```
+```bash
 wget -O ~/.zshrc.grml https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
 ```
 
@@ -170,7 +170,7 @@ export GPG_TTY=$(tty)
 
 `atime` это время доступа к файлу. В обычной работе такая метрика бесполезна. На диск могут быть тысячи файлов и для каждого файла ядро ОС будет фиксировать и обновлять время доступа. Подобная операция весьма дорогая.
 
-```
+```bash
 zfs set atime=off zroot
 ```
 
