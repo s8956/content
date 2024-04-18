@@ -9,11 +9,24 @@
 # /interface ethernet set [ find default-name="ether1" ] mac-address="00:00:00:00:00:00"
 # -------------------------------------------------------------------------------------------------------------------- #
 
+# Administrator password.
 :local rosAdminPassword "PassWord"
+
+# Bridge.
 :local rosBridgeName "bridge1"
+:local rosBridgeMinPort 2
+:local rosBridgeMaxPort 5
+
+# Router name.
 :local rosRouterName "GW1"
+
+# Static gateway name.
 :local rosGwDomain "gw1.lan"
+
+# Network domain name.
 :local rosNwDomain "home.lan"
+
+# Port knocking.
 :local rosIcmpKnockSize 100
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -26,11 +39,16 @@ add name=WAN
 add name=LAN
 
 /interface bridge port
-:for i from=2 to=5 do={ add bridge="$rosBridgeName" interface=("ether" . $i) }
+:for i from=$rosBridgeMinPort to=$rosBridgeMaxPort do={
+  add bridge="$rosBridgeName" interface=("ether" . $i)
+}
 
 /interface list member
 add interface=ether1 list=WAN
 add interface="$rosBridgeName" list=LAN
+
+/ipv6 settings
+set disable-ipv6=yes
 
 /ip ipsec profile
 set [ find default=yes ] dh-group=ecp384 enc-algorithm=aes-256 hash-algorithm=sha256
@@ -75,6 +93,8 @@ add action=add-src-to-address-list address-list="AdminCP" address-list-timeout=3
   comment="[ROS] ICMP port knocking for AdminCP"
 add action=accept chain=input protocol=icmp \
   comment="[ROS] ICMP"
+add action=accept chain=input protocol=ospf disabled=yes \
+  comment="[ROS] OSPF"
 add action=accept chain=input dst-port=9090,22022 protocol=tcp src-address-list="AdminCP" \
   comment="[ROS] WinBox and SSH"
 add action=drop chain=input in-interface-list=!LAN \
@@ -122,6 +142,12 @@ add address="0.ru.pool.ntp.org"
 add address="1.ru.pool.ntp.org"
 add address="time.google.com"
 add address="time.cloudflare.com"
+
+/system routerboard settings
+set silent-boot=yes
+
+/system watchdog
+set automatic-supout=no
 
 /tool bandwidth-server
 set enabled=no
