@@ -9,6 +9,7 @@ images:
   - 'https://images.unsplash.com/photo-1486881809698-a59614a9ac7e'
 categories:
   - 'network'
+  - 'scripts'
 tags:
   - 'mikrotik'
   - 'routeros'
