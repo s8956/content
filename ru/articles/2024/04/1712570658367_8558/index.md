@@ -71,7 +71,7 @@ draft: 0
 {{< /alert >}}
 
 - Создаём интерфейс {{< tag "GRE">}}:
-  - Имя интерфейса: `gre-gw1-gw2`.
+  - Имя интерфейса: `gre-sts`.
   - Секретная фраза для IPsec: `PassWord`.
   - WAN IP-адрес локального маршрутизатора `R1`: `1.1.1.1`.
   - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
@@ -79,17 +79,17 @@ draft: 0
 
 ```routeros
 /interface gre
-add allow-fast-path=no ipsec-secret="PassWord" name=gre-gw1-gw2 local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
+add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
 ```
 
 - Прописываем интерфейсу IP-адрес `10.255.255.1/24`:
   - Адрес интерфейса: `10.255.255.1/24`.
-  - Интерфейс: `gre-gw1-gw2`.
-  - Комментарий: `[GRE] GRE-GW1-GW2`.
+  - Интерфейс: `gre-sts`.
+  - Комментарий: `[GRE] GRE-STS`.
 
 ```routeros
 /ip address
-add address=10.255.255.1/24 interface=gre-gw1-gw2 comment="[GRE] GRE-GW1-GW2"
+add address=10.255.255.1/24 interface="gre-sts" comment="[GRE] GRE-STS"
 ```
 
 - Указываем маршрут до удалённой сети `R2`:
@@ -109,7 +109,7 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
 {{< /alert >}}
 
 - Создаём интерфейс {{< tag "GRE">}}:
-  - Имя интерфейса: `gre-gw2-gw1`.
+  - Имя интерфейса: `gre-sts`.
   - Секретная фраза для IPsec: `PassWord`.
   - WAN IP-адрес локального маршрутизатора `R2`: `2.2.2.2`.
   - WAN IP-адрес удалённого маршрутизатора `R1`: `1.1.1.1`.
@@ -117,17 +117,17 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
 
 ```routeros
 /interface gre
-add allow-fast-path=no ipsec-secret="PassWord" name=gre-gw2-gw1 local-address=2.2.2.2 remote-address=1.1.1.1 comment="HOST: gw1.example.com"
+add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" local-address=2.2.2.2 remote-address=1.1.1.1 comment="HOST: gw1.example.com"
 ```
 
 - Прописываем интерфейсу IP-адрес `10.255.255.2/24`:
   - Адрес интерфейса: `10.255.255.2/24`.
-  - Интерфейс: `gre-gw2-gw1`.
-  - Комментарий: `[GRE] GRE-GW2-GW1`.
+  - Интерфейс: `gre-sts`.
+  - Комментарий: `[GRE] GRE-STS`.
 
 ```routeros
 /ip address
-add address=10.255.255.2/24 interface=gre-gw2-gw1 comment="[GRE] GW2-GW1"
+add address=10.255.255.2/24 interface="gre-sts" comment="[GRE] GRE-STS"
 ```
 
 - Указываем маршрут до удалённой сети `R1`:
