@@ -207,20 +207,20 @@ add allowed-address=10.1.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw
 {{< / alert >}}
 
 - Создаём инстанс:
-  - Название: `ospf-instance-1`.
+  - Название: `ospf-instance-wg`.
 
 ```routeros
 /routing ospf instance
-add name=ospf-instance-1
+add name=ospf-instance-wg
 ```
 
 - Добавляем Area:
   - Название Area: `backbone`.
-  - Название инстанса: `ospf-instance-1`.
+  - Название инстанса: `ospf-instance-wg`.
 
 ```routeros
 /routing ospf area
-add instance=ospf-instance-1 name=backbone
+add instance=ospf-instance-wg name=backbone
 ```
 
 - Настраиваем шаблоны:
