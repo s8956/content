@@ -79,7 +79,7 @@ draft: 0
 
 ```routeros
 /interface gre
-add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" local-address=1.1.1.1 remote-address=2.2.2.2 comment="HOST: gw2.example.com"
+add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=2.2.2.2 comment="HOST: gw2.example.com"
 ```
 
 - Прописываем интерфейсу IP-адрес `10.255.255.1/24`:
@@ -117,7 +117,7 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
 
 ```routeros
 /interface gre
-add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" local-address=2.2.2.2 remote-address=1.1.1.1 comment="HOST: gw1.example.com"
+add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=1.1.1.1 comment="HOST: gw1.example.com"
 ```
 
 - Прописываем интерфейсу IP-адрес `10.255.255.2/24`:
