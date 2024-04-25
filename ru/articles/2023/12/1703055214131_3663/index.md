@@ -3,7 +3,7 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'MikroTik: Базовая автоматическая настройка'
+title: 'MikroTik: Базовая настройка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1520869562399-e772f042f422'
@@ -79,4 +79,4 @@ draft: 0
 
 ### Скрипт конфигурации
 
-{{< file "ros.router.rsc" >}}
+{{< file "mt.router.rsc" >}}
