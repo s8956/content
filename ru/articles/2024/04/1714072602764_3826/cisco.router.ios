@@ -13,26 +13,25 @@ no service finger
 ! ----------------------------------------------------------------------------------------------------------------------
 ! GENERAL.
 ! ----------------------------------------------------------------------------------------------------------------------
-! Hostname: 'gw1'.
-! Domain:   'gw1.lan'
-! ----------------------------------------------------------------------------------------------------------------------
-aaa new-model
-aaa authentication login default local
-aaa authentication ppp default local
-!
 clock timezone UTC 3
+! Updates the hardware clock with a new software clock setting.
 ! clock update-calendar
 hostname gw1
 logging buffered 4096
 ip cef
-ip domain name home.lan
 ip multicast-routing
 no ip source-route
 no ip bootp server
-!
+! Reserving memory for critical notifications (KB).
 memory reserve critical 4096
-! Not in v15.0:
+! Reserve memory for console access (KB).
 ! memory reserve console 512
+! ----------------------------------------------------------------------------------------------------------------------
+! Authentication, Authorization, and Accounting (AAA).
+! ----------------------------------------------------------------------------------------------------------------------
+aaa new-model
+aaa authentication login default local
+aaa authentication ppp default local
 ! ----------------------------------------------------------------------------------------------------------------------
 ! USERS AND PASSWORDS.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -59,11 +58,11 @@ line vty 0 4
   transport input ssh
   transport output ssh
 line aux 0
-  ! transport input none
-  ! transport output none
-  ! no exec
-  ! exec-timeout 0 1
-  ! no password
+  transport input none
+  transport output none
+  no exec
+  exec-timeout 0 1
+  no password
 ! ----------------------------------------------------------------------------------------------------------------------
 ! SSH.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -100,9 +99,11 @@ ntp server 194.190.168.1
 ! ----------------------------------------------------------------------------------------------------------------------
 ! DNS.
 ! ----------------------------------------------------------------------------------------------------------------------
-ip dns server
+ip domain lookup
+ip domain name home.lan
 ip name-server 1.1.1.1
 ip name-server 8.8.8.8
+ip dns server
 ! ----------------------------------------------------------------------------------------------------------------------
 ! DHCP.
 ! ----------------------------------------------------------------------------------------------------------------------
