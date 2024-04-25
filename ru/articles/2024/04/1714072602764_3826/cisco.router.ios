@@ -3,7 +3,7 @@
 ! ----------------------------------------------------------------------------------------------------------------------
 service password-encryption
 service timestamps debug datetime msec localtime show-timezone
-service timestamps log datetime localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
 service tcp-keepalives-in
 service tcp-keepalives-out
 no service pad
@@ -32,9 +32,6 @@ memory reserve critical 4096
 aaa new-model
 aaa authentication login default local
 aaa authentication ppp default local
-! ----------------------------------------------------------------------------------------------------------------------
-! USERS AND PASSWORDS.
-! ----------------------------------------------------------------------------------------------------------------------
 enable password qwerty-en
 username admin privilege 15 password qwerty-admin
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -55,8 +52,7 @@ line vty 0 4
   logging synchronous
   ! Auto-login in configure mode:
   privilege level 15
-  transport input ssh
-  transport output ssh
+  transport input telnet ssh
 line aux 0
   transport input none
   transport output none
@@ -65,11 +61,11 @@ line aux 0
   no password
 ! ----------------------------------------------------------------------------------------------------------------------
 ! SSH.
-! ----------------------------------------------------------------------------------------------------------------------
+! Generate RSA key pairs for SSH Public-Key Authentication:
 ! crypto key generate rsa modulus 2048
+! ----------------------------------------------------------------------------------------------------------------------
 ip ssh time-out 60
 ip ssh authentication-retries 5
-! ip ssh source-interface GigabitEthernet0/1
 ip ssh version 2
 ! ----------------------------------------------------------------------------------------------------------------------
 ! INTERFACES.
@@ -100,6 +96,7 @@ ntp server 194.190.168.1
 ! DNS.
 ! ----------------------------------------------------------------------------------------------------------------------
 ip domain lookup
+ip domain timeout 2
 ip domain name home.lan
 ip name-server 1.1.1.1
 ip name-server 8.8.8.8
