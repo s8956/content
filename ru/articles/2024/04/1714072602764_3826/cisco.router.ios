@@ -1,3 +1,11 @@
+! @package    Cisco / IOS
+! @author     Kai Kimera <mail@kai.kim>
+! @copyright  2024 Library Online
+! @license    MIT
+! @version    0.1.0
+! @link
+! ----------------------------------------------------------------------------------------------------------------------
+
 ! ----------------------------------------------------------------------------------------------------------------------
 ! SERVICES.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -50,7 +58,6 @@ line con 0
 line vty 0 4
   access-class ACL_VTY in
   logging synchronous
-  ! Auto-login in configure mode:
   privilege level 15
   transport input telnet ssh
 line aux 0
