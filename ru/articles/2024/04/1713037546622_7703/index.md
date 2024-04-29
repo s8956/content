@@ -66,7 +66,7 @@ draft: 0
 
 Теперь настроим сетевой интерфейс `FE0/1` на {{< tag "Cisco" >}}:
 
-``` {hl_lines="2 4-6"}
+```
 # conf t
 (config)# int fa0/1
 (config-if)# ip address 192.168.1.1 255.255.255.0
