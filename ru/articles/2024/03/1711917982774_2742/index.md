@@ -70,7 +70,7 @@ draft: 0
   - Группа Diffie-Hellman (стойкость шифрования): `ecp384`.
   - Алгоритм шифрования: `aes-256`.
 
-```routeros
+```text
 /ip ipsec profile
 add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
 ```
@@ -81,7 +81,7 @@ add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
   - Алгоритм шифрования: `aes-256-cbc`.
   - Группа Diffie-Hellman (стойкость шифрования): `ecp384`.
 
-```routeros
+```text
 /ip ipsec proposal
 add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=ecp384
 ```
@@ -93,7 +93,7 @@ add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=e
   - Режим обмена: `ike2`.
   - Комментарий: `GW2`.
 
-```routeros
+```text
 /ip ipsec peer
 add address="gw2.example.com" exchange-mode=ike2 name=GW2 profile=ipsec-sts comment="GW2"
 ```
@@ -104,7 +104,7 @@ add address="gw2.example.com" exchange-mode=ike2 name=GW2 profile=ipsec-sts comm
     *Секретная фраза должна быть одинаковой на обоих маршрутизаторах.*
   - Комментарий: `GW2`.
 
-```routeros
+```text
 /ip ipsec identity
 add peer=GW2 secret="PassWord" comment="GW2"
 ```
@@ -118,7 +118,7 @@ add peer=GW2 secret="PassWord" comment="GW2"
   - Представление: `ipsec-sts`.
   - Комментарий: `GW1-GW2`.
 
-```routeros
+```text
 /ip ipsec policy
 add src-address=10.1.0.0/16 dst-address=10.2.0.0/16 tunnel=yes action=encrypt proposal=ipsec-sts peer=GW2 comment="GW1-GW2"
 ```
@@ -128,7 +128,7 @@ add src-address=10.1.0.0/16 dst-address=10.2.0.0/16 tunnel=yes action=encrypt pr
   - Адрес удалённой сети `R2`: `10.2.0.0/16`.
   - Комментарий: `[IPsec] GW1-GW2`.
 
-```routeros
+```text
 /ip firewall nat
 add chain=srcnat action=accept src-address=10.1.0.0/16 dst-address=10.2.0.0/16 place-before=0 comment="[IPsec] GW1-GW2"
 ```
@@ -137,7 +137,7 @@ add chain=srcnat action=accept src-address=10.1.0.0/16 dst-address=10.2.0.0/16 p
   - Открыть порты `500` и `4500` по протоколу `UDP`.
   - Разрешить трафик по протоколу `ipsec-esp`.
 
-```routeros
+```text
 /ip firewall filter
 add action=accept chain=input dst-port=500,4500 in-interface-list=WAN protocol=udp comment="[ROS] IPsec"
 add action=accept chain=input in-interface-list=WAN protocol=ipsec-esp comment="[ROS] IPsec"
@@ -147,7 +147,7 @@ add action=accept chain=input in-interface-list=WAN protocol=ipsec-esp comment="
   - Пакеты из удалённой сети `R2` `10.2.0.0/16` в локальную сеть `R1` `10.1.0.0/16`.
   - Пакеты из локальной сети `R1` `10.1.0.0/16` в удалённую сеть `R2` `10.2.0.0/16`.
 
-```routeros
+```text
 /ip firewall raw
 add action=notrack chain=prerouting src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[IPsec] GW2-GW1"
 add action=notrack chain=prerouting src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[IPsec] GW1-GW2"
@@ -160,7 +160,7 @@ add action=notrack chain=prerouting src-address=10.1.0.0/16 dst-address=10.2.0.0
   - Группа Diffie-Hellman (стойкость шифрования): `ecp384`.
   - Алгоритм шифрования: `aes-256`.
 
-```routeros
+```text
 /ip ipsec profile
 add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
 ```
@@ -171,7 +171,7 @@ add dh-group=ecp384 enc-algorithm=aes-256 name=ipsec-sts
   - Алгоритм шифрования: `aes-256-cbc`.
   - Группа Diffie-Hellman (стойкость шифрования): `ecp384`.
 
-```routeros
+```text
 /ip ipsec proposal
 add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=ecp384
 ```
@@ -183,7 +183,7 @@ add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=e
   - Режим обмена: `ike2`.
   - Комментарий: `GW1`.
 
-```routeros
+```text
 /ip ipsec peer
 add address="gw1.example.com" exchange-mode=ike2 name=GW1 profile=ipsec-sts comment="GW1"
 ```
@@ -194,7 +194,7 @@ add address="gw1.example.com" exchange-mode=ike2 name=GW1 profile=ipsec-sts comm
     *Секретная фраза должна быть одинаковой на обоих маршрутизаторах.*
   - Комментарий: `GW1`.
 
-```routeros
+```text
 /ip ipsec identity
 add peer=GW1 secret="PassWord" comment="GW1"
 ```
@@ -208,7 +208,7 @@ add peer=GW1 secret="PassWord" comment="GW1"
   - Представление: `ipsec-sts`.
   - Комментарий: `GW2-GW1`.
 
-```routeros
+```text
 /ip ipsec policy
 add src-address=10.2.0.0/16 dst-address=10.1.0.0/16 tunnel=yes action=encrypt proposal=ipsec-sts peer=GW1 comment="GW2-GW1"
 ```
@@ -218,7 +218,7 @@ add src-address=10.2.0.0/16 dst-address=10.1.0.0/16 tunnel=yes action=encrypt pr
   - Адрес удалённой сети `R1`: `10.1.0.0/16`.
   - Комментарий: `[IPsec] GW2-GW1`.
 
-```routeros
+```text
 /ip firewall nat
 add chain=srcnat action=accept src-address=10.2.0.0/16 dst-address=10.1.0.0/16 place-before=0 comment="[IPsec] GW2-GW1"
 ```
@@ -227,7 +227,7 @@ add chain=srcnat action=accept src-address=10.2.0.0/16 dst-address=10.1.0.0/16 p
   - Открыть порты `500` и `4500` по протоколу `UDP`.
   - Разрешить трафик по протоколу `ipsec-esp`.
 
-```routeros
+```text
 /ip firewall filter
 add action=accept chain=input dst-port=500,4500 in-interface-list=WAN protocol=udp comment="[ROS] IPsec"
 add action=accept chain=input in-interface-list=WAN protocol=ipsec-esp comment="[ROS] IPsec"
@@ -237,7 +237,7 @@ add action=accept chain=input in-interface-list=WAN protocol=ipsec-esp comment="
   - Пакеты из удалённой сети `R1` `10.1.0.0/16` в локальную сеть `R2` `10.2.0.0/16`.
   - Пакеты из локальной сети `R2` `10.2.0.0/16` в удалённую сеть `R1` `10.1.0.0/16`.
 
-```routeros
+```text
 /ip firewall raw
 add action=notrack chain=prerouting src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[IPsec] GW1-GW2"
 add action=notrack chain=prerouting src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[IPsec] GW2-GW1"
@@ -247,4 +247,4 @@ add action=notrack chain=prerouting src-address=10.2.0.0/16 dst-address=10.1.0.0
 
 Сделал небольшой скрипт, который позволяет быстро развернуть туннель между двумя маршрутизаторами. Скрипт запускается отдельно на каждом из маршрутизаторов со своими настройками.
 
-{{< file "ros.ipsec.rsc" >}}
+{{< file "ros.ipsec.rsc" "text" >}}

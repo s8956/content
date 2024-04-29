@@ -52,4 +52,4 @@ draft: 1
 
 ### Скрипт конфигурации
 
-{{< file "cisco.router.ios" >}}
+{{< file "cisco.router.ios" "text" >}}

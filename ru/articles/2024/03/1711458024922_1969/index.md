@@ -57,7 +57,7 @@ draft: 0
 
 Теперь настроим сетевой интерфейс `FE0/1` на {{< tag "Cisco" >}}:
 
-```cisco-cli
+```
 # conf t
 (config)# int fa0/1
 (config-if)# ip address 192.168.1.1 255.255.255.0
@@ -73,7 +73,7 @@ draft: 0
 
 Для того, чтобы загрузить конфигурацию с TFTP-сервера, необходимо выполнить следующую команду:
 
-```cisco-cli
+```
 # copy tftp://192.168.1.2/BACKUP_CONF_FILE startup-config
 ```
 
@@ -86,7 +86,7 @@ draft: 0
 
 Для выгрузки конфигурации {{< tag "Cisco" >}} на внешний TFTP-сервер, можно воспользоваться следующей командой:
 
-```cisco-cli
+```
 # copy startup-config tftp://192.168.1.2/BACKUP_CONF_FILE
 ```
 

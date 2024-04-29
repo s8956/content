@@ -71,7 +71,7 @@ draft: 0
   - Название интерфейса: `wireguard-sts`.
   - Комментарий: `WireGuard (Site-to-Site)`.
 
-```routeros
+```text
 /interface wireguard
 add listen-port=51820 name=wireguard-sts comment="WireGuard (Site-to-Site)"
 ```
@@ -81,7 +81,7 @@ add listen-port=51820 name=wireguard-sts comment="WireGuard (Site-to-Site)"
   - Интерфейс: `wireguard-sts`.
   - Комментарий: `[WG] WireGuard (Site-to-Site)`.
 
-```routeros
+```text
 /ip address
 add address=10.255.255.1/24 interface=wireguard-sts comment="[WG] WireGuard (Site-to-Site)"
 ```
@@ -91,7 +91,7 @@ add address=10.255.255.1/24 interface=wireguard-sts comment="[WG] WireGuard (Sit
   - Шлюз `R2`: `10.255.255.2`.
   - Комментарий: `[WG] GW1-GW2`.
 
-```routeros
+```text
 /ip route
 add dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[WG] GW1-GW2"
 ```
@@ -101,7 +101,7 @@ add dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[WG] GW1-GW2"
   - Разрешить трафик из удалённой сети `R2` `10.2.0.0/16` в локальную сеть `R1` `10.1.0.0/16`.
   - Разрешить трафик из локальной сети `R1` `10.1.0.0/16` в удалённую сеть `R2` `10.2.0.0/16`.
 
-```routeros
+```text
 /ip firewall filter
 add action=accept chain=input dst-port=51820 in-interface-list=WAN protocol=udp comment="[WG] WireGuard (Site-to-Site)"
 add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 comment="[WG] GW2-GW1"
@@ -115,7 +115,7 @@ add action=accept chain=forward src-address=10.1.0.0/16 dst-address=10.2.0.0/16 
   - Название интерфейса: `wireguard-sts`.
   - Комментарий: `WireGuard (Site-to-Site)`.
 
-```routeros
+```text
 /interface wireguard
 add listen-port=51820 name=wireguard-sts comment="WireGuard (Site-to-Site)"
 ```
@@ -125,7 +125,7 @@ add listen-port=51820 name=wireguard-sts comment="WireGuard (Site-to-Site)"
   - Интерфейс: `wireguard-sts`.
   - Комментарий: `[WG] WireGuard (Site-to-Site)`.
 
-```routeros
+```text
 /ip address
 add address=10.255.255.2/24 interface=wireguard-sts comment="WireGuard (Site-to-Site)"
 ```
@@ -135,7 +135,7 @@ add address=10.255.255.2/24 interface=wireguard-sts comment="WireGuard (Site-to-
   - Шлюз `R1`: `10.255.255.1`.
   - Комментарий: `[WG] GW2-GW1`.
 
-```routeros
+```text
 /ip route
 add dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[WG] GW2-GW1"
 ```
@@ -145,7 +145,7 @@ add dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[WG] GW2-GW1"
   - Разрешить трафик из удалённой сети `R1` `10.1.0.0/16` в локальную сеть `R2` `10.2.0.0/16`.
   - Разрешить трафик из локальной сети `R2` `10.2.0.0/16` в удалённую сеть `R1` `10.1.0.0/16`.
 
-```routeros
+```text
 /ip firewall filter
 add action=accept chain=input dst-port=51820 in-interface-list=WAN protocol=udp comment="[WG] WireGuard (Site-to-Site)"
 add action=accept chain=forward src-address=10.1.0.0/16 dst-address=10.2.0.0/16 comment="[WG] GW1-GW2"
@@ -156,7 +156,7 @@ add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 
 
 Написал небольшой сценарий для разворачивания интерфейса WireGuard на маршрутизаторах. Настройки сценария, естественно, разные под каждый из маршрутизаторов. А вот добавлять peer'ы придётся вручную.
 
-{{< file "ros.wg.rsc" >}}
+{{< file "ros.wg.rsc" "text" >}}
 
 ## Добавление peer'ов
 
@@ -175,7 +175,7 @@ add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 
       *Без этого параметра не будет работать протокол {{< tag "OSPF" >}}.*
   - Комментарий: `[WG] GW2`.
 
-```routeros
+```text
 /interface wireguard peers
 add allowed-address=10.2.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw2.example.com endpoint-port=51820 interface=wireguard-sts public-key="<public-key>" comment="[WG] GW2"
 ```
@@ -195,7 +195,7 @@ add allowed-address=10.2.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw
       *Без этого параметра не будет работать протокол {{< tag "OSPF" >}}.*
   - Комментарий: `[WG] GW1`.
 
-```routeros
+```text
 /interface wireguard peers
 add allowed-address=10.1.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw1.example.com endpoint-port=51820 interface=wireguard-sts public-key="<public-key>" comment="[WG] GW1"
 ```
@@ -209,7 +209,7 @@ add allowed-address=10.1.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw
 - Создаём инстанс:
   - Название: `ospf-instance-wg`.
 
-```routeros
+```text
 /routing ospf instance
 add name=ospf-instance-wg
 ```
@@ -218,7 +218,7 @@ add name=ospf-instance-wg
   - Название Area: `backbone`.
   - Название инстанса: `ospf-instance-wg`.
 
-```routeros
+```text
 /routing ospf area
 add instance=ospf-instance-wg name=backbone
 ```
@@ -230,7 +230,7 @@ add instance=ospf-instance-wg name=backbone
     - Area: `backbone`.
     - Type: `PTP` (Point-to-Point).
 
-```routeros
+```text
 /routing ospf interface-template
 add area=backbone interfaces=bridge1
 add area=backbone interfaces=wireguard-sts type=ptp
@@ -239,7 +239,7 @@ add area=backbone interfaces=wireguard-sts type=ptp
 - Настраиваем фильтры брандмауэра:
   - Разрешить протокол {{< tag "OSPF" >}} на интерфейсе `wireguard-sts`.
 
-```routeros
+```text
 /ip firewall filter
 add action=accept chain=input in-interface=wireguard-sts protocol=ospf comment="[WG] OSPF"
 ```

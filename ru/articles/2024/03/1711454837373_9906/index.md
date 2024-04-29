@@ -53,26 +53,26 @@ draft: 0
 
 Далее, необходимо переключить регистр с `0x2102` на `0x2142` и перезагрузить оборудование:
 
-```cisco-cli
+```
 rommon> confreg 0x2142
 rommon> reset
 ```
 
 После перезагрузки оборудования, можно сбросить пароль. Переходим  режим конфигурирования:
 
-```cisco-cli
+```
 > en
 ```
 
 Импортируем стартовую конфигурацию в текущую:
 
-```cisco-cli
+```
 # copy startup-config running-config
 ```
 
 Отлично. Сейчас мы находимся в режиме полного контроля и в конфигурации, к которой ранее не было доступа. Теперь сбрасываем пароль у необходимого пользователя:
 
-```cisco-cli
+```
 # config t
 (config)# en secret PassWord
 (config)# username USER privilege 15 secret PassWord
@@ -80,14 +80,14 @@ rommon> reset
 
 Далее, нужно не забыть переключить регистр обратно, с `0x2142` на `0x2102`:
 
-```cisco-cli
+```
 (config)# config-register 0x2102
 (config)# exit
 ```
 
 Теперь экспортируем текущую конфигурацию обратно в стартовую:
 
-```cisco-cli
+```
 # copy running-config startup-config
 # reload
 ```

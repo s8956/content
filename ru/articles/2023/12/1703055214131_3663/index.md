@@ -55,7 +55,7 @@ draft: 0
 - Загрузить скрипт в память {{< tag "MikroTik" >}}, предварительно настроив параметры скрипта под себя.
 - Зайти в **Terminal** и выполнить следующую команду:
 
-```routeros
+```text
 /system reset-configuration no-defaults=yes skip-backup=yes run-after-reset="ros.router.rsc"
 ```
 
@@ -79,4 +79,4 @@ draft: 0
 
 ### Скрипт конфигурации
 
-{{< file "mt.router.rsc" >}}
+{{< file "mt.router.rsc" "text" >}}

@@ -59,7 +59,7 @@ draft: 0
 
 Теперь настроим сетевой интерфейс `FE0/1` на {{< tag "Cisco" >}}:
 
-```cisco-cli
+```
 # conf t
 (config)# int fa0/1
 (config-if)# ip address 192.168.1.1 255.255.255.0
@@ -75,13 +75,13 @@ draft: 0
 
 Смотрим текущую версию {{< tag "IOS" >}}:
 
-```cisco-cli
+```
 # show version
 ```
 
 На всякий случай, делаем резервную копию текущего образа {{< tag "IOS" >}} на TFTP-сервер:
 
-```cisco-cli
+```
 # show flash: | include .bin
 # copy flash:IOS_FW.bin tftp://192.168.1.2
 ```
@@ -95,7 +95,7 @@ draft: 0
 
 Загружаем на флэш-карту новый образ {{< tag "IOS" >}}:
 
-```cisco-cli
+```
 # copy tftp://192.168.1.2/IOS_FW.bin flash:
 ```
 
@@ -108,7 +108,7 @@ draft: 0
 
 Проверяем контрольную сумму загруженного образа {{< tag "IOS" >}}:
 
-```cisco-cli
+```
 # show flash: | include .bin
 # verify /md5 flash:IOS_FW.bin
 ```
@@ -121,7 +121,7 @@ draft: 0
 
 Прописываем в конфигурации {{< tag "Cisco" >}} загрузку нового образа {{< tag "IOS" >}} и перезагружаем оборудование:
 
-```cisco-cli
+```
 # conf t
 (config)# boot system flash:IOS_FW.bin
 (config)# exit
@@ -136,7 +136,7 @@ draft: 0
 
 После перезагрузки смотрим версию {{< tag "IOS" >}}:
 
-```cisco-cli
+```
 # show version
 ```
 

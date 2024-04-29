@@ -77,7 +77,7 @@ draft: 0
   - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
   - Комментарий: `HOST: gw2.example.com`.
 
-```routeros
+```text
 /interface gre
 add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=2.2.2.2 comment="HOST: gw2.example.com"
 ```
@@ -87,7 +87,7 @@ add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=2.2
   - Интерфейс: `gre-sts`.
   - Комментарий: `[GRE] GRE-STS`.
 
-```routeros
+```text
 /ip address
 add address=10.255.255.1/24 interface="gre-sts" comment="[GRE] GRE-STS"
 ```
@@ -97,7 +97,7 @@ add address=10.255.255.1/24 interface="gre-sts" comment="[GRE] GRE-STS"
   - Шлюз `R2`: `10.255.255.2`.
   - Комментарий: `[GRE] GW2`.
 
-```routeros
+```text
 /ip route
 add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
 ```
@@ -115,7 +115,7 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
   - WAN IP-адрес удалённого маршрутизатора `R1`: `1.1.1.1`.
   - Комментарий: `HOST: gw1.example.com`.
 
-```routeros
+```text
 /interface gre
 add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=1.1.1.1 comment="HOST: gw1.example.com"
 ```
@@ -125,7 +125,7 @@ add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=1.1
   - Интерфейс: `gre-sts`.
   - Комментарий: `[GRE] GRE-STS`.
 
-```routeros
+```text
 /ip address
 add address=10.255.255.2/24 interface="gre-sts" comment="[GRE] GRE-STS"
 ```
@@ -135,7 +135,7 @@ add address=10.255.255.2/24 interface="gre-sts" comment="[GRE] GRE-STS"
   - Шлюз `R1`: `10.255.255.1`.
   - Комментарий: `[GRE] GW1`.
 
-```routeros
+```text
 /ip route
 add distance=1 dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[GRE] GW1"
 ```
@@ -146,4 +146,4 @@ add distance=1 dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[GRE] GW1"
 
 Суть скрипта в решении проблем с внешними динамическими IP-адресами маршрутизатора.
 
-{{< file "ros.gre.dip.rsc" >}}
+{{< file "ros.gre.dip.rsc" "text" >}}
