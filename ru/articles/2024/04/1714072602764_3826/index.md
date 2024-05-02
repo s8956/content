@@ -6,18 +6,15 @@
 title: 'Cisco: Базовая настройка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1663932210347-164a05ed0ccd'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'inDev'
+  - 'network'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'cisco'
+  - 'ios'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -52,4 +49,4 @@ draft: 1
 
 ### Скрипт конфигурации
 
-{{< file "cisco.router.ios" "text" >}}
+{{< file "cisco.router.ios" "properties" >}}
