@@ -71,7 +71,7 @@ draft: 1
   - Использование общего ключа для проверки подлинности: `authentication pre-share`.
   - Группа Diffie–Hellman: `group 2`.
 
-```properties
+```
 crypto isakmp policy 5
   encr aes 256
   authentication pre-share
@@ -82,7 +82,7 @@ crypto isakmp policy 5
   - Общий ключ: `PassWord`.
   - IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
 
-```properties
+```
 crypto isakmp key PassWord address 2.2.2.2
 ```
 
@@ -91,7 +91,7 @@ crypto isakmp key PassWord address 2.2.2.2
   - Метод шифрования: `esp-aes 256`.
   - Алгоритм хеширования: `esp-sha-hmac`.
 
-```properties
+```
 crypto ipsec transform-set GRE-TS esp-aes 256 esp-sha-hmac
 ```
 
@@ -100,10 +100,10 @@ crypto ipsec transform-set GRE-TS esp-aes 256 esp-sha-hmac
   - Название набора преобразований: `GRE-TS`.
   - Алгоритм Diffie–Hellman'а (1024 бита): `pfs group2`. Использование данной опции позволяет повысить уровень защищенности трафика - при создании каждого IPsec SA производится выработка новых сессионных ключей.
 
-```properties
+```
 crypto ipsec profile GRE-STS
- set transform-set GRE-TS
- set pfs group2
+  set transform-set GRE-TS
+  set pfs group2
 ```
 
 - Создаём туннель:
@@ -115,7 +115,7 @@ crypto ipsec profile GRE-STS
   - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
   - Профиль {{< tag "IPsec" >}}: `GRE-STS`.
 
-```properties
+```
 interface Tunnel0
   ip address 10.255.255.1 255.255.255.0
   ip mtu 1400
@@ -130,7 +130,7 @@ interface Tunnel0
   - Маска подсети удалённого роутера `R2`: `255.255.0.0`.
   - IP-адрес шлюза удалённого роутера `R2`: `10.255.255.2`.
 
-```properties
+```
 ip route 10.2.0.0 255.255.0.0 10.255.255.2
 ```
 
@@ -141,7 +141,7 @@ ip route 10.2.0.0 255.255.0.0 10.255.255.2
   - Использование общего ключа для проверки подлинности: `authentication pre-share`.
   - Группа Diffie–Hellman: `group 2`.
 
-```properties
+```
 crypto isakmp policy 5
   encr aes 256
   authentication pre-share
@@ -152,7 +152,7 @@ crypto isakmp policy 5
   - Общий ключ: `PassWord`.
   - IP адрес удалённого маршрутизатора `R1`: `1.1.1.1`.
 
-```properties
+```
 crypto isakmp key PassWord address 1.1.1.1
 ```
 
@@ -161,7 +161,7 @@ crypto isakmp key PassWord address 1.1.1.1
   - Метод шифрования: `esp-aes 256`.
   - Алгоритм хеширования: `esp-sha-hmac`.
 
-```properties
+```
 crypto ipsec transform-set GRE-TS esp-aes 256 esp-sha-hmac
 ```
 
@@ -170,7 +170,7 @@ crypto ipsec transform-set GRE-TS esp-aes 256 esp-sha-hmac
   - Название набора преобразований: `GRE-TS`.
   - Алгоритм Diffie–Hellman'а (1024 бита): `pfs group2`. Использование данной опции позволяет повысить уровень защищенности трафика - при создании каждого IPsec SA производится выработка новых сессионных ключей.
 
-```properties
+```
 crypto ipsec profile GRE-STS
   set transform-set GRE-TS
   set pfs group2
@@ -185,7 +185,7 @@ crypto ipsec profile GRE-STS
   - WAN IP-адрес удалённого маршрутизатора `R1`: `1.1.1.1`.
   - Профиль {{< tag "IPsec" >}}: `GRE-STS`.
 
-```properties
+```
 interface Tunnel0
   ip address 10.255.255.2 255.255.255.0
   ip mtu 1400
@@ -200,6 +200,6 @@ interface Tunnel0
   - Маска подсети удалённого роутера `R1`: `255.255.0.0`.
   - IP-адрес шлюза удалённого роутера `R1`: `10.255.255.1`.
 
-```properties
+```
 ip route 10.1.0.0 255.255.0.0 10.255.255.1
 ```
