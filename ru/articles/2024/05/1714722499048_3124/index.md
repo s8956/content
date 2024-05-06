@@ -6,7 +6,7 @@
 title: 'Cisco: Туннель GRE/IPsec (Site-to-Site)'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1616253426172-74a82120b7bf'
 categories:
   - 'network'
   - 'inDev'
@@ -20,7 +20,7 @@ authors:
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
-complexity: '0'
+complexity: '1'
 toc: 1
 comments: 1
 
@@ -42,10 +42,10 @@ hash: '7b3bb6b3c7dbc50c2bf69d88c66a8a74cdc7571d'
 uuid: '7b3bb6b3-c7db-550c-abf6-9d88c66a8a74'
 slug: '7b3bb6b3-c7db-550c-abf6-9d88c66a8a74'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по созданию туннеля {{< tag "GRE" >}} с шифрованием {{< tag "IPsec" >}} на {{< tag "Cisco" >}}.
 
 <!--more-->
 
