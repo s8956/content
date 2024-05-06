@@ -3,7 +3,7 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Cisco: Туннель GRE/IPsec (Site-to-Site)'
+title: 'Cisco: Туннель GRE/IPsec (Site-to-Site) + OSPF'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1616253426172-74a82120b7bf'
@@ -120,6 +120,7 @@ interface Tunnel0
   ip address 10.255.255.1 255.255.255.0
   ip mtu 1400
   ip tcp adjust-mss 1360
+  ip ospf mtu-ignore
   tunnel source 1.1.1.1
   tunnel destination 2.2.2.2
   tunnel protection ipsec profile GRE-STS
@@ -132,6 +133,20 @@ interface Tunnel0
 
 ```
 ip route 10.2.0.0 255.255.0.0 10.255.255.2
+```
+
+- Настройка {{< tag "OSPF" >}}:
+  - Указание ID маршрутизатора: `router-id 10.1.0.1`.
+  - Отключение HELLO-пакетов на всех интерфейсах: `passive-interface default`.
+  - Включение HELLO-пакетов на интерфейсе `Tunnel0`: `no passive-interface Tunnel0`.
+  - Анонсирование сети `10.1.0.0/16` в {{< tag "OSPF" >}}: `network 10.1.0.0 0.0.255.255 area 0`.
+
+```
+router ospf 5
+  router-id 10.1.0.1
+  passive-interface default
+  no passive-interface Tunnel0
+  network 10.1.0.0 0.0.255.255 area 0
 ```
 
 ### Router #2
@@ -190,6 +205,7 @@ interface Tunnel0
   ip address 10.255.255.2 255.255.255.0
   ip mtu 1400
   ip tcp adjust-mss 1360
+  ip ospf mtu-ignore
   tunnel source 2.2.2.2
   tunnel destination 1.1.1.1
   tunnel protection ipsec profile GRE-STS
@@ -202,4 +218,18 @@ interface Tunnel0
 
 ```
 ip route 10.1.0.0 255.255.0.0 10.255.255.1
+```
+
+- Настройка {{< tag "OSPF" >}}:
+  - Указание ID маршрутизатора: `router-id 10.2.0.1`.
+  - Отключение HELLO-пакетов на всех интерфейсах: `passive-interface default`.
+  - Включение HELLO-пакетов на интерфейсе `Tunnel0`: `no passive-interface Tunnel0`.
+  - Анонсирование сети `10.1.0.0/16` в {{< tag "OSPF" >}}: `network 10.2.0.0 0.0.255.255 area 0`.
+
+```
+router ospf 5
+  router-id 10.2.0.1
+  passive-interface default
+  no passive-interface Tunnel0
+  network 10.2.0.0 0.0.255.255 area 0
 ```
