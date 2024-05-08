@@ -57,8 +57,8 @@ ip cef
 ! audio and video. IP multicast routing enables a host (source) to send packets to a group of hosts (receivers) anywhere
 ! within the IP network by using a special form of IP address called the IP multicast group address.
 ip multicast-routing
-! The algorithm attempts to discover the largest IP datagram that can be sent without fragmentation through an IP path and
-! maximizes data transfer throughput.
+! The algorithm attempts to discover the largest IP datagram that can be sent without fragmentation through an IP path
+! and maximizes data transfer throughput.
 ip tcp path-mtu-discovery
 ! The TCP Selective Acknowledgment feature improves performance if multiple packets are lost from one TCP window of
 ! data.
@@ -168,6 +168,7 @@ ip dns server
 ! Gateway: '10.88.0.1'.
 ! DNS:     '10.88.0.1'.
 ! -------------------------------------------------------------------------------------------------------------------- !
+service dhcp FastEthernet0/1
 ip dhcp excluded-address 10.88.0.1
 ip dhcp excluded-address 10.88.0.2 10.88.200.0
 ip dhcp pool LAN
@@ -178,7 +179,7 @@ ip dhcp pool LAN
 ! -------------------------------------------------------------------------------------------------------------------- !
 ! NAT.
 ! -------------------------------------------------------------------------------------------------------------------- !
-ip nat inside source list ACL_NAT interface FastEthernet0/0 overload
+ip nat inside source route-map MAP_ETH_00 interface FastEthernet0/0 overload
 ! -------------------------------------------------------------------------------------------------------------------- !
 ! ACL.
 ! -------------------------------------------------------------------------------------------------------------------- !
@@ -193,5 +194,9 @@ ip access-list standard ACL_VTY
 ip access-list standard ACL_NAT
   remark Hosts permitted to NAT.
   permit 10.88.0.0 0.0.255.255
+!
+route-map MAP_ETH_00 permit 10
+  match ip address ACL_NAT
+  match interface FastEthernet0/0
 !
 end
