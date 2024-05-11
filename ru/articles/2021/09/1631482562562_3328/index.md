@@ -3,7 +3,7 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Установка Proxmox VE на Debian 11 (Bullseye)'
+title: 'Proxmox VE: Установка на Debian 11 (Bullseye)'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1566443280617-35db331c54fb'
