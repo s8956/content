@@ -10,69 +10,31 @@
 ! SERVICES.
 ! -------------------------------------------------------------------------------------------------------------------- !
 service password-encryption
-! Date and time in debug mode.
 service timestamps debug datetime msec localtime show-timezone
-! Date and time in logs.
 service timestamps log datetime msec localtime show-timezone
-! The service tcp-keepalives-in and service tcp-keepalives-out global configuration commands enable a device to send TCP
-! keepalives for TCP sessions. This configuration must be used in order to enable TCP keepalives on inbound connections
-! to the device and outbound connections from the device. This ensures that the device on the remote end of the
-! connection is still accessible and that half-open or orphaned connections are removed from the local Cisco IOS device.
 service tcp-keepalives-in
 service tcp-keepalives-out
-! Because there is a chance that more than one log message can have the same timestamp, you can display messages with
-! sequence numbers so that you can unambiguously refer to a single message.
 service sequence-numbers
-! The packet assembler/disassembler (PAD) service supports X.25 links.
-! This service is on by default, but it is not needed unless your router is using X.25.
 no service pad
-! TCP and UDP small servers are servers (daemons, in Unix parlance) that run in the router which are useful for
-! diagnostics.
 no service udp-small-servers
 no service tcp-small-servers
-! Finger Service can be used to find out the users who are logged in to a Cisco Router / Switch.
-! If "finger" service is enabled, when users connect to the router using "telnet <ip_address> finger",
-! router will reveal the users who are logged in and then close the telnet connection.
 no service finger
 ! -------------------------------------------------------------------------------------------------------------------- !
 ! GENERAL.
 ! -------------------------------------------------------------------------------------------------------------------- !
-! Setting clock time zone.
 clock timezone UTC 3
-! Updates the hardware clock with a new software clock setting.
 !clock update-calendar
-! Setting Cisco hostname.
 hostname gw1
-! The amount of memory allocated controls how many log messages it can contain before it fills up and starts to
-! overwrite the older messages.
 logging buffered 4096
-! Logging critical messages at the console is important for an organization managing technology risk.
-! Turning on console logging for critical messages.
 logging console critical
-! Cisco Express Forwarding (CEF) switching is a proprietary form of scalable switching intended to tackle the problems
-! associated with demand caching. With CEF switching, the information which is conventionally stored in a route cache is
-! split up over several data structures.
 ip cef
-! IP multicasting is a more efficient way to use network resources, especially for bandwidth-intensive services such as
-! audio and video. IP multicast routing enables a host (source) to send packets to a group of hosts (receivers) anywhere
-! within the IP network by using a special form of IP address called the IP multicast group address.
 ip multicast-routing
-! The algorithm attempts to discover the largest IP datagram that can be sent without fragmentation through an IP path
-! and maximizes data transfer throughput.
 ip tcp path-mtu-discovery
-! The TCP Selective Acknowledgment feature improves performance if multiple packets are lost from one TCP window of
-! data.
 ip tcp selective-ack
-! The remote host implements TCP timestamps and therefore allows to compute the uptime. Vulnerability Detection Result.
 ip tcp timestamp
-! Source routing is a technique whereby the sender of a packet can specify the route that a packet should take through
-! the network.
 no ip source-route
-! Disable the Bootstrap Protocol (BOOTP) service on your routing device. BootP allows a router to issue IP addresses.
 no ip bootp server
-! Reserving memory for critical notifications (KB).
 memory reserve critical 4096
-! Reserve memory for console access (KB).
 !memory reserve console 512
 ! -------------------------------------------------------------------------------------------------------------------- !
 ! Authentication, Authorization, and Accounting (AAA).
@@ -117,7 +79,6 @@ ip ssh authentication-retries 5
 ip ssh version 2
 ! -------------------------------------------------------------------------------------------------------------------- !
 ! SNMP server.
-! CISCO_ID - community ID.
 ! -------------------------------------------------------------------------------------------------------------------- !
 snmp-server community CISCO_ID ro ACL_SNMP_RO
 snmp-server location Petrovka 37, 2 floor, room 220
@@ -129,22 +90,16 @@ ip access-list standard ACL_SNMP_RO
 ! -------------------------------------------------------------------------------------------------------------------- !
 ! INTERFACES.
 ! -------------------------------------------------------------------------------------------------------------------- !
-! WAN.
 interface FastEthernet0/0
   ip address dhcp
   ip nat outside
-! LAN.
 interface FastEthernet0/1
   ip address 10.88.0.1 255.255.0.0
   ip nat inside
-! Loopback #0.
 interface Loopback0
   ip address 10.90.10.1 255.255.255.255
-! Loopback #1.
 interface Loopback1
-  ip address 10.90.20.1 255.255.255.0
-  ip nat inside
-! Disable HTTP server.
+  ip address 10.90.20.1 255.255.255.255
 no ip http server
 no ip http secure-server
 ! -------------------------------------------------------------------------------------------------------------------- !
@@ -163,11 +118,6 @@ ip dns server
 ! -------------------------------------------------------------------------------------------------------------------- !
 ! DHCP.
 ! -------------------------------------------------------------------------------------------------------------------- !
-! IP pool: '10.88.200.0 - 10.88.255.254'.
-! Network: '10.88.0.0/16'.
-! Gateway: '10.88.0.1'.
-! DNS:     '10.88.0.1'.
-! -------------------------------------------------------------------------------------------------------------------- !
 service dhcp FastEthernet0/1
 ip dhcp excluded-address 10.88.0.1
 ip dhcp excluded-address 10.88.0.2 10.88.200.0
@@ -184,13 +134,11 @@ ip nat inside source route-map MAP_ETH_00 interface FastEthernet0/0 overload
 ! ACL.
 ! -------------------------------------------------------------------------------------------------------------------- !
 !
-! Access to a Cisco terminal.
 ip access-list standard ACL_VTY
   remark Hosts permitted to VTY.
   permit 10.0.0.0 0.255.255.255
   permit 172.16.0.0 0.15.255.255
   permit 192.168.0.0 0.0.255.255
-! NAT (overload).
 ip access-list standard ACL_NAT
   remark Hosts permitted to NAT.
   permit 10.88.0.0 0.0.255.255
