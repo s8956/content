@@ -95,8 +95,8 @@ draft: 0
 
 ### Аккаунты
 
-- `aaa new-model` - включение новой модели системы аутентификации авторизации и учета событий, встроенная в операционную систему Cisco IOS.
-- `aaa authentication login default local` - база логинов и паролей хранится на устройстве Cisco.
+- `aaa new-model` - включение новой модели системы аутентификации авторизации и учета событий, встроенная в операционную систему {{< tag "Cisco" >}} IOS.
+- `aaa authentication login default local` - база логинов и паролей хранится на устройстве {{< tag "Cisco" >}}.
 - `aaa authentication ppp default local` - локальная аутентификация для сеансов PPP.
 - `enable password qwerty-en` - пароль для режима `enable`.
 - `username admin privilege 15 password qwerty-admin` - добавление нового пользователя `admin`.
