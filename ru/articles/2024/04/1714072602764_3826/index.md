@@ -16,7 +16,8 @@ tags:
 authors:
   - 'KaiKimera'
 sources:
-  - ''
+  - 'https://ciscozine.com/nat-and-pat-a-complete-explanation/'
+  - 'https://danjmcintyre.com/2020/02/13/cisco-router-dual-wan-uplinks-with-nat/'
 license: 'CC-BY-SA-4.0'
 complexity: '1'
 toc: 1
