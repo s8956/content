@@ -3,21 +3,28 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: '1717320810477_4439'
+title: 'Пользователи и группы в FreeBSD и Linux'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1582675002932-42541ef3c690'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'inDev'
+  - 'linux'
+  - 'bsd'
+  - 'terminal'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'freebsd'
+  - 'linux'
+  - 'adduser'
+  - 'usermod'
+  - 'userdel'
+  - 'lock'
+  - 'unlock'
+  - 'groupmod'
+  - 'useradd'
+  - 'gpasswd'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -43,14 +50,16 @@ hash: 'eea13ebc7ca98721d017d911a8f6354d4605e58f'
 uuid: 'eea13ebc-7ca9-5721-b017-d911a8f6354d'
 slug: 'eea13ebc-7ca9-5721-b017-d911a8f6354d'
 
-draft: 1
+draft: 0
 ---
 
-
+Набор команд для работы с группами и пользователями в {{< tag "Linux" >}} и {{< tag "FreeBSD" >}}.
 
 <!--more-->
 
 ## FreeBSD
+
+Во {{< tag "FreeBSD" >}} для работы с пользователями и группами, можно использовать несколько инструментов. Я использую мощную утилиту `pw`. Конфигурация утилиты `pw` находится в файле `/etc/pw.conf`.
 
 ### Создать пользователя
 
@@ -92,7 +101,7 @@ u='username'; pw lock "${u}";
 u='username'; pw unlock "${u}";
 ```
 
-### Добавить пользователя в группу
+### Добавить пользователя в дополнительную группу
 
 - Добавить пользователя `username` в группу `www`:
 
@@ -106,6 +115,14 @@ u='username'; pw groupmod www -m "${u}";
 u='username'; pw usermod "${u}" -G wheel,devels;
 ```
 
+### Удалить пользователя из дополнительной группы
+
+- Удалить пользователя `username` из группы `www`:
+
+```bash
+u='username'; pw groupmod www -d "${u}";
+```
+
 ### Посмотреть информацию о пользователе
 
 - Посмотреть информацию о пользователе `username`:
@@ -116,12 +133,14 @@ u='username'; pw show user "${u}";
 
 ## Linux
 
+В отличие от {{< tag "FreeBSD" >}}, в {{< tag "Linux" >}} можно пользоваться стандартными инструментами `useradd`, `usermod` и `userdel`.
+
 ### Создать пользователя
 
 - Создать пользователя `username`, добавить его в группу `sudo`, указать комментарий `User username` и задать пароль:
 
 ```bash
-u='username'; useradd "${u}" -m -G sudo -c "User ${u}" && passwd "${u}";
+u='username'; useradd -m -G sudo -c "User ${u}" "${u}" && passwd "${u}";
 ```
 
 ### Переименовать пользователя
@@ -137,5 +156,53 @@ u_old='username_old'; u_new='username_new'; usermod -l "${u_new}" -d "/home/${u_
 - Удалить пользователя `username` и его домашнюю директорию (`-r`):
 
 ```bash
-u='username'; userdel "${u}" -r;
+u='username'; userdel -r "${u}";
+```
+
+### Заблокировать пользователя
+
+- Заблокировать пользователя `username`:
+
+```bash
+u='username'; usermod -L "${u}";
+```
+
+### Разблокировать пользователя
+
+- Разблокировать пользователя `username`:
+
+```bash
+u='username'; usermod -U "${u}";
+```
+
+### Добавить пользователя в дополнительную группу
+
+- Добавить пользователя `username` в группу `www`:
+
+```bash
+u='username'; usermod -aG www "${u}";
+```
+
+### Удалить пользователя из дополнительной группы
+
+- Удалить пользователя `username` из группы `www`:
+
+```bash
+u='username'; gpasswd -d "${u}" www;
+```
+
+### Изменить основную группу пользователя
+
+- Изменить основную группу пользователя `username` на группу `www`:
+
+```bash
+u='username'; usermod -g www "${u}";
+```
+
+### Заменить у пользователя дополнительные группы
+
+- Заменить у пользователя `username` все дополнительные группы на группу `www`:
+
+```bash
+u='username'; usermod -G www "${u}";
 ```
