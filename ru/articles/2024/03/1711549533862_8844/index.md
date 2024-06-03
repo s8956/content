@@ -93,7 +93,6 @@ google.com.             112     IN      A       173.194.222.102
 ```
 
 Где:
-
 - `;; SERVER: 172.16.18.22#53(172.16.18.22) (UDP)` - сервер DNS, с которого пришёл ответ.
 
 ### Drill
@@ -128,7 +127,6 @@ google.com.     184     IN      A       216.58.210.142
 ```
 
 Где:
-
 - `;; SERVER: 172.16.18.22#53(172.16.18.22) (UDP)` - сервер DNS, с которого пришёл ответ.
 
 ### NSLookUp
@@ -171,7 +169,6 @@ Address: 2a00:1450:4010:c0b::65
 ```
 
 Где:
-
 - `Server: 172.16.18.22` - сервер DNS, с которого пришёл ответ.
 
 ## Информация по DNS-записям
@@ -223,7 +220,6 @@ smtp.google.com.        300     IN      AAAA    2a00:1450:4010:c06::1b
 ```
 
 Где:
-
 - `google.com. 300 IN MX 10 smtp.google.com.` - MX-запись домена `google.com`.
 
 ### Drill
@@ -263,7 +259,6 @@ smtp.google.com.        30      IN      A       142.250.150.26
 ```
 
 Где:
-
 - `google.com. 300 IN MX 10 smtp.google.com.` - MX-запись домена `google.com`.
 
 ### NSLookUp
@@ -293,7 +288,6 @@ smtp.google.com internet address = 173.194.220.26
 ```
 
 Где:
-
 - `google.com MX preference = 10, mail exchanger = smtp.google.com` - MX-запись домена `google.com`.
 
 ## Трассировка

@@ -98,7 +98,6 @@ $cp = "";
 ```
 
 Где:
-
 - `{$author['avatar']}` - аватар.
 - `{$author['title']}` - ранг.
 - `{$author['member_rank_img']}` - изображения ранга.
@@ -248,7 +247,6 @@ $INFO['board_url'] = "http://".$_SERVER["HTTP_HOST"];
 $INFO['board_url'] = "http://".$_SERVER["HTTP_HOST"]."/forum";
 ```
 Где:
-
 - `forum` - папка форума.
 
 ## Как сделать, чтобы прикреплённые имена файлов имели русские символы в названии?

@@ -91,7 +91,6 @@ Dism /Get-ImageInfo /ImageFile:"C:\BuildFarm\WIM\install.wim"
 ```
 
 Где:
-
 - `/Get-ImageInfo` - получить информацию о версиях операционной системы, находящихся в WIM-образ.
 - `/ImageFile` - путь к WIM-образу.
 
@@ -140,7 +139,6 @@ Dism /Mount-Image /ImageFile:"C:\BuildFarm\WIM\install.wim" /MountDir:"C:\BuildF
 ```
 
 Где:
-
 - `/Mount-Image` - команда на монтирование {{< tag "WIM" >}}-образа.
 - `/MountDir` - путь к директории, в которую необходимо поместить содержимое монтируемого {{< tag "WIM" >}}-образа.
 - `/index:5` - номер версии дистрибутива ОС. Номер можно узнать командой `/Get-ImageInfo`.
@@ -175,7 +173,6 @@ Dism /Cleanup-Mountpoints
 Dism /Image:"C:\BuildFarm\MNT" /Add-Package /PackagePath:"C:\BuildFarm\UPD"
 ```
 Где:
-
 - `/Image` - путь к директории, в которой находится содержимое примонтированного WIM-образа.
 - `/Add-Package` - команда на добавление пакетов (обновлений) в WIM-образ.
   - `/PackagePath` - путь к директории, в которой находятся пакеты (обновления) для интеграции в WIM-образ.
@@ -188,7 +185,6 @@ Dism /Image:"C:\BuildFarm\MNT" /Add-Package /PackagePath:"C:\BuildFarm\UPD"
 Dism /Image:"C:\BuildFarm\MNT" /Get-Packages
 ```
 Где:
-
 - `/Image` - путь к директории, в которой находится содержимое примонтированного {{< tag "WIM" >}}-образа.
 - `/Get-Packages` - команда для получения информации о интегрированных пакетах примонтированного {{< tag "WIM" >}}-образа.
 
@@ -201,7 +197,6 @@ Dism /Image:"C:\BuildFarm\MNT" /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 
 Где:
-
 - `/Image` - путь к директории, в которой находится содержимое примонтированного {{< tag "WIM" >}}-образа.
 - `/Cleanup-Image` - очистка и восстановление образа.
   - `/StartComponentCleanup` - удаляет заменённые компоненты и уменьшает размер хранилища компонентов.
@@ -216,7 +211,6 @@ Dism /Image:"C:\BuildFarm\MNT" /Cleanup-Image /ScanHealth
 ```
 
 Где:
-
 - `/Image` - путь к директории, в которой находится содержимое примонтированного {{< tag "WIM" >}}-образа.
 - `/Cleanup-Image` - очистка и восстановление образа.
   - `/ScanHealth` - сканирование образа на наличие повреждений хранилища компонентов.
@@ -230,7 +224,6 @@ Dism /Unmount-Image /MountDir:"C:\BuildFarm\MNT" /Commit
 ```
 
 Где:
-
 - `/Unmount-Image` - команда для отмонтирования {{< tag "WIM" >}}-образа.
 - `/MountDir` - путь к директории, в которой находится содержимое примонтированного {{< tag "WIM" >}}-образа.
 - `/Commit` - сохранение совершённых изменений в {{< tag "WIM" >}}-образе.

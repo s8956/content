@@ -223,7 +223,6 @@ gpg --delete-secret-key 'JTM4BAVLPI8F0XHR'
 ```
 
 Где:
-
 - `--delete-secret-key 'JTM4BAVLPI8F0XHR'` - удаление приватного ключа с идентификатором `JTM4BAVLPI8F0XHR`.
 
 2. Удаление публичного ключа:
@@ -233,7 +232,6 @@ gpg --delete-key 'JTM4BAVLPI8F0XHR'
 ```
 
 Где:
-
 - `--delete-key 'JTM4BAVLPI8F0XHR'` - удаление публичного ключа с идентификатором `JTM4BAVLPI8F0XHR`.
 
 Эти две команды можно объединить в одну при помощи параметра `--delete-secret-and-public-key`:
@@ -243,7 +241,6 @@ gpg --delete-secret-and-public-key 'JTM4BAVLPI8F0XHR'
 ```
 
 Где:
-
 - `--delete-secret-and-public-key 'JTM4BAVLPI8F0XHR'` - удаление приватного и публичного ключа с идентификатором `JTM4BAVLPI8F0XHR`.
 
 ## Скрипт автоматической генерации ключей

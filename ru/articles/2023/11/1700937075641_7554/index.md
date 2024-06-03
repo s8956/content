@@ -73,7 +73,6 @@ sed -i 's|RELEASE_OLD|RELEASE_NEW|g' '/etc/apt/sources.list'
 ```
 
 Где:
-
 - `RELEASE_OLD` - старое имя релиза.
 - `RELEASE_NEW` - новое имя релиза.
 
