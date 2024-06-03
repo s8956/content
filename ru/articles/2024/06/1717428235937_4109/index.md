@@ -6,15 +6,17 @@
 title: 'Создание расширяемого хранилища LVM'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1589995186011-a7b485edc4bf'
 categories:
   - 'linux'
   - 'terminal'
-  - 'cat_03'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'lvm'
+  - 'pv'
+  - 'vg'
+  - 'lv'
+  - 'resize2fs'
+  - 'xfs_growfs'
 authors:
   - 'KaiKimera'
 sources:
@@ -42,14 +44,25 @@ hash: '2b75198c776c6ed94037976c6d3021f9dcadad1d'
 uuid: '2b75198c-776c-5ed9-9037-976c6d3021f9'
 slug: '2b75198c-776c-5ed9-9037-976c6d3021f9'
 
-draft: 1
+draft: 0
 ---
 
-
+Рассматриваем работу с LVM, управлением логическими томами. Вкратце описываю процессы и привожу полноценные команды для создания, изменения и удаления LVM.
 
 <!--more-->
 
+{{< alert "important" >}}
+Все команды в статье предполагают предварительные настройки по каждый отдельный хост. Будьте аккуратными!
+{{< / alert >}}
+
 ## Создание LVM
+
+Чтобы создать LVM, необходимо:
+1. Создать физический том **PV** на диске.
+2. Создать группу логических томов **VG**.
+3. Создать логические тома **LV**.
+
+Команда для создания LVM с одним логическим томом `storage` 100% размера:
 
 ```bash
 pv='/dev/sdb'; vg='data'; lv='storage'; pvcreate "${pv}" && vgcreate "${vg}" "${pv}" && lvcreate -l 100%FREE -n "${lv}" "${vg}";
@@ -60,9 +73,23 @@ pv='/dev/sdb'; vg='data'; lv='storage'; pvcreate "${pv}" && vgcreate "${vg}" "${
 - `vg='data'` - имя группы томов (VG).
 - `lv='storage'` - имя логического тома (LV).
 
+### Форматирование LV
+
+Форматирование логического тома **LV** в файловую систему **EXT4**:
+
 ```bash
 mkfs.ext4 "/dev/${vg}/${lv}"
 ```
+
+Форматирование логического тома **LV** в файловую систему **XFS**:
+
+```bash
+mkfs.xfs "/dev/${vg}/${lv}"
+```
+
+### Монтирование LV
+
+Создание точки монтирования и монтирование логического тома **LV** в директорию `/home/storage`:
 
 ```bash
 mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage ext4 defaults 0 0" >> '/etc/fstab';
@@ -70,29 +97,44 @@ mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage ext4 defaults 0 0"
 
 ## Расширение LVM
 
+Для того, чтобы расширить логический том **LV**, необходимо:
+1. Расширить физический том **PV**.
+2. Расширить логические тома **LV**.
+3. Расширить файловую систему.
+
+Команда в одну строку для расширения логического тома **LV**:
+
 ```bash
-pv='/dev/sdb'; ext='/dev/sdc'; vg='data'; lv='storage'; pvresize "${pv}" && vgextend "${vg}" "${ext}" && lvextend -l 100%FREE "/dev/${vg}/${lv}";
+pv='/dev/sdb'; vg='data'; lv='storage'; pvresize "${pv}" && lvextend -l 100%FREE "/dev/${vg}/${lv}";
 ```
 
 Где:
-- `pv='/dev/sdb'` - диск, который нужно расширить.
-- `ext='/dev/sdc'` - дополнительный диск для расширения.
+- `pv='/dev/sdb'` - физический том PV, который нужно расширить.
 - `vg='data'` - имя группы томов (VG).
 - `lv='storage'` - имя логического тома (LV).
 
-### EXT4
+### Расширение ФС
+
+Расширить файловую систему **EXT4**:
 
 ```bash
 resize2fs "/dev/${vg}/${lv}"
 ```
 
-### XFS
+Расширить файловую систему **XFS**:
 
 ```bash
 xfs_growfs "/dev/${vg}/${lv}"
 ```
 
 ## Удаление LVM
+
+Для удаления LVM, необходимо:
+1. Удалить логические тома **LV**.
+2. Удалить группу томов **VG**.
+3. Удалить физический том **PV**.
+
+Для удаления LVM, нужно выполнить команду:
 
 ```bash
 pv='/dev/sdb'; vg='data'; lv='storage'; lvremove "/dev/${vg}/${lv}" && vgremove "${vg}" && pvremove "${pv}";
@@ -105,13 +147,19 @@ pv='/dev/sdb'; vg='data'; lv='storage'; lvremove "/dev/${vg}/${lv}" && vgremove 
 
 ## Информация по LVM
 
+Отображение информации о физическом томе **PV**:
+
 ```bash
 pvdisplay
 ```
 
+Отображение информации о группе логических томов **VG**:
+
 ```bash
 vgdisplay
 ```
+
+Отображение информации о логических томах **LV**:
 
 ```bash
 lvdisplay
