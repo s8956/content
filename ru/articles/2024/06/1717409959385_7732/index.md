@@ -6,7 +6,7 @@
 title: 'RHEL: Статический IP-адрес'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7'
 categories:
   - 'terminal'
   - 'linux'
