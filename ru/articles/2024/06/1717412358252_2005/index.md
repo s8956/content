@@ -3,15 +3,15 @@
 # General settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'FreeBSD: Пользователи и группы'
+title: 'Linux: Пользователи и группы'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1582675002932-42541ef3c690'
+  - 'https://images.unsplash.com/photo-1580780965002-6ca357516eb1'
 categories:
-  - 'bsd'
+  - 'linux'
   - 'terminal'
 tags:
-  - 'freebsd'
+  - 'linux'
   - 'adduser'
   - 'usermod'
   - 'userdel'
@@ -33,35 +33,35 @@ comments: 1
 # Date settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-date: '2024-06-02T12:33:30+03:00'
-publishDate: '2024-06-02T12:33:30+03:00'
+date: '2024-06-03T13:59:22+03:00'
+publishDate: '2024-06-03T13:59:22+03:00'
 expiryDate: ''
-lastMod: '2024-06-02T12:33:30+03:00'
+lastMod: '2024-06-03T13:59:22+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # Meta settings.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 type: 'articles'
-hash: 'eea13ebc7ca98721d017d911a8f6354d4605e58f'
-uuid: 'eea13ebc-7ca9-5721-b017-d911a8f6354d'
-slug: 'eea13ebc-7ca9-5721-b017-d911a8f6354d'
+hash: 'b29b331dac934193f3efbeab5a0f8dff02540b2d'
+uuid: 'b29b331d-ac93-5193-83ef-beab5a0f8dff'
+slug: 'b29b331d-ac93-5193-83ef-beab5a0f8dff'
 
 draft: 0
 ---
 
-Набор команд для работы с группами и пользователями в {{< tag "FreeBSD" >}}.
+Набор команд для работы с группами и пользователями в {{< tag "Linux" >}}.
 
 <!--more-->
 
-Во {{< tag "FreeBSD" >}} для работы с пользователями и группами, можно использовать несколько инструментов. Я использую мощную утилиту `pw`. Конфигурация утилиты `pw` находится в файле `/etc/pw.conf`.
+В отличие от {{< tag "FreeBSD" >}}, в {{< tag "Linux" >}} можно пользоваться стандартными инструментами `useradd`, `usermod` и `userdel`.
 
 ### Создать пользователя
 
-- Создать пользователя `username`, добавить его в группу `wheel`, указать комментарий `User username` и задать пароль:
+- Создать пользователя `username`, добавить его в группу `sudo`, указать комментарий `User username` и задать пароль:
 
 ```bash
-u='username'; pw adduser "${u}" -m -G wheel -c "User ${u}" && passwd "${u}";
+u='username'; useradd -m -G sudo -c "User ${u}" "${u}" && passwd "${u}";
 ```
 
 ### Переименовать пользователя
@@ -69,7 +69,7 @@ u='username'; pw adduser "${u}" -m -G wheel -c "User ${u}" && passwd "${u}";
 - Переименовать домашнюю директорию пользователя, переименовать пользователя и его группу:
 
 ```bash
-u_old='username_old'; u_new='username_new'; mv "/home/${u_old}" "/home/${u_new}" && pw usermod -n "${u_old}" -l "${u_new}" -d "/home/${u_new}" && pw groupmod -n "${u_old}" -l "${u_new}";
+u_old='username_old'; u_new='username_new'; usermod -l "${u_new}" -d "/home/${u_new}" -m "${u_old}" && groupmod -n "${u_new}" "${u_old}";
 ```
 
 ### Удалить пользователя
@@ -77,7 +77,7 @@ u_old='username_old'; u_new='username_new'; mv "/home/${u_old}" "/home/${u_new}"
 - Удалить пользователя `username` и его домашнюю директорию (`-r`):
 
 ```bash
-u='username'; pw userdel "${u}" -r;
+u='username'; userdel -r "${u}";
 ```
 
 ### Заблокировать пользователя
@@ -85,7 +85,7 @@ u='username'; pw userdel "${u}" -r;
 - Заблокировать пользователя `username`:
 
 ```bash
-u='username'; pw lock "${u}";
+u='username'; usermod -L "${u}";
 ```
 
 ### Разблокировать пользователя
@@ -93,7 +93,7 @@ u='username'; pw lock "${u}";
 - Разблокировать пользователя `username`:
 
 ```bash
-u='username'; pw unlock "${u}";
+u='username'; usermod -U "${u}";
 ```
 
 ### Добавить пользователя в дополнительную группу
@@ -101,13 +101,7 @@ u='username'; pw unlock "${u}";
 - Добавить пользователя `username` в группу `www`:
 
 ```bash
-u='username'; pw groupmod www -m "${u}";
-```
-
-- Заменить все текущие группы пользователя `username` на группы `wheel` и `devels`:
-
-```bash
-u='username'; pw usermod "${u}" -G wheel,devels;
+u='username'; usermod -aG www "${u}";
 ```
 
 ### Удалить пользователя из дополнительной группы
@@ -115,13 +109,21 @@ u='username'; pw usermod "${u}" -G wheel,devels;
 - Удалить пользователя `username` из группы `www`:
 
 ```bash
-u='username'; pw groupmod www -d "${u}";
+u='username'; gpasswd -d "${u}" www;
 ```
 
-### Посмотреть информацию о пользователе
+### Изменить основную группу пользователя
 
-- Посмотреть информацию о пользователе `username`:
+- Изменить основную группу пользователя `username` на группу `www`:
 
 ```bash
-u='username'; pw show user "${u}";
+u='username'; usermod -g www "${u}";
+```
+
+### Заменить у пользователя дополнительные группы
+
+- Заменить у пользователя `username` все дополнительные группы на группу `www`:
+
+```bash
+u='username'; usermod -G www "${u}";
 ```
