@@ -105,7 +105,7 @@ mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage ext4 defaults 0 0"
 Команда в одну строку для расширения логического тома **LV**:
 
 ```bash
-pv='/dev/sdb'; vg='data'; lv='storage'; pvresize "${pv}" && lvextend -l 100%FREE "/dev/${vg}/${lv}";
+pv='/dev/sdb'; vg='data'; lv='storage'; pvresize "${pv}" && lvextend -l +100%FREE "/dev/${vg}/${lv}";
 ```
 
 Где:
