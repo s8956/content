@@ -72,13 +72,13 @@ ls /dev/sg*
 - Проверить SATA-диск:
 
 ```bash
-sg='3'; smartctl -d sat --all "/dev/sg${sg}";
+sg='3'; smartctl -d sat --all "/dev/sg${sg}"
 ```
 
 - Проверить SCSI-диск:
 
 ```bash
-sg='5'; smartctl -d scsi --all "/dev/sg${sg}";
+sg='5'; smartctl -d scsi --all "/dev/sg${sg}"
 ```
 
 ## LSI MegaRAID
@@ -93,5 +93,5 @@ megacli -LdPdInfo -aALL | grep 'Id'
 - Посмотреть SMART конкретного диска:
 
 ```bash
-id='5'; smartctl -d megaraid,${id} --all /dev/sda;
+id='5'; smartctl -d megaraid,${id} --all /dev/sda
 ```
