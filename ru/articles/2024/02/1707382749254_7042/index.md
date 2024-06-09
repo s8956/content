@@ -81,7 +81,7 @@ mkdir -p /usr/local/etc/pkg/repos && echo 'FreeBSD: { url: "pkg+http://pkg.FreeB
 2. Обновить базу данных пакетов и обновить пакеты:
 
 ```bash
-pkg update -f && pkg upgrade
+pkg update -f && pkg upgrade --yes
 ```
 
 ## Установка пакетов
