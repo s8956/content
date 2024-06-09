@@ -65,7 +65,7 @@ freebsd-update fetch && freebsd-update install
 1. Запросить и применить обновления пакетов:
 
 ```bash
-pkg update -f && pkg upgrade
+pkg update -f && pkg upgrade --yes
 ```
 
 ## Переключение ветки пакетов

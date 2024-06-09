@@ -61,7 +61,7 @@ draft: 0
 - Создать пользователя `username`, добавить его в группу `wheel`, указать комментарий `User username` и задать пароль:
 
 ```bash
-u='username'; pw adduser "${u}" -m -G wheel -c "User ${u}" && passwd "${u}";
+u='username'; pw adduser "${u}" -m -G wheel -c "User ${u}" && passwd "${u}"
 ```
 
 ### Переименовать пользователя
@@ -69,7 +69,7 @@ u='username'; pw adduser "${u}" -m -G wheel -c "User ${u}" && passwd "${u}";
 - Переименовать домашнюю директорию пользователя, переименовать пользователя и его группу:
 
 ```bash
-u_old='username_old'; u_new='username_new'; mv "/home/${u_old}" "/home/${u_new}" && pw usermod -n "${u_old}" -l "${u_new}" -d "/home/${u_new}" && pw groupmod -n "${u_old}" -l "${u_new}";
+u_old='username_old'; u_new='username_new'; mv "/home/${u_old}" "/home/${u_new}" && pw usermod -n "${u_old}" -l "${u_new}" -d "/home/${u_new}" && pw groupmod -n "${u_old}" -l "${u_new}"
 ```
 
 ### Удалить пользователя
@@ -77,7 +77,7 @@ u_old='username_old'; u_new='username_new'; mv "/home/${u_old}" "/home/${u_new}"
 - Удалить пользователя `username` и его домашнюю директорию (`-r`):
 
 ```bash
-u='username'; pw userdel "${u}" -r;
+u='username'; pw userdel "${u}" -r
 ```
 
 ### Заблокировать пользователя
@@ -85,7 +85,7 @@ u='username'; pw userdel "${u}" -r;
 - Заблокировать пользователя `username`:
 
 ```bash
-u='username'; pw lock "${u}";
+u='username'; pw lock "${u}"
 ```
 
 ### Разблокировать пользователя
@@ -93,7 +93,7 @@ u='username'; pw lock "${u}";
 - Разблокировать пользователя `username`:
 
 ```bash
-u='username'; pw unlock "${u}";
+u='username'; pw unlock "${u}"
 ```
 
 ### Добавить пользователя в дополнительную группу
@@ -101,13 +101,13 @@ u='username'; pw unlock "${u}";
 - Добавить пользователя `username` в группу `www`:
 
 ```bash
-u='username'; pw groupmod www -m "${u}";
+u='username'; pw groupmod www -m "${u}"
 ```
 
 - Заменить все текущие группы пользователя `username` на группы `wheel` и `devels`:
 
 ```bash
-u='username'; pw usermod "${u}" -G wheel,devels;
+u='username'; pw usermod "${u}" -G wheel,devels
 ```
 
 ### Удалить пользователя из дополнительной группы
@@ -115,7 +115,7 @@ u='username'; pw usermod "${u}" -G wheel,devels;
 - Удалить пользователя `username` из группы `www`:
 
 ```bash
-u='username'; pw groupmod www -d "${u}";
+u='username'; pw groupmod www -d "${u}"
 ```
 
 ### Посмотреть информацию о пользователе
@@ -123,5 +123,5 @@ u='username'; pw groupmod www -d "${u}";
 - Посмотреть информацию о пользователе `username`:
 
 ```bash
-u='username'; pw show user "${u}";
+u='username'; pw show user "${u}"
 ```

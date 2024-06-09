@@ -65,7 +65,7 @@ draft: 0
 Команда для создания LVM с одним логическим томом `storage` 100% размера:
 
 ```bash
-pv='/dev/sdb'; vg='data'; lv='storage'; pvcreate "${pv}" && vgcreate "${vg}" "${pv}" && lvcreate -l 100%FREE -n "${lv}" "${vg}";
+pv='/dev/sdb'; vg='data'; lv='storage'; pvcreate "${pv}" && vgcreate "${vg}" "${pv}" && lvcreate -l 100%FREE -n "${lv}" "${vg}"
 ```
 
 Где:
@@ -92,13 +92,13 @@ mkfs.xfs "/dev/${vg}/${lv}"
 Создание точки монтирования и монтирование логического тома **LV** в директорию `/home/storage` с файловой системой **EXT4**:
 
 ```bash
-mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage ext4 defaults 0 0" >> '/etc/fstab';
+mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage ext4 defaults 0 0" >> '/etc/fstab'
 ```
 
 Создание точки монтирования и монтирование логического тома **LV** в директорию `/home/storage` с файловой системой **XFS**:
 
 ```bash
-mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage xfs defaults 0 0" >> '/etc/fstab';
+mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage xfs defaults 0 0" >> '/etc/fstab'
 ```
 
 ## Расширение LVM
@@ -111,7 +111,7 @@ mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage xfs defaults 0 0" 
 Команда в одну строку для расширения логического тома **LV**:
 
 ```bash
-pv='/dev/sdb'; vg='data'; lv='storage'; pvresize "${pv}" && lvextend -l +100%FREE "/dev/${vg}/${lv}";
+pv='/dev/sdb'; vg='data'; lv='storage'; pvresize "${pv}" && lvextend -l +100%FREE "/dev/${vg}/${lv}"
 ```
 
 Где:
@@ -143,7 +143,7 @@ xfs_growfs "/dev/${vg}/${lv}"
 Для удаления LVM, нужно выполнить команду:
 
 ```bash
-pv='/dev/sdb'; vg='data'; lv='storage'; lvremove "/dev/${vg}/${lv}" && vgremove "${vg}" && pvremove "${pv}";
+pv='/dev/sdb'; vg='data'; lv='storage'; lvremove "/dev/${vg}/${lv}" && vgremove "${vg}" && pvremove "${pv}"
 ```
 
 Где:

@@ -61,7 +61,7 @@ draft: 0
 - Создать пользователя `username`, добавить его в группу `sudo`, указать комментарий `User username` и задать пароль:
 
 ```bash
-u='username'; useradd -m -G sudo -c "User ${u}" "${u}" && passwd "${u}";
+u='username'; useradd -m -G sudo -c "User ${u}" "${u}" && passwd "${u}"
 ```
 
 ### Переименовать пользователя
@@ -69,7 +69,7 @@ u='username'; useradd -m -G sudo -c "User ${u}" "${u}" && passwd "${u}";
 - Переименовать домашнюю директорию пользователя, переименовать пользователя и его группу:
 
 ```bash
-u_old='username_old'; u_new='username_new'; usermod -l "${u_new}" -d "/home/${u_new}" -m "${u_old}" && groupmod -n "${u_new}" "${u_old}";
+u_old='username_old'; u_new='username_new'; usermod -l "${u_new}" -d "/home/${u_new}" -m "${u_old}" && groupmod -n "${u_new}" "${u_old}"
 ```
 
 ### Удалить пользователя
@@ -77,7 +77,7 @@ u_old='username_old'; u_new='username_new'; usermod -l "${u_new}" -d "/home/${u_
 - Удалить пользователя `username` и его домашнюю директорию (`-r`):
 
 ```bash
-u='username'; userdel -r "${u}";
+u='username'; userdel -r "${u}"
 ```
 
 ### Заблокировать пользователя
@@ -85,7 +85,7 @@ u='username'; userdel -r "${u}";
 - Заблокировать пользователя `username`:
 
 ```bash
-u='username'; usermod -L "${u}";
+u='username'; usermod -L "${u}"
 ```
 
 ### Разблокировать пользователя
@@ -93,7 +93,7 @@ u='username'; usermod -L "${u}";
 - Разблокировать пользователя `username`:
 
 ```bash
-u='username'; usermod -U "${u}";
+u='username'; usermod -U "${u}"
 ```
 
 ### Добавить пользователя в дополнительную группу
@@ -101,7 +101,7 @@ u='username'; usermod -U "${u}";
 - Добавить пользователя `username` в группу `www`:
 
 ```bash
-u='username'; usermod -aG www "${u}";
+u='username'; usermod -aG www "${u}"
 ```
 
 ### Удалить пользователя из дополнительной группы
@@ -109,7 +109,7 @@ u='username'; usermod -aG www "${u}";
 - Удалить пользователя `username` из группы `www`:
 
 ```bash
-u='username'; gpasswd -d "${u}" www;
+u='username'; gpasswd -d "${u}" www
 ```
 
 ### Изменить основную группу пользователя
@@ -117,7 +117,7 @@ u='username'; gpasswd -d "${u}" www;
 - Изменить основную группу пользователя `username` на группу `www`:
 
 ```bash
-u='username'; usermod -g www "${u}";
+u='username'; usermod -g www "${u}"
 ```
 
 ### Заменить у пользователя дополнительные группы
@@ -125,5 +125,5 @@ u='username'; usermod -g www "${u}";
 - Заменить у пользователя `username` все дополнительные группы на группу `www`:
 
 ```bash
-u='username'; usermod -G www "${u}";
+u='username'; usermod -G www "${u}"
 ```
