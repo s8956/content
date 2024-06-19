@@ -128,7 +128,7 @@ draft: 0
 
 ```
 # conf t
-(config)# boot system flash:IOS_FW.bin
+(config)# boot system flash IOS_FW.bin
 (config)# exit
 # reload
 ```
