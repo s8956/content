@@ -255,35 +255,7 @@ bash bash.openssl.ca.sh cert
 
 ## Быстрое создание само-подписанного сертификата
 
-Для быстрого создания само-подписанного сертификата, я написал пару небольших команд.
-
-### ECC (Elliptic Curve Cryptography)
-
-```bash
-ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; ossl_org='RiK'; ossl_host='example.com'; openssl ecparam -genkey -name 'prime256v1' -out "${ossl_host}.key" && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext 'basicConstraints = critical, CA:FALSE' -addext 'nsComment = OpenSSL Generated Certificate' -addext 'keyUsage = critical, digitalSignature, keyEncipherment' -addext 'extendedKeyUsage = serverAuth, clientAuth' -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl x509 -req -sha256 -days ${ossl_days} -copy_extensions 'copyall' -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
-```
-
-Где:
-- `ossl_days` - количество дней валидности сертификата.
-- `ossl_country` - страна.
-- `ossl_state` - штат.
-- `ossl_city` - город.
-- `ossl_org` - организация.
-- `ossl_host` - хост.
-
-### RSA (Rivest-Shamir-Adleman)
-
-```bash
-ossl_days='3650'; ossl_country='RU'; ossl_state='Russia'; ossl_city='Moscow'; ossl_org='RiK'; ossl_host='example.com'; openssl genrsa -out "${ossl_host}.key" 2048 && openssl req -new -sha256 -key "${ossl_host}.key" -out "${ossl_host}.csr" -subj "/C=${ossl_country}/ST=${ossl_state}/L=${ossl_city}/O=${ossl_org}/CN=${ossl_host}" -addext 'basicConstraints = critical, CA:FALSE' -addext 'nsComment = OpenSSL Generated Certificate' -addext 'keyUsage = critical, digitalSignature, keyEncipherment' -addext 'extendedKeyUsage = serverAuth, clientAuth' -addext "subjectAltName=DNS:${ossl_host},DNS:*.${ossl_host}" && openssl x509 -req -sha256 -days ${ossl_days} -copy_extensions 'copyall' -key "${ossl_host}.key" -in "${ossl_host}.csr" -out "${ossl_host}.crt" && openssl x509 -in "${ossl_host}.crt" -text -noout
-```
-
-Где:
-- `ossl_days` - количество дней валидности сертификата.
-- `ossl_country` - страна.
-- `ossl_state` - штат.
-- `ossl_city` - город.
-- `ossl_org` - организация.
-- `ossl_host` - хост.
+Для быстрого создания само-подписанного сертификата, я написал небольшой скрипт. Настройки скрипта необходимо адаптировать под себя.
 
 ### Скрипт
 
