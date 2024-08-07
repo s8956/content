@@ -5,7 +5,7 @@ Content for Hugo **SITE-0003**.
 ## Install
 
 ```
-git submodule add 'https://github.com/site-0003/content.git' 'content'
+git submodule add 'https://github.com/s8956/content.git' 'content'
 ```
 
 ## Update
