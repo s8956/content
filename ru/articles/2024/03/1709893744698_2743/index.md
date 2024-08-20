@@ -1,6 +1,6 @@
 ---
 # -------------------------------------------------------------------------------------------------------------------- #
-# General settings.
+# GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
 title: 'Работа с ZFS'
@@ -20,12 +20,12 @@ authors:
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
-complexity: '0'
+complexity: '1'
 toc: 1
 comments: 1
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# Date settings.
+# DATE
 # -------------------------------------------------------------------------------------------------------------------- #
 
 date: '2024-03-08T13:29:06+03:00'
@@ -34,7 +34,7 @@ expiryDate: ''
 lastMod: '2024-03-08T13:29:06+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# Meta settings.
+# META
 # -------------------------------------------------------------------------------------------------------------------- #
 
 type: 'articles'
@@ -49,77 +49,84 @@ draft: 1
 
 <!--more-->
 
-## RAID
-
-### Stripe (RAID0)
-
 ```bash
-zpool create -f <pool_name> <dev_0> <dev_1>
+ls -l '/dev/disk/by-path/'
 ```
 
-### Mirror (RAID1)
+## Пулы
+
+### RAID
+
+#### Stripe (RAID0)
 
 ```bash
-zpool create -f <pool_name> mirror <dev_0> <dev_1>
+p='data'; zpool create -o ashift=12 -O atime=off "${p}" 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
 ```
 
-### RAIDZ-1 (RAID5)
+#### Mirror (RAID1)
 
 ```bash
-zpool create -f <pool_name> raidz <dev_0> <dev_1> <dev_2>
+p='data'; zpool create -o ashift=12 -O atime=off "${p}" mirror 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
 ```
 
-### RAIDZ-2 (RAID6)
+#### RAIDZ-1 (RAID5)
 
 ```bash
-zpool create -f <pool_name> raidz2 <dev_0> <dev_1> <dev_2> <dev_3>
+p='data'; zpool create -o ashift=12 -O atime=off "${p}" raidz 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0'
 ```
 
-### RAIDZ-3
+#### RAIDZ-2 (RAID6)
 
 ```bash
-zpool create -f <pool_name> raidz3 <dev_0> <dev_1> <dev_2> <dev_3> <dev_4>
+p='data'; zpool create -o ashift=12 -O atime=off "${p}" raidz2 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'
 ```
 
-### RAID10
+#### RAIDZ-3
 
 ```bash
-zpool create -f <pool_name> mirror <dev_0> <dev_1> mirror <dev_2> <dev_3>
+p='data'; zpool create -o ashift=12 -O atime=off "${p}" raidz3 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0' 'pci-0000:01:00.0-scsi-0:1:4:0'
 ```
 
-## Cache / Log
-
-### Cache
+#### RAID10
 
 ```bash
-zpool add -f <pool_name> cache <dev_0>
+p='data'; zpool create -o ashift=12 -O atime=off "${p}" mirror 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' mirror 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'
 ```
 
-### Log
+### Cache / Log
+
+#### Cache
 
 ```bash
-zpool add -f <pool_name> log <dev_0>
+p='data'; zpool add "${p}" cache 'pci-0000:01:00.0-scsi-0:1:0:0'
 ```
 
-## Status
+#### Log
 
 ```bash
-zpool status -v <pool_name>
+p='data'; zpool add "${p}" log 'pci-0000:01:00.0-scsi-0:1:0:0'
 ```
 
-## List
+### Status
+
+```bash
+p='data'; zpool status -v "${p}"
+```
+
+### List
 
 ```bash
 zpool list
 ```
 
+### Destroy
+
 ```bash
-zfs list
+p='data'; zpool destroy "${p}"
 ```
 
-## Destroy
-
+## Тома
 
 ```bash
-zpool destroy -f <pool_name>
+p='data'; v='cloud'; zfs create "${p}/${v}"
 ```
