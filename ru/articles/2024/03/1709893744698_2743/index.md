@@ -81,7 +81,7 @@ ls -l '/dev/disk/by-id/'
 Создание обычного пула `data` из одного диска `pci-0000:01:00.0-scsi-0:1:0:0`:
 
 ```bash
-p='data'; zpool create -o ashift=12 -O atime=off "${p}" 'pci-0000:01:00.0-scsi-0:1:0:0'
+p='data'; zpool create -o 'ashift=12' -O 'atime=off' "${p}" 'pci-0000:01:00.0-scsi-0:1:0:0'
 ```
 
 ### Расширение пула
@@ -211,7 +211,7 @@ p='data'; zpool status -v "${p}"
 Создать **RAID-0** из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
 ```bash
-p='data'; zpool create -o ashift=12 -O atime=off "${p}" 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
+p='data'; zpool create -o 'ashift=12' -O 'atime=off' "${p}" 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
 ```
 
 #### Mirror (RAID1)
@@ -219,7 +219,7 @@ p='data'; zpool create -o ashift=12 -O atime=off "${p}" 'pci-0000:01:00.0-scsi-0
 Создать зеркало (**RAID-1**) из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
 ```bash
-p='data'; zpool create -o ashift=12 -O atime=off "${p}" mirror 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
+p='data'; zpool create -o 'ashift=12' -O 'atime=off' "${p}" mirror 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
 ```
 
 #### RAID10
@@ -227,7 +227,7 @@ p='data'; zpool create -o ashift=12 -O atime=off "${p}" mirror 'pci-0000:01:00.0
 Создать **RAID-10** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0`, `pci-0000:01:00.0-scsi-0:1:2:0` и `pci-0000:01:00.0-scsi-0:1:3:0`:
 
 ```bash
-p='data'; zpool create -o ashift=12 -O atime=off "${p}" mirror 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' mirror 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'
+p='data'; zpool create -o 'ashift=12' -O 'atime=off' "${p}" mirror 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' mirror 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'
 ```
 
 #### RAIDZ-1 (RAID5)
@@ -235,7 +235,7 @@ p='data'; zpool create -o ashift=12 -O atime=off "${p}" mirror 'pci-0000:01:00.0
 Создать **RAID-5** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0` и `pci-0000:01:00.0-scsi-0:1:2:0`:
 
 ```bash
-p='data'; zpool create -o ashift=12 -O atime=off "${p}" raidz 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0'
+p='data'; zpool create -o 'ashift=12' -O 'atime=off' "${p}" raidz 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0'
 ```
 
 #### RAIDZ-2 (RAID6)
@@ -243,7 +243,7 @@ p='data'; zpool create -o ashift=12 -O atime=off "${p}" raidz 'pci-0000:01:00.0-
 Создать **RAID-6** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0`, `pci-0000:01:00.0-scsi-0:1:2:0` и `pci-0000:01:00.0-scsi-0:1:3:0`
 
 ```bash
-p='data'; zpool create -o ashift=12 -O atime=off "${p}" raidz2 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'
+p='data'; zpool create -o 'ashift=12' -O 'atime=off' "${p}" raidz2 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'
 ```
 
 #### RAIDZ-3
@@ -251,7 +251,7 @@ p='data'; zpool create -o ashift=12 -O atime=off "${p}" raidz2 'pci-0000:01:00.0
 Создать **RAIDZ-3** из дисков `pci-0000:01:00.0-scsi-0:1:0:0` `pci-0000:01:00.0-scsi-0:1:1:0` `pci-0000:01:00.0-scsi-0:1:2:0` `pci-0000:01:00.0-scsi-0:1:3:0` и `pci-0000:01:00.0-scsi-0:1:4:0`:
 
 ```bash
-p='data'; zpool create -o ashift=12 -O atime=off "${p}" raidz3 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0' 'pci-0000:01:00.0-scsi-0:1:4:0'
+p='data'; zpool create -o 'ashift=12' -O 'atime=off' "${p}" raidz3 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0' 'pci-0000:01:00.0-scsi-0:1:4:0'
 ```
 
 ### Работа с ARC и ZIL
