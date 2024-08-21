@@ -284,6 +284,12 @@ p='data'; zpool add "${p}" log 'pci-0000:01:00.0-scsi-0:1:5:0'
 p='data'; v='cloud'; zfs create "${p}/${v}"
 ```
 
+Создать том `cloud` в пуле `data` и с точкой монтирования `/opt/cloud`:
+
+```bash
+p='data'; v='cloud'; zfs create -o "mountpoint=/opt/${v}" "${p}/${v}"
+```
+
 ### Удаление тома
 
 Удалить том `cloud` в пуле `data`:
