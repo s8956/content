@@ -312,3 +312,17 @@ p='data'; v='secret'; zfs create -o 'encryption=on' -o 'keyformat=passphrase' "$
 - `keyformat=passphrase` - тип шифрования "парольная фраза".
 
 При создании тома `secret`, {{< tag "ZFS" >}} попросит ввести парольную фразу для шифрования данных.
+
+## Снимки
+
+### Создание снимка
+
+```bash
+p='data'; v='cloud'; s='2019-06-24'; zfs snapshot "${p}/${v}@${s}"
+```
+
+### Удаление снимка
+
+```bash
+p='data'; v='cloud'; s='2019-06-24'; zfs destroy "${p}/${v}@${s}"
+```
