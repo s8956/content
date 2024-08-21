@@ -107,7 +107,7 @@ p='data'; zpool online -e "${p}" 'pci-0000:03:00.0-scsi-0:1:0:0'
 Включение автоматического расширения пула `data`:
 
 ```bash
-p='data'; zpool set autoexpand=on "${p}"
+p='data'; zpool set 'autoexpand=on' "${p}"
 ```
 
 ### Подключение и отключение дисков
