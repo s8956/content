@@ -315,14 +315,60 @@ p='data'; v='secret'; zfs create -o 'encryption=on' -o 'keyformat=passphrase' "$
 
 ## Снимки
 
-### Создание снимка
+### Список снимков
+
+Показать список всех снимков:
 
 ```bash
-p='data'; v='cloud'; s='2019-06-24'; zfs snapshot "${p}/${v}@${s}"
+zfs list -t 'snapshot'
 ```
 
-### Удаление снимка
+Показать список снимков тома `cloud` в пуле `data`:
 
 ```bash
-p='data'; v='cloud'; s='2019-06-24'; zfs destroy "${p}/${v}@${s}"
+p='data'; v='cloud'; zfs list -r -t 'snapshot' -o 'name,creation' "${p}/${v}"
+```
+
+### Создание снимков
+
+Создать снимок `2024-08-21.19-32-02` тома `cloud` в пуле `data`:
+
+```bash
+p='data'; v='cloud'; s=$( date '+%F.%H-%M-%S' ); zfs snapshot "${p}/${v}@${s}"
+```
+
+Создать снимок `2024-08-21.19-32-02` тома `cloud` и всех его дочерних томов в пуле `data`:
+
+```bash
+p='data'; v='cloud'; s=$( date '+%F.%H-%M-%S' ); zfs snapshot -r "${p}/${v}@${s}"
+```
+
+### Переименование снимков
+
+Переименовать снимок `name_OLD` тома `cloud` в пуле `data`:
+
+```bash
+p='data'; v='cloud'; zfs rename "${p}/${v}@name_OLD" 'name_NEW'
+```
+
+Переименовать снимок `name_OLD` тома `cloud` и во всех его дочерних томов в пуле `data`:
+
+```bash
+p='data'; v='cloud'; zfs rename -r "${p}/${v}@name_OLD" 'name_NEW'
+```
+
+### Откат данных к снимку
+
+Выполнить откат данных к снимку `2024-08-21.19-32-02` тома `cloud` в пуле `data`:
+
+```bash
+p='data'; v='cloud'; zfs rollback "${p}/${v}@2024-08-21.19-32-02"
+```
+
+### Удаление снимков
+
+Удалить снимок `2024-08-21.19-32-02` тома `cloud` в пуле `data`:
+
+```bash
+p='data'; v='cloud'; zfs destroy "${p}/${v}@2024-08-21.19-32-02"
 ```
