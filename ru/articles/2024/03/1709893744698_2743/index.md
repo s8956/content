@@ -303,7 +303,7 @@ p='data'; v='cloud'; zfs destroy "${p}/${v}"
 Создать том `secret` в пуле `data` и зашифровать его парольной фразой:
 
 ```bash
-p='data'; v='secret'; zfs create -o encryption=on -o keyformat=passphrase "${p}/${v}"
+p='data'; v='secret'; zfs create -o 'encryption=on' -o 'keyformat=passphrase' "${p}/${v}"
 ```
 
 Где:
