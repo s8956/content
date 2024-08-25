@@ -372,3 +372,65 @@ p='data'; v='cloud'; zfs rollback "${p}/${v}@2024-08-21.19-32-02"
 ```bash
 p='data'; v='cloud'; zfs destroy "${p}/${v}@2024-08-21.19-32-02"
 ```
+
+## Оптимизации
+
+Специализированные настройки ZFS под конкретные задачи.
+
+### PostgreSQL
+
+Создать основной том `pgsql`:
+
+```bash
+p='data'; v='pgsql'; zfs create "${p}/${v}"
+```
+
+Создать специальный том `pgsql/data` для баз данных:
+
+```bash
+p='data'; v='pgsql/data'; zfs create -o 'recordsize=32K' "${p}/${v}"
+```
+
+Создать специальный том `pgsql/wal` для WAL:
+
+```bash
+p='data'; v='pgsql/wal'; zfs create -o 'recordsize=32K' "${p}/${v}"
+```
+
+Откорректировать настройки PostgreSQL:
+
+```ini
+data_directory = '/data/pgsql/data'
+full_page_writes = off
+wal_init_zero = off
+wal_recycle = off
+```
+
+### MySQL
+
+Создать основной том `mysql`:
+
+```bash
+p='data'; v='mysql'; zfs create "${p}/${v}"
+```
+
+Создать специальный том `mysql/data` для баз данных:
+
+```bash
+p='data'; v='mysql/data'; zfs create -o 'recordsize=16K' "${p}/${v}"
+```
+
+Создать специальный том `mysql/log` для логирования:
+
+```bash
+p='data'; v='mysql/log'; zfs create "${p}/${v}"
+```
+
+Откорректировать настройки MySQL:
+
+```ini
+datadir = 'data/mysql/data'
+innodb_doublewrite = 0
+innodb_use_native_aio = 0
+innodb_use_atomic_writes = 0
+```
