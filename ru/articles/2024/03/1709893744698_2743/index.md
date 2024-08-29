@@ -290,6 +290,18 @@ p='data'; v='cloud'; zfs create "${p}/${v}"
 p='data'; v='cloud'; zfs create -o "mountpoint=/opt/${v}" "${p}/${v}"
 ```
 
+Создать том `cloud` в пуле `data` и с алгоритмом компрессии `zstd`:
+
+```bash
+p='data'; v='cloud'; zfs create -o 'compression=zstd' "${p}/${v}"
+```
+
+Создать том `cloud` в пуле `data` с алгоритмом компрессии `zstd` и точкой монтирования `/opt/cloud`:
+
+```bash
+p='data'; v='cloud'; zfs create -o 'compression=zstd' -o "mountpoint=/opt/${v}" "${p}/${v}"
+```
+
 ### Удаление тома
 
 Удалить том `cloud` в пуле `data`:
@@ -375,29 +387,29 @@ p='data'; v='cloud'; zfs destroy "${p}/${v}@2024-08-21.19-32-02"
 
 ## Оптимизации
 
-Специализированные настройки ZFS под конкретные задачи.
+Специализированные настройки {{< tag "ZFS" >}} под конкретные задачи.
 
 ### PostgreSQL
 
-Создать основной том `pgsql`:
+Создать основной том `pgsql` с алгоритмом компрессии `zstd`:
 
 ```bash
-p='data'; v='pgsql'; zfs create "${p}/${v}"
+p='data'; v='pgsql'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
-Создать специальный том `pgsql/data` для баз данных:
+Создать специальный том `pgsql/data` с алгоритмом компрессии `zstd` для баз данных:
 
 ```bash
-p='data'; v='pgsql/data'; zfs create -o 'recordsize=32K' "${p}/${v}"
+p='data'; v='pgsql/data'; zfs create -o 'compression=zstd' -o 'recordsize=32K' "${p}/${v}"
 ```
 
-Создать специальный том `pgsql/wal` для WAL:
+Создать специальный том `pgsql/wal` с алгоритмом компрессии `zstd` для WAL:
 
 ```bash
-p='data'; v='pgsql/wal'; zfs create -o 'recordsize=32K' "${p}/${v}"
+p='data'; v='pgsql/wal'; zfs create -o 'compression=zstd' -o 'recordsize=32K' "${p}/${v}"
 ```
 
-Откорректировать настройки PostgreSQL:
+Откорректировать настройки {{< tag "PostgreSQL" >}}:
 
 ```ini
 data_directory = '/data/pgsql/data'
@@ -408,25 +420,25 @@ wal_recycle = off
 
 ### MySQL
 
-Создать основной том `mysql`:
+Создать основной том `mysql` с алгоритмом компрессии `zstd`:
 
 ```bash
-p='data'; v='mysql'; zfs create "${p}/${v}"
+p='data'; v='mysql'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
-Создать специальный том `mysql/data` для баз данных:
+Создать специальный том `mysql/data` с алгоритмом компрессии `zstd` для баз данных:
 
 ```bash
-p='data'; v='mysql/data'; zfs create -o 'recordsize=16K' "${p}/${v}"
+p='data'; v='mysql/data'; zfs create -o 'compression=zstd' -o 'recordsize=16K' "${p}/${v}"
 ```
 
-Создать специальный том `mysql/log` для логирования:
+Создать специальный том `mysql/log` с алгоритмом компрессии `zstd` для логирования:
 
 ```bash
-p='data'; v='mysql/log'; zfs create "${p}/${v}"
+p='data'; v='mysql/log'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
-Откорректировать настройки MySQL:
+Откорректировать настройки {{< tag "MySQL" >}}:
 
 ```ini
 datadir = 'data/mysql/data'
