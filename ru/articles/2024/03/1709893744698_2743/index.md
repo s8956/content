@@ -397,22 +397,22 @@ p='data'; v='cloud'; zfs destroy "${p}/${v}@2024-08-21.19-32-02"
 p='data'; v='pgsql'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
-Создать специальный том `pgsql/data` с алгоритмом компрессии `zstd` для баз данных:
+Создать специальный том `pgsql/main` с алгоритмом компрессии `zstd` для баз данных:
 
 ```bash
-p='data'; v='pgsql/data'; zfs create -o 'compression=zstd' -o 'recordsize=32K' "${p}/${v}"
+p='data'; v='pgsql/main'; zfs create -o 'recordsize=32K' "${p}/${v}"
 ```
 
 Создать специальный том `pgsql/wal` с алгоритмом компрессии `zstd` для WAL:
 
 ```bash
-p='data'; v='pgsql/wal'; zfs create -o 'compression=zstd' -o 'recordsize=32K' "${p}/${v}"
+p='data'; v='pgsql/wal'; zfs create -o 'recordsize=32K' "${p}/${v}"
 ```
 
 Откорректировать настройки {{< tag "PostgreSQL" >}}:
 
 ```ini
-data_directory = '/data/pgsql/data'
+data_directory = '/data/pgsql/main'
 full_page_writes = off
 wal_init_zero = off
 wal_recycle = off
@@ -426,22 +426,22 @@ wal_recycle = off
 p='data'; v='mysql'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
-Создать специальный том `mysql/data` с алгоритмом компрессии `zstd` для баз данных:
+Создать специальный том `mysql/main` с алгоритмом компрессии `zstd` для баз данных:
 
 ```bash
-p='data'; v='mysql/data'; zfs create -o 'compression=zstd' -o 'recordsize=16K' "${p}/${v}"
+p='data'; v='mysql/main'; zfs create -o 'recordsize=16K' "${p}/${v}"
 ```
 
 Создать специальный том `mysql/log` с алгоритмом компрессии `zstd` для логирования:
 
 ```bash
-p='data'; v='mysql/log'; zfs create -o 'compression=zstd' "${p}/${v}"
+p='data'; v='mysql/log'; zfs create "${p}/${v}"
 ```
 
 Откорректировать настройки {{< tag "MySQL" >}}:
 
 ```ini
-datadir = 'data/mysql/data'
+datadir = 'data/mysql/main'
 innodb_doublewrite = 0
 innodb_use_native_aio = 0
 innodb_use_atomic_writes = 0
