@@ -400,7 +400,7 @@ p='data'; v='pgsql'; zfs create -o 'compression=zstd' "${p}/${v}"
 Создать специальный том `pgsql/main` с алгоритмом компрессии `zstd` для баз данных:
 
 ```bash
-p='data'; v='pgsql/main'; zfs create -o 'recordsize=32K' "${p}/${v}" && chmod 700 "${p}/${v}"
+p='data'; v='pgsql/data'; zfs create -o 'compression=zstd' -o 'recordsize=32K' "${p}/${v}"
 ```
 
 Создать специальный том `pgsql/wal` с алгоритмом компрессии `zstd` для WAL:
