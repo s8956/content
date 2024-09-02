@@ -397,13 +397,13 @@ p='data'; v='cloud'; zfs destroy "${p}/${v}@2024-08-21.19-32-02"
 p='data'; v='pgsql'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
-Создать специальный том `pgsql/main` с алгоритмом компрессии `zstd` для баз данных:
+Создать специальный том `pgsql/main` с алгоритмом компрессии `zstd` и размером блока `32K` для баз данных:
 
 ```bash
-p='data'; v='pgsql/data'; zfs create -o 'compression=zstd' -o 'recordsize=32K' "${p}/${v}" && chmod 700
+p='data'; v='pgsql/main'; zfs create -o 'recordsize=32K' "${p}/${v}" && chmod 700
 ```
 
-Создать специальный том `pgsql/wal` с алгоритмом компрессии `zstd` для WAL:
+Создать специальный том `pgsql/wal` с алгоритмом компрессии `zstd` и размером блока `32K` для WAL:
 
 ```bash
 p='data'; v='pgsql/wal'; zfs create -o 'recordsize=32K' "${p}/${v}"
@@ -426,7 +426,7 @@ wal_recycle = off
 p='data'; v='mysql'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
-Создать специальный том `mysql/main` с алгоритмом компрессии `zstd` для баз данных:
+Создать специальный том `mysql/main` с алгоритмом компрессии `zstd` и размером блока `16K` для баз данных:
 
 ```bash
 p='data'; v='mysql/main'; zfs create -o 'recordsize=16K' "${p}/${v}"
