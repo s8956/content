@@ -14,12 +14,16 @@
 
 ```batch
 @echo off
-rem --------------------------------------------------------------------------------------------------------------------
-rem Disable new Acrobat Reader UI.
-rem --------------------------------------------------------------------------------------------------------------------
-rem Pausing script execution.
+
+rem # ---------------------------------------------------------------------------------------------------------------- #
+rem # Disable new Acrobat Reader UI.
+rem # ---------------------------------------------------------------------------------------------------------------- #
+
+rem # Pausing script execution.
 ping 127.0.0.1 -n 5 > nul
-rem Adding the 'bEnableAV2' parameter to the Windows registry.
-reg add "HKCU\Software\Adobe\Acrobat Reader\DC\AVGeneral" /v "bEnableAV2" /f /t "REG_DWORD" /d 0
+
+rem # Adding the 'bEnableAV2' parameter to the Windows registry.
+reg add "HKCU\Software\Adobe\Acrobat Reader\DC\AVGeneral" /v "bEnableAV2" /t "REG_DWORD" /d 0 /f
+
 exit
 ```
