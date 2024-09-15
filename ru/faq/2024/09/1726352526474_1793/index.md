@@ -33,7 +33,7 @@ hash: 'ffca78dbeb621e14f1c11142a8a3b8a68ce23e0e'
 uuid: 'ffca78db-eb62-5e14-91c1-1142a8a3b8a6'
 slug: 'ffca78db-eb62-5e14-91c1-1142a8a3b8a6'
 
-draft: 1
+draft: 0
 ---
 
 Поменялся IP-адрес сервера Proxmox. Старый IP остался в само-заверенном SSL-сертификате. Как обновить сертификат?
