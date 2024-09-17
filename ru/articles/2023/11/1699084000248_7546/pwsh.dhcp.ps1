@@ -1,24 +1,24 @@
 <#PSScriptInfo
-  .VERSION      0.1.0
-  .GUID
-  .AUTHOR       Kai Kimera
-  .AUTHOREMAIL  mail@kai.kim
-  .COMPANYNAME  Library Online
-  .COPYRIGHT    2023 Library Online. All rights reserved.
-  .LICENSEURI   https://choosealicense.com/licenses/mit/
-  .PROJECTURI
+.VERSION      0.1.0
+.GUID
+.AUTHOR       Kai Kimera
+.AUTHOREMAIL  mail@kai.kim
+.COMPANYNAME  Library Online
+.COPYRIGHT    2023 Library Online. All rights reserved.
+.LICENSEURI   https://choosealicense.com/licenses/mit/
+.PROJECTURI
 #>
 
 #Requires -Version 7.2
 
 <#
-  .SYNOPSIS
+.SYNOPSIS
 
-  .DESCRIPTION
+.DESCRIPTION
 
-  .EXAMPLE
+.EXAMPLE
 
-  .LINK
+.LINK
 #>
 
 Param(
