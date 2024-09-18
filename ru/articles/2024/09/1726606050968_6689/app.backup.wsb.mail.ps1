@@ -73,9 +73,9 @@ Please check server backup!
 Host: ${Hostname}
 Status: ERROR
 
---
+-- 
 #ID:${HID}
-#TYPE:backup:error
+#TYPE:BACKUP:ERROR
 "@
 
   Start-Smtp -S "${Subject}" -B "${Body}"
@@ -94,9 +94,9 @@ Windows Server Backup completed successfully!
 Host: ${Hostname}
 Status: SUCCESS
 
---
+-- 
 #ID:${HID}
-#TYPE:backup:success
+#TYPE:BACKUP:SUCCESS
 "@
 
   Start-Smtp -S "${Subject}" -B "${Body}"
