@@ -1,7 +1,7 @@
 Для того, чтобы переместить виртуальную машину со старого VMware ESXi на новый, необходимо:
 
-- Включить SSH на обоих ESXi (Host / Actions / Services / Enable SSH).
-- Проверить, включён ли порт SSH (`22`) в брандмауэре на обоих ESXi (Networking > Firewall rules).
+- Включить SSH на обоих ESXi (*Host / Actions / Services / Enable SSH*).
+- Проверить, включён ли порт SSH (`22`) в брандмауэре на обоих ESXi (*Networking / Firewall rules*).
 - Зайти по SSH на старый ESXi, где находится виртуальная машина и ввести следующую команду:
 
 ```bash
