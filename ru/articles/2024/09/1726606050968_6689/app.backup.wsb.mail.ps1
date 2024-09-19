@@ -19,8 +19,8 @@ The script sends messages to the specified address for further analysis.
 The messages contain the host ID and notification type.
 
 .EXAMPLE
-.\app.backup.wsb.mail.ps1 -Type 'error'
-.\app.backup.wsb.mail.ps1 -Type 'success'
+.\app.backup.wsb.mail.ps1 -Type 'error' [-SSL]
+.\app.backup.wsb.mail.ps1 -Type 'success' [-SSL]
 
 .LINK
 https://lib.onl/ru/2024/09/40539e36-4656-5532-b920-8975c97d4dc5/
