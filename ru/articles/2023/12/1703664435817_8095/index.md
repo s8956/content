@@ -52,7 +52,13 @@ draft: 0
 Для работы DoH необходимо наличие сертификатов в базе MikroTik. Пакет сертификатов я беру с сайта `curl.se`:
 
 ```text
-/tool fetch url="https://curl.se/ca/cacert.pem" dst-path="ros.cacert.pem"; /certificate import file-name="ros.cacert.pem" passphrase="" name="CA"
+/tool fetch url="https://curl.se/ca/cacert.pem" dst-path="ros.cacert.pem"
+```
+
+Импортируем сертификаты:
+
+```text
+/certificate import file-name="ros.cacert.pem" passphrase="" name="CA"
 ```
 
 ## Настройка DoH
