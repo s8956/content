@@ -66,7 +66,8 @@ Windows Server Backup хороша в качестве компонента ре
 
 {{< file "app.backup.wsb.mail.ini" >}}
 
-**Параметры:**
+#### Параметры
+
 - `From` - адрес email, с которого будет отправлено сообщение.
 - `To` - адрес email, на который будет отправлено сообщение.
 - `Server` - IP-адрес SMTP-сервера.
@@ -78,7 +79,8 @@ Windows Server Backup хороша в качестве компонента ре
 
 {{< file "app.backup.wsb.mail.ps1" >}}
 
-**Параметры:**
+#### Параметры
+
 - `Type` - тип сообщения.
   - `success` - задание {{< tag "Windows" >}} Server Backup успешно выполнено.
   - `error` - задание {{< tag "Windows" >}} Server Backup не выполнено или выполнено с ошибками.
