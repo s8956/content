@@ -90,6 +90,7 @@ Wants=network-online.target
 Согласно переменным `After=network-online.target` и `Wants=network-online.target`, unit ждёт активности сети и после этого загружается.
 
 Объединив всё это, получаем цепочку последовательных, зависимых друг от друга, вызовов:
+
 1. Активность сети.
 2. Модуль `jitsi-videobridge2.service`.
 3. Модуль `jigasi.service`.
