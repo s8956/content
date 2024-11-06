@@ -258,4 +258,50 @@ bash bash.openssl.ca.sh cert
 
 ### Скрипт
 
+Генератор корректных SSL-сертификатов. Перед генерацией сертификата, необходимо откорректировать переменные в скрипте под проект.
+
 {{< file "bash.openssl.ssc.sh" >}}
+
+#### Использование
+
+Скрипт можно удалённо запросить из репозитория или запустить локально на хосте. Скрипт принимает следующие параметры согласно очерёдности:
+
+1. `CN` - CN (Common Name).
+2. `subjectAltName` - subjectAltName (Alternative Name).
+3. `[TRUE|FALSE]` - является ли сертификат сертификатом центра сертификации и можно ли при помощи него заверять другие сертификаты. Параметр принимает значение `TRUE` или `FALSE`. По умолчанию `FALSE`.
+
+#### Удалённый запрос скрипта
+
+В терминале выполнить команду, подставив свои значения:
+
+```bash
+curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>'
+```
+
+```bash
+wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>'
+```
+
+Например:
+
+```bash
+curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2'
+```
+
+```bash
+wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2'
+```
+
+Таким образом, сертификат будет сгенерирован с заданными параметрами и заверен собственной подписью.
+
+#### Создание PFX
+
+Чтобы создать PFX-файл, необходимо выполнить следующую команду:
+
+```bash
+f='example.com'; openssl pkcs12 -export -certpbe PBE-SHA1-3DES -keypbe PBE-SHA1-3DES -nomac -inkey "${f}.key" -in "${f}.crt" -out "${f}.pfx"
+```
+
+Где:
+
+- `f` - переменная, содержащая общее название файлов.
