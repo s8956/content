@@ -21,7 +21,7 @@
 .LINK
 #>
 
-Param(
+param(
   [Alias('ScopeStartRange')]
   [IPAddress]$P_ScopeStartRange = 10.0.100.1,
 

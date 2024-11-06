@@ -31,7 +31,7 @@ function Start-Script() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 function Start-SrvAddsInstall() {
-  Param(
+  param(
     [Alias('N')][string]$Name = 'AD-Domain-Services'
   )
 
@@ -43,7 +43,7 @@ function Start-SrvAddsInstall() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 function Start-SrvAddsForest() {
-  Param(
+  param(
     [Parameter(Mandatory)][Alias('DN')][string]$DomainName,
     [Parameter(Mandatory)][Alias('DNN')][string]$DomainNetBiosName,
     [Alias('DCM')][int]$DCMode = 7,
