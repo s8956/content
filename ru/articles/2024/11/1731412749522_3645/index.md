@@ -3,21 +3,21 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: '1731412749522_3645'
+title: "Автоматическое обновление сертификатов Let's Encrypt"
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1633265486064-086b219458ec'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'scripts'
+  - 'security'
+  - 'terminal'
+  - 'linux'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'acme'
+  - 'lego'
+  - 'letsencrypt'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -49,11 +49,21 @@ draft: 1
 
 <!--more-->
 
+## Установка
+
+- Скопировать файлы `app.acme.lego.conf`, `app.acme.lego.example.com.conf` и `app.acme.lego.sh` в директорию `/root/apps/acme/`.
+- Указать бит выполнения для `*.sh` скриптов: `chmod +x /root/apps/acme/*.sh`.
+- Скопировать файл `app_acme_lego` в директорию `/etc/cron.d/`.
+- Настроить параметры скрипта в файлах `app.acme.lego.conf` и `app.acme.lego.example.com.conf`.
+
 ## Скрипт
 
-### Приложение
+Скрипт состоит из 4-х компонентов:
 
-{{< file "app.acme.lego.sh" >}}
+- Файл с основными настройками.
+- Файл с настройками домена.
+- Приложение.
+- Задача для CRON.
 
 ### Общая конфигурация
 
@@ -103,6 +113,9 @@ draft: 1
 - `ACME_DOMAINS` - список доменов для получения сертификата.
 - `ACME_HTTP_WEBROOT` - WEB-директория сервера для интеграции директории идентификации `.well-known/acme-challenge`. Если параметр пустой, LeGo поднимает свой внутренний сервер для получения сертификата.
 
+### Приложение
+
+{{< file "app.acme.lego.sh" >}}
 
 ### Задача
 

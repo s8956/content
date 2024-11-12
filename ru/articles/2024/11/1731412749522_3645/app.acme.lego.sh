@@ -14,7 +14,7 @@
 
 # Sources.
 SRC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd -P )"; readonly SRC_DIR # Script directory.
-SRC_NAME="$(basename "$(readlink -f "${BASH_SOURCE[0]}")")"; readonly SRC_NAME # Script name.
+SRC_NAME="$( basename "$( readlink -f "${BASH_SOURCE[0]}" )" )"; readonly SRC_NAME # Script name.
 SRC_DOMAIN="${1:?}"; readonly SRC_DOMAIN # Domain name.
 # shellcheck source=/dev/null
 . "${SRC_DIR}/${SRC_NAME%.*}.conf" # Loading main configuration file.

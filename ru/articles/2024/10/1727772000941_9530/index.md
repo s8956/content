@@ -12,6 +12,7 @@ categories:
   - 'linux'
 tags:
   - 'asterisk'
+  - 'voip'
 authors:
   - 'KaiKimera'
 sources:
@@ -49,22 +50,22 @@ draft: 0
 
 ## Установка
 
-- Скопировать файлы `app.asterisk.room-close.ini` и `app.asterisk.room-close.sh` в директорию `/root/apps/`.
-- Указать бит выполнения для `*.sh` скриптов: `chmod +x /root/apps/*.sh`.
+- Скопировать файлы `app.asterisk.room-close.conf` и `app.asterisk.room-close.sh` в директорию `/root/apps/asterisk/`.
+- Указать бит выполнения для `*.sh` скриптов: `chmod +x /root/apps/asterisk/*.sh`.
 - Скопировать файл `app_asterisk_room-close` в директорию `/etc/cron.d/`.
-- Настроить параметры скрипта в файле `app.asterisk.room-close.ini`.
+- Настроить параметры скрипта в файле `app.asterisk.room-close.conf`.
 
 ## Скрипт
 
 Скрипт состоит из трёх компонентов:
 
-- Файл настройки.
+- Файл с настройками.
 - Приложение.
-- Задача для Cron.
+- Задача для CRON.
 
 ### Настройка
 
-{{< file "app.asterisk.room-close.ini" >}}
+{{< file "app.asterisk.room-close.conf" "bash" >}}
 
 #### Параметры
 
@@ -72,7 +73,7 @@ draft: 0
 
 ### Приложение
 
-Приложение забирает параметры из файла настройки и обрабатывает значения.
+Приложение забирает параметры из файла настроек и обрабатывает значения.
 
 {{< file "app.asterisk.room-close.sh" >}}
 
@@ -80,4 +81,4 @@ draft: 0
 
 Задача запускает скрипт каждые 10 секунд для проверки конференц-комнат.
 
-{{< file "app_asterisk_room-close" >}}
+{{< file "app_asterisk_room-close" "bash" >}}
