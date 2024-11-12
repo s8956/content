@@ -28,7 +28,7 @@ export LEGO_PFX_PASSWORD="${ACME_PFX_PASSWORD:?}"
 export LEGO_PFX_FORMAT="${ACME_PFX_FORMAT:?}"
 
 # Parameters.
-ACME_COMMAND="${2:?}"; readonly ACME_COMMAND
+ACME_CMD="${2:?}"; readonly ACME_CMD; [[ ! "${ACME_CMD}" =~ ^(run|renew)$ ]] && exit 1
 ACME_EMAIL="${ACME_EMAIL:?}"; readonly ACME_EMAIL
 ACME_PATH="${ACME_PATH:?}"; readonly ACME_PATH
 ACME_METHOD="${ACME_METHOD:?}"; readonly ACME_METHOD
@@ -38,6 +38,7 @@ ACME_HTTP_WEBROOT="${ACME_HTTP_WEBROOT?}"; readonly ACME_HTTP_WEBROOT
 ACME_TLS_PORT="${ACME_TLS_PORT:?}"; readonly ACME_TLS_PORT
 ACME_KEY_TYPE="${ACME_KEY_TYPE:?}"; readonly ACME_KEY_TYPE
 ACME_CRT_TIMEOUT="${ACME_CRT_TIMEOUT:?}"; readonly ACME_CRT_TIMEOUT
+ACME_DAYS="${ACME_DAYS:?}"; readonly ACME_DAYS
 ACME_SERVICES=("${ACME_SERVICES[@]:?}"); readonly ACME_SERVICES
 ACME_DOMAINS=("${ACME_DOMAINS[@]:?}"); readonly ACME_DOMAINS
 ACME_DNS="${ACME_DNS:?}"; readonly ACME_DNS
@@ -46,7 +47,7 @@ ACME_DNS="${ACME_DNS:?}"; readonly ACME_DNS
 # INITIALIZATION
 # -------------------------------------------------------------------------------------------------------------------- #
 
-run() { lego "${ACME_COMMAND}"; }
+run() { lego; }
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # LEGO
@@ -54,9 +55,16 @@ run() { lego "${ACME_COMMAND}"; }
 # -------------------------------------------------------------------------------------------------------------------- #
 
 lego() {
-  local command; command="${1}"
-  local options
-  options=(
+  local cmd; cmd=("${ACME_CMD}")
+
+  case "${ACME_CMD}" in
+    'renew')
+      cmd+=('--days' "${ACME_DAYS}")
+      ;;
+  esac
+
+  local opts
+  opts=(
     '--accept-tos'
     '--key-type' "${ACME_KEY_TYPE}"
     '--email' "${ACME_EMAIL}"
@@ -67,23 +75,23 @@ lego() {
 
   case "${ACME_METHOD}" in
     'dns')
-      options+=('--dns' "${ACME_DNS}")
+      opts+=('--dns' "${ACME_DNS}")
       ;;
     'http')
-      options+=('--http' '--http.port' "${ACME_HTTP_PORT}" '--http.proxy-header' "${ACME_HTTP_PROXY_HEADER}")
-      [[ -n "${ACME_HTTP_WEBROOT}" ]] && options+=('--http.webroot' "${ACME_HTTP_WEBROOT}")
+      opts+=('--http' '--http.port' "${ACME_HTTP_PORT}" '--http.proxy-header' "${ACME_HTTP_PROXY_HEADER}")
+      [[ -n "${ACME_HTTP_WEBROOT}" ]] && opts+=('--http.webroot' "${ACME_HTTP_WEBROOT}")
       ;;
     'tls')
-      options+=('--tls' '--tls.port' "${ACME_TLS_PORT}")
+      opts+=('--tls' '--tls.port' "${ACME_TLS_PORT}")
       ;;
     *)
       echo 'TYPE is not supported!'; exit 1
       ;;
   esac
 
-  for i in "${ACME_DOMAINS[@]}"; do options+=('--domains' "${i}"); done
+  for i in "${ACME_DOMAINS[@]}"; do opts+=('--domains' "${i}"); done
 
-  if "${SRC_DIR}/lego" "${options[@]}" "${command}"; then
+  if "${SRC_DIR}/lego" "${opts[@]}" "${cmd[@]}"; then
     [[ ! -d "${ACME_PATH}" ]] && mkdir -p "${ACME_PATH}"
     cp -f "${LEGO_PATH}/certificates/"{*.crt,*.key,*.pem,*.pfx} "${ACME_PATH}" \
       && chmod 644 "${ACME_PATH}/"{*.crt,*.key,*.pem,*.pfx}
