@@ -85,7 +85,7 @@ lego() {
       opts+=('--tls' '--tls.port' "${ACME_TLS_PORT}")
       ;;
     *)
-      echo 'TYPE is not supported!'; exit 1
+      echo 'ACME_METHOD is not supported!'; exit 1
       ;;
   esac
 
