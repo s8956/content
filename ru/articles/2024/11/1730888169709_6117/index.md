@@ -3,10 +3,10 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Jigasi: The following addresses failed: RFC 6120 A/AAAA Endpoint'
+title: 'Jigasi: "The following addresses failed: RFC 6120 A/AAAA Endpoint"'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1525598912003-663126343e1f'
 categories:
   - 'linux'
   - 'network'
@@ -14,6 +14,8 @@ tags:
   - 'jigasi'
   - 'jitsi'
   - 'systemd'
+  - 'linux'
+  - 'unit'
 authors:
   - 'KaiKimera'
 sources:
@@ -40,14 +42,14 @@ hash: '45ffdbeb37ec3ed2d3cd347df5e3d07b660573da'
 uuid: '45ffdbeb-37ec-5ed2-b3cd-347df5e3d07b'
 slug: '45ffdbeb-37ec-5ed2-b3cd-347df5e3d07b'
 
-draft: 1
+draft: 0
 ---
 
-
+Решение ошибки, связанной с раннем запуском сервиса {{< tag "Jigasi" >}}.
 
 <!--more-->
 
-После перезагрузки сервера, **Jigasi** не может приглашать локальные телефоны. Ошибка:
+После перезагрузки сервера, {{< tag "Jigasi" >}} не может приглашать локальные телефоны. Появляется следующая ошибка:
 
 ```terminal
 cat /var/log/jitsi/jicofo.log
@@ -69,14 +71,14 @@ org.jivesoftware.smack.SmackException$EndpointConnectionException: The following
 2024-11-05 11:36:36.255 WARNING: [14] org.jivesoftware.smackx.ping.PingManager.pingServerIfNecessary: XMPPTCPConnection[not-authenticated] (0) was not authenticated
 ```
 
-Возможно, Jigasi запускается раньше других сервисов. Чтобы Jigasi запустился в необходимое время, был написан unit-переопределитель стандартной конфигурации **systemd**. Создаём файл `/etc/systemd/system/jigasi.service.d/override.conf` со строками:
+Возможно, {{< tag "Jigasi" >}} запускается раньше других сервисов. Чтобы {{< tag "Jigasi" >}} запустился в необходимое время, надо переопределить зависимости запуска стандартной конфигурации **systemd**. Для этого создаём файл `/etc/systemd/system/jigasi.service.d/override.conf` со строками:
 
 ```ini
 [Unit]
 After=jitsi-videobridge2.service
 ```
 
-Таким образом, переменную `After` из стандартной конфигурации Jigasi мы переопределяем на свою и говорим Jigasi, чтобы та ждала загрузки unit'а `jitsi-videobridge2.service` и только после этого сама запускалась.
+Таким образом, переменную `After` из стандартной конфигурации {{< tag "Jigasi" >}} мы переопределяем на свою и говорим {{< tag "Jigasi" >}}, чтобы та ждала загрузки unit'а `jitsi-videobridge2.service` и только после этого сама запускалась.
 
 Сам же unit `jitsi-videobridge2.service` содержит такие строки:
 
@@ -89,8 +91,14 @@ Wants=network-online.target
 
 Согласно переменным `After=network-online.target` и `Wants=network-online.target`, unit ждёт активности сети и после этого загружается.
 
-Объединив всё это, получаем цепочку последовательных, зависимых друг от друга, вызовов:
+Объединив всё это, получаем цепочку последовательных, зависимых друг от друга, запусков:
 
 1. Активность сети.
 2. Модуль `jitsi-videobridge2.service`.
 3. Модуль `jigasi.service`.
+
+Команда для создания переопределения unit'а одной строчкой:
+
+```bash
+d='/etc/systemd/system/jigasi.service.d'; mkdir -p "${d}" && echo -e "[Unit]\nAfter=jitsi-videobridge2.service" > "${d}/override.conf" && systemctl daemon-reload && systemctl restart 'jigasi.service'
+```
