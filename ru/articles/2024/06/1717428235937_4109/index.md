@@ -54,6 +54,19 @@ draft: 0
 Все команды в статье предполагают предварительные настройки по каждый отдельный хост. Будьте аккуратными!
 {{< / alert >}}
 
+## Экспорт параметров
+
+Для начала экспортируем заранее подготовленные параметры в переменные окружения:
+
+```bash
+export PV='/dev/sdb'; export VG='data'; export LV='storage';
+```
+
+Где:
+- `PV='/dev/sdb'` - диск, который будет использоваться в качестве физического тома для LVM.
+- `VG='data'` - имя группы томов (VG).
+- `LV='storage'` - имя логического тома (LV).
+
 ## Создание LVM
 
 Чтобы создать LVM, необходимо:
@@ -64,26 +77,21 @@ draft: 0
 Команда для создания LVM с одним логическим томом `storage` 100% размера:
 
 ```bash
-pv='/dev/sdb'; vg='data'; lv='storage'; pvcreate "${pv}" && vgcreate "${vg}" "${pv}" && lvcreate -l 100%FREE -n "${lv}" "${vg}"
+pvcreate "${PV}" && vgcreate "${VG}" "${PV}" && lvcreate -l 100%FREE -n "${LV}" "${VG}"
 ```
-
-Где:
-- `pv='/dev/sdb'` - диск, который будет использоваться в качестве физического тома для LVM.
-- `vg='data'` - имя группы томов (VG).
-- `lv='storage'` - имя логического тома (LV).
 
 ### Форматирование LV
 
 Форматирование логического тома **LV** в файловую систему **EXT4**:
 
 ```bash
-mkfs.ext4 "/dev/${vg}/${lv}"
+mkfs.ext4 "/dev/${VG}/${LV}"
 ```
 
 Форматирование логического тома **LV** в файловую систему **XFS**:
 
 ```bash
-mkfs.xfs "/dev/${vg}/${lv}"
+mkfs.xfs "/dev/${VG}/${LV}"
 ```
 
 ### Монтирование LV
@@ -91,45 +99,41 @@ mkfs.xfs "/dev/${vg}/${lv}"
 Создание точки монтирования и монтирование логического тома **LV** в директорию `/home/storage` с файловой системой **EXT4**:
 
 ```bash
-mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage ext4 defaults 0 0" >> '/etc/fstab'
+mkdir '/home/storage' && echo "/dev/${VG}/${LV} /home/storage ext4 defaults 0 0" >> '/etc/fstab' && mount "/dev/${VG}/${LV}" '/home/storage'
 ```
 
 Создание точки монтирования и монтирование логического тома **LV** в директорию `/home/storage` с файловой системой **XFS**:
 
 ```bash
-mkdir '/home/storage' && echo "/dev/${vg}/${lv} /home/storage xfs defaults 0 0" >> '/etc/fstab'
+mkdir '/home/storage' && echo "/dev/${VG}/${LV} /home/storage xfs defaults 0 0" >> '/etc/fstab' && mount "/dev/${VG}/${LV}" '/home/storage'
 ```
 
 ## Расширение LVM
 
 Для того, чтобы расширить логический том **LV**, необходимо:
-1. Расширить физический том **PV**.
-2. Расширить логические тома **LV**.
-3. Расширить файловую систему.
+1. Указать системе провести повторное сканирование указанного устройства на предмет изменённых параметров (в данном случае, размер диска).
+2. Расширить физический том **PV**.
+3. Расширить логические тома **LV**.
+4. Расширить файловую систему.
 
 Команда в одну строку для расширения логического тома **LV**:
 
 ```bash
-pv='/dev/sdb'; vg='data'; lv='storage'; pvresize "${pv}" && lvextend -l +100%FREE "/dev/${vg}/${lv}"
+echo 1 > "/sys/block/${PV##*/}/device/rescan" && pvresize "${PV}" && lvextend -l +100%FREE "/dev/${VG}/${LV}"
 ```
-
-Где:
-- `pv='/dev/sdb'` - физический том PV, который нужно расширить.
-- `vg='data'` - имя группы томов (VG).
-- `lv='storage'` - имя логического тома (LV).
 
 ### Расширение ФС
 
 Расширить файловую систему **EXT4**:
 
 ```bash
-resize2fs "/dev/${vg}/${lv}"
+resize2fs "/dev/${VG}/${LV}"
 ```
 
 Расширить файловую систему **XFS**:
 
 ```bash
-xfs_growfs "/dev/${vg}/${lv}"
+xfs_growfs "/dev/${VG}/${LV}"
 ```
 
 ## Удаление LVM
@@ -142,13 +146,8 @@ xfs_growfs "/dev/${vg}/${lv}"
 Для удаления LVM, нужно выполнить команду:
 
 ```bash
-pv='/dev/sdb'; vg='data'; lv='storage'; lvremove "/dev/${vg}/${lv}" && vgremove "${vg}" && pvremove "${pv}"
+lvremove "/dev/${VG}/${LV}" && vgremove "${VG}" && pvremove "${PV}"
 ```
-
-Где:
-- `pv='/dev/sdb'` - диск, который будет использоваться в качестве физического тома для LVM.
-- `vg='data'` - имя группы томов (VG).
-- `lv='storage'` - имя логического тома (LV).
 
 ## Информация по LVM
 
