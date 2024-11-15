@@ -117,9 +117,6 @@ crypto ipsec profile GRE-STS
 ```
 interface Tunnel0
   ip address 10.255.255.1 255.255.255.0
-  ip mtu 1400
-  ip tcp adjust-mss 1360
-  ip ospf mtu-ignore
   tunnel source 1.1.1.1
   tunnel destination 2.2.2.2
   tunnel protection ipsec profile GRE-STS
@@ -202,9 +199,6 @@ crypto ipsec profile GRE-STS
 ```
 interface Tunnel0
   ip address 10.255.255.2 255.255.255.0
-  ip mtu 1400
-  ip tcp adjust-mss 1360
-  ip ospf mtu-ignore
   tunnel source 2.2.2.2
   tunnel destination 1.1.1.1
   tunnel protection ipsec profile GRE-STS
