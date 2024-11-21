@@ -49,28 +49,54 @@ draft: 1
 
 <!--more-->
 
-- Создание пользователя и базы данных:
+## Установка пакетов
+
+### Angie
 
 ```bash
-sudo -u 'postgres' createuser --pwprompt 'zabbix' && sudo -u 'postgres' createdb -O 'zabbix' 'zabbix'
+. /etc/os-release; curl -fsSLo '/etc/apt/keyrings/angie.gpg' 'https://angie.software/keys/angie-signing.gpg' && echo "deb [signed-by=/etc/apt/keyrings/angie.gpg] https://download.angie.software/angie/${ID}/${VERSION_ID} ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/angie.list' && apt update && apt install --yes angie angie-module-brotli
 ```
 
-- Импортирование схемы базы данных:
+### PHP
 
 ```bash
-zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u 'zabbix' psql 'zabbix'
+. /etc/os-release; curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg' && echo "deb [signed-by=/etc/apt/keyrings/php.gpg] https://packages.sury.org/php ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/php.list' && apt update && apt install --yes php8.3-fpm php8.3-bcmath php8.3-bz2 php8.3-cli php8.3-curl php8.3-gd php8.3-gmp php8.3-imagick php8.3-imap php8.3-intl php8.3-ldap php8.3-mbstring php8.3-memcached php8.3-mysql php8.3-odbc php8.3-opcache php8.3-pgsql php8.3-redis php8.3-uploadprogress php8.3-xml php8.3-zip php8.3-zstd
 ```
 
-- Добавление расширения TimescaleDB:
+### PostgreSQL
+
+- Установить PostgreSQL:
 
 ```bash
-echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql 'zabbix'
+. /etc/os-release; curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor -o '/etc/apt/keyrings/pgsql.gpg' && echo "deb [signed-by=/etc/apt/keyrings/pgsql.gpg] https://apt.postgresql.org/pub/repos/apt ${VERSION_CODENAME}-pgdg main" | tee '/etc/apt/sources.list.d/pgsql.list' && apt update && apt install --yes postgresql-16
 ```
 
-- Импортирование схемы TimescaleDB:
+### TimescaleDB
+
+- Установить TimescaleDB:
 
 ```bash
-cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u 'zabbix' psql 'zabbix'
+. /etc/os-release; curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmor -o '/etc/apt/keyrings/timescaledb.gpg' && echo "deb [signed-by=/etc/apt/keyrings/timescaledb.gpg] https://packagecloud.io/timescale/timescaledb/debian/ ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/timescaledb.list' && apt update && apt install --yes timescaledb-2-postgresql-16='2.17.*' timescaledb-2-loader-postgresql-16='2.17.*' timescaledb-tools
+```
+
+### Zabbix
+
+```bash
+. /etc/os-release; curl -fsSLo '/etc/apt/keyrings/zabbix.gpg' 'https://uaik.github.io/config/zabbix/zabbix.gpg' && echo "deb [signed-by=/etc/apt/keyrings/zabbix.gpg] https://repo.zabbix.com/zabbix/7.0/debian ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/zabbix.list' && apt update && apt install --yes zabbix-server-pgsql zabbix-frontend-php zabbix-sql-scripts zabbix-agent
+```
+
+## Установка Zabbix
+
+- Создание пользователя и базы данных, импортирование схемы базы данных:
+
+```bash
+sudo -u 'postgres' createuser --pwprompt 'zabbix' && sudo -u 'postgres' createdb -O 'zabbix' 'zabbix' && zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u 'zabbix' psql 'zabbix'
+```
+
+- Добавление расширения и импортирование схемы TimescaleDB:
+
+```bash
+echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql 'zabbix' && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u 'zabbix' psql 'zabbix'
 ```
 
 - Обновление схемы TimescaleDB:
