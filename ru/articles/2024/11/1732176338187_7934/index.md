@@ -42,7 +42,7 @@ hash: 'f892bebc3ecd118ae94827eed31649daccb04ff5'
 uuid: 'f892bebc-3ecd-518a-a948-27eed31649da'
 slug: 'f892bebc-3ecd-518a-a948-27eed31649da'
 
-draft: 1
+draft: 0
 ---
 
 Алгоритм получения сертификата Let's Encrypt и последующего его продления при помощи скрипта.
