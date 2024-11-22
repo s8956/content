@@ -104,3 +104,20 @@ echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' 
 ```bash
 echo "ALTER EXTENSION timescaledb UPDATE;" | sudo -u 'postgres' psql 'zabbix'
 ```
+
+## Резервное копирование
+
+```bash
+d='backup.db'; pg_dump -Fd --host='127.0.0.1' --port='5432' --username='zabbix' --password --dbname='zabbix' -f "${d}" && tar -cJf "${d}" "${d}.tar.xz"
+```
+
+## Восстановление
+
+```bash
+sudo -u 'postgres' dropdb 'zabbix'
+sudo -u 'postgres' createdb -O 'zabbix' 'zabbix'
+echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql 'zabbix'
+echo 'SELECT timescaledb_pre_restore();' | sudo -u 'postgres' psql 'zabbix'
+pg_restore --host='127.0.0.1' --port='5432' --username='zabbix' --password --dbname='zabbix' 'backup.db'
+echo 'SELECT timescaledb_post_restore();' | sudo -u 'postgres' psql 'zabbix'
+```
