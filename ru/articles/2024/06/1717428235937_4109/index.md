@@ -133,7 +133,7 @@ resize2fs "/dev/${VG}/${LV}"
 Расширить файловую систему **XFS**:
 
 ```bash
-xfs_growfs "/dev/${VG}/${LV}"
+xfs_growfs -d "/dev/${VG}/${LV}"
 ```
 
 ## Удаление LVM
