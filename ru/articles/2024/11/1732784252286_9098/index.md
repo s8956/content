@@ -79,10 +79,10 @@ sudo -u 'postgres' dropuser 'PG_USER'
 
 ## Резервное копирование
 
-- Создать резервную копию базы данных в формате `directory`:
+- Создать резервную копию базы данных:
 
 ```bash
-u='PG_USER'; db='PG_DB'; d="${HOME}/pgsql.${db}"; pg_dump -Fd --host='127.0.0.1' --port='5432' --username="${u}" --password --dbname="${db}" -f "${d}"
+u='PG_USER'; db='PG_DB'; d="${HOME}/pgsql.${db}.sql"; pg_dump --host='127.0.0.1' --port='5432' --username="${u}" --password --dbname="${db}" -f "${d}"
 ```
 
 ## Восстановление
@@ -99,8 +99,8 @@ sudo -u 'postgres' dropdb 'PG_DB'
 sudo -u 'postgres' createdb -O 'PG_USER' 'PG_DB'
 ```
 
-- Восстановить данные новую базу данных из формата `directory`:
+- Восстановить данные в новую базу данных:
 
 ```bash
-u='PG_USER'; db='PG_DB'; d="${HOME}/pgsql.${db}"; pg_restore -Fd --host='127.0.0.1' --port='5432' --username="${u}" --password --dbname="${db}" "${d}"
+db='PG_DB'; d="${HOME}/pgsql.${db}.sql"; sudo -u 'postgres' psql --dbname="${db}" -f "${d}"
 ```
