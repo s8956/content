@@ -102,5 +102,5 @@ sudo -u 'postgres' createdb -O 'DB_USER' 'DB_NAME'
 - Восстановить данные в новую базу данных:
 
 ```bash
-xzcat 'backup.sql.xz' | sudo -u 'DB_USER' psql 'DB_NAME'
+xzcat 'backup.sql.xz' | sudo -u 'postgres' psql 'DB_NAME'
 ```
