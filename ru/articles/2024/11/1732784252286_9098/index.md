@@ -52,29 +52,29 @@ draft: 0
 
 ## Создание пользователя и БД 
 
-- Создать пользователя `PG_USER` с паролем:
+- Создать пользователя `DB_USER` с паролем:
 
 ```bash
-sudo -u 'postgres' createuser --pwprompt 'PG_USER'
+sudo -u 'postgres' createuser --pwprompt 'DB_USER'
 ```
 
-- Создать базу данных `PG_DB` с владельцем `PG_USER`:
+- Создать базу данных `DB_NAME` с владельцем `DB_USER`:
 
 ```bash
-sudo -u 'postgres' createdb -O 'PG_USER' 'PG_DB'
+sudo -u 'postgres' createdb -O 'DB_USER' 'DB_NAME'
 ```
 ## Удаление БД и пользователя
 
-- Удалить базу данных `PG_DB`:
+- Удалить базу данных `DB_NAME`:
 
 ```bash
-sudo -u 'postgres' dropdb 'PG_DB'
+sudo -u 'postgres' dropdb 'DB_NAME'
 ```
 
-- Удалить пользователя `PG_USER`:
+- Удалить пользователя `DB_USER`:
 
 ```bash
-sudo -u 'postgres' dropuser 'PG_USER'
+sudo -u 'postgres' dropuser 'DB_USER'
 ```
 
 ## Резервное копирование
@@ -82,25 +82,25 @@ sudo -u 'postgres' dropuser 'PG_USER'
 - Создать резервную копию базы данных:
 
 ```bash
-u='PG_USER'; db='PG_DB'; d="${HOME}/pgsql.${db}.sql"; pg_dump --host='127.0.0.1' --port='5432' --username="${u}" --password --dbname="${db}" -f "${d}"
+pg_dump --host='127.0.0.1' --port='5432' --username='DB_USER' --password --dbname='DB_NAME' | xz > 'backup.sql.xz'
 ```
 
 ## Восстановление
 
-- Удалить старую базу данных `PG_DB` (при необходимости):
+- Удалить старую базу данных `DB_NAME` (при необходимости):
 
 ```bash
-sudo -u 'postgres' dropdb 'PG_DB'
+sudo -u 'postgres' dropdb 'DB_NAME'
 ```
 
-- Создать новую базу данных `PG_DB` с владельцем `PG_USER`:
+- Создать новую базу данных `DB_NAME` с владельцем `DB_USER`:
 
 ```bash
-sudo -u 'postgres' createdb -O 'PG_USER' 'PG_DB'
+sudo -u 'postgres' createdb -O 'DB_USER' 'DB_NAME'
 ```
 
 - Восстановить данные в новую базу данных:
 
 ```bash
-db='PG_DB'; d="${HOME}/pgsql.${db}.sql"; sudo -u 'postgres' psql --dbname="${db}" -f "${d}"
+xzcat 'backup.sql.xz' | sudo -u 'DB_USER' psql 'DB_NAME'
 ```
