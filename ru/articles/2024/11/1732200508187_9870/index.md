@@ -108,7 +108,7 @@ echo "ALTER EXTENSION timescaledb UPDATE;" | sudo -u 'postgres' psql 'zabbix'
 ## Резервное копирование
 
 ```bash
-d='backup.db'; pg_dump -Fd --host='127.0.0.1' --port='5432' --username='zabbix' --password --dbname='zabbix' -f "${d}" && tar -cJf "${d}" "${d}.tar.xz"
+d='backup.db'; pg_dump -Fd --host='127.0.0.1' --port='5432' --username='zabbix' --password --dbname='zabbix' -f "${d}"
 ```
 
 ## Восстановление
