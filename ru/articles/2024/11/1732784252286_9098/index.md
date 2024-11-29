@@ -190,13 +190,13 @@ timescaledb-tune --quiet --yes && systemctl restart postgresql@17-main.service
 pg_dropcluster --stop 17 main
 ```
 
-- Запустить обновление версии экземпляра PostgreSQL 16 до PostgreSQL 17:
+- Запустить обновление версии экземпляра PostgreSQL 16 до PostgreSQL 17 в кластере:
 
 ```bash
 pg_upgradecluster 16 main
 ```
 
-- Удалить версию экземпляра PostgreSQL 16:
+- Удалить версию экземпляра PostgreSQL 16 из кластера:
 
 ```bash
 pg_dropcluster 16 main
