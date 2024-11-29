@@ -50,7 +50,33 @@ draft: 0
 
 <!--more-->
 
-## Создание пользователя и БД 
+## Списки
+
+- Посмотреть список баз данных:
+
+```bash
+sudo -u 'postgres' psql -c '\l'
+```
+
+- Посмотреть список ролей:
+
+```bash
+sudo -u 'postgres' psql -c '\du'
+```
+
+- Посмотреть список таблиц схемы `public` в базе данных `DB_NAME`:
+
+```bash
+sudo -u 'postgres' psql -c '\c DB_NAME' -c '\dt'
+```
+
+- Посмотреть список таблиц всех схем в базе данных `DB_NAME`:
+
+```bash
+sudo -u 'postgres' psql -c '\c DB_NAME' -c '\dt *.*'
+```
+
+## Создание
 
 - Создать пользователя `DB_USER` с паролем:
 
@@ -61,9 +87,16 @@ sudo -u 'postgres' createuser --pwprompt 'DB_USER'
 - Создать базу данных `DB_NAME` с владельцем `DB_USER`:
 
 ```bash
-sudo -u 'postgres' createdb -O 'DB_USER' 'DB_NAME'
+sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 ```
-## Удаление БД и пользователя
+
+- Создать базу данных `DB_NAME` из шаблона `template0` с владельцем `DB_USER`:
+
+```bash
+sudo -u 'postgres' createdb --owner='DB_USER' --template='template0' 'DB_NAME'
+```
+
+## Удаление
 
 - Удалить базу данных `DB_NAME`:
 
@@ -79,10 +112,10 @@ sudo -u 'postgres' dropuser 'DB_USER'
 
 ## Резервное копирование
 
-- Создать резервную копию базы данных:
+- Создать резервную копию базы данных `DB_NAME` при помощи пользователя `DB_USER` и записать в файл `backup.sql.xz`:
 
 ```bash
-pg_dump --host='127.0.0.1' --port='5432' --username='DB_USER' --password --dbname='DB_NAME' | xz > 'backup.sql.xz'
+f='backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='DB_USER' --password --dbname='DB_NAME' --file="${f}" && xz "${f}"
 ```
 
 ## Восстановление
@@ -96,11 +129,11 @@ sudo -u 'postgres' dropdb 'DB_NAME'
 - Создать новую базу данных `DB_NAME` с владельцем `DB_USER`:
 
 ```bash
-sudo -u 'postgres' createdb -O 'DB_USER' 'DB_NAME'
+sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 ```
 
-- Восстановить данные в новую базу данных:
+- Восстановить данные в новую базу данных `DB_NAME` из файла `backup.sql.xz`:
 
 ```bash
-xzcat 'backup.sql.xz' | sudo -u 'postgres' psql 'DB_NAME'
+f='backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --dbname='DB_NAME' --file="${f}"
 ```
