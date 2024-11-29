@@ -137,3 +137,17 @@ sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 ```bash
 f='backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --dbname='DB_NAME' --file="${f}"
 ```
+
+## Очистка и анализ
+
+- Выполнить очистку и собрать статистику базы данных `DB_NAME`:
+
+```bash
+sudo -u 'postgres' vacuumdb --dbname='DB_NAME' --analyze
+```
+
+- Выполнить очистку и собрать статистику всех баз данных:
+
+```bash
+sudo -u 'postgres' vacuumdb --all --analyze
+```
