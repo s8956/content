@@ -151,3 +151,59 @@ sudo -u 'postgres' vacuumdb --dbname='DB_NAME' --analyze
 ```bash
 sudo -u 'postgres' vacuumdb --all --analyze
 ```
+
+## Обновление кластера
+
+{{< alert "important" >}}
+В данном примере рассматривается сценарий обновления PostgreSQL **16** до PostgreSQL **17** на ОС **Debian**.
+{{< /alert >}}
+
+- Посмотреть список экземпляров PostgreSQL в кластере:
+
+```bash
+pg_lsclusters
+```
+
+- Установить новую версию PostgreSQL 17:
+
+```bash
+apt install postgresql-17
+```
+
+{{< accordion-item "TimescaleDB" >}}
+- Установить новую версию TimescaleDB для PostgreSQL 17:
+
+```bash
+apt install timescaledb-2-postgresql-17 timescaledb-2-loader-postgresql-17
+```
+
+- Импортировать настройки TimescaleDB в конфигурацию PostgreSQL 17:
+
+```bash
+timescaledb-tune --quiet --yes && systemctl restart postgresql@17-main.service
+```
+{{< /accordion-item >}}
+
+- Остановить новую версию экземпляра PostgreSQL 17 в кластере:
+
+```bash
+pg_dropcluster --stop 17 main
+```
+
+- Запустить обновление версии экземпляра PostgreSQL 16 до PostgreSQL 17:
+
+```bash
+pg_upgradecluster 16 main
+```
+
+- Удалить версию экземпляра PostgreSQL 16:
+
+```bash
+pg_dropcluster 16 main
+```
+
+- Посмотреть установленные пакеты для PostgreSQL 16 и удалить ненужные:
+
+```bash
+apt list --installed | grep 'postgresql.*-16'
+```
