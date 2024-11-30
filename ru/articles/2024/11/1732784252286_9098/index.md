@@ -115,8 +115,12 @@ sudo -u 'postgres' dropuser 'DB_USER'
 - Создать резервную копию базы данных `DB_NAME` при помощи пользователя `DB_USER` и записать в файл `backup.sql.xz`:
 
 ```bash
-f='backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='DB_USER' --password --dbname='DB_NAME' --file="${f}" && xz "${f}"
+f='backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='DB_USER' --password --dbname='DB_NAME' --file="${f}" && xz "${f}" && rm -f "${f}"
 ```
+
+{{< alert "warning" >}}
+Использовать перенаправление для резервного копирования и восстановления базы данных не рекомендуется. Резервная копия базы данных может оказаться повреждённой.
+{{< /alert >}}
 
 ## Восстановление
 
