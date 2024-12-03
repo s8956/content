@@ -12,6 +12,7 @@ categories:
   - 'terminal'
   - 'inDev'
 tags:
+  - 'sql'
   - 'postgresql'
 authors:
   - 'KaiKimera'
@@ -50,18 +51,32 @@ draft: 0
 
 <!--more-->
 
-## Списки
-
-- Посмотреть список баз данных:
-
-```bash
-sudo -u 'postgres' psql -c '\l'
-```
+## Роли (пользователи)
 
 - Посмотреть список ролей:
 
 ```bash
 sudo -u 'postgres' psql -c '\du'
+```
+
+- Создать пользователя `DB_USER` с паролем:
+
+```bash
+sudo -u 'postgres' createuser --pwprompt 'DB_USER'
+```
+
+- Удалить пользователя `DB_USER`:
+
+```bash
+sudo -u 'postgres' dropuser 'DB_USER'
+```
+
+## Базы данных
+
+- Посмотреть список баз данных:
+
+```bash
+sudo -u 'postgres' psql -c '\l'
 ```
 
 - Посмотреть список таблиц схемы `public` в базе данных `DB_NAME`:
@@ -76,14 +91,6 @@ sudo -u 'postgres' psql -c '\c DB_NAME' -c '\dt'
 sudo -u 'postgres' psql -c '\c DB_NAME' -c '\dt *.*'
 ```
 
-## Создание
-
-- Создать пользователя `DB_USER` с паролем:
-
-```bash
-sudo -u 'postgres' createuser --pwprompt 'DB_USER'
-```
-
 - Создать базу данных `DB_NAME` с владельцем `DB_USER`:
 
 ```bash
@@ -96,18 +103,10 @@ sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 sudo -u 'postgres' createdb --owner='DB_USER' --template='template0' 'DB_NAME'
 ```
 
-## Удаление
-
 - Удалить базу данных `DB_NAME`:
 
 ```bash
 sudo -u 'postgres' dropdb 'DB_NAME'
-```
-
-- Удалить пользователя `DB_USER`:
-
-```bash
-sudo -u 'postgres' dropuser 'DB_USER'
 ```
 
 ## Резервное копирование
