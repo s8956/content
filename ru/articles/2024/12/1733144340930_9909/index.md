@@ -55,6 +55,12 @@ draft: 0
 echo "CREATE USER 'DB_USER'@'127.0.0.1' IDENTIFIED BY 'DB_PASSWORD';" | mysql --user='root' --password
 ```
 
+- Переименовать пользователя `DB_USER@127.0.0.1` в `DB_USER@localhost`:
+
+```bash
+echo "RENAME USER 'DB_USER'@'127.0.0.1' TO 'DB_USER'@'localhost';" | mysql --user='root' --password
+```
+
 - Изменить пароль пользователя `DB_USER` на `DB_PASSWORD_NEW`:
 
 ```bash
