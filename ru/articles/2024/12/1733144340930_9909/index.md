@@ -91,7 +91,7 @@ echo "GRANT ALL ON DB_NAME.* TO 'DB_USER'@'127.0.01'; FLUSH PRIVILEGES;" | mysql
 echo "GRANT ALL ON *.* TO 'DB_USER'@'127.0.01'; FLUSH PRIVILEGES;" | mysql --user='root' --password
 ```
 
-- Отозвать права пользователя `DB_USER` у базы данных `DB_NAME`:
+- Отозвать все права пользователя `DB_USER` у базы данных `DB_NAME`:
 
 ```bash
 echo "REVOKE ALL ON DB_NAME FROM 'DB_USER'@'127.0.0.1';" | mysql --user='root' --password
