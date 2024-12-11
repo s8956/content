@@ -98,13 +98,13 @@ draft: 1
 - Создать пользователя и базу данных `zabbix`, импортировать схему для базы данных `zabbix`:
 
 ```bash
-sudo -u 'postgres' createuser --pwprompt 'zabbix' && sudo -u 'postgres' createdb -O 'zabbix' 'zabbix' && zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u 'zabbix' psql 'zabbix'
+u='zabbix'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${u}" && zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u "${u}" psql "${u}"
 ```
 
 - Добавить расширение, импортировать схему TimescaleDB для базы данных `zabbix`:
 
 ```bash
-echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql 'zabbix' && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u 'zabbix' psql 'zabbix'
+u='zabbix'; echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql "${u}" && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u "${u}" psql "${u}"
 ```
 
 ### Настройка Nginx
@@ -144,7 +144,7 @@ echo 'SELECT timescaledb_pre_restore();' | sudo -u 'postgres' psql 'zabbix'
 ```
 
 ```bash
-f='zabbix.backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --dbname 'zabbix' --file="${f}"
+f='zabbix.backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --dbname='zabbix' --file="${f}"
 ```
 
 ```bash
