@@ -14,6 +14,7 @@ categories:
 tags:
   - 'sql'
   - 'mysql'
+  - 'debian'
 authors:
   - 'KaiKimera'
 sources:

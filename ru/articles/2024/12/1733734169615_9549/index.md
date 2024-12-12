@@ -6,18 +6,15 @@
 title: 'Базовая конфигурация SQUID'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1503019419990-1d961b6301aa'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'network'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'squid'
+  - 'debian'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -42,10 +39,10 @@ hash: '3e75ca13a07aedcd40715db0363ddea637b7879f'
 uuid: '3e75ca13-a07a-5dcd-9071-5db0363ddea6'
 slug: '3e75ca13-a07a-5dcd-9071-5db0363ddea6'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по быстрому запуску PROXY-сервера {{< tag "SQUID" >}}.
 
 <!--more-->
 
@@ -69,7 +66,7 @@ apt update && apt install --yes squid
 
 - `auth_param` - параметр авторизации.
   - `basic` - базовый.
-    - `program /usr/lib/squid/basic_ncsa_auth /etc/squid/users.conf` - файл с паролями для пользователей.
+    - `program /usr/lib/squid/basic_ncsa_auth /etc/squid/users.conf` - файл с логинами и паролями для пользователей.
     - `realm Proxy Server` - строка (название сервера), отображающаяся в форме ввода логина и пароля у клиента. По умолчанию: `Squid proxy-caching web server`.
 - `acl` - список доступа.
   - `clients` - название списка доступа для авторизации пользователей БЕЗ ввода логина и пароля.
@@ -77,8 +74,8 @@ apt update && apt install --yes squid
 
 ## Пользователи
 
+- Создать файл `/etc/squid/users.conf` с пользователями `user01:user01` и `user02:user02`:
+
 {{< file "users.conf" "text" >}}
 
-https://hostingcanada.org/htpasswd-generator/
-
-Bcrypt
+- Заменить содержимое файла `/etc/squid/users.conf` на собственное. Пароли можно шифровать при помощи [этого инструмента](https://hostingcanada.org/htpasswd-generator/), выбрав режим **Bcrypt**.
