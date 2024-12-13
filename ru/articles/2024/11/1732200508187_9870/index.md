@@ -8,16 +8,17 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1622533277534-e2b5f311bb60'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'network'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'zabbix'
+  - 'debian'
+  - 'angie'
+  - 'php'
+  - 'postgresql'
+  - 'timescale'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -42,14 +43,16 @@ hash: '160a7005882dd037cd1fe0739a879ce6dbd15a0b'
 uuid: '160a7005-882d-5037-9d1f-e0739a879ce6'
 slug: '160a7005-882d-5037-9d1f-e0739a879ce6'
 
-draft: 1
+draft: 0
 ---
 
-
+В этой заметке я устанавливаю Zabbix на ОС Debian с немного изменённым списком пакетов. Вместо Nginx я использую его форк **Angie**.
 
 <!--more-->
 
 ## Установка пакетов
+
+Необходимо установить пакеты для Angie, PHP, PostgreSQL, TimescaleDB и самого Zabbix. Пакет `zabbix-nginx-conf` не нужен, так как мы воссоздадим его конфигурацию на Angie.
 
 ### Angie
 
@@ -88,10 +91,16 @@ draft: 1
 - Добавить репозиторий и установить пакеты Zabbix:
 
 ```bash
-. /etc/os-release; curl -fsSLo '/etc/apt/keyrings/zabbix.gpg' 'https://uaik.github.io/config/zabbix/zabbix.gpg' && echo "deb [signed-by=/etc/apt/keyrings/zabbix.gpg] https://repo.zabbix.com/zabbix/7.0/debian ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/zabbix.list' && apt update && apt install --yes zabbix-server-pgsql zabbix-frontend-php zabbix-sql-scripts zabbix-agent2
+. /etc/os-release; curl -fsSL 'https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-B5333005' | gpg --dearmor -o '/etc/apt/keyrings/zabbix.gpg' && echo "deb [signed-by=/etc/apt/keyrings/zabbix.gpg] https://repo.zabbix.com/zabbix/7.0/debian ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/zabbix.list' && apt update && apt install --yes zabbix-server-pgsql zabbix-frontend-php zabbix-sql-scripts zabbix-agent2
 ```
 
 ## Установка Zabbix
+
+Установка Zabbix состоит из этапов:
+
+1. Настройка базы данных.
+2. Настройка конфигурации Nginx (в данном случае Angie).
+3. Настройка конфигурации PHP-FPM.
 
 ### Настройка базы данных
 
@@ -107,19 +116,43 @@ u='zabbix'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres
 u='zabbix'; echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql "${u}" && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u "${u}" psql "${u}"
 ```
 
-### Настройка Nginx
+- Открыть файл `/etc/zabbix/zabbix_server.conf` и отредактировать параметр:
 
-- Создать файл `zabbix.conf` со следующем содержимым:
+```ini
+DBPassword=password
+```
 
-{{< file "nginx.conf" "nginx" >}}
+### Настройка Angie
+
+- Создать файл `/etc/angie/http.d/zabbix.conf` со следующем содержимым:
+
+{{< file "angie.zabbix.conf" "nginx" >}}
 
 ### Настройка PHP-FPM
 
-- Создать файл `zabbix.conf` со следующем содержимым:
+- Создать файл `/etc/php/8.3/fpm/pool.d/zabbix.conf` со следующем содержимым:
 
-{{< file "php-fpm.conf" "ini" >}}
+{{< file "php-fpm.zabbix.conf" "ini" >}}
+
+### Запуск мастера установки
+
+- Перезапустить сервер Zabbix и сопутствующие службы:
+
+```bash
+systemctl restart zabbix-server zabbix-agent2 angie php8.3-fpm
+```
+
+- Включить автоматический запуск сервера Zabbix и сопутствующих служб:
+
+```bash
+systemctl enable zabbix-server zabbix-agent2 angie php8.3-fpm
+```
+
+- Для запуска мастера установки, необходимо в браузере открыть домен, указанный в конфигурации Angie.
 
 ## Резервное копирование
+
+- Создать резервную копию базы данных `zabbix`:
 
 ```bash
 f='zabbix.backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='zabbix' --password --dbname='zabbix' --file="${f}" && xz "${f}" && rm -f "${f}"
@@ -127,35 +160,54 @@ f='zabbix.backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='zabb
 
 ## Восстановление
 
+- Удалить существующую базу данных `zabbix`:
+
 ```bash
 sudo -u 'postgres' dropdb 'zabbix'
 ```
+
+- Создать новую базу данных `zabbix` с владельцем `zabbix`:
 
 ```bash
 sudo -u 'postgres' createdb -O 'zabbix' 'zabbix'
 ```
 
+- Создать расширение `timescaledb` для базы данных `zabbix`:
+
 ```bash
 echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql 'zabbix'
 ```
+
+- Остановить процессы `timescaledb` в базе данных `zabbix` перед восстановлением:
 
 ```bash
 echo 'SELECT timescaledb_pre_restore();' | sudo -u 'postgres' psql 'zabbix'
 ```
 
+- Восстановить информацию в базе данных `zabbix` из файла `zabbix.backup.sql.xz`:
+
 ```bash
 f='zabbix.backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --dbname='zabbix' --file="${f}"
 ```
 
+- Запустить процессы `timescaledb` после восстановления базы данных `zabbix`:
+
 ```bash
 echo 'SELECT timescaledb_post_restore();' | sudo -u 'postgres' psql 'zabbix'
 ```
+
+- Запустить Vacuum после восстановления базы данных `zabbix`:
 
 ```bash
 sudo -u 'postgres' vacuumdb --all --analyze
 ```
 
 ## Обновление Zabbix
+
+Обновление Zabbix состоит из двух этапов:
+
+1. Остановка сервера Zabbix, обновление пакетов и запуск сервера Zabbix.
+2. Остановка сервера Zabbix, обновление схемы TimescaleDB и запуск сервера Zabbix.
 
 ### Обновление пакетов
 
@@ -176,6 +228,8 @@ apt update && apt install --only-upgrade zabbix-server-pgsql zabbix-frontend-php
 ```bash
 systemctl start zabbix-server zabbix-agent2
 ```
+
+### Обновление TimescaleDB
 
 - Остановка служб Zabbix:
 
