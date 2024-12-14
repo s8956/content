@@ -17,6 +17,7 @@ tags:
   - 'php'
   - 'postgresql'
   - 'timescale'
+  - 'timescaledb'
 authors:
   - 'KaiKimera'
 sources:
@@ -67,7 +68,7 @@ draft: 0
 - Добавить репозиторий и установить пакеты PHP-FPM:
 
 ```bash
-. /etc/os-release; curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg' && echo "deb [signed-by=/etc/apt/keyrings/php.gpg] https://packages.sury.org/php ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/php.list' && apt update && apt install --yes php8.3-fpm php8.3-bcmath php8.3-bz2 php8.3-cli php8.3-curl php8.3-gd php8.3-gmp php8.3-imagick php8.3-imap php8.3-intl php8.3-ldap php8.3-mbstring php8.3-memcached php8.3-mysql php8.3-odbc php8.3-opcache php8.3-pgsql php8.3-redis php8.3-uploadprogress php8.3-xml php8.3-zip php8.3-zstd
+. /etc/os-release; v='8.3'; p=("php${v}-fpm" "php${v}-bcmath" "php${v}-bz2" "php${v}-cli" "php${v}-curl" "php${v}-gd" "php${v}-gmp" "php${v}-imagick" "php${v}-imap" "php${v}-intl" "php${v}-ldap" "php${v}-mbstring" "php${v}-memcached" "php${v}-mysql" "php${v}-odbc" "php${v}-opcache" "php${v}-pgsql" "php${v}-redis" "php${v}-uploadprogress" "php${v}-xml" "php${v}-zip" "php${v}-zstd"); curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg' && echo "deb [signed-by=/etc/apt/keyrings/php.gpg] https://packages.sury.org/php ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/php.list' && apt update && apt install --yes "${p[@]}"
 ```
 
 ### PostgreSQL
@@ -139,13 +140,13 @@ DBPassword=password
 - Перезапустить сервер Zabbix и сопутствующие службы:
 
 ```bash
-systemctl restart zabbix-server zabbix-agent2 angie php8.3-fpm
+systemctl restart zabbix-server zabbix-agent2 angie php${v}-fpm
 ```
 
 - Включить автоматический запуск сервера Zabbix и сопутствующих служб:
 
 ```bash
-systemctl enable zabbix-server zabbix-agent2 angie php8.3-fpm
+systemctl enable zabbix-server zabbix-agent2 angie php${v}-fpm
 ```
 
 - Для запуска мастера установки, необходимо в браузере открыть домен, указанный в конфигурации Angie.

@@ -16,6 +16,7 @@ tags:
   - 'systemd'
   - 'linux'
   - 'unit'
+  - 'error'
 authors:
   - 'KaiKimera'
 sources:
