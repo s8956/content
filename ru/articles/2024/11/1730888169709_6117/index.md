@@ -54,7 +54,7 @@ draft: 0
 
 ```terminal
 cat /var/log/jitsi/jicofo.log
-
+<...>
 2024-11-05 11:36:06.116 INFO: [33] SipGateway.registrationStateChanged#120: REG STATE CHANGE ProtocolProviderServiceSipImpl(SIP:1234@192.168.1.2) -> RegistrationStateChangeEvent[ oldState=Unregistered; newState=RegistrationState=Registering; userRequest=false; reasonCode=-1; reason=null]
 2024-11-05 11:36:06.179 INFO: [43] SipGateway.registrationStateChanged#120: REG STATE CHANGE ProtocolProviderServiceSipImpl(SIP:1234@192.168.1.2) -> RegistrationStateChangeEvent[ oldState=Registering; newState=RegistrationState=Registered; userRequest=false; reasonCode=-1; reason=null]
 2024-11-05 11:36:06.180 WARNING: [43] SipHealthPeriodicChecker.create#170: No health check started, no HEALTH_CHECK_SIP_URI prop.
@@ -70,6 +70,7 @@ org.jivesoftware.smack.SmackException$EndpointConnectionException: The following
         at net.java.sip.communicator.impl.protocol.jabber.ProtocolProviderServiceJabberImpl.register(ProtocolProviderServiceJabberImpl.java:494)
         at org.jitsi.jigasi.util.RegisterThread.run(RegisterThread.java:59)
 2024-11-05 11:36:36.255 WARNING: [14] org.jivesoftware.smackx.ping.PingManager.pingServerIfNecessary: XMPPTCPConnection[not-authenticated] (0) was not authenticated
+<...>
 ```
 
 Возможно, {{< tag "Jigasi" >}} запускается раньше других сервисов. Чтобы {{< tag "Jigasi" >}} запустился в необходимое время, надо переопределить зависимости запуска стандартной конфигурации **systemd**. Для этого создаём файл `/etc/systemd/system/jigasi.service.d/override.conf` со строками:
