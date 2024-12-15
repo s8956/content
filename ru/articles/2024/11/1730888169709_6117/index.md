@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Jigasi: "The following addresses failed: RFC 6120 A/AAAA Endpoint"'
+title: 'Jigasi: The following addresses failed: RFC 6120 A/AAAA Endpoint'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1525598912003-663126343e1f'
