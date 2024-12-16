@@ -6,12 +6,13 @@
 title: 'Обновление FreeBSD до актуальной версии'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1517581177682-a085bb7ffb15'
 categories:
   - 'bsd'
 tags:
   - 'freebsd'
   - 'freebsd-update'
+  - 'update'
   - 'pkg'
 authors:
   - 'KaiKimera'
@@ -39,46 +40,49 @@ hash: '61ba571a7e1042fab064d91a8e4f6daadaf19af6'
 uuid: '61ba571a-7e10-52fa-9064-d91a8e4f6daa'
 slug: '61ba571a-7e10-52fa-9064-d91a8e4f6daa'
 
-draft: 1
+draft: 0
 ---
 
 Этапы обновления FreeBSD на новую версию.
 
 <!--more-->
 
-## План обновления
+## Подробный план обновления
 
-1. Запросить информация о новой версии FreeBSD:
+- Запросить информация о новой версии FreeBSD:
 
 ```bash
 freebsd-update fetch && freebsd-update install
 ```
 
-2. Перевести систему на новую версию (`14.1`) и перезагрузить:
+- Перевести систему на новую версию (`14.2`) и перезагрузить:
 
 ```bash
-freebsd-update upgrade -r 14.1-RELEASE && freebsd-update install && shutdown -r now
+freebsd-update upgrade -r '14.2-RELEASE' && freebsd-update install && shutdown -r now
 ```
 
-3. Установить новые компоненты пользовательского пространства и удалить старые системные библиотеки:
+- Установить новые компоненты пользовательского пространства и удалить старые системные библиотеки:
 
 ```bash
-freebsd-update install; freebsd-update install && shutdown -r now
+freebsd-update install && freebsd-update install && shutdown -r now
 ```
 
-## Автоматизация
+## Сокращённый план обновления
+
+Часть команд идут в одну строку с заранее определёнными переменными. Это сокращённый вариант плана обновления.
 
 ### Первый этап обновления
 
-```bash
-v='14.1-RELEASE'; freebsd-update fetch && freebsd-update install; freebsd-update upgrade -r "${v}" && freebsd-update install && shutdown -r now
-```
+- Обновить систему до версии `14.2`:
 
-Где:
-- `14.1-RELEASE` - новая версия FreeBSD.
+```bash
+v='14.2'; freebsd-update fetch && freebsd-update install; freebsd-update upgrade -r "${v}-RELEASE" && freebsd-update install && shutdown -r now
+```
 
 ### Второй этап обновления
 
+- Обновить базу пакетов и сами пакеты:
+
 ```bash
-freebsd-update install && freebsd-update install; pkg update -f && pkg upgrade --yes && shutdown -r now
+freebsd-update install && freebsd-update install && shutdown -r now
 ```
