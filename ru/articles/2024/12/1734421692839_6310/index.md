@@ -60,7 +60,7 @@ apt install --yes unattended-upgrades apt-listchanges
 
 - Открыть файл `/etc/apt/apt.conf.d/50unattended-upgrades` и **закомментировать** строку:
 
-```go {hl_lines=9}
+```c {hl_lines=9,file="50unattended-upgrades"}
 Unattended-Upgrade::Origins-Pattern {
         // Codename based matching:
         // This will follow the migration of a release through different
@@ -91,3 +91,9 @@ Unattended-Upgrade::Origins-Pattern {
 - Создать файл `/etc/apt/apt.conf.d/20auto-upgrades` со следующим содержимым:
 
 {{< file "20auto-upgrades" "c" >}}
+
+- Запустить автоматическое обновление вручную для отладки:
+
+```bash
+unattended-upgrade -d
+```
