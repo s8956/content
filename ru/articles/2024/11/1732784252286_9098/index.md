@@ -70,6 +70,18 @@ sudo -u 'postgres' createuser --pwprompt 'DB_USER'
 ```bash
 sudo -u 'postgres' dropuser 'DB_USER'
 ```
+- Изменить пользователя всех баз данных с `DB_USER_OLD` на `DB_USER_NEW`:
+
+```bash
+sudo -u 'postgres' psql -c 'reassign owned by DB_USER_OLD to DB_USER_NEW;'
+```
+
+- Изменить пользователя таблиц базы данных `DB_NAME` с `DB_USER_OLD` на `DB_USER_NEW`:
+
+```bash
+sudo -u 'postgres' psql -c '\c DB_NAME' -c 'reassign owned by DB_USER_OLD to DB_USER_NEW;'
+```
+
 
 ## Базы данных
 
@@ -210,3 +222,21 @@ pg_dropcluster 16 main
 ```bash
 apt list --installed | grep 'postgresql.*-16'
 ```
+
+## Удалённое подключение
+
+- В файле `postgresql.conf` добавить `listen_addresses = '*'`:
+
+```ini
+# listen_addresses = 'localhost'
+listen_addresses = '*'
+```
+
+- В файле `pg_hba.conf` добавить строки:
+
+```
+host    all             all             0.0.0.0/0               scram-sha-256
+host    all             all             ::/0                    scram-sha-256
+```
+
+- В брандмауэре открыть порт `5432/tcp`.
