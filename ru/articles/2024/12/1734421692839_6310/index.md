@@ -58,9 +58,9 @@ apt install --yes unattended-upgrades apt-listchanges
 
 ## Настройка
 
-- Открыть файл `/etc/apt/apt.conf.d/50unattended-upgrades` и **закомментировать** строку:
+- Открыть файл `/etc/apt/apt.conf.d/50unattended-upgrades` и **закомментировать** строки:
 
-```c {hl_lines=9,file="50unattended-upgrades"}
+```c {hl_lines=["9-11"],file="50unattended-upgrades"}
 Unattended-Upgrade::Origins-Pattern {
         // Codename based matching:
         // This will follow the migration of a release through different
@@ -70,8 +70,8 @@ Unattended-Upgrade::Origins-Pattern {
 //      "origin=Debian,codename=${distro_codename}-updates";
 //      "origin=Debian,codename=${distro_codename}-proposed-updates";
 //      "origin=Debian,codename=${distro_codename},label=Debian";
-        "origin=Debian,codename=${distro_codename},label=Debian-Security";
-        "origin=Debian,codename=${distro_codename}-security,label=Debian-Security";
+//      "origin=Debian,codename=${distro_codename},label=Debian-Security";
+//      "origin=Debian,codename=${distro_codename}-security,label=Debian-Security";
 
         // Archive or Suite based matching:
         // Note that this will silently match a different release after
