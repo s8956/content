@@ -53,7 +53,7 @@ draft: 0
 
 После установки базовой системы, рекомендуется запустить обновление.
 
-1. Запросить и применить обновления:
+- Запросить и применить обновления:
 
 ```bash
 freebsd-update fetch && freebsd-update install
@@ -61,7 +61,7 @@ freebsd-update fetch && freebsd-update install
 
 ## Обновление пакетов
 
-1. Запросить и применить обновления пакетов:
+- Запросить и применить обновления пакетов:
 
 ```bash
 pkg update -f && pkg upgrade --yes
@@ -71,13 +71,13 @@ pkg update -f && pkg upgrade --yes
 
 По умолчанию, {{< tag "FreeBSD" >}} берёт обновления пакетов из квартальной (`quarterly`) ветки. Если хочется получить свежие пакеты здесь и сейчас, то нужно переключить ветку на `latest`.
 
-1. Создать файл `/usr/local/etc/pkg/repos/FreeBSD.conf`:
+- Создать файл `/usr/local/etc/pkg/repos/FreeBSD.conf`:
 
 ```bash
 mkdir -p /usr/local/etc/pkg/repos && echo 'FreeBSD: { url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest" }' > /usr/local/etc/pkg/repos/FreeBSD.conf
 ```
 
-2. Обновить базу данных пакетов и обновить пакеты:
+- Обновить базу данных пакетов и обновить пакеты:
 
 ```bash
 pkg update -f && pkg upgrade --yes
@@ -89,9 +89,9 @@ pkg update -f && pkg upgrade --yes
 
 ### Установка сервиса обновления микрокода CPU
 
-1. Установить пакет.
-2. Добавить в `rc.conf` автозапуск сервиса.
-3. Запустить сервис.
+- Установить пакет.
+- Добавить в `rc.conf` автозапуск сервиса.
+- Запустить сервис.
 
 ```bash
 pkg install cpu-microcode && sysrc microcode_update_enable=YES && service microcode_update start
@@ -111,13 +111,13 @@ pkg install bash ca_root_nss curl gnupg htop mc nano rsync rsyslog sudo zsh && s
 
 ### Установка Zsh для пользователей
 
-1. Изменить стандартную оболочку на {{< tag "Zsh" >}} для **root**:
+- Изменить стандартную оболочку на {{< tag "Zsh" >}} для **root**:
 
 ```bash
 chsh -s zsh root
 ```
 
-2. Изменить стандартную оболочку на {{< tag "Zsh" >}} для **обычного пользователя**:
+- Изменить стандартную оболочку на {{< tag "Zsh" >}} для **обычного пользователя**:
 
 ```bash
 chsh -s zsh USERNAME
@@ -126,46 +126,50 @@ chsh -s zsh USERNAME
 Где:
 - `USERNAME` - логин пользователя.
 
-### Конфигурация Zsh
+## Настройка приложений и служб
 
-Использую конфигурацию от {{< tag "GRML" >}}.
+### Ядро
 
-1. Скачиваем конфигурацию:
-
-```bash
-curl -fsSLo '/etc/zshrc.grml' 'https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc'
-```
-
-2. Открываем файл `~/.zshrc` и добавляем следующие строки:
-
+- Увеличение лимита на дескрипторы файлов:
 
 ```bash
-. '/etc/zshrc.grml'
-export GPG_TTY=$(tty)
+echo -e 'kern.maxfiles=500000\nkern.maxfilesperproc=500000' >> '/etc/sysctl.conf'
 ```
 
-Я работаю на ОС Windows и к серверам подключаюсь через {{< tag "KiTTY" >}}. При работе с {{< tag "GPG" >}}, она иногда не понимает куда ей выбрасывать запрос на парольную фразу. Поэтому, у меня здесь добавлен фикс `export GPG_TTY=$(tty)`.
+### ZFS
 
-## Настройка ядра
-
-### Увеличение числа дескрипторов файлов
-
-У меня используется синхронизация данных при помощи {{< tag "Syncthing" >}}, данных много. Иногда случается ступор из-за лимита на дескрипторы файлов. Открываем `/etc/sysctl.conf`, добавляем:
-
-```ini
-kern.maxfiles=500000
-kern.maxfilesperproc=500000
-```
-
-## Настройка файловой системы
-
-### Отключение `atime`
-
-`atime` это время доступа к файлу. В обычной работе такая метрика бесполезна. На диск могут быть тысячи файлов и для каждого файла ядро ОС будет фиксировать и обновлять время доступа. Подобная операция весьма дорогая.
+- Отключение `atime`:
 
 ```bash
 zfs set atime=off zroot
 ```
 
-Где:
-- `zroot` - пул файловой системы {{< tag "ZFS" >}}.
+### Zsh
+
+- Скачиваем конфигурацию:
+
+```bash
+curl -fsSLo '/etc/zshrc.grml' 'https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc'
+```
+
+- Редактируем `~/.zshrc`:
+
+```bash
+echo -e ". '/etc/zshrc.grml'\nexport GPG_TTY=\$(tty)" >> ~/.zshrc
+```
+
+### SSHD
+
+```bash
+sed -i '' -e 's/#Port 22/Port 8022/g' -e 's/#IgnoreRhosts/IgnoreRhosts/g' -e 's/#MaxAuthTries 6/MaxAuthTries 2/g' -e 's/#PermitEmptyPasswords/PermitEmptyPasswords/g' -e 's/#PermitRootLogin/PermitRootLogin/g' -e 's/#X11Forwarding/X11Forwarding/g' -e 's/#LogLevel INFO/LogLevel VERBOSE/g' '/etc/ssh/sshd_config'
+```
+
+#### Параметры
+
+- `Port 8022` - порт SSH.
+- `IgnoreRhosts yes` - не учитывать содержимое файлов `.rhosts` и `.shosts`.
+- `MaxAuthTries 2` - количество попыток авторизации.
+- `PermitEmptyPasswords no` - запретить вход с пустым паролем.
+- `PermitRootLogin no` - запретить вход под пользователем `root`.
+- `X11Forwarding no` - отключить проброс приложений X11.
+- `LogLevel VERBOSE` - включить расширенное логирование.
