@@ -112,8 +112,8 @@ pkg install bash ca_root_nss curl gnupg htop mc nano rsync rsyslog sudo zsh
 У меня используется синхронизация данных при помощи {{< tag "Syncthing" >}}, данных много. Иногда случается ступор из-за лимита на дескрипторы файлов. Открываем `/etc/sysctl.conf`, добавляем:
 
 ```ini
-kern.maxfiles=500000
-kern.maxfilesperproc=500000
+kern.maxfiles=9223372036854775807
+kern.maxfilesperproc=9223372036854775807
 ```
 
 Перезагружаем систему:
