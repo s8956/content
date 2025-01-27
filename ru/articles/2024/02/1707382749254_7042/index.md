@@ -160,6 +160,8 @@ echo -e ". '/etc/zshrc.grml'\nexport GPG_TTY=\$(tty)" >> ~/.zshrc
 
 ### SSHD
 
+- Настройка параметров подключения по SSH:
+
 ```bash
 sed -i '' -e 's/#Port 22/Port 8022/g' -e 's/#IgnoreRhosts/IgnoreRhosts/g' -e 's/#MaxAuthTries 6/MaxAuthTries 2/g' -e 's/#PermitEmptyPasswords/PermitEmptyPasswords/g' -e 's/#PermitRootLogin/PermitRootLogin/g' -e 's/#X11Forwarding/X11Forwarding/g' -e 's/#LogLevel INFO/LogLevel VERBOSE/g' '/etc/ssh/sshd_config'
 ```
