@@ -102,24 +102,7 @@ pkg install cpu-microcode && sysrc microcode_update_enable=YES && service microc
 Для работы на сервере, я устанавливаю следующие пакеты:
 
 ```bash
-pkg install bash ca_root_nss curl gnupg htop mc nano rsync rsyslog sudo zsh
-```
-
-## Настройка ядра
-
-### Увеличение числа дескрипторов файлов
-
-У меня используется синхронизация данных при помощи {{< tag "Syncthing" >}}, данных много. Иногда случается ступор из-за лимита на дескрипторы файлов. Открываем `/etc/sysctl.conf`, добавляем:
-
-```ini
-kern.maxfiles=9223372036854775807
-kern.maxfilesperproc=9223372036854775807
-```
-
-Перезагружаем систему:
-
-```bash
-shutdown -r now
+pkg install bash ca_root_nss curl gnupg htop mc nano rsync rsyslog sudo zsh && sysrc syslogd_enable=NO && sysrc rsyslogd_enable=YES
 ```
 
 ## Настройка терминала
@@ -137,11 +120,11 @@ chsh -s zsh root
 2. Изменить стандартную оболочку на {{< tag "Zsh" >}} для **обычного пользователя**:
 
 ```bash
-chsh -s zsh user
+chsh -s zsh USERNAME
 ```
 
 Где:
-- `user` - логин пользователя.
+- `USERNAME` - логин пользователя.
 
 ### Конфигурация Zsh
 
@@ -150,18 +133,29 @@ chsh -s zsh user
 1. Скачиваем конфигурацию:
 
 ```bash
-wget -O ~/.zshrc.grml https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+curl -fsSLo '/etc/zshrc.grml' 'https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc'
 ```
 
 2. Открываем файл `~/.zshrc` и добавляем следующие строки:
 
 
 ```bash
-. "${HOME}/.zshrc.grml"
+. '/etc/zshrc.grml'
 export GPG_TTY=$(tty)
 ```
 
 Я работаю на ОС Windows и к серверам подключаюсь через {{< tag "KiTTY" >}}. При работе с {{< tag "GPG" >}}, она иногда не понимает куда ей выбрасывать запрос на парольную фразу. Поэтому, у меня здесь добавлен фикс `export GPG_TTY=$(tty)`.
+
+## Настройка ядра
+
+### Увеличение числа дескрипторов файлов
+
+У меня используется синхронизация данных при помощи {{< tag "Syncthing" >}}, данных много. Иногда случается ступор из-за лимита на дескрипторы файлов. Открываем `/etc/sysctl.conf`, добавляем:
+
+```ini
+kern.maxfiles=500000
+kern.maxfilesperproc=500000
+```
 
 ## Настройка файловой системы
 
