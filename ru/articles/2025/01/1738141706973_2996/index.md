@@ -9,6 +9,8 @@ images:
   - 'https://images.unsplash.com/photo-1639322537504-6427a16b0a28'
 categories:
   - 'linux'
+  - 'security'
+  - 'network'
 tags:
   - 'angie'
   - 'nginx'
