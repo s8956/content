@@ -149,13 +149,13 @@ zfs set atime=off zroot
 - Скачиваем конфигурацию:
 
 ```bash
-curl -fsSLo '/etc/zshrc.grml' 'https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc'
+curl -fsSLo '/usr/local/etc/zshrc.grml' 'https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc'
 ```
 
 - Редактируем `~/.zshrc`:
 
 ```bash
-echo -e ". '/etc/zshrc.grml'\nexport GPG_TTY=\$(tty)" >> ~/.zshrc
+echo -e ". '/usr/local/etc/zshrc.grml'\nexport GPG_TTY=\$(tty)" >> ~/.zshrc
 ```
 
 ### SSHD
