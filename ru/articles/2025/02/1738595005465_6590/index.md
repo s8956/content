@@ -51,7 +51,7 @@ draft: 1
 
 <!--more-->
 
-```terminal{mode="root"}
+```terminal
 lsblk
 NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
 sda               8:0    0   20G  0 disk
@@ -62,7 +62,7 @@ sda               8:0    0   20G  0 disk
   └─system-root 254:1    0 14.3G  0 lvm  /
 ```
 
-```terminal{mode="root"}
+```terminal
 lsblk
 NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
 sda               8:0    0   30G  0 disk
@@ -91,7 +91,7 @@ export PV='/dev/sda3'; export VG='system'; export LV='root';
 Увеличение раздела `root` при помощи одной команды:
 
 ```bash
-echo 1 > "/sys/block/${PV##*/}/device/rescan" && parted -s -a 'optimal' "${PV//[0-9]/}" "resizepart ${PV//[^0-9]/} 100%" && pvresize "${PV}" && lvextend -l +100%FREE "/dev/${VG}/${LV}"
+echo 1 > "/sys/block/$( echo "${PV##*/}" | sed 's/[0-9]*//g' )/device/rescan" && parted -s -a 'optimal' "${PV//[0-9]/}" "resizepart ${PV//[^0-9]/} 100%" && pvresize "${PV}" && lvextend -l +100%FREE "/dev/${VG}/${LV}"
 ```
 
 ### Расширение ФС
