@@ -6,7 +6,7 @@
 title: 'Уведомления от Windows Server Backup'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1704265586128-7fc54dcc774f'
+  - 'https://images.unsplash.com/photo-1573325743508-f6eef36bb65f'
 categories:
   - 'scripts'
   - 'windows'

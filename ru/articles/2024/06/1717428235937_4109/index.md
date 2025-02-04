@@ -62,7 +62,8 @@ draft: 0
 export PV='/dev/sdb'; export VG='data'; export LV='storage';
 ```
 
-Где:
+### Параметры
+
 - `PV='/dev/sdb'` - диск, который будет использоваться в качестве физического тома для LVM.
 - `VG='data'` - имя группы томов (VG).
 - `LV='storage'` - имя логического тома (LV).
