@@ -53,75 +53,87 @@ draft: 0
 - Создать пользователя `DB_USER` с паролем `DB_PASSWORD`:
 
 ```bash
-echo "CREATE USER 'DB_USER'@'127.0.0.1' IDENTIFIED BY 'DB_PASSWORD';" | mysql --user='root' --password
+echo "create user 'DB_USER'@'127.0.0.1' identified by 'DB_PASSWORD';" | mysql --user='root' --password
 ```
 
 - Переименовать пользователя `DB_USER@127.0.0.1` в `DB_USER@localhost`:
 
 ```bash
-echo "RENAME USER 'DB_USER'@'127.0.0.1' TO 'DB_USER'@'localhost';" | mysql --user='root' --password
+echo "rename user 'DB_USER'@'127.0.0.1' to 'DB_USER'@'localhost';" | mysql --user='root' --password
 ```
 
 - Изменить пароль пользователя `DB_USER` на `DB_PASSWORD_NEW`:
 
 ```bash
-echo "ALTER USER 'DB_USER'@'127.0.0.1' IDENTIFIED BY 'DB_PASSWORD_NEW';" | mysql --user='root' --password
+echo "alter user 'DB_USER'@'127.0.0.1' identified by 'DB_PASSWORD_NEW';" | mysql --user='root' --password
 ```
 
 - Удалить пользователя `DB_USER`:
 
 ```bash
-echo "DROP USER 'DB_USER'@'127.0.0.1';" | mysql --user='root' --password
+echo "drop user 'DB_USER'@'127.0.0.1';" | mysql --user='root' --password
 ```
 
 - Дать права `CREATE`, `ALTER`, `DROP`, `INSERT`, `UPDATE`, `DELETE`, `SELECT`, `REFERENCES` и `RELOAD` на базу данных `DB_NAME` пользователю `DB_USER`:
 
 ```bash
-echo "GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on DB_NAME.* TO 'DB_USER'@'127.0.0.1'; FLUSH PRIVILEGES;" | mysql --user='root' --password
+echo "grant create, alter, drop, insert, update, delete, select, references, reload on DB_NAME.* to 'DB_USER'@'127.0.0.1'; flush privileges;" | mysql --user='root' --password
 ```
 
 - Дать все права на базу данных `DB_NAME` пользователю `DB_USER`:
 
 ```bash
-echo "GRANT ALL ON DB_NAME.* TO 'DB_USER'@'127.0.01'; FLUSH PRIVILEGES;" | mysql --user='root' --password
+echo "grant all on DB_NAME.* to 'DB_USER'@'127.0.01'; flush privileges;" | mysql --user='root' --password
 ```
 
 - Дать все права на все базы данных пользователю `DB_USER`:
 
 ```bash
-echo "GRANT ALL ON *.* TO 'DB_USER'@'127.0.01'; FLUSH PRIVILEGES;" | mysql --user='root' --password
+echo "grant all on *.* to 'DB_USER'@'127.0.01'; flush privileges;" | mysql --user='root' --password
 ```
 
 - Отозвать все права пользователя `DB_USER` у базы данных `DB_NAME`:
 
 ```bash
-echo "REVOKE ALL ON DB_NAME FROM 'DB_USER'@'127.0.0.1';" | mysql --user='root' --password
+echo "revoke all on DB_NAME from 'DB_USER'@'127.0.0.1';" | mysql --user='root' --password
 ```
 
 - Показать права пользователя `DB_USER`:
 
 ```bash
-echo "SHOW GRANTS FOR 'DB_USER'@'127.0.0.1';" | mysql --user='root' --password
+echo "show grants for 'DB_USER'@'127.0.0.1';" | mysql --user='root' --password
 ```
 
 ## Базы данных
 
+- Посмотреть список баз данных:
+
+```bash
+echo 'show databases;' | mysql --user='root' --password
+```
+
+- Посмотреть список таблиц в базе данных `DB_NAME`:
+
+```bash
+echo 'show full tables from DB_NAME;' | mysql --user='root' --password
+```
+
 - Создать базу данных `DB_NAME` с кодировкой `utf8mb4` и сопоставлением `utf8mb4_unicode_ci`:
 
 ```bash
-echo "CREATE DATABASE IF NOT EXISTS DB_NAME CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';" | mysql --user='root' --password
+echo "create database if not exists DB_NAME character set 'utf8mb4' collate 'utf8mb4_unicode_ci';" | mysql --user='root' --password
 ```
 
 - Изменить кодировку и сопоставление базы данных на `utf8mb4` и `utf8mb4_unicode_ci` соответственно:
 
 ```bash
-echo "ALTER DATABASE DB_NAME CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';" | mysql --user='root' --password
+echo "alter database DB_NAME character set 'utf8mb4' collate 'utf8mb4_unicode_ci';" | mysql --user='root' --password
 ```
 
 - Удалить базу данных `DB_NAME`:
 
 ```bash
-echo "DROP DATABASE IF EXISTS DB_NAME;" | mysql --user='root' --password
+echo 'drop database if exists DB_NAME;' | mysql --user='root' --password
 ```
 
 ## Резервное копирование
@@ -137,19 +149,19 @@ f='backup.sql'; mysqldump --user='root' --password --single-transaction --databa
 - Удалить старую базу данных `DB_NAME`:
 
 ```bash
-echo "DROP DATABASE IF EXISTS DB_NAME;" | mysql --user='root' --password
+echo 'drop database if exists DB_NAME;' | mysql --user='root' --password
 ```
 
 - Создать базу данных `DB_NAME` с кодировкой `utf8mb4` и сопоставлением `utf8mb4_unicode_ci`:
 
 ```bash
-echo "CREATE DATABASE IF NOT EXISTS DB_NAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" | mysql --user='root' --password
+echo "create database if not exists DB_NAME character set 'utf8mb4' collate 'utf8mb4_unicode_ci';" | mysql --user='root' --password
 ```
 
 - Дать все права на базу данных `DB_NAME` пользователю `DB_USER`:
 
 ```bash
-echo "GRANT ALL PRIVILEGES ON DB_NAME.* TO 'DB_USER'@'127.0.01'; FLUSH PRIVILEGES;" | mysql --user='root' --password
+echo "grant all privileges on DB_NAME.* to 'DB_USER'@'127.0.01'; flush privileges;" | mysql --user='root' --password
 ```
 
 - Восстановить данные в новую базу данных `DB_NAME` из файла `backup.sql.xz`:
