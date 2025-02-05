@@ -50,6 +50,12 @@ draft: 0
 
 ## Пользователи
 
+- Посмотреть список пользователей:
+
+```bash
+echo 'select User from mysql.user;' | mysql --user='root' --password
+```
+
 - Создать пользователя `DB_USER` с паролем `DB_PASSWORD`:
 
 ```bash
