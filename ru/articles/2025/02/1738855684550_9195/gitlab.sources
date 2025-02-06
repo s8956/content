@@ -1,0 +1,8 @@
+X-Repolib-Name: GitLab
+Enabled:        yes
+Types:          deb
+URIs:           https://packages.gitlab.com/gitlab/gitlab-ee/debian
+Suites:         bookworm
+Components:     main
+Architectures:  amd64
+Signed-By:      /etc/apt/keyrings/gitlab.gpg
