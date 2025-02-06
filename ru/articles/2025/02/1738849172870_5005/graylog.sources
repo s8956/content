@@ -1,0 +1,8 @@
+X-Repolib-Name: Graylog
+Enabled:        yes
+Types:          deb
+URIs:           https://packages.graylog2.org/repo/debian
+Suites:         stable
+Components:     6.1
+Architectures:  amd64
+Signed-By:      /etc/apt/keyrings/graylog.gpg
