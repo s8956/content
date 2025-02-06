@@ -75,12 +75,10 @@ apt update && apt install --yes mysql-server
 
 ### Основная конфигурация
 
-- Создать файл основной конфигурации `/etc/mysql/mysql.conf.d/mysqld.main.cnf` со следующим содержимым:
+- Создать файл `mysqld` конфигурации `/etc/mysql/mysql.conf.d/mysqld.main.cnf` со следующим содержимым:
 
 {{< file "mysql.mysqld.main.cnf" "ini" >}}
 
-### Дополнительная конфигурация
-
-- Создать файл дополнительной конфигурации `/etc/mysql/mysql.conf.d/mysqldump.main.cnf` со следующим содержимым:
+- Создать файл `mysqldump` конфигурации `/etc/mysql/mysql.conf.d/mysqldump.main.cnf` со следующим содержимым:
 
 {{< file "mysql.mysqldump.main.cnf" "ini" >}}
