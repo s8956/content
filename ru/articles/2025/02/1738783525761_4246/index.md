@@ -87,18 +87,28 @@ f='/etc/angie/angie.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 
 ### Дополнительная конфигурация
 
+- Создать директорию для дополнительной конфигурации:
+
+```bash
+d='/etc/angie/conf.d'; [[ ! -d "${d}" ]] && mkdir "${d}"
+```
+
 - Создать файл дополнительной конфигурации `/etc/angie/conf.d/00.main.conf` со следующим содержимым:
 
 {{< file "angie.main.conf" "nginx" >}}
 
 ### Сайты
 
-- Сохранить оригинальный файл конфигурации:
+- Сохранить оригинальный файл стандартного сайта:
 
 ```bash
 f='/etc/angie/http.d/default.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
 ```
 
-- Создать файл стандартного сайта `/etc/angie/http.d/default.conf` со следующим содержимым:
+- Создать файл стандартного сайта (`80`) `/etc/angie/http.d/default.conf` со следующим содержимым:
 
 {{< file "angie.http.default.conf" "nginx" >}}
+
+- Создать файл стандартного сайта (`443`) `/etc/angie/http.d/default.ssl.conf` со следующим содержимым:
+
+{{< file "angie.http.default.ssl.conf" "nginx" >}}
