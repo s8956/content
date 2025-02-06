@@ -6,7 +6,7 @@
 title: 'GitLab: Установка и настройка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1531030874896-fdef6826f2f7'
 categories:
   - 'linux'
   - 'terminal'
