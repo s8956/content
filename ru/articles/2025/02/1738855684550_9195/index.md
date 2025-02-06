@@ -8,16 +8,14 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'terminal'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'debian'
+  - 'apt'
+  - 'gitlab'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
