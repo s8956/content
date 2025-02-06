@@ -56,7 +56,13 @@ apt update && apt install --yes squid
 
 ## Конфигурация
 
-- Заменить файл конфигурации `/etc/squid/squid.conf` на:
+- Сохранить оригинальный файл конфигурации:
+
+```bash
+f='/etc/squid/squid.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+```
+
+- Создать файл основной конфигурации `/etc/squid/squid.conf` со следующим содержимым:
 
 {{< file "squid.conf" "squid" >}}
 

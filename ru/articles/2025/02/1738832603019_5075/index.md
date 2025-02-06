@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'PHP: Установка и настройка'
+title: 'PostgreSQL: Установка и настройка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
@@ -13,7 +13,7 @@ categories:
 tags:
   - 'debian'
   - 'apt'
-  - 'php'
+  - 'postgresql'
 authors:
   - 'KaiKimera'
 sources:
@@ -27,18 +27,18 @@ comments: 1
 # DATE
 # -------------------------------------------------------------------------------------------------------------------- #
 
-date: '2025-02-05T22:02:21+03:00'
-publishDate: '2025-02-05T22:02:21+03:00'
-lastMod: '2025-02-05T22:02:21+03:00'
+date: '2025-02-06T12:03:26+03:00'
+publishDate: '2025-02-06T12:03:26+03:00'
+lastMod: '2025-02-06T12:03:26+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # META
 # -------------------------------------------------------------------------------------------------------------------- #
 
 type: 'articles'
-hash: '9bd1261d38420859e2022e1d7a5ba9f44360148d'
-uuid: '9bd1261d-3842-5859-8202-2e1d7a5ba9f4'
-slug: '9bd1261d-3842-5859-8202-2e1d7a5ba9f4'
+hash: '9c234b3c704e099f8fd9b3fbb70f789767f901b4'
+uuid: '9c234b3c-704e-599f-9fd9-b3fbb70f7897'
+slug: '9c234b3c-704e-599f-9fd9-b3fbb70f7897'
 
 draft: 1
 ---
@@ -54,33 +54,27 @@ draft: 1
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor -o '/etc/apt/keyrings/pgsql.gpg'
 ```
 
 ### APT
 
-- Создать файл репозитория `/etc/apt/sources.list.d/php.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/pgsql.sources` со следующим содержимым:
 
-{{< file "php.sources" "text" >}}
+{{< file "pgsql.sources" "text" >}}
 
 ## Установка
 
 - Установить пакеты:
 
 ```bash
-v='8.4'; apt update && apt install --yes php${v}-fpm php${v}-bcmath php${v}-bz2 php${v}-cli php${v}-curl php${v}-gd php${v}-gmp php${v}-imagick php${v}-imap php${v}-intl php${v}-ldap php${v}-mbstring php${v}-memcached php${v}-mysql php${v}-odbc php${v}-opcache php${v}-pgsql php${v}-redis php${v}-uploadprogress php${v}-xml php${v}-zip php${v}-zstd
+v='17'; apt update && apt install --yes postgresql-${v}
 ```
 
 ## Настройка
 
-### Настройка PHP
+### Основная конфигурация
 
-- Создать файл `/etc/php/8.4/fpm/conf.d/00.main.ini` со следующим содержимым:
+- Создать файл основной конфигурации `/etc/postgresql/17/main/conf.d/00.main.conf` со следующим содержимым:
 
-{{< file "php.main.ini" >}}
-
-### Настройка PHP-FPM
-
-- Создать файл `/etc/php/8.4/fpm/pool.d/www.conf` со следующим содержимым:
-
-{{< file "php.pool.www.conf" "ini" >}}
+{{< file "pgsql.main.conf" "ini" >}}

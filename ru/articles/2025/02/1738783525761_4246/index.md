@@ -8,16 +8,14 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'terminal'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'debian'
+  - 'apt'
+  - 'angie'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -56,7 +54,7 @@ draft: 1
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fSLo '/etc/apt/keyrings/angie.gpg' 'https://angie.software/keys/angie-signing.gpg'
+curl -fsSLo '/etc/apt/keyrings/angie.gpg' 'https://angie.software/keys/angie-signing.gpg'
 ```
 
 ### APT
@@ -77,18 +75,30 @@ apt update && apt install --yes angie angie-module-brotli angie-module-zstd
 
 ### Основная конфигурация
 
+- Сохранить оригинальный файл конфигурации:
+
+```bash
+f='/etc/angie/angie.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+```
+
 - Создать файл основной конфигурации `/etc/angie/angie.conf` со следующим содержимым:
 
 {{< file "angie.conf" "nginx" >}}
 
 ### Дополнительная конфигурация
 
-- Создать файл дополнительной конфигурации `/etc/angie/conf.d/angie.local.conf` со следующим содержимым:
+- Создать файл дополнительной конфигурации `/etc/angie/conf.d/00.main.conf` со следующим содержимым:
 
-{{< file "angie.local.conf" "nginx" >}}
+{{< file "angie.main.conf" "nginx" >}}
 
 ### Сайты
 
+- Сохранить оригинальный файл конфигурации:
+
+```bash
+f='/etc/angie/http.d/default.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+```
+
 - Создать файл стандартного сайта `/etc/angie/http.d/default.conf` со следующим содержимым:
 
-{{< file "site.default.conf" "nginx" >}}
+{{< file "angie.http.default.conf" "nginx" >}}

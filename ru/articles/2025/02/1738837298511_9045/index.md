@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'PHP: Установка и настройка'
+title: 'MongoDB: Установка и настройка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
@@ -13,7 +13,7 @@ categories:
 tags:
   - 'debian'
   - 'apt'
-  - 'php'
+  - 'mongodb'
 authors:
   - 'KaiKimera'
 sources:
@@ -27,18 +27,18 @@ comments: 1
 # DATE
 # -------------------------------------------------------------------------------------------------------------------- #
 
-date: '2025-02-05T22:02:21+03:00'
-publishDate: '2025-02-05T22:02:21+03:00'
-lastMod: '2025-02-05T22:02:21+03:00'
+date: '2025-02-06T13:21:41+03:00'
+publishDate: '2025-02-06T13:21:41+03:00'
+lastMod: '2025-02-06T13:21:41+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # META
 # -------------------------------------------------------------------------------------------------------------------- #
 
 type: 'articles'
-hash: '9bd1261d38420859e2022e1d7a5ba9f44360148d'
-uuid: '9bd1261d-3842-5859-8202-2e1d7a5ba9f4'
-slug: '9bd1261d-3842-5859-8202-2e1d7a5ba9f4'
+hash: '08fbbde770fc06d52a9e2f27ea376109f75fc22b'
+uuid: '08fbbde7-70fc-56d5-aa9e-2f27ea376109'
+slug: '08fbbde7-70fc-56d5-aa9e-2f27ea376109'
 
 draft: 1
 ---
@@ -54,33 +54,33 @@ draft: 1
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+v='7.0'; curl -fsSL "https://www.mongodb.org/static/pgp/server-${v}.asc" | gpg --dearmor -o '/etc/apt/keyrings/mongodb.gpg'
 ```
 
 ### APT
 
-- Создать файл репозитория `/etc/apt/sources.list.d/php.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/mongodb.sources` со следующим содержимым:
 
-{{< file "php.sources" "text" >}}
+{{< file "mongodb.sources" "text" >}}
 
 ## Установка
 
 - Установить пакеты:
 
 ```bash
-v='8.4'; apt update && apt install --yes php${v}-fpm php${v}-bcmath php${v}-bz2 php${v}-cli php${v}-curl php${v}-gd php${v}-gmp php${v}-imagick php${v}-imap php${v}-intl php${v}-ldap php${v}-mbstring php${v}-memcached php${v}-mysql php${v}-odbc php${v}-opcache php${v}-pgsql php${v}-redis php${v}-uploadprogress php${v}-xml php${v}-zip php${v}-zstd
+apt update && apt install --yes mongodb-org
 ```
 
 ## Настройка
 
-### Настройка PHP
+### Основная конфигурация
 
-- Создать файл `/etc/php/8.4/fpm/conf.d/00.main.ini` со следующим содержимым:
+- Сохранить оригинальный файл конфигурации:
 
-{{< file "php.main.ini" >}}
+```bash
+f='/etc/mongod.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+```
 
-### Настройка PHP-FPM
+- Создать файл основной конфигурации `/etc/mongod.conf` со следующим содержимым:
 
-- Создать файл `/etc/php/8.4/fpm/pool.d/www.conf` со следующим содержимым:
-
-{{< file "php.pool.www.conf" "ini" >}}
+{{< file "mongod.conf" "yml" >}}

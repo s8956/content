@@ -1,0 +1,8 @@
+X-Repolib-Name: TimescaleDB
+Enabled:        yes
+Types:          deb
+URIs:           https://packagecloud.io/timescale/timescaledb/debian
+Suites:         bookworm
+Components:     main
+Architectures:  amd64
+Signed-By:      /etc/apt/keyrings/timescaledb.gpg
