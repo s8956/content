@@ -6,7 +6,7 @@
 title: 'TimescaleDB: Установка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
 categories:
   - 'linux'
   - 'terminal'
