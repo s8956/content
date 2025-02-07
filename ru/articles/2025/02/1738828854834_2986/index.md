@@ -82,3 +82,21 @@ apt update && apt install --yes mysql-server
 - Создать файл `mysqldump` конфигурации `/etc/mysql/mysql.conf.d/mysqldump.main.cnf` со следующим содержимым:
 
 {{< file "mysql.mysqldump.main.cnf" "ini" >}}
+
+- Удалить файлы в директории `/var/lib/mysql` и инициализировать стандартные базы данных:
+
+```bash
+rm -rf /var/lib/mysql/* && mysqld --initialize --user='mysql'
+```
+
+- Узнать временный пароль пользователя `root`:
+
+```bash
+cat '/var/log/mysql/error.log' | grep 'MY-010454'
+```
+
+- Сменить пароль пользователя `root`, добавить пользователей `root@127.0.0.1` и `root@::1`:
+
+```bash
+p='PASSWORD'; echo "alter user 'root'@'localhost' identified by '${p}'; create user 'root'@'127.0.0.1' identified by '${p}'; create user 'root'@'::1' identified by '${p}';" | mysql --user='root' --password --connect-expired-password
+```
