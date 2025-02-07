@@ -2,6 +2,7 @@ X-Repolib-Name: GitLab
 Enabled: yes
 Types: deb
 URIs: https://packages.gitlab.com/gitlab/gitlab-ee/debian
+#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce
 Suites: bookworm
 Components: main
 Architectures: amd64

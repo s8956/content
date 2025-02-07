@@ -1,0 +1,9 @@
+X-Repolib-Name: Redis
+Enabled: yes
+Types: deb
+URIs: https://packages.redis.io/deb
+#URIs: https://mirror.yandex.ru/mirrors/packages.redis.io
+Suites: bookworm
+Components: main
+Architectures: amd64
+Signed-By: /etc/apt/keyrings/redis.gpg
