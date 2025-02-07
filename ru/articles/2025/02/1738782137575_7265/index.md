@@ -54,7 +54,7 @@ draft: 1
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.yandex.ru/mirrors/packages.sury.org/php/apt.gpg'
 ```
 
 ### APT
