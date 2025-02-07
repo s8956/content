@@ -61,7 +61,7 @@ curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor 
 
 - Создать файл репозитория `/etc/apt/sources.list.d/pgsql.sources` со следующим содержимым:
 
-{{< file "pgsql.sources" "text" >}}
+{{< file "pgsql.sources" "yaml" >}}
 
 ## Установка
 

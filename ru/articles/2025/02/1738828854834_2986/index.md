@@ -61,7 +61,7 @@ curl -fsSL 'https://lib.onl/ru/2025/02/f29ee2b5-891d-591e-8b21-69f494cd11c0/mysq
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mysql.sources` со следующим содержимым:
 
-{{< file "mysql.sources" "text" >}}
+{{< file "mysql.sources" "yaml" >}}
 
 ## Установка
 

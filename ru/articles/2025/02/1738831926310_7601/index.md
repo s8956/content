@@ -62,7 +62,7 @@ curl -fsSL 'https://artifacts.opensearch.org/publickeys/opensearch.pgp' | gpg --
 
 - Создать файл репозитория `/etc/apt/sources.list.d/opensearch.sources` со следующим содержимым:
 
-{{< file "opensearch.sources" "text" >}}
+{{< file "opensearch.sources" "yaml" >}}
 
 ## Установка
 

@@ -62,7 +62,7 @@ curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmo
 
 - Создать файл репозитория `/etc/apt/sources.list.d/timescaledb.sources` со следующим содержимым:
 
-{{< file "timescaledb.sources" "text" >}}
+{{< file "timescaledb.sources" "yaml" >}}
 
 ## Установка
 

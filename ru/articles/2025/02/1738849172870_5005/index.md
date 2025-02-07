@@ -63,7 +63,7 @@ curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://packages.graylog2.org/repo/
 
 - Создать файл репозитория `/etc/apt/sources.list.d/graylog.sources` со следующим содержимым:
 
-{{< file "graylog.sources" "text" >}}
+{{< file "graylog.sources" "yaml" >}}
 
 ## Установка
 

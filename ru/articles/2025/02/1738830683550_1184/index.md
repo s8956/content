@@ -62,7 +62,7 @@ curl -fsSL 'https://artifacts.elastic.co/GPG-KEY-elasticsearch' | gpg --dearmor 
 
 - Создать файл репозитория `/etc/apt/sources.list.d/elasticsearch.sources` со следующим содержимым:
 
-{{< file "elasticsearch.sources" "text" >}}
+{{< file "elasticsearch.sources" "yaml" >}}
 
 ## Установка
 

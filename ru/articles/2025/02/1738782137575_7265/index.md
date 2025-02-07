@@ -61,7 +61,7 @@ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
 
 - Создать файл репозитория `/etc/apt/sources.list.d/php.sources` со следующим содержимым:
 
-{{< file "php.sources" "text" >}}
+{{< file "php.sources" "yaml" >}}
 
 ## Установка
 

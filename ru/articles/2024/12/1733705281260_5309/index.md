@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: '1733705281260_5309'
+title: 'HAProxy: Установка и настройка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
@@ -48,5 +48,31 @@ draft: 1
 
 
 <!--more-->
+
+## Репозиторий
+
+### GPG
+
+- Скачать и установить ключ репозитория:
+
+```bash
+curl -fsSL 'https://haproxy.debian.net/bernat.debian.org.gpg' | gpg --dearmor -o '/etc/apt/keyrings/haproxy.gpg'
+```
+
+### APT
+
+- Создать файл репозитория `/etc/apt/sources.list.d/haproxy.sources` со следующим содержимым:
+
+{{< file "haproxy.sources" "yaml" >}}
+
+## Установка
+
+- Установить пакеты:
+
+```bash
+v='3.0'; apt update && apt install --yes haproxy="${v}".\*
+```
+
+## Настройка
 
 {{< file "haproxy.cfg" "text" >}}

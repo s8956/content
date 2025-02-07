@@ -61,7 +61,7 @@ v='7.0'; curl -fsSL "https://www.mongodb.org/static/pgp/server-${v}.asc" | gpg -
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mongodb.sources` со следующим содержимым:
 
-{{< file "mongodb.sources" "text" >}}
+{{< file "mongodb.sources" "yaml" >}}
 
 ## Установка
 

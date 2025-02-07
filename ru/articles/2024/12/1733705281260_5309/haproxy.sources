@@ -1,0 +1,8 @@
+X-Repolib-Name: HAProxy
+Enabled:        yes
+Types:          deb
+URIs:           http://haproxy.debian.net
+Suites:         bookworm-backports-3.0
+Components:     main
+Architectures:  amd64
+Signed-By:      /etc/apt/keyrings/haproxy.gpg

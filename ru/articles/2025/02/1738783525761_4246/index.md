@@ -61,7 +61,7 @@ curl -fsSLo '/etc/apt/keyrings/angie.gpg' 'https://angie.software/keys/angie-sig
 
 - Создать файл репозитория `/etc/apt/sources.list.d/angie.sources` со следующим содержимым:
 
-{{< file "angie.sources" "text" >}}
+{{< file "angie.sources" "yaml" >}}
 
 ## Установка
 

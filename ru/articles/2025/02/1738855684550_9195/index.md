@@ -61,7 +61,7 @@ curl -fsSL 'https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey' | gpg --dearmor
 
 - Создать файл репозитория `/etc/apt/sources.list.d/gitlab.sources` со следующим содержимым:
 
-{{< file "gitlab.sources" "text" >}}
+{{< file "gitlab.sources" "yaml" >}}
 
 ## Установка
 
