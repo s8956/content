@@ -61,7 +61,9 @@ curl -fsSL 'https://packages.redis.io/gpg' | gpg --dearmor -o '/etc/apt/keyrings
 
 - Создать файл репозитория `/etc/apt/sources.list.d/redis.sources` со следующим содержимым:
 
-{{< file "redis.sources" "yaml" >}}
+```bash
+. '/etc/os-release'; echo -e "X-Repolib-Name: Redis\nEnabled: yes\nTypes: deb\nURIs: https://packages.redis.io/deb\n#URIs: https://mirror.yandex.ru/mirrors/packages.redis.io\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/redis.gpg" | tee '/etc/apt/sources.list.d/redis.sources'
+```
 
 ## Установка
 
