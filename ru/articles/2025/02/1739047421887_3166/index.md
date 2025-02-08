@@ -3,20 +3,21 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'MariaDB: Установка и настройка'
+title: 'Syslog-NG: Установка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
 categories:
-  - 'linux'
-  - 'terminal'
+  - 'cat_01'
+  - 'cat_02'
+  - 'cat_03'
 tags:
-  - 'debian'
-  - 'apt'
-  - 'mariadb'
-  - 'install'
+  - 'tag_01'
+  - 'tag_02'
+  - 'tag_03'
 authors:
-  - 'KaiKimera'
+  - 'JohnDoe'
+  - 'JaneDoe'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
@@ -28,18 +29,18 @@ comments: 1
 # DATE
 # -------------------------------------------------------------------------------------------------------------------- #
 
-date: '2025-02-07T14:49:15+03:00'
-publishDate: '2025-02-07T14:49:15+03:00'
-lastMod: '2025-02-07T14:49:15+03:00'
+date: '2025-02-08T23:43:42+03:00'
+publishDate: '2025-02-08T23:43:42+03:00'
+lastMod: '2025-02-08T23:43:42+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # META
 # -------------------------------------------------------------------------------------------------------------------- #
 
 type: 'articles'
-hash: '0068df20232a95a2548752dc746a4f472515fd55'
-uuid: '0068df20-232a-55a2-a487-52dc746a4f47'
-slug: '0068df20-232a-55a2-a487-52dc746a4f47'
+hash: '24f7d6b6531f528386934ca9d034f604a509542a'
+uuid: '24f7d6b6-531f-5283-b693-4ca9d034f604'
+slug: '24f7d6b6-531f-5283-b693-4ca9d034f604'
 
 draft: 1
 ---
@@ -55,15 +56,15 @@ draft: 1
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/mariadb.gpg' 'https://mariadb.org/mariadb_release_signing_key.pgp'
+curl -fsSL 'https://ose-repo.syslog-ng.com/apt/syslog-ng-ose-pub.asc' | gpg --dearmor -o '/etc/apt/keyrings/syslog-ng.gpg'
 ```
 
 ### APT
 
-- Создать файл репозитория `/etc/apt/sources.list.d/mariadb.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/syslog-ng.sources` со следующим содержимым:
 
 ```bash
-. '/etc/os-release'; v='11.4'; echo -e "X-Repolib-Name: MariaDB\nEnabled: yes\nTypes: deb\nURIs: https://mirror.netcologne.de/mariadb/repo/${v}/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/mariadb/repo/${v}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mariadb.gpg\n" | tee '/etc/apt/sources.list.d/mariadb.sources'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Syslog-NG\nEnabled: yes\nTypes: deb\nURIs: https://ose-repo.syslog-ng.com/apt\nSuites: stable\nComponents: ${ID}-${VERSION_CODENAME}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/syslog-ng.gpg\n" | tee '/etc/apt/sources.list.d/syslog-ng.sources'
 ```
 
 ## Установка
@@ -71,5 +72,5 @@ curl -fsSLo '/etc/apt/keyrings/mariadb.gpg' 'https://mariadb.org/mariadb_release
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes mariadb-server
+apt update && apt install --yes syslog-ng
 ```

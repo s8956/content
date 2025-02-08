@@ -53,7 +53,7 @@ curl -fsSLo '/etc/apt/keyrings/nginx.gpg' 'https://packages.sury.org/nginx/apt.g
 ```
 
 ```bash
-. '/etc/os-release'; echo -e "X-Repolib-Name: Nginx\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/nginx-mainline\n#URIs: https://mirror.yandex.ru/mirrors/packages.sury.org/nginx-mainline\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nginx.gpg" | tee '/etc/apt/sources.list.d/nginx.sources'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Nginx\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/nginx-mainline\n#URIs: https://mirror.yandex.ru/mirrors/packages.sury.org/nginx-mainline\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nginx.gpg\n" | tee '/etc/apt/sources.list.d/nginx.sources'
 ```
 
 ```bash

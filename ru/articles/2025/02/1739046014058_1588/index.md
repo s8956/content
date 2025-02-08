@@ -3,10 +3,10 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: '1739046014058_1588'
+title: 'Rsyslog: Установка и настройка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
 categories:
   - 'cat_01'
   - 'cat_02'
@@ -48,3 +48,37 @@ draft: 1
 
 
 <!--more-->
+
+## Репозиторий
+
+### GPG
+
+- Скачать и установить ключ репозитория:
+
+```bash
+. '/etc/os-release' && curl -fsSL "https://download.opensuse.org/repositories/home:rgerhards/Debian_${VERSION_ID}/Release.key" | gpg --dearmor -o '/etc/apt/keyrings/rsyslog.gpg'
+```
+
+### APT
+
+- Создать файл репозитория `/etc/apt/sources.list.d/rsyslog.sources` со следующим содержимым:
+
+```bash
+. '/etc/os-release' && echo -e "X-Repolib-Name: Rsyslog\nEnabled: yes\nTypes: deb\nURIs: http://download.opensuse.org/repositories/home:/rgerhards/Debian_${VERSION_ID}/\nSuites: /\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/rsyslog.gpg\n" | tee '/etc/apt/sources.list.d/rsyslog.sources'
+```
+
+## Установка
+
+- Установить пакеты:
+
+```bash
+apt update && apt install --yes rsyslog
+```
+
+## Настройка
+
+### Основная конфигурация
+
+- Создать файл основной конфигурации `/etc/rsyslog.d/00.main.conf` со следующим содержимым:
+
+{{< file "rsyslog.main.conf" "text" >}}

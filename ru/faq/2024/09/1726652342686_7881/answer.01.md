@@ -5,11 +5,11 @@
 - Зайти по SSH на старый ESXi, где находится виртуальная машина и ввести следующую команду:
 
 ```bash
-scp -r '/vmfs/volumes/datastore1/vm_example' 'root@192.168.11.22:/vmfs/volumes/datastore1/'
+scp -r '/vmfs/volumes/datastore1/vm_example' 'root@192.168.1.2:/vmfs/volumes/datastore1/'
 ```
 
 Где:
 
 - `vm_example` - директория виртуальной машины.
-- `root@192.168.11.22` - логин и IP-адрес нового ESXi, на который необходимо переместить виртуальную машину.
+- `root@192.168.1.2` - логин и IP-адрес нового ESXi, на который необходимо переместить виртуальную машину.
 - `/vmfs/volumes/` - путь к датасторам.

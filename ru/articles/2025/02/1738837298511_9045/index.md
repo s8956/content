@@ -63,7 +63,7 @@ v='7.0'; curl -fsSL "https://www.mongodb.org/static/pgp/server-${v}.asc" | gpg -
 - Создать файл репозитория `/etc/apt/sources.list.d/mongodb.sources` со следующим содержимым:
 
 ```bash
-. '/etc/os-release'; v='7.0'; echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\nTypes: deb\nURIs: http://repo.mongodb.org/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/${ID}\nSuites: ${VERSION_CODENAME}/mongodb-org/${v}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mongodb.gpg" | tee '/etc/apt/sources.list.d/mongodb.sources'
+. '/etc/os-release'; v='7.0'; echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\nTypes: deb\nURIs: http://repo.mongodb.org/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/${ID}\nSuites: ${VERSION_CODENAME}/mongodb-org/${v}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mongodb.gpg\n" | tee '/etc/apt/sources.list.d/mongodb.sources'
 ```
 
 ## Установка
