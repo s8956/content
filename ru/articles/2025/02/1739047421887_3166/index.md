@@ -74,3 +74,11 @@ curl -fsSL 'https://ose-repo.syslog-ng.com/apt/syslog-ng-ose-pub.asc' | gpg --de
 ```bash
 apt update && apt install --yes syslog-ng
 ```
+
+## Настройка
+
+### Основная конфигурация
+
+- Создать файл основной конфигурации `/etc/syslog-ng/conf.d/00.main.conf` со следующим содержимым:
+
+{{< file "syslog-ng.main.conf" "text" >}}
