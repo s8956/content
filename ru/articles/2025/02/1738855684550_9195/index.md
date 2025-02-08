@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'gitlab'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

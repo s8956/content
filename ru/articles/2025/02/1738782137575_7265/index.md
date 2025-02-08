@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'php'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

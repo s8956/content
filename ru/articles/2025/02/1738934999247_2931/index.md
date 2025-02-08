@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'redis'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

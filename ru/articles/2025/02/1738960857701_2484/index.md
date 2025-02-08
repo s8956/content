@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'nginx'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

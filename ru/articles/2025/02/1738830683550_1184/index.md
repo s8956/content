@@ -15,6 +15,7 @@ tags:
   - 'apt'
   - 'elastic'
   - 'elasticsearch'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

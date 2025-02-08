@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'mysql'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

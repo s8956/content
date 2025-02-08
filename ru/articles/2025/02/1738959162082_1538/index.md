@@ -16,6 +16,7 @@ tags:
   - 'eclipse'
   - 'temurin'
   - 'adoptium'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

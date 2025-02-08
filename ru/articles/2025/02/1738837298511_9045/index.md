@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'mongodb'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

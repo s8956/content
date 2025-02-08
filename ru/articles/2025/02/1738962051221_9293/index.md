@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'nodejs'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:
@@ -62,7 +63,7 @@ curl -fsSL 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key' | gpg --d
 - Создать файл репозитория `/etc/apt/sources.list.d/nodesource.sources` со следующим содержимым:
 
 ```bash
-v='22'; echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${v}.x\nSuites: nodistro\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nodesource.gpg" | tee '/etc/apt/sources.list.d/nodesource.sources'
+v='22'; echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${v}.x\n#URIs: https://mirror.yandex.ru/mirrors/deb.nodesource.com/node_${v}.x\nSuites: nodistro\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nodesource.gpg" | tee '/etc/apt/sources.list.d/nodesource.sources'
 ```
 
 - Создать файлы предпочтений `/etc/apt/preferences.d/nsolid` и `/etc/apt/preferences.d/nodejs`:

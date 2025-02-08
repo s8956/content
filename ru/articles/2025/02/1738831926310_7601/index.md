@@ -15,6 +15,7 @@ tags:
   - 'apt'
   - 'opensearch'
   - 'aws'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

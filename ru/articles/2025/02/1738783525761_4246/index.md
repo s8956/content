@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'angie'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

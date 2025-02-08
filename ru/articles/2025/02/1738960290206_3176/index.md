@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'caddy'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

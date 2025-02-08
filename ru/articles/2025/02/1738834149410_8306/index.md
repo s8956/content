@@ -15,6 +15,7 @@ tags:
   - 'apt'
   - 'timescale'
   - 'timescaledb'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

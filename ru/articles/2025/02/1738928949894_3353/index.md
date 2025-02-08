@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'mariadb'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:

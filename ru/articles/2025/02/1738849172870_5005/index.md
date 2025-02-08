@@ -16,6 +16,7 @@ tags:
   - 'graylog'
   - 'mongodb'
   - 'angie'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:
