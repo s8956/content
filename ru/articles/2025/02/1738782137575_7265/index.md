@@ -52,11 +52,19 @@ draft: 1
 
 ### GPG
 
-- Скачать и установить ключ репозитория:
+- Скачать и установить ключ репозитория с оригинального репозитория:
+
+```bash
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+```
+
+{{< alert "tip" >}}
+Если оригинальный репозиторий недоступен, ключ можно скачать с зеркала:
 
 ```bash
 curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.yandex.ru/mirrors/packages.sury.org/php/apt.gpg'
 ```
+{{< /alert >}}
 
 ### APT
 

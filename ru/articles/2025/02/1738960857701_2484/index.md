@@ -48,13 +48,35 @@ draft: 1
 
 <!--more-->
 
+## Репозиторий
+
+### GPG
+
+- Скачать и установить ключ репозитория:
+
 ```bash
-curl -fsSLo '/etc/apt/keyrings/nginx.gpg' 'https://packages.sury.org/nginx/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/nginx.gpg' 'https://packages.sury.org/nginx-mainline/apt.gpg'
 ```
+
+{{< alert "tip" >}}
+Если оригинальный репозиторий недоступен, ключ можно скачать с зеркала:
+
+```bash
+curl -fsSLo '/etc/apt/keyrings/nginx.gpg' 'https://mirror.yandex.ru/mirrors/packages.sury.org/nginx-mainline/apt.gpg'
+```
+{{< /alert >}}
+
+### APT
+
+- Создать файл репозитория `/etc/apt/sources.list.d/nginx.sources` со следующим содержимым:
 
 ```bash
 . '/etc/os-release' && echo -e "X-Repolib-Name: Nginx\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/nginx-mainline\n#URIs: https://mirror.yandex.ru/mirrors/packages.sury.org/nginx-mainline\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nginx.gpg\n" | tee '/etc/apt/sources.list.d/nginx.sources'
 ```
+
+## Установка
+
+- Установить пакеты:
 
 ```bash
 apt update && apt install --yes nginx libnginx-mod-brotli
