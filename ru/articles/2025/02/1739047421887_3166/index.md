@@ -8,16 +8,17 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'terminal'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'debian'
+  - 'apt'
+  - 'syslog-ng'
+  - 'syslog'
+  - 'log'
+  - 'install'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'

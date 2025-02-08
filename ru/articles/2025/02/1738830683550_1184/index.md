@@ -59,6 +59,10 @@ draft: 1
 curl -fsSL 'https://artifacts.elastic.co/GPG-KEY-elasticsearch' | gpg --dearmor -o '/etc/apt/keyrings/elasticsearch.gpg'
 ```
 
+{{< alert "tip" >}}
+Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
+{{< /alert >}}
+
 ### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/elasticsearch.sources` со следующим содержимым:

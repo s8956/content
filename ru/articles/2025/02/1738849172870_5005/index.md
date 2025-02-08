@@ -60,6 +60,10 @@ draft: 1
 curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://packages.graylog2.org/repo/debian/keyring.gpg'
 ```
 
+{{< alert "tip" >}}
+Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
+{{< /alert >}}
+
 ### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/graylog.sources` со следующим содержимым:

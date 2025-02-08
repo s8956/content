@@ -58,6 +58,10 @@ draft: 1
 curl -fsSL 'https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey' | gpg --dearmor -o '/etc/apt/keyrings/gitlab.gpg'
 ```
 
+{{< alert "tip" >}}
+Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
+{{< /alert >}}
+
 ### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/gitlab.sources` со следующим содержимым:

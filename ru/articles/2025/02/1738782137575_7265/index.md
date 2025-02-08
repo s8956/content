@@ -55,7 +55,7 @@ draft: 1
 - Скачать и установить ключ репозитория с оригинального репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+curl -x 'http://user:password@proxy.example.com:8080' -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
 ```
 
 {{< alert "tip" >}}
@@ -64,6 +64,8 @@ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
 ```bash
 curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.yandex.ru/mirrors/packages.sury.org/php/apt.gpg'
 ```
+
+Или воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
 {{< /alert >}}
 
 ### APT

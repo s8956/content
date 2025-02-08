@@ -58,6 +58,10 @@ draft: 1
 v='7.0'; curl -fsSL "https://www.mongodb.org/static/pgp/server-${v}.asc" | gpg --dearmor -o '/etc/apt/keyrings/mongodb.gpg'
 ```
 
+{{< alert "tip" >}}
+Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
+{{< /alert >}}
+
 ### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mongodb.sources` со следующим содержимым:
