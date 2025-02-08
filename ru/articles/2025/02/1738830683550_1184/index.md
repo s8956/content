@@ -6,7 +6,7 @@
 title: 'ElasticSearch: Установка и настройка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1643042945810-1119948eeabc'
+  - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
 categories:
   - 'linux'
   - 'terminal'

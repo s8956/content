@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Redis: Установка'
+title: 'NodeJS: Установка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
@@ -13,7 +13,7 @@ categories:
 tags:
   - 'debian'
   - 'apt'
-  - 'redis'
+  - 'nodejs'
 authors:
   - 'KaiKimera'
 sources:
@@ -27,18 +27,18 @@ comments: 1
 # DATE
 # -------------------------------------------------------------------------------------------------------------------- #
 
-date: '2025-02-07T16:30:03+03:00'
-publishDate: '2025-02-07T16:30:03+03:00'
-lastMod: '2025-02-07T16:30:03+03:00'
+date: '2025-02-08T00:00:51+03:00'
+publishDate: '2025-02-08T00:00:51+03:00'
+lastMod: '2025-02-08T00:00:51+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # META
 # -------------------------------------------------------------------------------------------------------------------- #
 
 type: 'articles'
-hash: '0b81ff23999199ccdc64370b86ad2263b5533c06'
-uuid: '0b81ff23-9991-59cc-8c64-370b86ad2263'
-slug: '0b81ff23-9991-59cc-8c64-370b86ad2263'
+hash: '138218c7d9a9aeeb44cf31ba8dc24896cc15f418'
+uuid: '138218c7-d9a9-5eeb-a4cf-31ba8dc24896'
+slug: '138218c7-d9a9-5eeb-a4cf-31ba8dc24896'
 
 draft: 1
 ---
@@ -54,15 +54,21 @@ draft: 1
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://packages.redis.io/gpg' | gpg --dearmor -o '/etc/apt/keyrings/redis.gpg'
+curl -fsSL 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key' | gpg --dearmor -o '/etc/apt/keyrings/nodesource.gpg'
 ```
 
 ### APT
 
-- Создать файл репозитория `/etc/apt/sources.list.d/redis.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/nodesource.sources` со следующим содержимым:
 
 ```bash
-. '/etc/os-release'; echo -e "X-Repolib-Name: Redis\nEnabled: yes\nTypes: deb\nURIs: https://packages.redis.io/deb\n#URIs: https://mirror.yandex.ru/mirrors/packages.redis.io\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/redis.gpg" | tee '/etc/apt/sources.list.d/redis.sources'
+v='22'; echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${v}.x\nSuites: nodistro\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nodesource.gpg" | tee '/etc/apt/sources.list.d/nodesource.sources'
+```
+
+- Создать файлы предпочтений `/etc/apt/preferences.d/nsolid` и `/etc/apt/preferences.d/nodejs`:
+
+```bash
+echo -e "Package: nsolid\nPin: origin deb.nodesource.com\nPin-Priority: 600" | tee '/etc/apt/preferences.d/nsolid' && echo -e "Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600" | tee '/etc/apt/preferences.d/nodejs'
 ```
 
 ## Установка
@@ -70,5 +76,5 @@ curl -fsSL 'https://packages.redis.io/gpg' | gpg --dearmor -o '/etc/apt/keyrings
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes redis
+apt update && apt install --yes nodejs
 ```

@@ -89,6 +89,18 @@ f='/etc/graylog/server/server.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "
 
 {{< file "graylog.server.conf" "ini" >}}
 
+- Создать пароль для `password_secret`:
+
+```bash
+< '/dev/urandom' tr -dc 'A-Z-a-z-0-9' | head -c ${1:-96}; echo;
+```
+
+- Создать хэш пароля `password_secret` для `root_password_sha2`:
+
+```bash
+echo -n 'Enter Password: ' && head -1 < '/dev/stdin' | tr -d '\n' | sha256sum | cut -d ' ' -f1
+```
+
 ### Конфигурация PROXY-сервера
 
 - Создать файл сайта `/etc/angie/http.d/graylog.conf` со следующим содержимым:

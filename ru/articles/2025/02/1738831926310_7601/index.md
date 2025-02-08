@@ -6,7 +6,7 @@
 title: 'OpenSearch: Установка и настройка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1619884889432-b242fdee532a'
+  - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
 categories:
   - 'linux'
   - 'terminal'

@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Базовая конфигурация SQUID'
+title: 'Squid: Установка и настройка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1503019419990-1d961b6301aa'
@@ -11,8 +11,9 @@ categories:
   - 'linux'
   - 'network'
 tags:
-  - 'squid'
   - 'debian'
+  - 'apt'
+  - 'squid'
 authors:
   - 'KaiKimera'
 sources:
