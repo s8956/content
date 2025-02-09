@@ -1,9 +1,0 @@
-X-Repolib-Name: MongoDB
-Enabled: yes
-Types: deb
-URIs: http://repo.mongodb.org/apt/debian
-#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/debian
-Suites: bookworm/mongodb-org/7.0
-Components: main
-Architectures: amd64
-Signed-By: /etc/apt/keyrings/mongodb.gpg

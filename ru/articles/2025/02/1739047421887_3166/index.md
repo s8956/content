@@ -80,6 +80,6 @@ apt update && apt install --yes syslog-ng
 
 ### Основная конфигурация
 
-- Создать файл основной конфигурации `/etc/syslog-ng/conf.d/00.main.conf` со следующим содержимым:
+- Создать файл основной конфигурации `/etc/syslog-ng/conf.d/99-syslog-ng.local.conf` со следующим содержимым:
 
-{{< file "syslog-ng.main.conf" "text" >}}
+{{< file "syslog-ng.local.conf" "text" >}}

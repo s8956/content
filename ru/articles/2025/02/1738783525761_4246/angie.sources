@@ -1,8 +1,0 @@
-X-Repolib-Name: Angie
-Enabled: yes
-Types: deb
-URIs: https://download.angie.software/angie/debian/12
-Suites: debian
-Components: bookworm
-Architectures: amd64
-Signed-By: /etc/apt/keyrings/angie.gpg

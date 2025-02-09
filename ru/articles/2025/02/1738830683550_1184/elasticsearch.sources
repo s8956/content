@@ -1,9 +1,0 @@
-X-Repolib-Name: ElasticSearch
-Enabled: yes
-Types: deb
-URIs: https://artifacts.elastic.co/packages/8.x/apt
-#URIs: https://mirror.yandex.ru/mirrors/elastic/8
-Suites: stable
-Components: main
-Architectures: amd64
-Signed-By: /etc/apt/keyrings/elasticsearch.gpg

@@ -78,13 +78,13 @@ apt update && apt install --yes mysql-server
 
 ### Основная конфигурация
 
-- Создать файл основной конфигурации `/etc/mysql/mysql.conf.d/mysqld.main.cnf` со следующим содержимым:
+- Создать файл основной конфигурации `/etc/mysql/mysql.conf.d/mysqld.local.cnf` со следующим содержимым:
 
-{{< file "mysql.mysqld.main.cnf" "ini" >}}
+{{< file "mysql.mysqld.local.cnf" "ini" >}}
 
-- Создать файл `mysqldump` конфигурации `/etc/mysql/mysql.conf.d/mysqldump.main.cnf` со следующим содержимым:
+- Создать файл `mysqldump` конфигурации `/etc/mysql/mysql.conf.d/mysqldump.local.cnf` со следующим содержимым:
 
-{{< file "mysql.mysqldump.main.cnf" "ini" >}}
+{{< file "mysql.mysqldump.local.cnf" "ini" >}}
 
 - Удалить файлы в директории `/var/lib/mysql` и инициализировать стандартные базы данных:
 

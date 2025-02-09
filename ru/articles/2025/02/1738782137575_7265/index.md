@@ -88,9 +88,9 @@ v='8.4'; apt update && apt install --yes php${v}-fpm php${v}-bcmath php${v}-bz2 
 
 ### Настройка PHP
 
-- Создать файл `/etc/php/8.4/fpm/conf.d/00.main.ini` со следующим содержимым:
+- Создать файл `/etc/php/8.4/fpm/conf.d/99-php.local.ini` со следующим содержимым:
 
-{{< file "php.main.ini" >}}
+{{< file "php.local.ini" >}}
 
 ### Настройка PHP-FPM
 

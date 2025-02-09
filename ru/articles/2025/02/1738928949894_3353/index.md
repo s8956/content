@@ -73,3 +73,27 @@ curl -fsSLo '/etc/apt/keyrings/mariadb.gpg' 'https://mariadb.org/mariadb_release
 ```bash
 apt update && apt install --yes mariadb-server
 ```
+
+## Настройка
+
+### Основная конфигурация
+
+- Создать файл основной конфигурации `/etc/mysql/mariadb.conf.d/99-server.local.cnf` со следующим содержимым:
+
+{{< file "mariadb.server.local.cnf" "ini" >}}
+
+- Создать файл `mysqldump` конфигурации `/etc/mysql/mariadb.conf.d/99-mariadb-clients.local.cnf` со следующим содержимым:
+
+{{< file "mariadb.mariadb-clients.local.cnf" "ini" >}}
+
+- Удалить файлы в директории `/var/lib/mysql` и инициализировать стандартные базы данных:
+
+```bash
+rm -rf /var/lib/mysql/* && mariadb-install-db
+```
+
+- Запустить скрипт безопасной установки:
+
+```bash
+mariadb-secure-installation
+```

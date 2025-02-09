@@ -91,6 +91,6 @@ f='/etc/opensearch/opensearch.yml'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "$
 
 ### Дополнительная конфигурация
 
-- Создать файл дополнительной конфигурации `/etc/opensearch/jvm.options.d/00.main.options` со следующим содержимым:
+- Создать файл дополнительной конфигурации `/etc/opensearch/jvm.options.d/99-jvm.local.options` со следующим содержимым:
 
-{{< file "opensearch.jvm.main.options" "text" >}}
+{{< file "opensearch.jvm.local.options" "text" >}}
