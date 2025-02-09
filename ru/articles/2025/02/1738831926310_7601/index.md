@@ -64,7 +64,7 @@ curl -fsSL 'https://artifacts.opensearch.org/publickeys/opensearch.pgp' | gpg --
 - Создать файл репозитория `/etc/apt/sources.list.d/opensearch.sources` со следующим содержимым:
 
 ```bash
-. '/etc/os-release'; v='2'; echo -e "X-Repolib-Name: OpenSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.opensearch.org/releases/bundle/opensearch/${v}.x/apt\nSuites: stable\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/opensearch.gpg\n" | tee '/etc/apt/sources.list.d/opensearch.sources'
+v='2'; . '/etc/os-release' && echo -e "X-Repolib-Name: OpenSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.opensearch.org/releases/bundle/opensearch/${v}.x/apt\nSuites: stable\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/opensearch.gpg\n" | tee '/etc/apt/sources.list.d/opensearch.sources'
 ```
 
 ## Установка
