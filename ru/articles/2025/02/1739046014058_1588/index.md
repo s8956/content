@@ -65,7 +65,7 @@ draft: 1
 - Создать файл репозитория `/etc/apt/sources.list.d/rsyslog.sources` со следующим содержимым:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Rsyslog\nEnabled: yes\nTypes: deb\nURIs: http://download.opensuse.org/repositories/home:/rgerhards/Debian_${VERSION_ID}/\nSuites: /\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/rsyslog.gpg\n" | tee '/etc/apt/sources.list.d/rsyslog.sources'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Rsyslog\nEnabled: yes\nTypes: deb\nURIs: http://download.opensuse.org/repositories/home:/rgerhards/Debian_${VERSION_ID}/\nSuites: /\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/rsyslog.gpg\n" | tee '/etc/apt/sources.list.d/rsyslog.sources' > '/dev/null'
 ```
 
 ## Установка

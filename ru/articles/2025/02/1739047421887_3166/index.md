@@ -65,7 +65,7 @@ curl -fsSL 'https://ose-repo.syslog-ng.com/apt/syslog-ng-ose-pub.asc' | gpg --de
 - Создать файл репозитория `/etc/apt/sources.list.d/syslog-ng.sources` со следующим содержимым:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Syslog-NG\nEnabled: yes\nTypes: deb\nURIs: https://ose-repo.syslog-ng.com/apt\nSuites: stable\nComponents: ${ID}-${VERSION_CODENAME}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/syslog-ng.gpg\n" | tee '/etc/apt/sources.list.d/syslog-ng.sources'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Syslog-NG\nEnabled: yes\nTypes: deb\nURIs: https://ose-repo.syslog-ng.com/apt\nSuites: stable\nComponents: ${ID}-${VERSION_CODENAME}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/syslog-ng.gpg\n" | tee '/etc/apt/sources.list.d/syslog-ng.sources' > '/dev/null'
 ```
 
 ## Установка

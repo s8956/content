@@ -63,7 +63,7 @@ curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor 
 - Создать файл репозитория `/etc/apt/sources.list.d/pgsql.sources` со следующим содержимым:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: PostgreSQL\nEnabled: yes\nTypes: deb\nURIs: https://apt.postgresql.org/pub/repos/apt\n#URIs: https://mirror.yandex.ru/mirrors/postgresql\nSuites: ${VERSION_CODENAME}-pgdg\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/pgsql.gpg\n" | tee '/etc/apt/sources.list.d/pgsql.sources'
+. '/etc/os-release' && echo -e "X-Repolib-Name: PostgreSQL\nEnabled: yes\nTypes: deb\nURIs: https://apt.postgresql.org/pub/repos/apt\n#URIs: https://mirror.yandex.ru/mirrors/postgresql\nSuites: ${VERSION_CODENAME}-pgdg\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/pgsql.gpg\n" | tee '/etc/apt/sources.list.d/pgsql.sources' > '/dev/null'
 ```
 
 ## Установка

@@ -63,7 +63,7 @@ curl -fsSLo '/etc/apt/keyrings/mariadb.gpg' 'https://mariadb.org/mariadb_release
 - Создать файл репозитория `/etc/apt/sources.list.d/mariadb.sources` со следующим содержимым:
 
 ```bash
-v='11.4'; . '/etc/os-release' && echo -e "X-Repolib-Name: MariaDB\nEnabled: yes\nTypes: deb\nURIs: https://mirror.netcologne.de/mariadb/repo/${v}/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/mariadb/repo/${v}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mariadb.gpg\n" | tee '/etc/apt/sources.list.d/mariadb.sources'
+v='11.4'; . '/etc/os-release' && echo -e "X-Repolib-Name: MariaDB\nEnabled: yes\nTypes: deb\nURIs: https://mirror.netcologne.de/mariadb/repo/${v}/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/mariadb/repo/${v}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mariadb.gpg\n" | tee '/etc/apt/sources.list.d/mariadb.sources' > '/dev/null'
 ```
 
 ## Установка
