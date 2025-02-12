@@ -71,29 +71,29 @@ v='11.4'; . '/etc/os-release' && echo -e "X-Repolib-Name: MariaDB\nEnabled: yes\
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes mariadb-server
+apt update && apt install --yes mariadb-server && systemctl stop mariadb.service
 ```
 
 ## Настройка
 
 ### Основная конфигурация
 
-- Создать файл основной конфигурации `/etc/mysql/mariadb.conf.d/99-server.local.cnf` со следующим содержимым:
+- Создать файл `/etc/mysql/mariadb.conf.d/99-server.local.cnf` для конфигурации `mariadbd` со следующим содержимым:
 
 {{< file "mariadb.server.local.cnf" "ini" >}}
 
-- Создать файл `mysqldump` конфигурации `/etc/mysql/mariadb.conf.d/99-mariadb-clients.local.cnf` со следующим содержимым:
+- Создать файл `/etc/mysql/mariadb.conf.d/99-mariadb-clients.local.cnf` для конфигурации клиентов со следующим содержимым:
 
 {{< file "mariadb.mariadb-clients.local.cnf" "ini" >}}
 
 - Удалить файлы в директории `/var/lib/mysql` и инициализировать стандартные базы данных:
 
 ```bash
-rm -rf /var/lib/mysql/* && mariadb-install-db
+rm -rf /var/lib/mysql/* && mariadb-install-db --user='mysql' && systemctl start mariadb.service
 ```
 
 - Запустить скрипт безопасной установки:
 
 ```bash
-mariadb-secure-installation
+mariadb-secure-installation && systemctl restart mariadb.service
 ```
