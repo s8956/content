@@ -64,7 +64,7 @@ Windows Server Backup хороша в качестве компонента ре
 
 Файл настройки представляет собой простой файл `.ini`, содержащий в себе приватные параметры.
 
-{{< file "app.backup.wsb.mail.ini" >}}
+{{< file "app.backup.wsb.mail.ini" "ini" >}}
 
 #### Параметры
 
@@ -77,7 +77,7 @@ Windows Server Backup хороша в качестве компонента ре
 
 ### Приложение
 
-{{< file "app.backup.wsb.mail.ps1" >}}
+{{< file "app.backup.wsb.mail.ps1" "pwsh" >}}
 
 #### Параметры
 
@@ -93,10 +93,10 @@ Windows Server Backup хороша в качестве компонента ре
 
 Задача присылает уведомление в том случае, когда в журнале событий появляется запись об ошибке выполнения {{< tag "Windows" >}} Server Backup.
 
-{{< file "task.backup.wsb.mail.error.xml" >}}
+{{< file "task.backup.wsb.mail.error.xml" "xml" >}}
 
 #### Успешно
 
 Задача присылает уведомление в том случае, когда в журнале событий появляется запись об успешном выполнении {{< tag "Windows" >}} Server Backup.
 
-{{< file "task.backup.wsb.mail.success.xml" >}}
+{{< file "task.backup.wsb.mail.success.xml" "xml" >}}

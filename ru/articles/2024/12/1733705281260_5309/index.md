@@ -77,4 +77,4 @@ v='3.0'; apt update && apt install --yes haproxy=${v}.\*
 
 ## Настройка
 
-{{< file "haproxy.cfg" "text" >}}
+{{< file "haproxy.cfg" >}}

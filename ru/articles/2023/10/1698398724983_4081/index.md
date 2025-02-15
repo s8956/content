@@ -107,4 +107,4 @@ The security database on the server does not have a computer account for this wo
 
 ### Скрипт
 
-{{< file "pwsh.csc.repair.ps1" >}}
+{{< file "pwsh.csc.repair.ps1" "pwsh" >}}

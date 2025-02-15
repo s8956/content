@@ -44,4 +44,4 @@ draft: 1
 
 <!--more-->
 
-{{< file "pwsh.adds.ps1" >}}
+{{< file "pwsh.adds.ps1" "pwsh" >}}

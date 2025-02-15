@@ -173,7 +173,7 @@ curl -X GET "https://api.cloudflare.com/client/v4/zones/<...>/dns_records" -H "A
 
 ### Приложение
 
-{{< file "ros.dns.rsc" "text" >}}
+{{< file "ros.dns.rsc" >}}
 
 #### Параметры
 

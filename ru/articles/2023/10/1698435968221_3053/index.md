@@ -73,4 +73,4 @@ draft: 0
 
 ### Скрипт
 
-{{< file "pwsh.win.srv.ws.ps1" >}}
+{{< file "pwsh.win.srv.ws.ps1" "pwsh" >}}

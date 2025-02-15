@@ -44,4 +44,4 @@ draft: 1
 
 <!--more-->
 
-{{< file "pwsh.dhcp.ps1" >}}
+{{< file "pwsh.dhcp.ps1" "pwsh" >}}

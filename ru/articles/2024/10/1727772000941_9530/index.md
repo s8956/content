@@ -76,7 +76,7 @@ draft: 0
 
 Приложение забирает параметры из файла настроек и обрабатывает значения.
 
-{{< file "app.asterisk.room-close.sh" >}}
+{{< file "app.asterisk.room-close.sh" "bash" >}}
 
 ### Задача
 

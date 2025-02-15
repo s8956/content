@@ -60,7 +60,7 @@ draft: 1
 
 ### Приложение
 
-{{< file "app.tls.ps1" >}}
+{{< file "app.tls.ps1" "pwsh" >}}
 
 #### Параметры
 

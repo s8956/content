@@ -71,7 +71,7 @@ draft: 1
 Файл `auto.diskpart.BIOS.cmd` предназначен для разметки SSD под старые материнские платы с прошивкой **BIOS**. Его необходимо переименовать в `auto.diskpart.cmd` и помесить в корень файла `.iso` с дистрибутивом ОС.
 {{< /alert >}}
 
-{{< file "auto.diskpart.BIOS.bat" >}}
+{{< file "auto.diskpart.BIOS.bat" "bat" >}}
 
 ### UEFI
 
@@ -79,7 +79,7 @@ draft: 1
 Файл `auto.diskpart.UEFI.cmd` предназначен для разметки SSD под новые материнские платы с прошивкой **UEFI**. Его необходимо переименовать в `auto.diskpart.cmd` и помесить в корень файла `.iso` с дистрибутивом ОС.
 {{< /alert >}}
 
-{{< file "auto.diskpart.UEFI.bat" >}}
+{{< file "auto.diskpart.UEFI.bat" "bat" >}}
 
 ## MS Windows 10
 
@@ -89,7 +89,7 @@ draft: 1
 Файл `WIN.10.AutoUnattend.BIOS.xml` предназначен для автоматической установки ОС под старые материнские платы с прошивкой **BIOS**. Его необходимо переименовать в `AutoUnattend.xml` и помесить в корень файла `.iso` с дистрибутивом ОС.
 {{< /alert >}}
 
-{{< file "WIN.10.AutoUnattend.BIOS.xml" >}}
+{{< file "WIN.10.AutoUnattend.BIOS.xml" "xml" >}}
 
 ### UEFI
 
@@ -97,13 +97,13 @@ draft: 1
 Файл `WIN.10.AutoUnattend.UEFI.xml` предназначен для автоматической установки ОС под новые материнские платы с прошивкой **UEFI**. Его необходимо переименовать в `AutoUnattend.xml` и помесить в корень файла `.iso` с дистрибутивом ОС.
 {{< /alert >}}
 
-{{< file "WIN.10.AutoUnattend.UEFI.xml" >}}
+{{< file "WIN.10.AutoUnattend.UEFI.xml" "xml" >}}
 
 ## MS Windows 11
 
 ### Обход ограничений
 
-{{< file "auto.tpm.bat" >}}
+{{< file "auto.tpm.bat" "bat" >}}
 
 ### BIOS
 
@@ -111,7 +111,7 @@ draft: 1
 Файл `WIN.11.AutoUnattend.BIOS.xml` предназначен для автоматической установки ОС под старые материнские платы с прошивкой **BIOS**. Его необходимо переименовать в `AutoUnattend.xml` и помесить в корень файла `.iso` с дистрибутивом ОС.
 {{< /alert >}}
 
-{{< file "WIN.11.AutoUnattend.BIOS.xml" >}}
+{{< file "WIN.11.AutoUnattend.BIOS.xml" "xml" >}}
 
 ### UEFI
 
@@ -119,4 +119,4 @@ draft: 1
 Файл `WIN.11.AutoUnattend.UEFI.xml` предназначен для автоматической установки ОС под новые материнские платы с прошивкой **UEFI**. Его необходимо переименовать в `AutoUnattend.xml` и помесить в корень файла `.iso` с дистрибутивом ОС.
 {{< /alert >}}
 
-{{< file "WIN.11.AutoUnattend.UEFI.xml" >}}
+{{< file "WIN.11.AutoUnattend.UEFI.xml" "xml" >}}

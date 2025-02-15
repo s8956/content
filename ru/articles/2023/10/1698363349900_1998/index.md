@@ -89,4 +89,4 @@ draft: 0
 
 ### Скрипт
 
-{{< file "pwsh.rdp.port.ps1" >}}
+{{< file "pwsh.rdp.port.ps1" "pwsh" >}}

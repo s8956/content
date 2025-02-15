@@ -58,7 +58,7 @@ draft: 1
 
 ### Приложение
 
-{{< file "app.firewall.ip.ps1" >}}
+{{< file "app.firewall.ip.ps1" "pwsh" >}}
 
 #### Параметры
 

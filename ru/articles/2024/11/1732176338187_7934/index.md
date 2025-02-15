@@ -87,7 +87,7 @@ draft: 0
 
 ### Приложение
 
-{{< file "ros.acme.rsc" "text" >}}
+{{< file "ros.acme.rsc" >}}
 
 #### Параметры
 

@@ -101,4 +101,4 @@ from_file '/etc/gitlab/gitlab.local.rb'
 
 - Создать файл дополнительной конфигурации `/etc/gitlab/gitlab.local.rb` со следующим содержимым:
 
-{{< file "gitlab.local.rb" >}}
+{{< file "gitlab.local.rb" "ruby" >}}

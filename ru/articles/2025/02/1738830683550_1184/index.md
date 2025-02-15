@@ -91,10 +91,10 @@ f='/etc/elasticsearch/elasticsearch.yml'; [[ -f "${f}" && ! -f "${f}.orig" ]] &&
 
 - Создать файл основной конфигурации `/etc/elasticsearch/elasticsearch.yml` со следующим содержимым:
 
-{{< file "elasticsearch.yml" >}}
+{{< file "elasticsearch.yml" "yaml" >}}
 
 ### Дополнительная конфигурация
 
 - Создать файл дополнительной конфигурации `/etc/elasticsearch/jvm.options.d/99-jvm.local.options` со следующим содержимым:
 
-{{< file "elasticsearch.jvm.local.options" "text" >}}
+{{< file "elasticsearch.jvm.local.options" >}}

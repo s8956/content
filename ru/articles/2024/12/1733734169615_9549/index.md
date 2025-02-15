@@ -83,6 +83,6 @@ f='/etc/squid/squid.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 
 - Создать файл `/etc/squid/users.conf` с пользователями `user01:user01` и `user02:user02`:
 
-{{< file "users.conf" "text" >}}
+{{< file "users.conf" >}}
 
 - Заменить содержимое файла `/etc/squid/users.conf` на собственное. Пароли можно шифровать при помощи [этого инструмента](https://hostingcanada.org/htpasswd-generator/), выбрав режим **Bcrypt**.

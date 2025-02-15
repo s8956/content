@@ -55,7 +55,7 @@ draft: 0
 - `-P` - путь к директории, в которой необходимо найти файлы.
 - `-T` - время, прошедшее с момента создания файла (в секундах).
 
-{{< file "pwsh.find.ct.ps1" >}}
+{{< file "pwsh.find.ct.ps1" "pwsh" >}}
 
 {{< alert "tip" >}}
 `.AddSeconds` можно заменить на `.AddDays`, чтобы отсчитывать дату не в секундах, а в днях.
@@ -74,7 +74,7 @@ draft: 0
 `.AddSeconds` можно заменить на `.AddDays`, чтобы отсчитывать дату не в секундах, а в днях.
 {{< / alert >}}
 
-{{< file "pwsh.find.lwt.ps1" >}}
+{{< file "pwsh.find.lwt.ps1" "pwsh" >}}
 
 ## Создать новый элемент
 
@@ -88,7 +88,7 @@ draft: 0
 - `-P` - путь к директории, в которой необходимо создать элемент.
 - `-N` - название элемента.
 
-{{< file "pwsh.new.item.ps1" >}}
+{{< file "pwsh.new.item.ps1" "pwsh" >}}
 
 ## Проверить существование элемента
 
@@ -99,7 +99,7 @@ draft: 0
 - `-T` - тип элемента.
 - `-P` - путь к директории, в которой необходимо проверить элемент.
 
-{{< file "pwsh.test.item.ps1" >}}
+{{< file "pwsh.test.item.ps1" "pwsh" >}}
 
 ## Проверить существование модуля
 
@@ -109,7 +109,7 @@ draft: 0
 
 - `-N` - название модуля.
 
-{{< file "pwsh.test.module.ps1" >}}
+{{< file "pwsh.test.module.ps1" "pwsh" >}}
 
 ## Вывести сообщение в терминал
 
@@ -125,13 +125,13 @@ draft: 0
 - `-M` - текст сообщения.
 - `-A` - действие, которое необходимо выполнить при выводе сообщения в терминал.
 
-{{< file "pwsh.write.msg.ps1" >}}
+{{< file "pwsh.write.msg.ps1" "pwsh" >}}
 
 ## Найти свободную букву диска
 
 Небольшая функция, которая возвращает не занятую букву диска. Используется в {{< uuid "52d75b90-0637-5ba6-91d6-b1bff40e1d67" >}}.
 
-{{< file "pwsh.find.adl.ps1" >}}
+{{< file "pwsh.find.adl.ps1" "pwsh" >}}
 
 ## Получить размер файла
 
@@ -141,7 +141,7 @@ draft: 0
 
 - `-F` - название файла.
 
-{{< file "pwsh.get.filesize.ps1" >}}
+{{< file "pwsh.get.filesize.ps1" "pwsh" >}}
 
 ## Работа с архивами 7-Zip
 
@@ -153,11 +153,11 @@ draft: 0
 
 ### Упаковка
 
-{{< file "pwsh.compress.7z.ps1" >}}
+{{< file "pwsh.compress.7z.ps1" "pwsh" >}}
 
 ### Распаковка
 
-{{< file "pwsh.expand.7z.ps1" >}}
+{{< file "pwsh.expand.7z.ps1" "pwsh" >}}
 
 ## Работа с архивами WinRAR
 
@@ -169,8 +169,8 @@ draft: 0
 
 ### Упаковка
 
-{{< file "pwsh.compress.rar.ps1" >}}
+{{< file "pwsh.compress.rar.ps1" "pwsh" >}}
 
 ### Распаковка
 
-{{< file "pwsh.expand.rar.ps1" >}}
+{{< file "pwsh.expand.rar.ps1" "pwsh" >}}

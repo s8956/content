@@ -75,4 +75,4 @@ draft: 0
 
 ## Скрипт
 
-{{< file "pwsh.disk.erase.ps1" >}}
+{{< file "pwsh.disk.erase.ps1" "pwsh" >}}

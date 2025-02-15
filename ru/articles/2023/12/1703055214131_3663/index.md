@@ -78,4 +78,4 @@ draft: 0
 
 ### Скрипт конфигурации
 
-{{< file "mt.router.rsc" "text" >}}
+{{< file "mt.router.rsc" >}}

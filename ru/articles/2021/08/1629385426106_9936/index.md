@@ -62,7 +62,7 @@ find "/home/user" -type f -mtime +3 -print0 | xargs -0 rm -f
 
 ## Скрипт
 
-{{< file "delete-files.sh" >}}
+{{< file "delete-files.sh" "bash" >}}
 
 В скрипте я вынес некоторые значения в переменные для удобной перенастройки. Вызывается скрипт следующем образом:
 

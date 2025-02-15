@@ -82,4 +82,4 @@ apt update && apt install --yes rsyslog
 
 - Создать файл основной конфигурации `/etc/rsyslog.d/99-rsyslog.local.conf` со следующим содержимым:
 
-{{< file "rsyslog.local.conf" "text" >}}
+{{< file "rsyslog.local.conf" >}}
