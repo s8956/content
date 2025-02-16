@@ -77,7 +77,7 @@ draft: 0
 - `${DIR}` - переменная, определяющая директорию `Downloads` (`Загрузки`) для текущего пользователя.
 
 ```powershell
-${CERT_ROOT} = 'russian_trusted_root_ca.cer'; ${CERT_SUB} = 'russian_trusted_sub_ca.cer'; ${DIR} = (New-Object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path; Invoke-WebRequest "https://gu-st.ru/content/Other/doc/${CERT_ROOT}" -OutFile "${DIR}\${CERT_ROOT}"; Import-Certificate -FilePath "${DIR}\${CERT_ROOT}" -CertStoreLocation 'Cert:\CurrentUser\Root'; Invoke-WebRequest "https://gu-st.ru/content/Other/doc/${CERT_SUB}" -OutFile "${DIR}\${CERT_SUB}"; Import-Certificate -FilePath "${DIR}\${CERT_SUB}" -CertStoreLocation 'Cert:\CurrentUser\CA'
+$CERT_ROOT = 'russian_trusted_root_ca.cer'; $CERT_SUB = 'russian_trusted_sub_ca.cer'; $DIR = (New-Object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path; Invoke-WebRequest "https://gu-st.ru/content/Other/doc/${CERT_ROOT}" -OutFile "${DIR}\${CERT_ROOT}" && Import-Certificate -FilePath "${DIR}\${CERT_ROOT}" -CertStoreLocation 'Cert:\CurrentUser\Root' && Invoke-WebRequest "https://gu-st.ru/content/Other/doc/${CERT_SUB}" -OutFile "${DIR}\${CERT_SUB}" && Import-Certificate -FilePath "${DIR}\${CERT_SUB}" -CertStoreLocation 'Cert:\CurrentUser\CA'
 ```
 
 ## Linux

@@ -72,10 +72,10 @@ draft: 0
 {{< table "table-striped table-bordered table-responsive w-50" >}}
 | Server IP | Server Port | Verify CN |
 | --------- | ----------- | --------- |
-| 1.1.1.1 | 853 | cloudflare-dns.com |
-| 1.0.0.1 | 853 | cloudflare-dns.com |
-| 2606:4700:4700::1111 | 853 | cloudflare-dns.com |
-| 2606:4700:4700::1001 | 853 | cloudflare-dns.com |
+| `1.1.1.1` | `853` | `cloudflare-dns.com` |
+| `1.0.0.1` | `853` | `cloudflare-dns.com` |
+| `2606:4700:4700::1111` | `853` | `cloudflare-dns.com` |
+| `2606:4700:4700::1001` | `853` | `cloudflare-dns.com` |
 {{< /table >}}
 
 ### Google
@@ -83,10 +83,10 @@ draft: 0
 {{< table "table-striped table-bordered table-responsive w-50" >}}
 | Server IP | Server Port | Verify CN |
 | --------- | ----------- | --------- |
-| 8.8.8.8 | 853 | dns.google |
-| 8.8.4.4 | 853 | dns.google |
-| 2001:4860:4860::8888 | 853 | dns.google |
-| 2001:4860:4860::8844 | 853 | dns.google |
+| `8.8.8.8` | `853` | `dns.google` |
+| `8.8.4.4` | `853` | `dns.google` |
+| `2001:4860:4860::8888` | `853` | `dns.google` |
+| `2001:4860:4860::8844` | `853` | `dns.google` |
 {{< /table >}}
 
 ### Quad9
@@ -94,10 +94,10 @@ draft: 0
 {{< table "table-striped table-bordered table-responsive w-50" >}}
 | Server IP | Server Port | Verify CN |
 | --------- | ----------- | --------- |
-| 9.9.9.9 | 853 | dns.quad9.net |
-| 149.112.112.112 | 853 | dns.quad9.net |
-| 2620:fe::fe | 853 | dns.quad9.net |
-| 2620:fe::9 | 853 | dns.quad9.net |
+| `9.9.9.9` | `853` | `dns.quad9.net` |
+| `149.112.112.112` | `853` | `dns.quad9.net` |
+| `2620:fe::fe` | `853` | `dns.quad9.net` |
+| `2620:fe::9` | `853` | `dns.quad9.net` |
 {{< /table >}}
 
 ### Cisco Umbrella
@@ -105,10 +105,10 @@ draft: 0
 {{< table "table-striped table-bordered table-responsive w-50" >}}
 | Server IP | Server Port | Verify CN |
 | --------- | ----------- | --------- |
-| 208.67.222.222 | 853 | dns.opendns.com |
-| 208.67.220.220 | 853 | dns.opendns.com |
-| 2620:119:35::35 | 853 | dns.opendns.com |
-| 2620:119:53::53 | 853 | dns.opendns.com |
+| `208.67.222.222` | `853` | `dns.opendns.com` |
+| `208.67.220.220` | `853` | `dns.opendns.com` |
+| `2620:119:35::35` | `853` | `dns.opendns.com` |
+| `2620:119:53::53` | `853` | `dns.opendns.com` |
 {{< /table >}}
 
 ### CleanBrowsing
@@ -116,10 +116,10 @@ draft: 0
 {{< table "table-striped table-bordered table-responsive w-50" >}}
 | Server IP | Server Port | Verify CN |
 | --------- | ----------- | --------- |
-| 185.228.168.9 | 853 | security-filter-dns.cleanbrowsing.org |
-| 185.228.169.9 | 853 | security-filter-dns.cleanbrowsing.org |
-| 2a0d:2a00:1::2 | 853 | security-filter-dns.cleanbrowsing.org |
-| 2a0d:2a00:2::2 | 853 | security-filter-dns.cleanbrowsing.org |
+| `185.228.168.9` | `853` | `security-filter-dns.cleanbrowsing.org` |
+| `185.228.169.9` | `853` | `security-filter-dns.cleanbrowsing.org` |
+| `2a0d:2a00:1::2` | `853` | `security-filter-dns.cleanbrowsing.org` |
+| `2a0d:2a00:2::2` | `853` | `security-filter-dns.cleanbrowsing.org` |
 {{< /table >}}
 
 ### AdGuard DNS
@@ -127,8 +127,8 @@ draft: 0
 {{< table "table-striped table-bordered table-responsive w-50" >}}
 | Server IP | Server Port | Verify CN |
 | --------- | ----------- | --------- |
-| 94.140.14.14 | 853 | dns.adguard-dns.com |
-| 94.140.15.15 | 853 | dns.adguard-dns.com |
-| 2a10:50c0::ad1:ff | 853 | dns.adguard-dns.com |
-| 2a10:50c0::ad2:ff | 853 | dns.adguard-dns.com |
+| `94.140.14.14` | `853` | `dns.adguard-dns.com` |
+| `94.140.15.15` | `853` | `dns.adguard-dns.com` |
+| `2a10:50c0::ad1:ff` | `853` | `dns.adguard-dns.com` |
+| `2a10:50c0::ad2:ff` | `853` | `dns.adguard-dns.com` |
 {{< /table >}}
