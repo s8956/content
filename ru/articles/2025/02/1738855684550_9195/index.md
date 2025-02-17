@@ -103,39 +103,51 @@ from_file '/etc/gitlab/gitlab.local.rb'
 
 {{< file "gitlab.local.rb" "ruby" >}}
 
+## Миграция web-сервера на внешний Angie
+
+- Установить Angie по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
+- Создать файл `/etc/angie/http.d/gitlab.conf` со следующим содержимым:
+{{< file "angie.gitlab.conf" "nginx" >}}
+
 ## Миграция базы данных на внешний PostgreSQL
 
-- Останавливаем все сервисы GitLab, кроме PostgreSQL:
+- Установить PostgreSQL по материалу {{< uuid "9c234b3c-704e-599f-9fd9-b3fbb70f7897" >}}.
+
+{{< alert "important" >}}
+Необходимо внимательно подбирать версию PostgreSQL под [рекомендуемые требования](https://docs.gitlab.com/install/requirements/#postgresql) GitLab.
+{{< /alert >}}
+
+- Остановить все сервисы GitLab, кроме PostgreSQL:
 
 ```bash
 gitlab-ctl stop && gitlab-ctl start postgresql && gitlab-ctl status
 ```
 
-- Экспортируем базу данных `gitlabhq_production` в файл `/tmp/gitlabhq_production.sql`:
+- Экспортировать базу данных `gitlabhq_production` в файл `/tmp/gitlabhq_production.sql`:
 
 ```bash
 sudo -u 'gitlab-psql' /opt/gitlab/embedded/bin/pg_dump --host='/var/opt/gitlab/postgresql' --username='gitlab-psql' --dbname='gitlabhq_production' --clean --create --file='/tmp/gitlabhq_production.sql'
 ```
 
-- Создаём роль `gitlab` на внешнем PostgreSQL:
+- Создать роль `gitlab` на внешнем PostgreSQL:
 
 ```bash
 sudo -u 'postgres' createuser --pwprompt 'gitlab'
 ```
 
-- Импортируем файл `/tmp/gitlabhq_production.sql` во внешний PostgreSQL:
+- Импортировать файл `/tmp/gitlabhq_production.sql` во внешний PostgreSQL:
 
 ```bash
 sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
 ```
 
-- Создаём расширения для базы данных `gitlabhq_production` во внешнем PostgreSQL:
+- Создать расширения для базы данных `gitlabhq_production` во внешнем PostgreSQL:
 
 ```bash
 echo 'CREATE EXTENSION IF NOT EXISTS pg_trgm; CREATE EXTENSION IF NOT EXISTS btree_gist; CREATE EXTENSION IF NOT EXISTS plpgsql;' | sudo -u 'postgres' psql 'gitlabhq_production'
 ```
 
-- Добавляем настройки в файл конфигурации `/etc/gitlab/gitlab.rb`:
+- Добавить настройки в файл конфигурации `/etc/gitlab/gitlab.rb`:
 
 ```ruby
 postgresql['enable'] = false
