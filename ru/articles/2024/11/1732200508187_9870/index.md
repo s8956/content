@@ -44,7 +44,7 @@ hash: '160a7005882dd037cd1fe0739a879ce6dbd15a0b'
 uuid: '160a7005-882d-5037-9d1f-e0739a879ce6'
 slug: '160a7005-882d-5037-9d1f-e0739a879ce6'
 
-draft: 0
+draft: 1
 ---
 
 В этой заметке я устанавливаю Zabbix на ОС Debian с немного изменённым списком пакетов. Вместо Nginx я использую его форк **Angie**.
@@ -53,43 +53,13 @@ draft: 0
 
 ## Установка пакетов
 
-Необходимо установить пакеты для Angie, PHP, PostgreSQL, TimescaleDB и самого Zabbix. Пакет `zabbix-nginx-conf` не нужен, так как мы воссоздадим его конфигурацию на Angie.
+Необходимо установить пакеты для Angie, PHP, PostgreSQL, TimescaleDB и самого Zabbix. Пакет `zabbix-nginx-conf` не нужен, так как мы воссоздадим его конфигурацию на **Angie**.
 
-### Angie
-
-- Добавить репозиторий и установить пакеты Angie:
-
-```bash
-. /etc/os-release; curl -fsSLo '/etc/apt/keyrings/angie.gpg' 'https://angie.software/keys/angie-signing.gpg' && echo "deb [signed-by=/etc/apt/keyrings/angie.gpg] https://download.angie.software/angie/${ID}/${VERSION_ID} ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/angie.list' && apt update && apt install --yes angie angie-module-brotli
-```
-
-### PHP
-
-- Добавить репозиторий и установить пакеты PHP-FPM:
-
-```bash
-. /etc/os-release; v='8.3'; p=("php${v}-fpm" "php${v}-bcmath" "php${v}-bz2" "php${v}-cli" "php${v}-curl" "php${v}-gd" "php${v}-gmp" "php${v}-imagick" "php${v}-imap" "php${v}-intl" "php${v}-ldap" "php${v}-mbstring" "php${v}-memcached" "php${v}-mysql" "php${v}-odbc" "php${v}-opcache" "php${v}-pgsql" "php${v}-redis" "php${v}-uploadprogress" "php${v}-xml" "php${v}-zip" "php${v}-zstd"); curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg' && echo "deb [signed-by=/etc/apt/keyrings/php.gpg] https://packages.sury.org/php ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/php.list' && apt update && apt install --yes "${p[@]}"
-```
-
-### PostgreSQL
-
-- Добавить репозиторий и установить пакеты PostgreSQL:
-
-```bash
-. /etc/os-release; curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor -o '/etc/apt/keyrings/pgsql.gpg' && echo "deb [signed-by=/etc/apt/keyrings/pgsql.gpg] https://apt.postgresql.org/pub/repos/apt ${VERSION_CODENAME}-pgdg main" | tee '/etc/apt/sources.list.d/pgsql.list' && apt update && apt install --yes postgresql-16
-```
-
-### TimescaleDB
-
-- Добавить репозиторий и установить пакеты TimescaleDB `2.18.*`:
-
-```bash
-. /etc/os-release; curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmor -o '/etc/apt/keyrings/timescaledb.gpg' && echo "deb [signed-by=/etc/apt/keyrings/timescaledb.gpg] https://packagecloud.io/timescale/timescaledb/debian/ ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/timescaledb.list' && apt update && apt install --yes timescaledb-2-postgresql-16='2.18.*' timescaledb-2-loader-postgresql-16='2.18.*' timescaledb-tools
-```
-
-### Zabbix
-
-- Добавить репозиторий и установить пакеты Zabbix:
+- Добавить репозиторий и установить пакеты **Angie** по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
+- Добавить репозиторий и установить пакеты **PHP-FPM** по материалу {{< uuid "9bd1261d-3842-5859-8202-2e1d7a5ba9f4" >}}.
+- Добавить репозиторий и установить пакеты **PostgreSQL** по материалу {{< uuid "9c234b3c-704e-599f-9fd9-b3fbb70f7897" >}}.
+- Добавить репозиторий и установить пакеты **TimescaleDB** по материалу {{< uuid "5dfddacb-ebc0-5c96-9598-39649fa484bc" >}}.
+- Добавить репозиторий и установить пакеты **Zabbix**:
 
 ```bash
 . /etc/os-release; curl -fsSL 'https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-B5333005' | gpg --dearmor -o '/etc/apt/keyrings/zabbix.gpg' && echo "deb [signed-by=/etc/apt/keyrings/zabbix.gpg] https://repo.zabbix.com/zabbix/7.0/debian ${VERSION_CODENAME} main" | tee '/etc/apt/sources.list.d/zabbix.list' && apt update && apt install --yes zabbix-server-pgsql zabbix-frontend-php zabbix-sql-scripts zabbix-agent2
