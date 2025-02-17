@@ -103,7 +103,7 @@ from_file '/etc/gitlab/gitlab.local.rb'
 
 {{< file "gitlab.local.rb" "ruby" >}}
 
-## Миграция web-сервера на внешний Angie
+## Миграция WEB-сервера на внешний Angie
 
 - Установить Angie по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
 - Создать файл `/etc/angie/http.d/gitlab.conf` со следующим содержимым:
