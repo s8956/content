@@ -102,3 +102,45 @@ from_file '/etc/gitlab/gitlab.local.rb'
 - Создать файл дополнительной конфигурации `/etc/gitlab/gitlab.local.rb` со следующим содержимым:
 
 {{< file "gitlab.local.rb" "ruby" >}}
+
+## Миграция базы данных на внешний PostgreSQL
+
+- Останавливаем все сервисы GitLab, кроме PostgreSQL:
+
+```bash
+gitlab-ctl stop && gitlab-ctl start postgresql && gitlab-ctl status
+```
+
+- Экспортируем базу данных `gitlabhq_production` в файл `/tmp/gitlabhq_production.sql`:
+
+```bash
+sudo -u 'gitlab-psql' /opt/gitlab/embedded/bin/pg_dump --host='/var/opt/gitlab/postgresql' --username='gitlab-psql' --dbname='gitlabhq_production' --clean --create --file='/tmp/gitlabhq_production.sql'
+```
+
+- Создаём роль `gitlab` на внешнем PostgreSQL:
+
+```bash
+sudo -u 'postgres' createuser --pwprompt 'gitlab'
+```
+
+- Импортируем файл `/tmp/gitlabhq_production.sql` во внешний PostgreSQL:
+
+```bash
+sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
+```
+
+- Создаём расширения для базы данных `gitlabhq_production` во внешнем PostgreSQL:
+
+```bash
+echo 'CREATE EXTENSION IF NOT EXISTS pg_trgm; CREATE EXTENSION IF NOT EXISTS btree_gist; CREATE EXTENSION IF NOT EXISTS plpgsql;' | sudo -u 'postgres' psql 'gitlabhq_production'
+```
+
+- Добавляем настройки в файл конфигурации `/etc/gitlab/gitlab.rb`:
+
+```ruby
+postgresql['enable'] = false
+gitlab_rails['db_adapter'] = 'postgresql'
+gitlab_rails['db_encoding'] = 'unicode'
+gitlab_rails['db_host'] = '/run/postgresql'
+gitlab_rails['db_password'] = '*****'
+```
