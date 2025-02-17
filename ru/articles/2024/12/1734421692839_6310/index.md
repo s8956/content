@@ -50,10 +50,10 @@ draft: 0
 
 ## Установка
 
-- Установить пакеты `unattended-upgrades` и `apt-listchanges`:
+- Установить пакеты `unattended-upgrades`, `apt-listchanges` и `python3-gi`:
 
 ```bash
-apt install --yes unattended-upgrades apt-listchanges
+apt install --yes unattended-upgrades apt-listchanges python3-gi
 ```
 
 ## Настройка
