@@ -109,6 +109,8 @@ f='iRedMail.backup.sql'; xz -d "${f}.xz" && mariadb --user='root' --password < "
 
 {{< file "irm.mariadb.users.sql" "sql" >}}
 
+- Перенаправить вывод от команды `fail2ban_banned_db unban_db` в `/dev/null`:
+
 ```bash
 crontab -l | sed -e 's|fail2ban_banned_db unban_db|fail2ban_banned_db unban_db >/dev/null|g' | crontab -
 ```
