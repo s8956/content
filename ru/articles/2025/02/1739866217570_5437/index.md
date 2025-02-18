@@ -105,6 +105,6 @@ apt install --yes dovecot-mysql postfix-mysql && systemctl restart dovecot.servi
 f='iRedMail.backup.sql'; xz -d "${f}.xz" && mariadb --user='root' --password < "${f}"
 ```
 
-- Создать технических пользователей iRedMail при помощи импорта файла:
+- Создать технических пользователей iRedMail и присвоить им привилегии импортировав следующий файл:
 
 {{< file "irm.mariadb.users.sql" "sql" >}}
