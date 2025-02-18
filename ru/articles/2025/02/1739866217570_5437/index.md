@@ -8,20 +8,20 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'terminal'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'debian'
+  - 'apt'
+  - 'install'
+  - 'email'
+  - 'iredmail'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
   - ''
 license: 'CC-BY-SA-4.0'
-complexity: '0'
+complexity: '1'
 toc: 1
 comments: 1
 
@@ -93,16 +93,10 @@ apt purge "mariadb-*" && apt autoremove
 ```
 
 - Установить новую версию версию СУБД MariaDB по материалу {{< uuid "0068df20-232a-55a2-a487-52dc746a4f47" >}}.
-- Установить пакеты совместимости MariaDB с MySQL:
+- Установить пакеты совместимости MariaDB с MySQL и пакеты для работы Dovecot и Postfix с базой данных:
 
 ```bash
-apt install --yes mariadb-server-compat mariadb-client-compat
-```
-
-- Установить пакеты для работы Dovecot и Postfix с базой данных:
-
-```bash
-apt install --yes dovecot-mysql postfix-mysql && systemctl restart dovecot.service postfix.service postfix@-.service
+apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql && systemctl restart dovecot.service postfix.service postfix@-.service
 ```
 
 - Импортировать ранее созданный файл базы данных `iRedMail.backup.sql`:
@@ -114,3 +108,7 @@ f='iRedMail.backup.sql'; xz -d "${f}.xz" && mariadb --user='root' --password < "
 - Создать технических пользователей iRedMail и присвоить им привилегии импортировав следующий файл:
 
 {{< file "irm.mariadb.users.sql" "sql" >}}
+
+```bash
+crontab -l | sed -e 's|fail2ban_banned_db unban_db|fail2ban_banned_db unban_db >/dev/null|g' | crontab -
+```
