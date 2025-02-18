@@ -108,7 +108,7 @@ UPDATE ibf_member_extra SET avatar_location = '';
 UPDATE ibf_member_extra SET avatar_size = '';
 ```
 
-10. Массовый перенос пользователей c определённым количеством сообщений из одной группы в другую.
+10. Массовый перенос пользователей с определённым количеством сообщений из одной группы в другую.
 
 ```sql
 UPDATE ibf_members SET mgroup=Б WHERE mgroup=А AND posts > 0;

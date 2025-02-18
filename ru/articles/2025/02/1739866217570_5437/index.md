@@ -93,6 +93,12 @@ apt purge "mariadb-*" && apt autoremove
 ```
 
 - Установить новую версию версию СУБД MariaDB по материалу {{< uuid "0068df20-232a-55a2-a487-52dc746a4f47" >}}.
+- Установить пакеты совместимости MariaDB с MySQL:
+
+```bash
+apt install --yes mariadb-server-compat mariadb-client-compat
+```
+
 - Установить пакеты для работы Dovecot и Postfix с базой данных:
 
 ```bash

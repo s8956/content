@@ -66,7 +66,7 @@ DELETE FROM content_cache_sigs;
 UPDATE profile_portal SET signature='';
 ```
 
-3. Массовый перенос пользователей c определённым количеством сообщений из одной группы в другую.
+3. Массовый перенос пользователей с определённым количеством сообщений из одной группы в другую.
 
 ```sql
 UPDATE members SET member_group_id=Б WHERE member_group_id=А AND posts > 0;
