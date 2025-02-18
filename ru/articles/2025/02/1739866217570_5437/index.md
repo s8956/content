@@ -49,9 +49,13 @@ draft: 1
 
 <!--more-->
 
+- Скачать и распаковать iRedMail:
+
 ```bash
 v='1.7.2'; curl -fSLo "${HOME}/iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMail/archive/refs/tags/${v}.tar.gz" && tar -xzf "${HOME}/iRedMail-${v}.tar.gz" && cd "${HOME}/iRedMail-${v}"
 ```
+
+- Создать файл `config` в корневой директории iRedMail со следующим содержимым:
 
 {{< file "irm.config" "bash" >}}
 
