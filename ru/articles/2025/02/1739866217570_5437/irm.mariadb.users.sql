@@ -20,5 +20,5 @@ grant select on vmail.* to 'vmail'@'127.0.0.1';
 -- USER: 'vmailadmin'.
 create user if not exists 'vmailadmin'@'127.0.0.1' identified by 'pa$$word';
 grant select, insert, update, delete on vmail.* to 'vmailadmin'@'127.0.0.1';
-
+-- INFO: Reload the grant tables.
 flush privileges;
