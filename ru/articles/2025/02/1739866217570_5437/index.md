@@ -86,7 +86,7 @@ apt purge "mariadb-*" && apt autoremove
 - Установить пакеты для работы Dovecot и Postfix с базой данных:
 
 ```bash
-apt install --yes dovecot-mysql postfix-mysql
+apt install --yes dovecot-mysql postfix-mysql && systemctl restart dovecot.service postfix.service postfix@-.service
 ```
 
 - Импортировать ранее созданный файл базы данных `iRedMail.backup.sql`:
