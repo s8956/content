@@ -49,6 +49,8 @@ draft: 1
 
 <!--more-->
 
+## Установка iRedMail
+
 - Скачать и распаковать iRedMail:
 
 ```bash
@@ -65,6 +67,8 @@ v='1.7.2'; curl -fSLo "${HOME}/iRedMail-${v}.tar.gz" "https://github.com/iredmai
 f='iRedMail.backup.sql'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' --result-file="${f}" && xz "${f}" && rm -f "${f}"
 ```
 
+## Миграция на Angie
+
 - Отключить Nginx:
 
 ```bash
@@ -79,6 +83,8 @@ systemctl disable --now nginx.service
 - Создать файл `/etc/php/8.2/fpm/pool.d/iredmail.conf` со следующим содержимым:
 
 {{< file "irm.php.pool.conf" "ini" >}}
+
+## Миграция на MariaDB
 
 - Удалить пакеты СУБД MariaDB:
 
