@@ -101,5 +101,5 @@ cat '/var/log/mysql/error.log' | grep 'MY-010454'
 - Сменить пароль пользователя `root`, добавить пользователей `root@127.0.0.1` и `root@::1`:
 
 ```bash
-p='PASSWORD'; echo "alter user 'root'@'localhost' identified by '${p}'; create user 'root'@'127.0.0.1' identified by '${p}'; create user 'root'@'::1' identified by '${p}';" | mysql --user='root' --password --connect-expired-password
+p='PASSWORD'; echo "alter user 'root'@'localhost' identified by '${p}'; create user 'root'@'127.0.0.1' identified by '${p}'; create user 'root'@'::1' identified by '${p}';" | mariadb --user='root' --password --connect-expired-password
 ```

@@ -107,7 +107,7 @@ from_file '/etc/gitlab/gitlab.local.rb'
 
 - Установить Angie по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
 - Создать файл `/etc/angie/http.d/gitlab.conf` со следующим содержимым:
-{{< file "angie.gitlab.conf" "nginx" >}}
+{{< file "gitlab.angie.conf" "nginx" >}}
 
 ## Миграция базы данных на внешний PostgreSQL
 

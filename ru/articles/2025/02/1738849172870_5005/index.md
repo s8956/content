@@ -110,4 +110,4 @@ echo -n 'Enter Password: ' && head -1 < '/dev/stdin' | tr -d '\n' | sha256sum | 
 
 - Создать файл сайта `/etc/angie/http.d/graylog.conf` со следующим содержимым:
 
-{{< file "angie.http.graylog.conf" "nginx" >}}
+{{< file "graylog.angie.http.conf" "nginx" >}}
