@@ -97,14 +97,14 @@ systemctl disable --now nginx.service
 - Удалить пакеты СУБД MariaDB:
 
 ```bash
-apt purge "mariadb-*" && apt autoremove
+apt purge "mariadb-*" && apt autoremove && rm -rf '/etc/mysql'
 ```
 
 - Установить новую версию версию СУБД MariaDB по материалу {{< uuid "0068df20-232a-55a2-a487-52dc746a4f47" >}}.
 - Установить пакеты совместимости MariaDB с MySQL и пакеты для работы Dovecot и Postfix с базой данных:
 
 ```bash
-apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql && systemctl restart dovecot.service postfix.service postfix@-.service
+apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql libdbd-mysql-perl && systemctl restart dovecot.service postfix.service postfix@-.service
 ```
 
 - Импортировать ранее созданный файл базы данных `iRedMail.backup.sql`:
