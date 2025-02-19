@@ -54,7 +54,7 @@ draft: 1
 - Скачать и распаковать последнюю версию iRedMail:
 
 ```bash
-api="$( curl -fsSL 'https://api.github.com/repos/iredmail/iRedMail/tags' )"; url="$( echo "${api}" | grep '"tarball_url":' | head -n 1 | cut -d '"' -f 4 )"; cid="$( echo "${api}" | grep '"sha":' | head -n 1 | cut -d '"' -f 4 | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && cd ./*"${cid}" || exit
+a="$( curl -fsSL 'https://api.github.com/repos/iredmail/iRedMail/tags' )"; l="$( echo "${a}" | grep '"tarball_url":' | head -n 1 | cut -d '"' -f 4 )"; c="$( echo "${a}" | grep '"sha":' | head -n 1 | cut -d '"' -f 4 | head -c 7 )"; curl -fSLOJ "${l}" && tar -xzf ./*"${c}.tar.gz" && cd ./*"${c}" || exit
 ```
 
 {{< alert "tip" >}}
