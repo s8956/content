@@ -6,7 +6,7 @@
 title: 'iRedMail: Миграция на Angie и MariaDB 11'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1596563910641-86f6aebaab9a'
 categories:
   - 'linux'
   - 'terminal'
@@ -104,6 +104,14 @@ apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql post
 ```bash
 f='iRedMail.backup.sql'; xz -d "${f}.xz" && mariadb --user='root' --password < "${f}"
 ```
+
+{{< alert tip >}}
+Если при импорте файла появляется ошибка `ERROR 1231 (42000) at line *: Variable 'sql_mode' can't be set to the value of 'NO_AUTO_CREATE_USER'`, то её можно исправить путём удаления директивы `NO_AUTO_CREATE_USER` из файла:
+
+```bash
+sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
+```
+{{< /alert >}}
 
 - Создать технических пользователей iRedMail и присвоить им привилегии импортировав следующий файл:
 
