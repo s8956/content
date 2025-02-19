@@ -142,15 +142,23 @@ echo "alter database DB_NAME character set 'utf8mb4' collate 'utf8mb4_unicode_ci
 echo 'drop database if exists DB_NAME;' | mariadb --user='root' --password
 ```
 
-## Резервное копирование
+## Экспорт
 
-- Создать резервную копию базы данных `DB_NAME` и записать в файл `backup.sql.xz`:
+- Экспортировать базу данных `DB_NAME` и записать в файл `backup.sql.xz`:
 
 ```bash
 f='backup.sql'; mariadb-dump --user='root' --password --single-transaction --databases 'DB_NAME' --result-file="${f}" && xz "${f}" && rm -f "${f}"
 ```
 
-## Восстановление
+{{< alert "tip" >}}
+Экспортировать данные можно при помощи конвейера:
+
+```bash
+f='backup.sql'; mariadb-dump --user='root' --password --single-transaction --databases 'DB_NAME' | xz -9 > "${f}.xz"
+```
+{{< /alert >}}
+
+## Импорт
 
 - Удалить старую базу данных `DB_NAME`:
 
@@ -170,8 +178,16 @@ echo "create database if not exists DB_NAME character set 'utf8mb4' collate 'utf
 echo "grant all privileges on DB_NAME.* to 'DB_USER'@'127.0.01'; flush privileges;" | mariadb --user='root' --password
 ```
 
-- Восстановить данные в новую базу данных `DB_NAME` из файла `backup.sql.xz`:
+- Импортировать данные в новую базу данных `DB_NAME` из файла `backup.sql.xz`:
 
 ```bash
 f='backup.sql'; xz -d "${f}.xz" && mariadb --user='root' --password --database='DB_NAME' < "${f}"
 ```
+
+{{< alert "tip" >}}
+Импортировать данных можно при помощи конвейера:
+
+```bash
+f='backup.sql'; xzcat "${f}.xz" | mariadb --user='root' --password --database='DB_NAME'
+```
+{{< /alert >}}

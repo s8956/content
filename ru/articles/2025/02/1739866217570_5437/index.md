@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'iRedMail: Миграция на Angie и MariaDB 11'
+title: 'iRedMail: Миграция на Angie и MariaDB'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1596563910641-86f6aebaab9a'
@@ -72,7 +72,7 @@ v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMa
 - Сделать экспорт базы данных текущей установки:
 
 ```bash
-f='iRedMail.backup.sql'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' --result-file="${f}" && xz "${f}" && rm -f "${f}"
+f='iRedMail.backup.sql'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}.xz"
 ```
 
 ## Миграция на Angie
@@ -92,7 +92,7 @@ systemctl disable --now nginx.service
 
 {{< file "irm.php.pool.conf" "ini" >}}
 
-## Миграция на MariaDB 11
+## Миграция на MariaDB
 
 - Удалить пакеты СУБД MariaDB:
 
@@ -101,7 +101,7 @@ apt purge "mariadb-*" && apt autoremove && rm -rf '/etc/mysql'
 ```
 
 - Установить новую версию версию СУБД MariaDB по материалу {{< uuid "0068df20-232a-55a2-a487-52dc746a4f47" >}}.
-- Установить пакеты совместимости MariaDB с MySQL и пакеты для работы Dovecot и Postfix с базой данных:
+- Установить пакеты совместимости MariaDB с MySQL (`mariadb-*-compat`) и пакеты для работы Dovecot (`dovecot-mysql`), Postfix (`postfix-mysql`) и Amavis (`libdbd-mysql-perl`) с базой данных:
 
 ```bash
 apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql libdbd-mysql-perl && systemctl restart dovecot.service postfix.service postfix@-.service
@@ -110,7 +110,7 @@ apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql post
 - Импортировать ранее созданный файл базы данных `iRedMail.backup.sql`:
 
 ```bash
-f='iRedMail.backup.sql'; xz -d "${f}.xz" && mariadb --user='root' --password < "${f}"
+f='iRedMail.backup.sql'; xzcat "${f}.xz" | mariadb --user='root' --password
 ```
 
 {{< alert tip >}}
