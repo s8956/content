@@ -51,11 +51,19 @@ draft: 1
 
 ## Установка iRedMail
 
-- Скачать и распаковать iRedMail:
+- Скачать и распаковать последнюю версию iRedMail:
+
+```bash
+url="$( curl -fsSL 'https://api.github.com/repos/iredmail/iRedMail/tags' | grep 'tarball_url' | head -n 1 | cut -d '"' -f 4 )"; v="$( echo "${url}" | cut -d '/' -f 10 )"; curl -fSLo "${HOME}/iRedMail-${v}.tar.gz" "${url}" && tar -xzf "${HOME}/iRedMail-${v}.tar.gz" && cd "${HOME}/iredmail-iRedMail-"* || exit
+```
+
+{{< alert "tip" >}}
+Если требуется конкретная версия iRedMail, то можно воспользоваться следующей командой:
 
 ```bash
 v='1.7.2'; curl -fSLo "${HOME}/iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMail/archive/refs/tags/${v}.tar.gz" && tar -xzf "${HOME}/iRedMail-${v}.tar.gz" && cd "${HOME}/iRedMail-${v}"
 ```
+{{< /alert >}}
 
 - Создать файл `config` в корневой директории iRedMail со следующим содержимым:
 
@@ -84,7 +92,7 @@ systemctl disable --now nginx.service
 
 {{< file "irm.php.pool.conf" "ini" >}}
 
-## Миграция на MariaDB
+## Миграция на MariaDB 11
 
 - Удалить пакеты СУБД MariaDB:
 
