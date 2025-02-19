@@ -54,14 +54,14 @@ draft: 1
 - Скачать и распаковать последнюю версию iRedMail:
 
 ```bash
-api="$( curl -fsSL 'https://api.github.com/repos/iredmail/iRedMail/tags' )"; url="$( echo "${api}" | grep '"tarball_url":' | head -n 1 | cut -d '"' -f 4 )"; sha="$( echo "${api}" | grep '"sha":' | head -n 1 | cut -d '"' -f 4 | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${sha}.tar.gz" && cd ./*"${sha}" || exit
+api="$( curl -fsSL 'https://api.github.com/repos/iredmail/iRedMail/tags' )"; url="$( echo "${api}" | grep '"tarball_url":' | head -n 1 | cut -d '"' -f 4 )"; cid="$( echo "${api}" | grep '"sha":' | head -n 1 | cut -d '"' -f 4 | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && cd ./*"${cid}" || exit
 ```
 
 {{< alert "tip" >}}
 Если требуется конкретная версия iRedMail, то можно воспользоваться следующей командой:
 
 ```bash
-v='1.7.2'; curl -fSLo "${HOME}/iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMail/archive/refs/tags/${v}.tar.gz" && tar -xzf "${HOME}/iRedMail-${v}.tar.gz" && cd "${HOME}/iRedMail-${v}"
+v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMail/archive/refs/tags/${v}.tar.gz" && tar -xzf "iRedMail-${v}.tar.gz" && cd "iRedMail-${v}" || exit
 ```
 {{< /alert >}}
 
