@@ -10,6 +10,7 @@ images:
 categories:
   - 'linux'
   - 'terminal'
+  - 'inDev'
 tags:
   - 'debian'
   - 'apt'
@@ -42,19 +43,19 @@ hash: '7deb49abbb4ff0e6719682b4a9778a2d7166c1bb'
 uuid: '7deb49ab-bb4f-50e6-b196-82b4a9778a2d'
 slug: '7deb49ab-bb4f-50e6-b196-82b4a9778a2d'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция, которая позволит мигрировать компоненты {{< tag "iRedMail" >}}, устанавливаемые из стандартных репозиториев {{< tag "Debian" >}} на более новые версии из официальных репозиториев разработчиков. Все действия необходимо выполнять предельно аккуратно, понимая за что отвечает та или иная команда.
 
 <!--more-->
 
 ## Установка iRedMail
 
-- Скачать и распаковать последнюю версию iRedMail:
+- Скачать и распаковать последнюю версию {{< tag "iRedMail" >}}:
 
 ```bash
-a="$( curl -fsSL 'https://api.github.com/repos/iredmail/iRedMail/tags' )"; l="$( echo "${a}" | grep '"tarball_url":' | head -n 1 | cut -d '"' -f 4 )"; c="$( echo "${a}" | grep '"sha":' | head -n 1 | cut -d '"' -f 4 | head -c 7 )"; curl -fSLOJ "${l}" && tar -xzf ./*"${c}.tar.gz" && cd ./*"${c}" || exit
+export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" || return
 ```
 
 {{< alert "tip" >}}
@@ -65,7 +66,7 @@ v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMa
 ```
 {{< /alert >}}
 
-- Создать файл `config` в корневой директории iRedMail со следующим содержимым:
+- Создать файл `config` в корневой директории {{< tag "iRedMail" >}} со следующим содержимым:
 
 {{< file "irm.config" "bash" >}}
 
@@ -79,40 +80,40 @@ f='iRedMail.backup.sql'; mysqldump --user='root' --password --single-transaction
 
 ### Angie
 
-- Отключить Nginx:
+- Отключить {{< tag "Nginx" >}}:
 
 ```bash
 systemctl disable --now nginx.service
 ```
 
-- Установить Angie по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
+- Установить {{< tag "Angie" >}} по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
 - Создать файл `/etc/angie/http.d/iredmail.ssl.conf` со следующим содержимым:
 
 {{< file "irm.angie.conf" "nginx" >}}
 
 ### PHP
 
-- Удалить пакеты старой версии PHP:
+- Удалить пакеты старой версии {{< tag "PHP" >}}:
 
 ```bash
 apt purge --yes 'php8*' && apt autoremove && rm -rf '/etc/php'
 ```
 
-- Установить новую версию PHP по материалу {{< uuid "9bd1261d-3842-5859-8202-2e1d7a5ba9f4" >}}.
+- Установить новую версию {{< tag "PHP" >}} по материалу {{< uuid "9bd1261d-3842-5859-8202-2e1d7a5ba9f4" >}}.
 - Создать файл `/etc/php/8.4/fpm/pool.d/iredmail.conf` со следующим содержимым:
 
 {{< file "irm.php.pool.conf" "ini" >}}
 
 ### MariaDB
 
-- Удалить пакеты старой версии СУБД MariaDB:
+- Удалить пакеты старой версии СУБД {{< tag "MariaDB" >}}:
 
 ```bash
 apt purge --yes 'mariadb-*' && apt autoremove && rm -rf '/etc/mysql'
 ```
 
-- Установить новую версию СУБД MariaDB по материалу {{< uuid "0068df20-232a-55a2-a487-52dc746a4f47" >}}.
-- Установить пакеты совместимости MariaDB с MySQL (`mariadb-*-compat`) и пакеты для работы Dovecot (`dovecot-mysql`), Postfix (`postfix-mysql`) и Amavis (`libdbd-mysql-perl`) с базой данных:
+- Установить новую версию СУБД {{< tag "MariaDB" >}} по материалу {{< uuid "0068df20-232a-55a2-a487-52dc746a4f47" >}}.
+- Установить пакеты совместимости {{< tag "MariaDB" >}} с {{< tag "MySQL" >}} (`mariadb-*-compat`) и пакеты для работы {{< tag "Dovecot" >}} (`dovecot-mysql`), {{< tag "Postfix" >}} (`postfix-mysql`) и {{< tag "Amavis" >}} (`libdbd-mysql-perl`) с базой данных:
 
 ```bash
 apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql libdbd-mysql-perl && systemctl restart dovecot.service postfix.service postfix@-.service
@@ -132,9 +133,11 @@ sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
 ```
 {{< /alert >}}
 
-- Создать технических пользователей iRedMail и присвоить им привилегии импортировав следующий файл:
+- Создать технических пользователей {{< tag "iRedMail" >}} и присвоить им привилегии импортировав следующий файл:
 
 {{< file "irm.mariadb.users.sql" "sql" >}}
+
+## Обновление
 
 ### RoundCube
 
@@ -144,10 +147,52 @@ sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
 export RC_OLD='1.6.9'; export RC_NEW='1.6.10'
 ```
 
-- Запустить команду обновления RoundCube:
+- Запустить команду обновления {{< tag "RoundCube" >}}:
 
 ```bash
 curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_NEW}/roundcubemail-${RC_NEW}-complete.tar.gz" && tar -xzf "roundcubemail-${RC_NEW}-complete.tar.gz" && mv "roundcubemail-${RC_NEW}" '/opt/www' && cp "/opt/www/roundcubemail-${RC_OLD}/config/config.inc.php" "/opt/www/roundcubemail-${RC_NEW}/config/config.inc.php" && "/opt/www/roundcubemail-${RC_NEW}/bin/update.sh" -v "${RC_OLD}" && chown -R root:root "/opt/www/roundcubemail-${RC_NEW}" && chown www-data:www-data "/opt/www/roundcubemail-${RC_NEW}"/{logs,temp,config/config.inc.php} && unlink '/opt/www/roundcubemail' && ln -s "/opt/www/roundcubemail-${RC_NEW}" '/opt/www/roundcubemail'
+```
+
+### iRedAdmin
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+export GH_NAME='iRedAdmin'; export GH_API="gh.api.${GH_NAME}.json"
+```
+
+- Запустить команду обновления {{< tag "iRedAdmin" >}}:
+
+```bash
+curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_${GH_NAME,,}.sh"
+```
+
+### iRedAPD
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+export GH_NAME='iRedAPD'; export GH_API="gh.api.${GH_NAME}.json"
+```
+
+- Запустить команду обновления {{< tag "iRedAPD" >}}:
+
+```bash
+curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_${GH_NAME,,}.sh"
+```
+
+### mlmmjadmin
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"
+```
+
+- Запустить команду обновления {{< tag "mlmmjadmin" >}}:
+
+```bash
+curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_${GH_NAME,,}.sh"
 ```
 
 ## Корректировка
@@ -162,7 +207,7 @@ sed -i -e 's|CMD_SQL="mysql|CMD_SQL="mariadb|g' '/usr/local/bin/fail2ban_banned_
 
 ### ClamAV
 
-Выполнить настройку российского зеркала обновлений ClamAV можно при помощи следующей команды:
+Выполнить настройку российского зеркала обновлений {{< tag "ClamAV" >}} можно при помощи следующей команды:
 
 ```bash
 sed -i -e 's|ScriptedUpdates yes|ScriptedUpdates no|g' '/etc/clamav/freshclam.conf' && echo -e 'PrivateMirror https://clamav-mirror.ru/\nPrivateMirror https://mirror.truenetwork.ru/clamav/\nPrivateMirror http://mirror.truenetwork.ru/clamav/\n' | tee -a '/etc/clamav/freshclam.conf' > '/dev/null' && rm -rf '/var/lib/clamav/freshclam.dat' && systemctl stop clamav-freshclam.service && freshclam -vvv && systemctl restart clamav-freshclam.service && systemctl restart clamav-daemon.service
