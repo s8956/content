@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'iRedMail: Миграция на Angie и MariaDB'
+title: 'iRedMail: Миграция на новые компоненты'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1596563910641-86f6aebaab9a'
