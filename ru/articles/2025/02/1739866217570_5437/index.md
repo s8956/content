@@ -17,6 +17,12 @@ tags:
   - 'install'
   - 'email'
   - 'iredmail'
+  - 'roundcube'
+  - 'iredadmin'
+  - 'iredapd'
+  - 'mlmmjadmin'
+  - 'fail2ban'
+  - 'clamav'
 authors:
   - 'KaiKimera'
 sources:
@@ -141,7 +147,7 @@ sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
 
 ### RoundCube
 
-- Экспортировать заранее подготовленные параметры в переменные окружения, которые содержат информацию о старой версии `RC_OLD` и новой версии `RC_NEW` RoundCube:
+- Экспортировать заранее подготовленные параметры в переменные окружения, которые содержат информацию о старой версии `RC_OLD` и новой версии `RC_NEW` {{< tag "RoundCube" >}}:
 
 ```bash
 export RC_OLD='1.6.9'; export RC_NEW='1.6.10'
