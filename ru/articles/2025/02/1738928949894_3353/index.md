@@ -98,8 +98,8 @@ rm -rf /var/lib/mysql/* && mariadb-install-db --user='mysql' && systemctl start 
 mariadb-secure-installation && systemctl restart mariadb.service
 ```
 
-- Создать пользователя с подключением `127.0.0.1`:
+- Создать пользователя `root` для подключения `127.0.0.1` и с любых хостов (`%`):
 
 ```bash
-p='PASSWORD'; echo "create user 'root'@'127.0.0.1' identified by '${p}';" | mariadb --user='root' --password
+ p='PASSWORD'; echo "create user if not exists 'root'@'127.0.0.1' identified by '${p}'; grant all privileges on *.* to 'root'@'127.0.0.1' with grant option; create user if not exists 'root'@'%' identified by '${p}'; grant all privileges on *.* to 'root'@'%' with grant option; flush privileges;" | mariadb --user='root' --password
 ```

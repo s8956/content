@@ -136,6 +136,20 @@ sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
 
 {{< file "irm.mariadb.users.sql" "sql" >}}
 
+### RoundCube
+
+- Экспортировать заранее подготовленные параметры в переменные окружения, которые содержат информацию о старой версии `RC_OLD` и новой версии `RC_NEW` RoundCube:
+
+```bash
+export RC_OLD='1.6.9'; export RC_NEW='1.6.10'
+```
+
+- Запустить команду обновления RoundCube:
+
+```bash
+curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_NEW}/roundcubemail-${RC_NEW}-complete.tar.gz" && tar -xzf "roundcubemail-${RC_NEW}-complete.tar.gz" && mv "roundcubemail-${RC_NEW}" '/opt/www' && cp "/opt/www/roundcubemail-${RC_OLD}/config/config.inc.php" "/opt/www/roundcubemail-${RC_NEW}/config/config.inc.php" && "/opt/www/roundcubemail-${RC_NEW}/bin/update.sh" -v "${RC_OLD}" && chown -R root:root "/opt/www/roundcubemail-${RC_NEW}" && chown www-data:www-data "/opt/www/roundcubemail-${RC_NEW}"/{logs,temp,config/config.inc.php} && unlink '/opt/www/roundcubemail' && ln -s "/opt/www/roundcubemail-${RC_NEW}" '/opt/www/roundcubemail'
+```
+
 ## Корректировка
 
 ### Fail2Ban
