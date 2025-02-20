@@ -92,7 +92,7 @@ systemctl disable --now nginx.service
 
 ### PHP
 
-- Удалить старую версию PHP:
+- Удалить пакеты старой версии PHP:
 
 ```bash
 apt purge --yes 'php8*' && apt autoremove && rm -rf '/etc/php'
@@ -105,7 +105,7 @@ apt purge --yes 'php8*' && apt autoremove && rm -rf '/etc/php'
 
 ### MariaDB
 
-- Удалить пакеты СУБД MariaDB:
+- Удалить пакеты старой версии СУБД MariaDB:
 
 ```bash
 apt purge --yes 'mariadb-*' && apt autoremove && rm -rf '/etc/mysql'
@@ -135,8 +135,6 @@ sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
 - Создать технических пользователей iRedMail и присвоить им привилегии импортировав следующий файл:
 
 {{< file "irm.mariadb.users.sql" "sql" >}}
-
-- Перенаправить вывод от команды `fail2ban_banned_db unban_db` в `/dev/null`:
 
 ## Корректировка
 
