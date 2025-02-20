@@ -81,7 +81,7 @@ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.su/php/apt.gpg'
 - Установить пакеты:
 
 ```bash
-v='8.4'; apt update && apt install --yes php${v}-fpm php${v}-bcmath php${v}-bz2 php${v}-cli php${v}-curl php${v}-gd php${v}-gmp php${v}-imagick php${v}-imap php${v}-intl php${v}-ldap php${v}-mbstring php${v}-memcached php${v}-mysql php${v}-odbc php${v}-opcache php${v}-pgsql php${v}-redis php${v}-uploadprogress php${v}-xml php${v}-zip php${v}-zstd
+v='8.4'; apt update && apt install --yes php${v} php${v}-{fpm,bcmath,bz2,cli,curl,gd,gmp,imagick,imap,intl,ldap,mbstring,memcached,mysql,odbc,opcache,pgsql,redis,uploadprogress,xml,zip,zstd}
 ```
 
 ## Настройка
@@ -93,6 +93,12 @@ v='8.4'; apt update && apt install --yes php${v}-fpm php${v}-bcmath php${v}-bz2 
 {{< file "php.local.ini" "ini" >}}
 
 ### PHP-FPM
+
+- Сохранить оригинальный файл конфигурации:
+
+```bash
+f='/etc/php/8.4/fpm/pool.d/www.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+```
 
 - Создать файл `/etc/php/8.4/fpm/pool.d/www.conf` со следующим содержимым:
 

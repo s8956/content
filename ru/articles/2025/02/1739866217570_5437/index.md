@@ -75,7 +75,9 @@ v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMa
 f='iRedMail.backup.sql'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}.xz"
 ```
 
-## Миграция на Angie
+## Миграция
+
+### Angie
 
 - Отключить Nginx:
 
@@ -88,19 +90,28 @@ systemctl disable --now nginx.service
 
 {{< file "irm.angie.conf" "nginx" >}}
 
-- Создать файл `/etc/php/8.2/fpm/pool.d/iredmail.conf` со следующим содержимым:
+### PHP
+
+- Удалить старую версию PHP:
+
+```bash
+apt purge --yes 'php8*' && apt autoremove && rm -rf '/etc/php'
+```
+
+- Установить новую версию PHP по материалу {{< uuid "9bd1261d-3842-5859-8202-2e1d7a5ba9f4" >}}.
+- Создать файл `/etc/php/8.4/fpm/pool.d/iredmail.conf` со следующим содержимым:
 
 {{< file "irm.php.pool.conf" "ini" >}}
 
-## Миграция на MariaDB
+### MariaDB
 
 - Удалить пакеты СУБД MariaDB:
 
 ```bash
-apt purge "mariadb-*" && apt autoremove && rm -rf '/etc/mysql'
+apt purge --yes 'mariadb-*' && apt autoremove && rm -rf '/etc/mysql'
 ```
 
-- Установить новую версию версию СУБД MariaDB по материалу {{< uuid "0068df20-232a-55a2-a487-52dc746a4f47" >}}.
+- Установить новую версию СУБД MariaDB по материалу {{< uuid "0068df20-232a-55a2-a487-52dc746a4f47" >}}.
 - Установить пакеты совместимости MariaDB с MySQL (`mariadb-*-compat`) и пакеты для работы Dovecot (`dovecot-mysql`), Postfix (`postfix-mysql`) и Amavis (`libdbd-mysql-perl`) с базой данных:
 
 ```bash
@@ -127,6 +138,20 @@ sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
 
 - Перенаправить вывод от команды `fail2ban_banned_db unban_db` в `/dev/null`:
 
+## Корректировка
+
+### Fail2Ban
+
+Если на почтовый адрес присылается уведомление `mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead`, то необходимо выполнить следующую команду:
+
 ```bash
-crontab -l | sed -e 's|fail2ban_banned_db unban_db|fail2ban_banned_db unban_db >/dev/null|g' | crontab -
+sed -i -e 's|CMD_SQL="mysql|CMD_SQL="mariadb|g' '/usr/local/bin/fail2ban_banned_db'
+```
+
+### ClamAV
+
+Выполнить настройку российского зеркала обновлений ClamAV можно при помощи следующей команды:
+
+```bash
+sed -i -e 's|ScriptedUpdates yes|ScriptedUpdates no|g' '/etc/clamav/freshclam.conf' && echo -e 'PrivateMirror https://clamav-mirror.ru/\nPrivateMirror https://mirror.truenetwork.ru/clamav/\nPrivateMirror http://mirror.truenetwork.ru/clamav/\n' | tee -a '/etc/clamav/freshclam.conf' > '/dev/null' && rm -rf '/var/lib/clamav/freshclam.dat' && systemctl stop clamav-freshclam.service && freshclam -vvv && systemctl restart clamav-freshclam.service && systemctl restart clamav-daemon.service
 ```
