@@ -59,7 +59,7 @@ draft: 0
 Для начала экспортируем заранее подготовленные параметры в переменные окружения:
 
 ```bash
-export PV='/dev/sdb'; export VG='data'; export LV='storage';
+export PV='/dev/sdb'; export VG='data'; export LV='storage'
 ```
 
 ### Параметры

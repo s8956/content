@@ -84,7 +84,7 @@ sda               8:0    0   30G  0 disk
 Для начала экспортируем заранее подготовленные параметры в переменные окружения:
 
 ```bash
-export PV='/dev/sda3'; export VG='system'; export LV='root';
+export PV='/dev/sda3'; export VG='system'; export LV='root'
 ```
 
 ### Параметры
