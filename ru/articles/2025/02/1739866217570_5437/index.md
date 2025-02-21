@@ -197,7 +197,11 @@ f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transact
 
 - Удалить текущие пустые базы дынных на новом сервере:
 
-{{< file "irm.mariadb.drop.db.sql" "sql" >}}
+{{< file "irm.mariadb.drop.database.sql" "sql" >}}
+
+```bash
+curl -fsSL 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.mariadb.drop.database.sql' | mariadb --user='root' --password
+```
 
 - Импортировать файл с базами данных старого сервера на новом сервере:
 
@@ -205,7 +209,11 @@ f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transact
 f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 ```
 
-- [Обновить схемы баз данных](#схемы-баз-данных).
+- Импортировать шаблон для создания технических пользователей {{< tag "iRedMail" >}}:
+
+{{< file "irm.mariadb.create.user.sql" "sql" >}}
+
+- [Обновить](#схемы-баз-данных) схемы баз данных.
 
 ## Обновление компонентов
 
@@ -215,7 +223,55 @@ f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 
 Изменения схем баз данных по версиям {{< tag "iRedMail" >}}. Изменения необходимо вносить поэтапно от версии к версии.
 
-{{< file "irm.mariadb.schema.update.sh" "bash" >}}
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+export GH_URL='https://raw.githubusercontent.com/iredmail/iRedMail/refs/heads/master/update'
+```
+
+#### Версии iRedMail
+
+- `1.4.0`:
+
+```bash
+curl -fsSL "${GH_URL}/1.4.0/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
+```
+
+- `1.4.1`:
+
+```bash
+curl -fsSL "${GH_URL}/1.4.1/iredmail.mysql" | mariadb --user='root' --password --database='vmail' && curl -fsSL "${GH_URL}/1.4.1/sogo.mysql" | mariadb --user='root' --password --database='sogo'
+```
+
+- `1.4.2`:
+
+```bash
+curl -fsSL "${GH_URL}/1.4.2/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
+```
+
+- `1.6.3`:
+
+```bash
+curl -fsSL "${GH_URL}/1.6.3/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
+```
+
+- `1.7.0`:
+
+```bash
+curl -fsSL "${GH_URL}/1.7.0/fail2ban.mysql" | mariadb --user='root' --password --database='fail2ban'
+```
+
+- `1.7.1`:
+
+```bash
+curl -fsSL "${GH_URL}/1.7.1/amavisd.mysql" | mariadb --user='root' --password --database='amavisd'
+```
+
+- `1.7.2`:
+
+```bash
+curl -fsSL "${GH_URL}/1.7.2/vmail.mysql" | mariadb --user='root' --password --database='vmail'
+```
 
 ### RoundCube
 
