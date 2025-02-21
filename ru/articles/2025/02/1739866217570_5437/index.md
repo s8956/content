@@ -164,19 +164,19 @@ sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysql
 - Переместить ключи **DKIM** со старого сервера на новый сервер:
 
 ```bash
-rsync -a '/var/lib/dkim/' 'root@remote_host:/var/lib/dkim/'
+rsync -a -e 'ssh -p 22' '/var/lib/dkim/' 'root@remote_host:/var/lib/dkim/'
 ```
 
 - Переместить базу данных **Fail2Ban** со старого сервера на новый сервер:
 
 ```bash
-rsync -a '/var/lib/fail2ban/' 'root@remote_host:/var/lib/fail2ban/'
+rsync -a -e 'ssh -p 22' '/var/lib/fail2ban/' 'root@remote_host:/var/lib/fail2ban/'
 ```
 
 - Переместить профили пользователей и письма со старого сервера на новый сервер:
 
 ```bash
-rsync -a '/var/vmail/vmail1/' 'root@remote_host:/var/vmail/vmail1/'
+rsync -a -e 'ssh -p 22' '/var/vmail/vmail1/' 'root@remote_host:/var/vmail/vmail1/'
 ```
 
 ### Миграция базы данных
@@ -184,7 +184,7 @@ rsync -a '/var/vmail/vmail1/' 'root@remote_host:/var/vmail/vmail1/'
 - Экспортировать базы данных старого сервера в файл `iRedMail.backup.sql.xz` и переместить на новый сервер:
 
 ```bash
-f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a "${f}" 'root@remote_host:/root/'
+f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a -e 'ssh -p 22' "${f}" 'root@remote_host:/root/'
 ```
 
 - Удалить текущие пустые базы данных на новом сервере:
