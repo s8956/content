@@ -61,7 +61,7 @@ draft: 0
 - Скачать и распаковать последнюю версию {{< tag "iRedMail" >}}:
 
 ```bash
-export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" || return
+export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" && curl -fsSLo 'config' 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.config' || return
 ```
 
 {{< alert "tip" >}}
@@ -83,6 +83,8 @@ f='iRedMail.backup.sql'; mysqldump --user='root' --password --single-transaction
 ```
 
 ## Миграция
+
+Миграция со стандартных компонентов {{< tag "iRedMail" >}} на новые от официальных разработчиков.
 
 ### Angie
 
@@ -122,7 +124,7 @@ apt purge --yes 'mariadb-*' && apt autoremove && rm -rf '/etc/mysql'
 - Установить пакеты совместимости {{< tag "MariaDB" >}} с {{< tag "MySQL" >}} (`mariadb-*-compat`) и пакеты для работы {{< tag "Dovecot" >}} (`dovecot-mysql`), {{< tag "Postfix" >}} (`postfix-mysql`) и {{< tag "Amavis" >}} (`libdbd-mysql-perl`) с базой данных:
 
 ```bash
-apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql libdbd-mysql-perl && systemctl restart dovecot.service postfix.service postfix@-.service
+apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql libdbd-mysql-perl && systemctl restart dovecot.service postfix.service postfix@-.service amavis.service
 ```
 
 - Импортировать ранее созданный файл базы данных `iRedMail.backup.sql`:
@@ -144,6 +146,8 @@ sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
 {{< file "irm.mariadb.users.sql" "sql" >}}
 
 ## Обновление
+
+Автоматическое обновления стандартных компонентов {{< tag "iRedMail" >}} и обновление схемы БД по версиям.
 
 ### RoundCube
 
@@ -201,7 +205,15 @@ export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"
 curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
+### Схема БД
+
+Изменения схемы базы данных по версиям {{< tag "iRedMail" >}}. Изменения необходимо вносить поэтапно от версии к версии.
+
+{{< file "irm.mariadb.schema.update.sh" "bash" >}}
+
 ## Корректировка
+
+В этом разделе описываются особенности миграции со стандартных компонентов {{< tag "iRedMail" >}} на более новые и способы решения возникших проблем.
 
 ### Fail2Ban
 
