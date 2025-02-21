@@ -215,12 +215,20 @@ curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"
 
 В этом разделе описываются особенности миграции со стандартных компонентов {{< tag "iRedMail" >}} на более новые и способы решения возникших проблем.
 
-### Fail2Ban
+### Редактирование скриптов
 
-Если на почтовый адрес присылается уведомление `mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead`, то необходимо выполнить следующую команду:
+Если на почтовый адрес присылаются уведомления `mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead`, то необходимо выполнить команды для исправления файлов.
+
+- Исправление файла `/usr/local/bin/fail2ban_banned_db`:
 
 ```bash
-sed -i -e 's|CMD_SQL="mysql|CMD_SQL="mariadb|g' '/usr/local/bin/fail2ban_banned_db'
+sed -i -e 's|CMD_SQL="mysql |CMD_SQL="mariadb |g' '/usr/local/bin/fail2ban_banned_db'
+```
+
+- Исправление файла `/var/vmail/backup/backup_mysql.sh`:
+
+```bash
+sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysqldump |CMD_MYSQLDUMP="mariadb-dump |g' '/var/vmail/backup/backup_mysql.sh'
 ```
 
 ### ClamAV
