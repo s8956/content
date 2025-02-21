@@ -72,17 +72,13 @@ v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMa
 ```
 {{< /alert >}}
 
-- Создать файл `config` в корневой директории {{< tag "iRedMail" >}} со следующим содержимым:
+- Создать файл `config` в корневой директории {{< tag "iRedMail" >}} со следующим шаблоном:
 
 {{< file "irm.config" "bash" >}}
 
-- Сделать экспорт базы данных текущей установки:
+- Заполнить шаблон `config` своими параметрами.
 
-```bash
-f='iRedMail.backup.sql'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}.xz"
-```
-
-## Миграция
+## Миграция компонентов
 
 Миграция со стандартных компонентов {{< tag "iRedMail" >}} на новые от официальных разработчиков.
 
@@ -114,6 +110,12 @@ apt purge --yes 'php8*' && apt autoremove && rm -rf '/etc/php'
 
 ### MariaDB
 
+- Сделать экспорт баз данных текущей установки в файл:
+
+```bash
+f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}"
+```
+
 - Удалить пакеты старой версии СУБД {{< tag "MariaDB" >}}:
 
 ```bash
@@ -127,10 +129,10 @@ apt purge --yes 'mariadb-*' && apt autoremove && rm -rf '/etc/mysql'
 apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql libdbd-mysql-perl && systemctl restart dovecot.service postfix.service postfix@-.service amavis.service
 ```
 
-- Импортировать ранее созданный файл базы данных `iRedMail.backup.sql`:
+- Импортировать ранее созданный файл с базами данных `iRedMail.backup.sql`:
 
 ```bash
-f='iRedMail.backup.sql'; xzcat "${f}.xz" | mariadb --user='root' --password
+f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 ```
 
 {{< alert tip >}}
@@ -141,13 +143,79 @@ sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
 ```
 {{< /alert >}}
 
-- Создать технических пользователей {{< tag "iRedMail" >}} и присвоить им привилегии импортировав следующий файл:
+- Импортировать следующий файл для создания технических пользователей {{< tag "iRedMail" >}}:
 
-{{< file "irm.mariadb.users.sql" "sql" >}}
+{{< file "irm.mariadb.create.user.sql" "sql" >}}
 
-## Обновление
+#### Особенности
+
+Если на почтовый адрес присылаются уведомления `mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead`, то необходимо выполнить команды для исправления файлов.
+
+- Исправление файла `/usr/local/bin/fail2ban_banned_db`:
+
+```bash
+sed -i -e 's|CMD_SQL="mysql |CMD_SQL="mariadb |g' '/usr/local/bin/fail2ban_banned_db'
+```
+
+- Исправление файла `/var/vmail/backup/backup_mysql.sh`:
+
+```bash
+sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysqldump |CMD_MYSQLDUMP="mariadb-dump |g' '/var/vmail/backup/backup_mysql.sh'
+```
+
+## Миграция данных
+
+Миграция данных со старого сервера на новый сервер.
+
+### Миграция файлов
+
+- Переместить ключи **DKIM** со старого сервера на новый сервер:
+
+```bash
+rsync -a '/var/lib/dkim/' 'root@remote_host:/var/lib/dkim/'
+```
+
+- Переместить базу данных **Fail2Ban** со старого сервера на новый сервер:
+
+```bash
+rsync -a '/var/lib/fail2ban/' 'root@remote_host:/var/lib/fail2ban/'
+```
+
+- Переместить профили пользователей и письма со старого сервера на новый сервер:
+
+```bash
+rsync -a '/var/vmail/vmail1/' 'root@remote_host:/var/vmail/vmail1/'
+```
+
+### Миграция базы данных
+
+- Экспортировать базы данных старого сервера в файл `iRedMail.backup.sql.xz` и переместить на новый сервер:
+
+```bash
+f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a "${f}" 'user@remote_host:/root/'
+```
+
+- Удалить текущие пустые базы дынных на новом сервере:
+
+{{< file "irm.mariadb.drop.db.sql" "sql" >}}
+
+- Импортировать файл с базами данных старого сервера на новом сервере:
+
+```bash
+f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
+```
+
+- [Обновить схемы баз данных](#схемы-баз-данных).
+
+## Обновление компонентов
 
 Автоматическое обновления стандартных компонентов {{< tag "iRedMail" >}} и обновление схемы БД по версиям.
+
+### Схемы баз данных
+
+Изменения схем баз данных по версиям {{< tag "iRedMail" >}}. Изменения необходимо вносить поэтапно от версии к версии.
+
+{{< file "irm.mariadb.schema.update.sh" "bash" >}}
 
 ### RoundCube
 
@@ -203,32 +271,6 @@ export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"
 
 ```bash
 curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
-```
-
-### Схема БД
-
-Изменения схемы базы данных по версиям {{< tag "iRedMail" >}}. Изменения необходимо вносить поэтапно от версии к версии.
-
-{{< file "irm.mariadb.schema.update.sh" "bash" >}}
-
-## Корректировка
-
-В этом разделе описываются особенности миграции со стандартных компонентов {{< tag "iRedMail" >}} на более новые и способы решения возникших проблем.
-
-### Редактирование скриптов
-
-Если на почтовый адрес присылаются уведомления `mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead`, то необходимо выполнить команды для исправления файлов.
-
-- Исправление файла `/usr/local/bin/fail2ban_banned_db`:
-
-```bash
-sed -i -e 's|CMD_SQL="mysql |CMD_SQL="mariadb |g' '/usr/local/bin/fail2ban_banned_db'
-```
-
-- Исправление файла `/var/vmail/backup/backup_mysql.sh`:
-
-```bash
-sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysqldump |CMD_MYSQLDUMP="mariadb-dump |g' '/var/vmail/backup/backup_mysql.sh'
 ```
 
 ### ClamAV
