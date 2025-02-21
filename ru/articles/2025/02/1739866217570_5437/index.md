@@ -197,8 +197,6 @@ f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transact
 
 - Удалить текущие пустые базы данных на новом сервере:
 
-{{< file "irm.mariadb.drop.database.sql" "sql" >}}
-
 ```bash
 curl -fsSL 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.mariadb.drop.database.sql' | mariadb --user='root' --password
 ```
