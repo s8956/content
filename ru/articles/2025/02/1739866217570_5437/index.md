@@ -61,11 +61,11 @@ draft: 0
 - Скачать и распаковать последнюю версию {{< tag "iRedMail" >}}:
 
 ```bash
-export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" && curl -fsSLo 'config' 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.config' || return
+export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" && curl -fsSLo 'config' 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.config' || return
 ```
 
 {{< alert "tip" >}}
-Если требуется конкретная версия iRedMail, то можно воспользоваться следующей командой:
+Если требуется конкретная версия iRedMail, то можно воспользоваться командой:
 
 ```bash
 v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMail/archive/refs/tags/${v}.tar.gz" && tar -xzf "iRedMail-${v}.tar.gz" && cd "iRedMail-${v}" || exit
@@ -77,6 +77,14 @@ v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMa
 {{< file "irm.config" "bash" >}}
 
 - Заполнить шаблон `config` своими параметрами.
+
+{{< alert "tip" >}}
+Для генерации паролей можно воспользоваться командой:
+
+```bash
+u=('MYSQL_ROOT_PASSWD' 'DOMAIN_ADMIN_PASSWD_PLAIN' 'SOGO_SIEVE_MASTER_PASSWD' 'AMAVISD_DB_PASSWD' 'FAIL2BAN_DB_PASSWD' 'IREDADMIN_DB_PASSWD' 'IREDAPD_DB_PASSWD' 'NETDATA_DB_PASSWD' 'RCM_DB_PASSWD' 'SOGO_DB_PASSWD' 'VMAIL_DB_ADMIN_PASSWD' 'VMAIL_DB_BIND_PASSWD'); for i in "${u[@]}"; do printf "%-25s = %s\n" "${i}" "$( < '/dev/urandom' tr -dc 'a-zA-Z0-9' | head -c "${1:-32}"; echo; )"; done
+```
+{{< /alert >}}
 
 ## Миграция компонентов
 
@@ -110,7 +118,7 @@ apt purge --yes 'php8*' && apt autoremove && rm -rf '/etc/php'
 
 ### MariaDB
 
-- Сделать экспорт баз данных текущей установки в файл:
+- Сделать экспорт баз данных СУБД {{< tag "MariaDB" >}} в файл `iRedMail.backup.sql.xz`:
 
 ```bash
 f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}"
@@ -129,13 +137,13 @@ apt purge --yes 'mariadb-*' && apt autoremove && rm -rf '/etc/mysql'
 apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql postfix-mysql libdbd-mysql-perl && systemctl restart dovecot.service postfix.service postfix@-.service amavis.service
 ```
 
-- Импортировать ранее созданный файл с базами данных `iRedMail.backup.sql`:
+- Импортировать ранее созданный файл `iRedMail.backup.sql.xz` в новую версию СУБД {{< tag "MariaDB" >}}:
 
 ```bash
 f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 ```
 
-- Импортировать следующий файл для создания технических пользователей {{< tag "iRedMail" >}}:
+- Импортировать шаблон для создания технических пользователей {{< tag "iRedMail" >}}:
 
 {{< file "irm.mariadb.create.user.sql" "sql" >}}
 
@@ -164,27 +172,27 @@ sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysql
 - Переместить ключи **DKIM** со старого сервера на новый сервер:
 
 ```bash
-rsync -a -e 'ssh -p 22' '/var/lib/dkim/' 'root@remote_host:/var/lib/dkim/'
+d='/var/lib/dkim/'; rsync -a -e 'ssh -p 22' "${d}" "root@192.168.1.2:${d}"
 ```
 
 - Переместить базу данных **Fail2Ban** со старого сервера на новый сервер:
 
 ```bash
-rsync -a -e 'ssh -p 22' '/var/lib/fail2ban/' 'root@remote_host:/var/lib/fail2ban/'
+d='/var/lib/fail2ban/'; rsync -a -e 'ssh -p 22' "${d}" "root@192.168.1.2:${d}"
 ```
 
 - Переместить профили пользователей и письма со старого сервера на новый сервер:
 
 ```bash
-rsync -a -e 'ssh -p 22' '/var/vmail/vmail1/' 'root@remote_host:/var/vmail/vmail1/'
+d='/var/vmail/vmail1/'; rsync -a -e 'ssh -p 22' "${d}" "root@192.168.1.2:${d}"
 ```
 
-### Миграция базы данных
+### Миграция баз данных
 
 - Экспортировать базы данных старого сервера в файл `iRedMail.backup.sql.xz` и переместить на новый сервер:
 
 ```bash
-f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a -e 'ssh -p 22' "${f}" 'root@remote_host:/root/'
+f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a -e 'ssh -p 22' "${f}" 'root@192.168.1.2:/root/'
 ```
 
 - Удалить текущие пустые базы данных на новом сервере:
@@ -195,7 +203,7 @@ f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transact
 curl -fsSL 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.mariadb.drop.database.sql' | mariadb --user='root' --password
 ```
 
-- Импортировать файл с базами данных старого сервера на новом сервере:
+- Импортировать файл `iRedMail.backup.sql.xz` с базами данных старого сервера на новом сервере:
 
 ```bash
 f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
@@ -289,44 +297,26 @@ curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_N
 
 ### iRedAdmin
 
-- Экспортировать заранее подготовленные параметры в переменные окружения:
-
-```bash
-export GH_NAME='iRedAdmin'; export GH_API="gh.api.${GH_NAME}.json"
-```
-
 - Запустить команду обновления {{< tag "iRedAdmin" >}}:
 
 ```bash
-curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='iRedAdmin'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ### iRedAPD
 
-- Экспортировать заранее подготовленные параметры в переменные окружения:
-
-```bash
-export GH_NAME='iRedAPD'; export GH_API="gh.api.${GH_NAME}.json"
-```
-
 - Запустить команду обновления {{< tag "iRedAPD" >}}:
 
 ```bash
-curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='iRedAPD'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ### mlmmjadmin
 
-- Экспортировать заранее подготовленные параметры в переменные окружения:
-
-```bash
-export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"
-```
-
 - Запустить команду обновления {{< tag "mlmmjadmin" >}}:
 
 ```bash
-curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" > "${GH_API}"; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ### ClamAV
