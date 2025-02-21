@@ -135,14 +135,6 @@ apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql post
 f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 ```
 
-{{< alert tip >}}
-Если при импорте файла появляется ошибка `ERROR 1231 (42000) at line *: Variable 'sql_mode' can't be set to the value of 'NO_AUTO_CREATE_USER'`, то её можно исправить путём удаления директивы `NO_AUTO_CREATE_USER` из файла:
-
-```bash
-sed -i 's/NO_AUTO_CREATE_USER//' 'iRedMail.backup.sql'
-```
-{{< /alert >}}
-
 - Импортировать следующий файл для создания технических пользователей {{< tag "iRedMail" >}}:
 
 {{< file "irm.mariadb.create.user.sql" "sql" >}}
@@ -208,6 +200,14 @@ curl -fsSL 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.
 ```bash
 f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 ```
+
+{{< alert tip >}}
+Если при импорте файла появляется ошибка `ERROR 1231 (42000) at line *: Variable 'sql_mode' can't be set to the value of 'NO_AUTO_CREATE_USER'`, то её можно исправить путём удаления директивы `NO_AUTO_CREATE_USER` из файла:
+
+```bash
+f='iRedMail.backup.sql'; xz -d "${f}.xz" && sed -i 's/NO_AUTO_CREATE_USER//' "${f}" && xz -9 "${f}"
+```
+{{< /alert >}}
 
 - Импортировать шаблон для создания технических пользователей {{< tag "iRedMail" >}}:
 
