@@ -184,7 +184,7 @@ rsync -a '/var/vmail/vmail1/' 'root@remote_host:/var/vmail/vmail1/'
 - Экспортировать базы данных старого сервера в файл `iRedMail.backup.sql.xz` и переместить на новый сервер:
 
 ```bash
-f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a "${f}" 'user@remote_host:/root/'
+f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a "${f}" 'root@remote_host:/root/'
 ```
 
 - Удалить текущие пустые базы данных на новом сервере:
