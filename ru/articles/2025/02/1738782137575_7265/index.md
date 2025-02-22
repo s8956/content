@@ -51,27 +51,19 @@ draft: 0
 
 ## Репозиторий
 
-Добавляем официальный репозиторий разработчиков и далее по шагам выполним установку и настройку {{< tag "PHP" >}} и PHP-FPM.
-
-### GPG
-
-- Скачать и установить ключ репозитория с оригинального репозитория:
+- Скачать и установить ключ репозитория:
 
 ```bash
-curl -x 'http://user:password@proxy.example.com:8080' -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.org/php/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4/php.gpg'
 ```
 
 {{< alert "tip" >}}
-Если оригинальный репозиторий недоступен, ключ можно скачать с зеркала:
+Ключ можно скачать с зеркала:
 
 ```bash
 curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.su/php/apt.gpg'
 ```
-
-Или воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
 {{< /alert >}}
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/php.sources` со следующим содержимым:
 

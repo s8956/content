@@ -43,24 +43,20 @@ hash: 'a931d52d3358f7f79c66b2bad6d3dcac838c0fb8'
 uuid: 'a931d52d-3358-57f7-8c66-b2bad6d3dcac'
 slug: 'a931d52d-3358-57f7-8c66-b2bad6d3dcac'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "Rsyslog" >}}.
 
 <!--more-->
 
 ## Репозиторий
-
-### GPG
 
 - Скачать и установить ключ репозитория:
 
 ```bash
 . '/etc/os-release' && curl -fsSL "https://download.opensuse.org/repositories/home:rgerhards/Debian_${VERSION_ID}/Release.key" | gpg --dearmor -o '/etc/apt/keyrings/rsyslog.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/rsyslog.sources` со следующим содержимым:
 
@@ -77,6 +73,8 @@ apt update && apt install --yes rsyslog
 ```
 
 ## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
 
 ### Основная конфигурация
 

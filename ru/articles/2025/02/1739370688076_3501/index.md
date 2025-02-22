@@ -51,15 +51,11 @@ draft: 1
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
 curl -fsSL 'https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key.txt' | gpg --dearmor -o '/etc/apt/keyrings/phusion.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/phusion.sources` со следующим содержимым:
 

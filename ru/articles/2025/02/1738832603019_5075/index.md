@@ -41,24 +41,20 @@ hash: '9c234b3c704e099f8fd9b3fbb70f789767f901b4'
 uuid: '9c234b3c-704e-599f-9fd9-b3fbb70f7897'
 slug: '9c234b3c-704e-599f-9fd9-b3fbb70f7897'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "PostgreSQL" >}}.
 
 <!--more-->
 
 ## Репозиторий
-
-### GPG
 
 - Скачать и установить ключ репозитория:
 
 ```bash
 curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor -o '/etc/apt/keyrings/pgsql.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/pgsql.sources` со следующим содержимым:
 
@@ -75,6 +71,8 @@ v='17'; apt update && apt install --yes postgresql-${v}
 ```
 
 ## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
 
 ### Основная конфигурация
 

@@ -42,24 +42,20 @@ hash: '0c18558eb4e197131ead9b767d14e99c6d9ab85f'
 uuid: '0c18558e-b4e1-5713-aead-9b767d14e99c'
 slug: '0c18558e-b4e1-5713-aead-9b767d14e99c'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "OpenSearch" >}}.
 
 <!--more-->
 
 ## Репозиторий
-
-### GPG
 
 - Скачать и установить ключ репозитория:
 
 ```bash
 curl -fsSL 'https://artifacts.opensearch.org/publickeys/opensearch.pgp' | gpg --dearmor -o '/etc/apt/keyrings/opensearch.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/opensearch.sources` со следующим содержимым:
 
@@ -76,6 +72,8 @@ v='2.15.0'; apt update && apt install --yes opensearch=${v} && apt-mark hold ope
 ```
 
 ## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
 
 ### Основная конфигурация
 

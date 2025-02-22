@@ -44,25 +44,17 @@ slug: 'f2d03575-8435-5182-925d-ac2a22100055'
 draft: 1
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "GitLab" >}}.
 
 <!--more-->
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey' | gpg --dearmor -o '/etc/apt/keyrings/gitlab.gpg'
+curl -fsSL 'https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055/gitlab.asc' | gpg --dearmor -o '/etc/apt/keyrings/gitlab.gpg'
 ```
-
-{{< alert "tip" >}}
-Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
-{{< /alert >}}
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/gitlab.sources` со следующим содержимым:
 
@@ -79,6 +71,8 @@ apt update && apt install --yes gitlab-ee
 ```
 
 ## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
 
 ### Основная конфигурация
 
@@ -106,7 +100,8 @@ from_file '/etc/gitlab/gitlab.local.rb'
 ## Миграция WEB-сервера на внешний Angie
 
 - Установить Angie по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
-- Создать файл `/etc/angie/http.d/gitlab.conf` со следующим содержимым:
+- Создать файл `/etc/angie/http.d/gitlab.ssl.conf` со следующим содержимым:
+
 {{< file "gitlab.angie.conf" "nginx" >}}
 
 ## Миграция базы данных на внешний PostgreSQL

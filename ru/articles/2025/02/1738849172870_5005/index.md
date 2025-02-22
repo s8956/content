@@ -43,28 +43,20 @@ hash: '21804a64d47aa563805047029e5cb5a3f5fddb1f'
 uuid: '21804a64-d47a-5563-a050-47029e5cb5a3'
 slug: '21804a64-d47a-5563-a050-47029e5cb5a3'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "Graylog" >}}.
 
 <!--more-->
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://packages.graylog2.org/repo/debian/keyring.gpg'
+curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3/graylog.gpg'
 ```
-
-{{< alert "tip" >}}
-Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
-{{< /alert >}}
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/graylog.sources` со следующим содержимым:
 
@@ -81,6 +73,8 @@ apt update && apt install --yes graylog-server
 ```
 
 ## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
 
 ### Основная конфигурация
 

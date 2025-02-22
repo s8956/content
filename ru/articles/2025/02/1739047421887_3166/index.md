@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Syslog-NG: Установка'
+title: 'Syslog-NG: Установка и настройка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
@@ -43,24 +43,20 @@ hash: '24f7d6b6531f528386934ca9d034f604a509542a'
 uuid: '24f7d6b6-531f-5283-b693-4ca9d034f604'
 slug: '24f7d6b6-531f-5283-b693-4ca9d034f604'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "Syslog-NG" >}}.
 
 <!--more-->
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://ose-repo.syslog-ng.com/apt/syslog-ng-ose-pub.asc' | gpg --dearmor -o '/etc/apt/keyrings/syslog-ng.gpg'
+curl -fsSL 'https://lib.onl/ru/2025/02/24f7d6b6-531f-5283-b693-4ca9d034f604/syslog-ng.asc' | gpg --dearmor -o '/etc/apt/keyrings/syslog-ng.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/syslog-ng.sources` со следующим содержимым:
 
@@ -77,6 +73,8 @@ apt update && apt install --yes syslog-ng
 ```
 
 ## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
 
 ### Основная конфигурация
 

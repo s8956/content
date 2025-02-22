@@ -51,17 +51,11 @@ draft: 0
 
 ## Репозиторий
 
-Добавляем официальный репозиторий разработчиков и далее по шагам выполним установку и настройку {{< tag "Angie" >}}.
-
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
 curl -fsSLo '/etc/apt/keyrings/angie.gpg' 'https://angie.software/keys/angie-signing.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/angie.sources` со следующим содержимым:
 

@@ -52,15 +52,11 @@ draft: 1
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
 curl -fsSL 'https://packages.adoptium.net/artifactory/api/gpg/key/public' | gpg --dearmor -o '/etc/apt/keyrings/adoptium.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/adoptium.sources` со следующим содержимым:
 

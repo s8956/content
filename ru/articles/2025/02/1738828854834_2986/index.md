@@ -50,15 +50,11 @@ draft: 1
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
 curl -fsSL 'https://lib.onl/ru/2025/02/f29ee2b5-891d-591e-8b21-69f494cd11c0/mysql.asc' | gpg --dearmor -o '/etc/apt/keyrings/mysql.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mysql.sources` со следующим содержимым:
 

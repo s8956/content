@@ -50,19 +50,11 @@ draft: 1
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://packages.redis.io/gpg' | gpg --dearmor -o '/etc/apt/keyrings/redis.gpg'
+curl -fsSL 'https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263/redis.asc' | gpg --dearmor -o '/etc/apt/keyrings/redis.gpg'
 ```
-
-{{< alert "tip" >}}
-Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
-{{< /alert >}}
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/redis.sources` со следующим содержимым:
 

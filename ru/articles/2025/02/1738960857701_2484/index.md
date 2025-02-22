@@ -50,23 +50,19 @@ draft: 1
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/nginx.gpg' 'https://packages.sury.org/nginx-mainline/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/nginx.gpg' 'https://lib.onl/ru/2025/02/b1575a3b-752b-5fdf-be6b-2ec04979e0f8/nginx.gpg'
 ```
 
 {{< alert "tip" >}}
-Если оригинальный репозиторий недоступен, ключ можно скачать с зеркала:
+Ключ можно скачать с зеркала:
 
 ```bash
 curl -fsSLo '/etc/apt/keyrings/nginx.gpg' 'https://packages.sury.su/nginx-mainline/apt.gpg'
 ```
 {{< /alert >}}
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/nginx.sources` со следующим содержимым:
 

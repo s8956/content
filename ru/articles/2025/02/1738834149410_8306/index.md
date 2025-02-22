@@ -42,24 +42,20 @@ hash: '5dfddacbebc0fc96f59839649fa484bc51568a83'
 uuid: '5dfddacb-ebc0-5c96-9598-39649fa484bc'
 slug: '5dfddacb-ebc0-5c96-9598-39649fa484bc'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "TimescaleDB" >}}.
 
 <!--more-->
 
 ## Репозиторий
-
-### GPG
 
 - Скачать и установить ключ репозитория:
 
 ```bash
 curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmor -o '/etc/apt/keyrings/timescaledb.gpg'
 ```
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/timescaledb.sources` со следующим содержимым:
 
@@ -72,5 +68,5 @@ curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmo
 - Установить пакеты:
 
 ```bash
-pgsql='17'; v='2.17.*'; apt update && apt install --yes timescaledb-2-postgresql-${pgsql}=${v} timescaledb-2-loader-postgresql-${pgsql}=${v} timescaledb-tools
+pgsql='17'; v='2.18.*'; apt update && apt install --yes timescaledb-2-postgresql-${pgsql}=${v} timescaledb-2-loader-postgresql-${pgsql}=${v} timescaledb-tools
 ```

@@ -42,28 +42,20 @@ hash: '6542fa1441f4330978c0a3bac519b93d875214a4'
 uuid: '6542fa14-41f4-5309-98c0-a3bac519b93d'
 slug: '6542fa14-41f4-5309-98c0-a3bac519b93d'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "ElasticSearch" >}}.
 
 <!--more-->
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://artifacts.elastic.co/GPG-KEY-elasticsearch' | gpg --dearmor -o '/etc/apt/keyrings/elasticsearch.gpg'
+curl -fsSL 'https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d/elasticsearch.asc' | gpg --dearmor -o '/etc/apt/keyrings/elasticsearch.gpg'
 ```
-
-{{< alert "tip" >}}
-Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
-{{< /alert >}}
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/elasticsearch.sources` со следующим содержимым:
 
@@ -80,6 +72,8 @@ apt update && apt install --yes elasticsearch
 ```
 
 ## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
 
 ### Основная конфигурация
 

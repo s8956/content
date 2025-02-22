@@ -41,28 +41,20 @@ hash: '08fbbde770fc06d52a9e2f27ea376109f75fc22b'
 uuid: '08fbbde7-70fc-56d5-aa9e-2f27ea376109'
 slug: '08fbbde7-70fc-56d5-aa9e-2f27ea376109'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "MongoDB" >}}.
 
 <!--more-->
 
 ## Репозиторий
 
-### GPG
-
 - Скачать и установить ключ репозитория:
 
 ```bash
-v='7.0'; curl -fsSL "https://www.mongodb.org/static/pgp/server-${v}.asc" | gpg --dearmor -o '/etc/apt/keyrings/mongodb.gpg'
+v='8.0'; curl -fsSL "https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109/mongodb-${v}.asc" | gpg --dearmor -o '/etc/apt/keyrings/mongodb.gpg'
 ```
-
-{{< alert "tip" >}}
-Если оригинальный репозиторий недоступен, можно попробовать воспользоваться ключом `-x 'http://user:password@proxy.example.com:8080'` для **cURL**.
-{{< /alert >}}
-
-### APT
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mongodb.sources` со следующим содержимым:
 
@@ -79,6 +71,8 @@ apt update && apt install --yes mongodb-org
 ```
 
 ## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
 
 ### Основная конфигурация
 
