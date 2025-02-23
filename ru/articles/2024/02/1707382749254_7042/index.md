@@ -15,7 +15,6 @@ tags:
   - 'freebsd'
   - 'zfs'
   - 'zsh'
-  - 'syncthing'
 authors:
   - 'KaiKimera'
 sources:

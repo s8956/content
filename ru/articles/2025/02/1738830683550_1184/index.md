@@ -57,7 +57,7 @@ draft: 0
 curl -fsSL 'https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d/elasticsearch.asc' | gpg --dearmor -o '/etc/apt/keyrings/elasticsearch.gpg'
 ```
 
-- Создать файл репозитория `/etc/apt/sources.list.d/elasticsearch.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/elasticsearch.sources`:
 
 ```bash
 v='8'; . '/etc/os-release' && echo -e "X-Repolib-Name: ElasticSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.elastic.co/packages/${v}.x/apt\n#URIs: https://mirror.yandex.ru/mirrors/elastic/${v}\nSuites: stable\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/elasticsearch.gpg\n" | tee '/etc/apt/sources.list.d/elasticsearch.sources' > '/dev/null'

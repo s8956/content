@@ -56,16 +56,16 @@ draft: 0
 curl -fsSL 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key' | gpg --dearmor -o '/etc/apt/keyrings/nodesource.gpg'
 ```
 
-- Создать файл репозитория `/etc/apt/sources.list.d/nodesource.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/nodesource.sources`:
 
 ```bash
-v='22'; echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${v}.x\n#URIs: https://mirror.yandex.ru/mirrors/deb.nodesource.com/node_${v}.x\nSuites: nodistro\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nodesource.gpg\n" | tee '/etc/apt/sources.list.d/nodesource.sources' > '/dev/null'
+v='22'; echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${v}.x\nSuites: nodistro\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nodesource.gpg\n" | tee '/etc/apt/sources.list.d/nodesource.sources' > '/dev/null'
 ```
 
-- Создать файлы предпочтений `/etc/apt/preferences.d/nsolid` и `/etc/apt/preferences.d/nodejs`:
+- Создать файлы предпочтений `/etc/apt/preferences.d/nsolid.pref` и `/etc/apt/preferences.d/nodejs.pref`:
 
 ```bash
-echo -e "Package: nsolid\nPin: origin deb.nodesource.com\nPin-Priority: 600\n" | tee '/etc/apt/preferences.d/nsolid' && echo -e "Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600\n" | tee '/etc/apt/preferences.d/nodejs'
+echo -e "Package: nsolid\nPin: origin deb.nodesource.com\nPin-Priority: 600\n" | tee '/etc/apt/preferences.d/nsolid.pref' > '/dev/null' && echo -e "Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600\n" | tee '/etc/apt/preferences.d/nodejs.pref' > '/dev/null'
 ```
 
 ## Установка

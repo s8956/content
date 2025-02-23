@@ -56,7 +56,7 @@ draft: 0
 curl -fsSL 'https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055/gitlab.asc' | gpg --dearmor -o '/etc/apt/keyrings/gitlab.gpg'
 ```
 
-- Создать файл репозитория `/etc/apt/sources.list.d/gitlab.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/gitlab.sources`:
 
 ```bash
 . '/etc/os-release' && echo -e "X-Repolib-Name: GitLab\nEnabled: yes\nTypes: deb\nURIs: https://packages.gitlab.com/gitlab/gitlab-ee/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/gitlab.gpg\n" | tee '/etc/apt/sources.list.d/gitlab.sources' > '/dev/null'

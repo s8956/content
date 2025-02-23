@@ -58,7 +58,7 @@ draft: 0
 curl -fsSL 'https://lib.onl/ru/2025/02/24f7d6b6-531f-5283-b693-4ca9d034f604/syslog-ng.asc' | gpg --dearmor -o '/etc/apt/keyrings/syslog-ng.gpg'
 ```
 
-- Создать файл репозитория `/etc/apt/sources.list.d/syslog-ng.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/syslog-ng.sources`:
 
 ```bash
 . '/etc/os-release' && echo -e "X-Repolib-Name: Syslog-NG\nEnabled: yes\nTypes: deb\nURIs: https://ose-repo.syslog-ng.com/apt\nSuites: stable\nComponents: ${ID}-${VERSION_CODENAME}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/syslog-ng.gpg\n" | tee '/etc/apt/sources.list.d/syslog-ng.sources' > '/dev/null'

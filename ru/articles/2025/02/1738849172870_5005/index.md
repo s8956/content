@@ -58,7 +58,7 @@ draft: 0
 curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3/graylog.gpg'
 ```
 
-- Создать файл репозитория `/etc/apt/sources.list.d/graylog.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/graylog.sources`:
 
 ```bash
 v='6.1'; . '/etc/os-release' && echo -e "X-Repolib-Name: Graylog\nEnabled: yes\nTypes: deb\nURIs: https://packages.graylog2.org/repo/${ID}\nSuites: stable\nComponents: ${v}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/graylog.gpg\n" | tee '/etc/apt/sources.list.d/graylog.sources' > '/dev/null'

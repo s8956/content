@@ -64,7 +64,7 @@ curl -fsSLo '/etc/apt/keyrings/nginx.gpg' 'https://packages.sury.su/nginx-mainli
 ```
 {{< /alert >}}
 
-- Создать файл репозитория `/etc/apt/sources.list.d/nginx.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/nginx.sources`:
 
 ```bash
 . '/etc/os-release' && echo -e "X-Repolib-Name: Nginx\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/nginx-mainline\n#URIs: https://packages.sury.su/nginx-mainline\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nginx.gpg\n" | tee '/etc/apt/sources.list.d/nginx.sources' > '/dev/null'

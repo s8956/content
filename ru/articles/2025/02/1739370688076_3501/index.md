@@ -57,7 +57,7 @@ draft: 1
 curl -fsSL 'https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key.txt' | gpg --dearmor -o '/etc/apt/keyrings/phusion.gpg'
 ```
 
-- Создать файл репозитория `/etc/apt/sources.list.d/phusion.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/phusion.sources`:
 
 ```bash
 . '/etc/os-release' && echo -e "X-Repolib-Name: Phusion\nEnabled: yes\nTypes: deb\nURIs: https://oss-binaries.phusionpassenger.com/apt/passenger\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/phusion.gpg\n" | tee '/etc/apt/sources.list.d/phusion.sources'

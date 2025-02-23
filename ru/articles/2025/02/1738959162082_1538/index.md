@@ -58,7 +58,7 @@ draft: 0
 curl -fsSL 'https://packages.adoptium.net/artifactory/api/gpg/key/public' | gpg --dearmor -o '/etc/apt/keyrings/adoptium.gpg'
 ```
 
-- Создать файл репозитория `/etc/apt/sources.list.d/adoptium.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/adoptium.sources`:
 
 ```bash
 . '/etc/os-release' && echo -e "X-Repolib-Name: Eclipse Temurin\nEnabled: yes\nTypes: deb\nURIs: https://packages.adoptium.net/artifactory/deb\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/adoptium.gpg\n" | tee '/etc/apt/sources.list.d/adoptium.sources' > '/dev/null'

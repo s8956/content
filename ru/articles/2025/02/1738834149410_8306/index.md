@@ -57,7 +57,7 @@ draft: 0
 curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmor -o '/etc/apt/keyrings/timescaledb.gpg'
 ```
 
-- Создать файл репозитория `/etc/apt/sources.list.d/timescaledb.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/timescaledb.sources`:
 
 ```bash
 . '/etc/os-release' && echo -e "X-Repolib-Name: TimescaleDB\nEnabled: yes\nTypes: deb\nURIs: https://packagecloud.io/timescale/timescaledb/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/timescaledb.gpg\n" | tee '/etc/apt/sources.list.d/timescaledb.sources' > '/dev/null'

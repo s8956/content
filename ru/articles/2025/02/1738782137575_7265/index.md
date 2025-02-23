@@ -64,7 +64,7 @@ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.su/php/apt.gpg'
 ```
 {{< /alert >}}
 
-- Создать файл репозитория `/etc/apt/sources.list.d/php.sources` со следующим содержимым:
+- Создать файл репозитория `/etc/apt/sources.list.d/php.sources`:
 
 ```bash
 . '/etc/os-release' && echo -e "X-Repolib-Name: PHP\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/php\n#URIs: https://packages.sury.su/php\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/php.gpg\n" | tee '/etc/apt/sources.list.d/php.sources' > '/dev/null'
