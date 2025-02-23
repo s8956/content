@@ -94,7 +94,7 @@ f='/etc/angie/angie.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 d='/etc/angie/conf.d'; [[ ! -d "${d}" ]] && mkdir "${d}"
 ```
 
-- Создать файл дополнительной конфигурации `/etc/angie/conf.d/99-angie.local.conf` со следующим содержимым:
+- Создать файл локальной конфигурации `/etc/angie/conf.d/99-angie.local.conf` со следующим содержимым:
 
 {{< file "angie.local.conf" "nginx" >}}
 

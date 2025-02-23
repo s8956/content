@@ -93,7 +93,7 @@ from_file '/etc/gitlab/gitlab.local.rb'
 
 ### Дополнительная конфигурация
 
-- Создать файл дополнительной конфигурации `/etc/gitlab/gitlab.local.rb` со следующим содержимым:
+- Создать файл локальной конфигурации `/etc/gitlab/gitlab.local.rb` со следующим содержимым:
 
 {{< file "gitlab.local.rb" "ruby" >}}
 

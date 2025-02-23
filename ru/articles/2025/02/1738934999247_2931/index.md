@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Redis: Установка'
+title: 'Redis: Установка и настройка'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
@@ -41,10 +41,10 @@ hash: '0b81ff23999199ccdc64370b86ad2263b5533c06'
 uuid: '0b81ff23-9991-59cc-8c64-370b86ad2263'
 slug: '0b81ff23-9991-59cc-8c64-370b86ad2263'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "Redis" >}}.
 
 <!--more-->
 
@@ -59,7 +59,7 @@ curl -fsSL 'https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263/redi
 - Создать файл репозитория `/etc/apt/sources.list.d/redis.sources` со следующим содержимым:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Redis\nEnabled: yes\nTypes: deb\nURIs: https://packages.redis.io/deb\n#URIs: https://mirror.yandex.ru/mirrors/packages.redis.io\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/redis.gpg\n" | tee '/etc/apt/sources.list.d/redis.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Redis\nEnabled: yes\nTypes: deb\nURIs: https://packages.redis.io/deb\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/redis.gpg\n" | tee '/etc/apt/sources.list.d/redis.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -69,3 +69,25 @@ curl -fsSL 'https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263/redi
 ```bash
 apt update && apt install --yes redis
 ```
+
+## Настройка
+
+В этом разделе приведена конфигурация с моими предпочтениями.
+
+### Основная конфигурация
+
+- Сохранить оригинальный файл конфигурации:
+
+```bash
+f='/etc/redis/redis.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig" && cp "${f}.orig" "${f}"
+```
+
+- Добавить директиву `include` в основной файл конфигурации:
+
+```bash
+echo -e '\ninclude /etc/redis/redis.local.conf' | tee -a '/etc/redis/redis.conf'
+```
+
+- Создать файл локальной конфигурации `/etc/redis/redis.local.conf` со следующим содержимым:
+
+{{< file "redis.local.conf" >}}
