@@ -62,10 +62,10 @@ curl -fsSL 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key' | gpg --d
 v='22'; echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${v}.x\nSuites: nodistro\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nodesource.gpg\n" | tee '/etc/apt/sources.list.d/nodesource.sources' > '/dev/null'
 ```
 
-- Создать файлы предпочтений `/etc/apt/preferences.d/nsolid.pref` и `/etc/apt/preferences.d/nodejs.pref`:
+- Скачать файлы предпочтений `nsolid.pref` и `nodejs.pref`:
 
 ```bash
-echo -e "Package: nsolid\nPin: origin deb.nodesource.com\nPin-Priority: 600\n" | tee '/etc/apt/preferences.d/nsolid.pref' > '/dev/null' && echo -e "Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600\n" | tee '/etc/apt/preferences.d/nodejs.pref' > '/dev/null'
+curl -fsSLo '/etc/apt/preferences.d/nsolid.pref' 'https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896/nsolid.pref' && curl -fsSLo '/etc/apt/preferences.d/nodejs.pref' 'https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896/nodejs.pref'
 ```
 
 ## Установка

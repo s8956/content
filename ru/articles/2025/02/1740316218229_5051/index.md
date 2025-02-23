@@ -6,7 +6,7 @@
 title: 'Syncthing: Установка и настройка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
 categories:
   - 'linux'
   - 'terminal'
@@ -62,10 +62,10 @@ curl -fsSLo '/etc/apt/keyrings/syncthing.gpg' 'https://syncthing.net/release-key
 echo -e "X-Repolib-Name: Syncthing\nEnabled: yes\nTypes: deb\nURIs: https://apt.syncthing.net\nSuites: syncthing\nComponents: stable\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/syncthing.gpg\n" | tee '/etc/apt/sources.list.d/syncthing.sources' > '/dev/null'
 ```
 
-- Создать файл предпочтений `/etc/apt/preferences.d/syncthing.pref`:
+- Скачать файл предпочтений `syncthing.pref`:
 
 ```bash
-echo -e "Package: *\nPin: origin apt.syncthing.net\nPin-Priority: 990\n" | tee '/etc/apt/preferences.d/syncthing.pref' > '/dev/null'
+curl -fsSLo '/etc/apt/preferences.d/syncthing.pref' 'https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc/syncthing.pref'
 ```
 
 ## Установка
