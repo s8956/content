@@ -74,10 +74,6 @@ apt update && apt install --yes graylog-server
 
 ## Настройка
 
-В этом разделе приведена конфигурация с моими предпочтениями.
-
-### Основная конфигурация
-
 - Сохранить оригинальный файл конфигурации:
 
 ```bash
@@ -102,6 +98,7 @@ echo -n 'Enter Password: ' && head -1 < '/dev/stdin' | tr -d '\n' | sha256sum | 
 
 ### Конфигурация PROXY-сервера
 
+- Установить {{< tag "Angie" >}} по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
 - Создать файл сайта `/etc/angie/http.d/graylog.conf` со следующим содержимым:
 
 {{< file "graylog.angie.http.conf" "nginx" >}}

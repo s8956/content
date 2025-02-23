@@ -72,10 +72,6 @@ apt update && apt install --yes mariadb-server && systemctl stop mariadb.service
 
 ## Настройка
 
-В этом разделе приведена конфигурация с моими предпочтениями.
-
-### Основная конфигурация
-
 - Создать файл `/etc/mysql/mariadb.conf.d/99-server.local.cnf` для конфигурации `mariadbd` со следующим содержимым:
 
 {{< file "mariadb.server.local.cnf" "ini" >}}

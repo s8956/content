@@ -73,9 +73,7 @@ apt update && apt install --yes passenger
 
 ## Настройка
 
-### Проверка установки
-
-- После установки пакетов необходимо проверить корректность параметров Phusion Passenger:
+- После установки пакетов необходимо проверить корректность параметров Phusion {{< tag "Passenger" >}}:
 
 ```bash
 /usr/bin/passenger-config validate-install

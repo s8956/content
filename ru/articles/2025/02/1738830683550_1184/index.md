@@ -73,10 +73,6 @@ apt update && apt install --yes elasticsearch
 
 ## Настройка
 
-В этом разделе приведена конфигурация с моими предпочтениями.
-
-### Основная конфигурация
-
 - Сохранить оригинальный файл конфигурации:
 
 ```bash
@@ -86,8 +82,6 @@ f='/etc/elasticsearch/elasticsearch.yml'; [[ -f "${f}" && ! -f "${f}.orig" ]] &&
 - Создать файл основной конфигурации `/etc/elasticsearch/elasticsearch.yml` со следующим содержимым:
 
 {{< file "elasticsearch.yml" "yaml" >}}
-
-### Дополнительная конфигурация
 
 - Создать файл локальной конфигурации `/etc/elasticsearch/jvm.options.d/99-jvm.local.options` со следующим содержимым:
 

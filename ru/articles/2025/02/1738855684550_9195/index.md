@@ -41,7 +41,7 @@ hash: 'f2d035758435b182025dac2a22100055e6b81721'
 uuid: 'f2d03575-8435-5182-925d-ac2a22100055'
 slug: 'f2d03575-8435-5182-925d-ac2a22100055'
 
-draft: 1
+draft: 0
 ---
 
 Инструкция по установке и первичной настройке {{< tag "GitLab" >}}.
@@ -72,10 +72,6 @@ apt update && apt install --yes gitlab-ee
 
 ## Настройка
 
-В этом разделе приведена конфигурация с моими предпочтениями.
-
-### Основная конфигурация
-
 - Сохранить оригинальный файл конфигурации:
 
 ```bash
@@ -91,28 +87,26 @@ f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 from_file '/etc/gitlab/gitlab.local.rb'
 ```
 
-### Дополнительная конфигурация
-
 - Создать файл локальной конфигурации `/etc/gitlab/gitlab.local.rb` со следующим содержимым:
 
 {{< file "gitlab.local.rb" "ruby" >}}
 
-## Миграция WEB-сервера на внешний Angie
+## Миграция на внешний Angie
 
-- Установить Angie по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
+- Установить {{< tag "Angie" >}} по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
 - Создать файл `/etc/angie/http.d/gitlab.ssl.conf` со следующим содержимым:
 
 {{< file "gitlab.angie.conf" "nginx" >}}
 
-## Миграция базы данных на внешний PostgreSQL
+## Миграция на внешний PostgreSQL
 
-- Установить PostgreSQL по материалу {{< uuid "9c234b3c-704e-599f-9fd9-b3fbb70f7897" >}}.
+- Установить {{< tag "PostgreSQL" >}} по материалу {{< uuid "9c234b3c-704e-599f-9fd9-b3fbb70f7897" >}}.
 
 {{< alert "important" >}}
 Необходимо внимательно подбирать версию PostgreSQL под [рекомендуемые требования](https://docs.gitlab.com/install/requirements/#postgresql) GitLab.
 {{< /alert >}}
 
-- Остановить все сервисы GitLab, кроме PostgreSQL:
+- Остановить все сервисы GitLab, кроме {{< tag "PostgreSQL" >}}:
 
 ```bash
 gitlab-ctl stop && gitlab-ctl start postgresql && gitlab-ctl status
@@ -124,22 +118,22 @@ gitlab-ctl stop && gitlab-ctl start postgresql && gitlab-ctl status
 sudo -u 'gitlab-psql' /opt/gitlab/embedded/bin/pg_dump --host='/var/opt/gitlab/postgresql' --username='gitlab-psql' --dbname='gitlabhq_production' --clean --create --file='/tmp/gitlabhq_production.sql'
 ```
 
-- Создать роль `gitlab` на внешнем PostgreSQL:
+- Создать роль `gitlab` на внешнем {{< tag "PostgreSQL" >}}:
 
 ```bash
 sudo -u 'postgres' createuser --pwprompt 'gitlab'
 ```
 
-- Импортировать файл `/tmp/gitlabhq_production.sql` во внешний PostgreSQL:
+- Импортировать файл `/tmp/gitlabhq_production.sql` во внешний {{< tag "PostgreSQL" >}}:
 
 ```bash
 sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
 ```
 
-- Создать расширения для базы данных `gitlabhq_production` во внешнем PostgreSQL:
+- Создать расширения для базы данных `gitlabhq_production` во внешнем {{< tag "PostgreSQL" >}}:
 
 ```bash
-echo 'CREATE EXTENSION IF NOT EXISTS pg_trgm; CREATE EXTENSION IF NOT EXISTS btree_gist; CREATE EXTENSION IF NOT EXISTS plpgsql;' | sudo -u 'postgres' psql 'gitlabhq_production'
+echo 'create extension if not exists pg_trgm; create extension if not exists btree_gist; create extension if not exists plpgsql;' | sudo -u 'postgres' psql 'gitlabhq_production'
 ```
 
 - Добавить настройки в файл конфигурации `/etc/gitlab/gitlab.rb`:

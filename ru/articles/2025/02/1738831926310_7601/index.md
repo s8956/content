@@ -68,14 +68,10 @@ v='2'; . '/etc/os-release' && echo -e "X-Repolib-Name: OpenSearch\nEnabled: yes\
 - Установить пакеты:
 
 ```bash
-v='2.15.0'; apt update && apt install --yes opensearch=${v} && apt-mark hold opensearch=${v}
+v='2.19.0'; apt update && apt install --yes opensearch=${v} && apt-mark hold opensearch=${v}
 ```
 
 ## Настройка
-
-В этом разделе приведена конфигурация с моими предпочтениями.
-
-### Основная конфигурация
 
 - Сохранить оригинальный файл конфигурации:
 
@@ -86,8 +82,6 @@ f='/etc/opensearch/opensearch.yml'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "$
 - Создать файл основной конфигурации `/etc/opensearch/opensearch.yml` со следующим содержимым:
 
 {{< file "opensearch.yml" "yaml" >}}
-
-### Дополнительная конфигурация
 
 - Создать файл локальной конфигурации `/etc/opensearch/jvm.options.d/99-jvm.local.options` со следующим содержимым:
 

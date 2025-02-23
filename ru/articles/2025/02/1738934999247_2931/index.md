@@ -72,10 +72,6 @@ apt update && apt install --yes redis
 
 ## Настройка
 
-В этом разделе приведена конфигурация с моими предпочтениями.
-
-### Основная конфигурация
-
 - Сохранить оригинальный файл конфигурации:
 
 ```bash
@@ -85,7 +81,7 @@ f='/etc/redis/redis.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 - Добавить директиву `include` в основной файл конфигурации:
 
 ```bash
-echo -e '\ninclude /etc/redis/redis.local.conf' | tee -a '/etc/redis/redis.conf' > '/dev/null'
+echo -e '\ninclude /etc/redis/redis.local.conf\n' | tee -a '/etc/redis/redis.conf' > '/dev/null'
 ```
 
 - Создать файл локальной конфигурации `/etc/redis/redis.local.conf` со следующим содержимым:
