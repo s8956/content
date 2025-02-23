@@ -85,7 +85,7 @@ f='/etc/redis/redis.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 - Добавить директиву `include` в основной файл конфигурации:
 
 ```bash
-echo -e '\ninclude /etc/redis/redis.local.conf' | tee -a '/etc/redis/redis.conf'
+echo -e '\ninclude /etc/redis/redis.local.conf' | tee -a '/etc/redis/redis.conf' > '/dev/null'
 ```
 
 - Создать файл локальной конфигурации `/etc/redis/redis.local.conf` со следующим содержимым:
