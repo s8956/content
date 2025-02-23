@@ -43,10 +43,10 @@ hash: '5c0145cf8d36cf8095ec98bd13539df574a42282'
 uuid: '5c0145cf-8d36-5f80-b5ec-98bd13539df5'
 slug: '5c0145cf-8d36-5f80-b5ec-98bd13539df5'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "Temurin" >}}.
 
 <!--more-->
 

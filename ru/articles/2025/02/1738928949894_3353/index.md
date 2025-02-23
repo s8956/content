@@ -10,7 +10,6 @@ images:
 categories:
   - 'linux'
   - 'terminal'
-  - 'inDev'
 tags:
   - 'debian'
   - 'apt'

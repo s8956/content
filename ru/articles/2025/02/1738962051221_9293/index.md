@@ -41,10 +41,10 @@ hash: '138218c7d9a9aeeb44cf31ba8dc24896cc15f418'
 uuid: '138218c7-d9a9-5eeb-a4cf-31ba8dc24896'
 slug: '138218c7-d9a9-5eeb-a4cf-31ba8dc24896'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "NodeJS" >}}.
 
 <!--more-->
 
