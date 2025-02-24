@@ -45,7 +45,7 @@ slug: '8f5671bc-0bad-55b3-962f-1bc9b468b8e9'
 draft: 1
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "Passenger" >}}.
 
 <!--more-->
 
@@ -65,10 +65,16 @@ curl -fsSL 'https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-
 
 ## Установка
 
-- Установить пакеты:
+- Установить standalone-пакеты:
 
 ```bash
 apt update && apt install --yes passenger
+```
+
+- Установить nginx-пакеты:
+
+```bash
+apt update && apt install --yes libnginx-mod-http-passenger
 ```
 
 ## Настройка

@@ -41,10 +41,10 @@ hash: '261ad6aba4a527f9cae2da4d1095e6fcf8c749e1'
 uuid: '261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'
 slug: '261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "Syncthing" >}}.
 
 <!--more-->
 
