@@ -3,5 +3,7 @@ enabled = true
 backend = polling
 filter = %(__name__)s
 logpath = /var/log/auth.log
-action = nftables-multiport[name="%(__name__)s", port="22,8022", protocol="tcp"]
+banaction = %(banaction_allports)s
+port = 22,8022
+protocol = tcp
 maxretry = 5
