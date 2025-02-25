@@ -43,7 +43,7 @@ hash: '45ffdbeb37ec3ed2d3cd347df5e3d07b660573da'
 uuid: '45ffdbeb-37ec-5ed2-b3cd-347df5e3d07b'
 slug: '45ffdbeb-37ec-5ed2-b3cd-347df5e3d07b'
 
-draft: 0
+draft: 1
 ---
 
 Решение ошибки, связанной с раннем запуском сервиса {{< tag "Jigasi" >}}.
