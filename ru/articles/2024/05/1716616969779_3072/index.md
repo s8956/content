@@ -14,6 +14,7 @@ categories:
 tags:
   - 'email'
   - 'iredmail'
+  - 'iredapd'
   - 'whitelist'
   - 'blacklist'
   - 'greylist'

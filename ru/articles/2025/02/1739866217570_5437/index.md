@@ -21,7 +21,6 @@ tags:
   - 'iredadmin'
   - 'iredapd'
   - 'mlmmjadmin'
-  - 'fail2ban'
   - 'clamav'
 authors:
   - 'KaiKimera'
