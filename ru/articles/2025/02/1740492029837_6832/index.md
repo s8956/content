@@ -66,6 +66,10 @@ apt update && apt install --yes fail2ban python3-systemd rsyslog
 
 {{< file "fail2ban.jail.local" "ini" >}}
 
+- Создать файл локальной конфигурации `/etc/fail2ban/action.d/nftables-common.local` со следующим содержимым:
+
+{{< file "fail2ban.action.nftables-common.local" "ini" >}}
+
 ## Тюрьмы
 
 ### SSH
