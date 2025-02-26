@@ -72,6 +72,6 @@ v='17'; apt update && apt install --yes postgresql-${v}
 
 ## Настройка
 
-- Создать файл локальной конфигурации `/etc/postgresql/17/main/conf.d/99-pgsql.local.conf` со следующим содержимым:
+- Создать файл локальной конфигурации `/etc/postgresql/17/main/conf.d/90-pgsql.local.conf` со следующим содержимым:
 
 {{< file "pgsql.local.conf" "ini" >}}

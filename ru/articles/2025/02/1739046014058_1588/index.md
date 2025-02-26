@@ -74,6 +74,6 @@ apt update && apt install --yes rsyslog
 
 ## Настройка
 
-- Создать файл локальной конфигурации `/etc/rsyslog.d/99-rsyslog.local.conf` со следующим содержимым:
+- Создать файл локальной конфигурации `/etc/rsyslog.d/90-rsyslog.local.conf` со следующим содержимым:
 
 {{< file "rsyslog.local.conf" >}}

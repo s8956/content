@@ -90,6 +90,17 @@ apt update && apt install --yes fail2ban python3-systemd rsyslog
 
 {{< file "fail2ban.jail.angie.limit-req.local" "ini" >}}
 
+- В файл конфигурации Angie добавить следующие строки:
+
+```nginx
+http {
+  limit_req_zone $binary_remote_addr zone=main:10m rate=50r/s;
+  server {
+    limit_req zone=main burst=60 nodelay;
+  }
+}
+```
+
 ### Asterisk
 
 - Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/asterisk.local` со следующим содержимым:

@@ -74,6 +74,6 @@ apt update && apt install --yes syslog-ng
 
 ## Настройка
 
-- Создать файл локальной конфигурации `/etc/syslog-ng/conf.d/99-syslog-ng.local.conf` со следующим содержимым:
+- Создать файл локальной конфигурации `/etc/syslog-ng/conf.d/90-syslog-ng.local.conf` со следующим содержимым:
 
 {{< file "syslog-ng.local.conf" >}}

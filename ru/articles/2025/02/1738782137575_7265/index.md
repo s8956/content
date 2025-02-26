@@ -80,7 +80,7 @@ v='8.4'; apt update && apt install --yes php${v} php${v}-{fpm,bcmath,bz2,cli,cur
 
 ## Настройка
 
-- Создать файл локальной конфигурации `/etc/php/8.4/fpm/conf.d/99-php.local.ini` со следующим содержимым:
+- Создать файл локальной конфигурации `/etc/php/8.4/fpm/conf.d/90-php.local.ini` со следующим содержимым:
 
 {{< file "php.local.ini" "ini" >}}
 
