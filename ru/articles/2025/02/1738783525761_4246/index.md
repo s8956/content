@@ -41,7 +41,7 @@ hash: 'b825cd19f0f59a63ecb200784311b73801d0e56a'
 uuid: 'b825cd19-f0f5-5a63-acb2-00784311b738'
 slug: 'b825cd19-f0f5-5a63-acb2-00784311b738'
 
-draft: 0
+draft: 1
 ---
 
 Инструкция по установке и первичной настройке {{< tag "Angie" >}}.
@@ -88,9 +88,11 @@ f='/etc/angie/angie.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 d='/etc/angie/conf.d'; [[ ! -d "${d}" ]] && mkdir "${d}"
 ```
 
-- Создать файл локальной конфигурации `/etc/angie/conf.d/90-angie.local.conf` со следующим содержимым:
+- Скачать файлы локальной конфигурации в `/etc/angie/conf.d/`:
 
-{{< file "angie.local.conf" "nginx" >}}
+```bash
+f=('core.conf' 'acme.conf' 'http3.conf' 'ssl.conf' 'headers.conf' 'proxy.conf' 'real_ip.conf' 'brotli.conf' 'gzip.conf' 'zstd.conf'); for i in "${f[@]}"; do curl -fsSLo "/etc/angie/conf.d/${i}" "https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738/angie.module.${i}.conf"; done
+```
 
 - Сохранить оригинальный файл стандартного сайта:
 
