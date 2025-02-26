@@ -109,7 +109,7 @@ apt update && apt install --yes fail2ban python3-systemd rsyslog
 - Заблокировать IP-адрес `192.168.1.2` на срок 1 неделю:
 
 ```bash
-fail2ban-client set recidive banip '192.168.1.2'
+fail2ban-client set 'recidive' banip '192.168.1.2'
 ```
 
 ### Manual
@@ -129,17 +129,63 @@ fail2ban-client set recidive banip '192.168.1.2'
 - Поместить IP-адрес `192.168.1.2` в тюрьму `manual` для постоянной блокировки:
 
 ```bash
-fail2ban-client set manual banip '192.168.1.2'
+fail2ban-client set 'manual' banip '192.168.1.2'
 ```
 
 - Удалить IP-адрес `192.168.1.2` из тюрьмы `manual`:
 
 ```bash
-fail2ban-client set manual unbanip '192.168.1.2'
+fail2ban-client set 'manual' unbanip '192.168.1.2'
 ```
 
 - Прочитать файл `ip.blacklist.txt` с IP-адресами и поместить их в тюрьму `manual` для постоянной блокировки:
 
 ```bash
-grep -v '^#' 'ip.blacklist.txt' | while read IP; do fail2ban-client set manual banip "${IP}"; done
+grep -v '^#' 'ip.blacklist.txt' | while read IP; do fail2ban-client set 'manual' banip "${IP}"; done
+```
+
+## Использование
+
+- Посмотреть статус всех тюрем:
+
+```bash
+fail2ban-client status
+```
+
+- Посмотреть статус тюрьмы `JAIL_NAME`:
+
+```bash
+fail2ban-client status 'JAIL_NAME'
+```
+
+- Посмотреть статус всех тюрем в компактном виде:
+
+```bash
+fail2ban-client banned
+```
+
+- Заблокировать IP-адрес `192.168.1.2` в тюрьме `JAIL_NAME`:
+
+```bash
+fail2ban-client set 'JAIL_NAME' banip '192.168.1.2'
+```
+
+- Разблокировать IP-адрес `192.168.1.2` в тюрьме `JAIL_NAME`:
+
+```bash
+fail2ban-client set 'JAIL_NAME' unbanip '192.168.1.2'
+```
+
+- Разблокировать IP-адрес `192.168.1.2` во всех тюрьмах:
+
+```bash
+fail2ban-client unban '192.168.1.2'
+```
+
+## Скрипты
+
+- Показать список заблокированных IP-адресов, разделённых по тюрьмам:
+
+```bash
+for i in $( fail2ban-client status | grep 'Jail list:' | sed 's|.*:||;s|,||g' ); do echo "Jail: ${i}"; fail2ban-client status "${i}" | grep 'Banned IP'; done
 ```
