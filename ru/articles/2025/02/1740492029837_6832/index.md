@@ -86,9 +86,9 @@ apt update && apt install --yes fail2ban python3-systemd rsyslog
 
 ### Angie: LimitReq
 
-- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/angie.limit.req.local` со следующим содержимым:
+- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/angie.limit-req.local` со следующим содержимым:
 
-{{< file "fail2ban.jail.angie.limit.req.local" "ini" >}}
+{{< file "fail2ban.jail.angie.limit-req.local" "ini" >}}
 
 ### Asterisk
 
