@@ -41,7 +41,7 @@ hash: 'b825cd19f0f59a63ecb200784311b73801d0e56a'
 uuid: 'b825cd19-f0f5-5a63-acb2-00784311b738'
 slug: 'b825cd19-f0f5-5a63-acb2-00784311b738'
 
-draft: 1
+draft: 0
 ---
 
 Инструкция по установке и первичной настройке {{< tag "Angie" >}}.
@@ -72,38 +72,20 @@ apt update && apt install --yes angie angie-module-brotli angie-module-zstd
 
 ## Настройка
 
-- Сохранить оригинальный файл конфигурации:
+- Скачать файл основной конфигурации `/etc/angie/angie.conf`:
 
 ```bash
-f='/etc/angie/angie.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+f=('angie'); d='/etc/angie'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig" && curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```
 
-- Создать файл основной конфигурации `/etc/angie/angie.conf` со следующим содержимым:
-
-{{< file "angie.conf" "nginx" >}}
-
-- Создать директорию для дополнительной конфигурации:
+- Скачать файлы локальной конфигурации модулей в `/etc/angie/conf.d/`:
 
 ```bash
-d='/etc/angie/conf.d'; [[ ! -d "${d}" ]] && mkdir "${d}"
+f=('core' 'acme' 'http3' 'ssl' 'headers' 'proxy' 'real_ip' 'brotli' 'gzip' 'zstd'); d='/etc/angie/conf.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; [[ ! -d "${d}" ]] && mkdir "${d}" && for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.conf" && ! -f "${d}/90-${i}.local.conf.orig" ]] && mv "${d}/90-${i}.local.conf" "${d}/90-${i}.local.conf.orig" && curl -fsSLo "${d}/90-${i}.local.conf" "${p}/angie.module.${i}.conf"; done
 ```
 
-- Скачать файлы локальной конфигурации в `/etc/angie/conf.d/`:
+- Скачать файлы стандартных сайтов (`80` и `443`) в `/etc/angie/http.d/`:
 
 ```bash
-f=('core.conf' 'acme.conf' 'http3.conf' 'ssl.conf' 'headers.conf' 'proxy.conf' 'real_ip.conf' 'brotli.conf' 'gzip.conf' 'zstd.conf'); for i in "${f[@]}"; do curl -fsSLo "/etc/angie/conf.d/${i}" "https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738/angie.module.${i}.conf"; done
+f=('default' 'default.ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig" && curl -fsSLo "${d}/${i}.conf" "${p}/angie.http.${i}.conf"; done
 ```
-
-- Сохранить оригинальный файл стандартного сайта:
-
-```bash
-f='/etc/angie/http.d/default.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
-```
-
-- Создать файл стандартного сайта (`80`) `/etc/angie/http.d/default.conf` со следующим содержимым:
-
-{{< file "angie.http.default.conf" "nginx" >}}
-
-- Создать файл стандартного сайта (`443`) `/etc/angie/http.d/default.ssl.conf` со следующим содержимым:
-
-{{< file "angie.http.default.ssl.conf" "nginx" >}}
