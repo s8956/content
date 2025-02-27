@@ -87,5 +87,5 @@ draft: 0
 - Запустить сервис {{< tag "Syncthing" >}} под пользователем `USER`:
 
 ```bash
- systemctl enable --now syncthing@USER.service
+systemctl enable --now syncthing@USER.service
 ```
