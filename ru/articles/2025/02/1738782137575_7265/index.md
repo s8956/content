@@ -48,6 +48,14 @@ draft: 0
 
 <!--more-->
 
+## Экспорт параметров
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+export PHP_VER='8.4'
+```
+
 ## Репозиторий
 
 - Скачать и установить ключ репозитория:
@@ -75,21 +83,25 @@ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.su/php/apt.gpg'
 - Установить пакеты:
 
 ```bash
-v='8.4'; apt update && apt install --yes php${v} php${v}-{fpm,bcmath,bz2,cli,curl,gd,gmp,imagick,imap,intl,ldap,mbstring,memcached,mysql,odbc,opcache,pgsql,redis,uploadprogress,xml,zip,zstd}
+[[ ! -v 'PHP_VER' ]] && return; apt update && apt install --yes php${PHP_VER} php${PHP_VER}-{fpm,bcmath,bz2,cli,curl,gd,gmp,imagick,imap,intl,ldap,mbstring,memcached,mysql,odbc,opcache,pgsql,redis,uploadprogress,xml,zip,zstd}
 ```
 
 ## Настройка
 
-- Создать файл локальной конфигурации `/etc/php/8.4/fpm/conf.d/90-php.local.ini` со следующим содержимым:
-
-{{< file "php.local.ini" "ini" >}}
-
-- Сохранить оригинальный файл конфигурации:
+- Скачать файл локальной конфигурации в `/etc/php/*/fpm/conf.d/`:
 
 ```bash
-f='/etc/php/8.4/fpm/pool.d/www.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+[[ ! -v 'PHP_VER' ]] && return; f=('php'); d="/etc/php/${PHP_VER}/fpm/conf.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.ini" && ! -f "${d}/90-${i}.local.ini.orig" ]] && mv "${d}/90-${i}.local.ini" "${d}/90-${i}.local.ini.orig"; curl -fsSLo "${d}/90-${i}.local.ini" "${p}/${i}.ini"; done
 ```
 
-- Создать файл `/etc/php/8.4/fpm/pool.d/www.conf` со следующим содержимым:
+- Скачать файлы локальной конфигурации модулей в `/etc/php/*/fpm/conf.d/`:
 
-{{< file "php.pool.www.conf" "ini" >}}
+```bash
+[[ ! -v 'PHP_VER' ]] && return; f=('cgi' 'date' 'mail' 'mbstring'); d="/etc/php/${PHP_VER}/fpm/conf.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.ini" && ! -f "${d}/90-${i}.local.ini.orig" ]] && mv "${d}/90-${i}.local.ini" "${d}/90-${i}.local.ini.orig"; curl -fsSLo "${d}/90-${i}.local.ini" "${p}/php.${i}.ini"; done
+```
+
+- Скачать файл конфигурации пула `www` в `/etc/php/*/fpm/pool.d/`:
+
+```bash
+[[ ! -v 'PHP_VER' ]] && return; f=('www'); d="/etc/php/${PHP_VER}/fpm/pool.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/php.pool.${i}.conf"; done
+```
