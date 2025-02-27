@@ -61,7 +61,7 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/mariadb.gpg' 'https://mariadb.org/mariadb_release_signing_key.pgp'
+ curl -fsSLo '/etc/apt/keyrings/mariadb.gpg' 'https://mariadb.org/mariadb_release_signing_key.pgp'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mariadb.sources`:
