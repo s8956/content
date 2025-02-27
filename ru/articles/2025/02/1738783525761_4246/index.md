@@ -75,17 +75,17 @@ apt update && apt install --yes angie angie-module-brotli angie-module-zstd
 - Скачать файл основной конфигурации `/etc/angie/angie.conf`:
 
 ```bash
-f=('angie'); d='/etc/angie'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig" && curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('angie'); d='/etc/angie'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```
 
 - Скачать файлы локальной конфигурации модулей в `/etc/angie/conf.d/`:
 
 ```bash
-f=('core' 'acme' 'http3' 'ssl' 'headers' 'proxy' 'real_ip' 'brotli' 'gzip' 'zstd'); d='/etc/angie/conf.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; [[ ! -d "${d}" ]] && mkdir "${d}" && for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.conf" && ! -f "${d}/90-${i}.local.conf.orig" ]] && mv "${d}/90-${i}.local.conf" "${d}/90-${i}.local.conf.orig" && curl -fsSLo "${d}/90-${i}.local.conf" "${p}/angie.module.${i}.conf"; done
+f=('core' 'acme' 'http3' 'ssl' 'headers' 'proxy' 'real_ip' 'brotli' 'gzip' 'zstd'); d='/etc/angie/conf.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; [[ ! -d "${d}" ]] && mkdir "${d}"; for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.conf" && ! -f "${d}/90-${i}.local.conf.orig" ]] && mv "${d}/90-${i}.local.conf" "${d}/90-${i}.local.conf.orig"; curl -fsSLo "${d}/90-${i}.local.conf" "${p}/angie.module.${i}.conf"; done
 ```
 
 - Скачать файлы стандартных сайтов (`80` и `443`) в `/etc/angie/http.d/`:
 
 ```bash
-f=('default' 'default.ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig" && curl -fsSLo "${d}/${i}.conf" "${p}/angie.http.${i}.conf"; done
+f=('default' 'default.ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/angie.http.${i}.conf"; done
 ```
