@@ -49,18 +49,26 @@ draft: 0
 
 <!--more-->
 
+## Экспорт параметров
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+ export ES_VER='8'
+```
+
 ## Репозиторий
 
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d/elasticsearch.asc' | gpg --dearmor -o '/etc/apt/keyrings/elasticsearch.gpg'
+ curl -fsSL 'https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d/elasticsearch.asc' | gpg --dearmor -o '/etc/apt/keyrings/elasticsearch.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/elasticsearch.sources`:
 
 ```bash
-v='8'; . '/etc/os-release' && echo -e "X-Repolib-Name: ElasticSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.elastic.co/packages/${v}.x/apt\n#URIs: https://mirror.yandex.ru/mirrors/elastic/${v}\nSuites: stable\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/elasticsearch.gpg\n" | tee '/etc/apt/sources.list.d/elasticsearch.sources' > '/dev/null'
+ [[ ! -v 'ES_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: ElasticSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.elastic.co/packages/${ES_VER}.x/apt\n#URIs: https://mirror.yandex.ru/mirrors/elastic/${ES_VER}\nSuites: stable\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/elasticsearch.gpg\n" | tee '/etc/apt/sources.list.d/elasticsearch.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -68,21 +76,19 @@ v='8'; . '/etc/os-release' && echo -e "X-Repolib-Name: ElasticSearch\nEnabled: y
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes elasticsearch
+ apt update && apt install --yes elasticsearch
 ```
 
 ## Настройка
 
-- Сохранить оригинальный файл конфигурации:
+- Скачать файл основной конфигурации в `/etc/elasticsearch/`:
 
 ```bash
-f='/etc/elasticsearch/elasticsearch.yml'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+ f=('elasticsearch'); d='/etc/elasticsearch'; p='https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d'; for i in "${f[@]}"; do [[ -f "${d}/${i}.yml" && ! -f "${d}/${i}.yml.orig" ]] && mv "${d}/${i}.yml" "${d}/${i}.yml.orig"; curl -fsSLo "${d}/${i}.yml" "${p}/${i}.yml" && chown root:elasticsearch "${d}/${i}.yml" && chmod 660 "${d}/${i}.yml"; done
 ```
 
-- Создать файл основной конфигурации `/etc/elasticsearch/elasticsearch.yml` со следующим содержимым:
+- Скачать файл локальной конфигурации в `/etc/elasticsearch/jvm.options.d/`:
 
-{{< file "elasticsearch.yml" "yaml" >}}
-
-- Создать файл локальной конфигурации `/etc/elasticsearch/jvm.options.d/90-jvm.local.options` со следующим содержимым:
-
-{{< file "elasticsearch.jvm.local.options" >}}
+```bash
+ f=('jvm'); d='/etc/elasticsearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d'; for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.options" && ! -f "${d}/90-${i}.local.options.orig" ]] && mv "${d}/90-${i}.local.options" "${d}/90-${i}.local.options.orig"; curl -fsSLo "${d}/90-${i}.local.options" "${p}/elasticsearch.${i}.local.options" && chown root:elasticsearch "${d}/90-${i}.local.options" && chmod 660 "${d}/90-${i}.local.options"; done
+```
