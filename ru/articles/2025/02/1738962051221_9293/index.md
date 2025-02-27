@@ -48,24 +48,32 @@ draft: 0
 
 <!--more-->
 
+## Экспорт параметров
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+ export NODE_VER='22'
+```
+
 ## Репозиторий
 
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key' | gpg --dearmor -o '/etc/apt/keyrings/nodesource.gpg'
+ curl -fsSL 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key' | gpg --dearmor -o '/etc/apt/keyrings/nodesource.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/nodesource.sources`:
 
 ```bash
-v='22'; echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${v}.x\nSuites: nodistro\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nodesource.gpg\n" | tee '/etc/apt/sources.list.d/nodesource.sources' > '/dev/null'
+ echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${NODE_VER}.x\nSuites: nodistro\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/nodesource.gpg\n" | tee '/etc/apt/sources.list.d/nodesource.sources' > '/dev/null'
 ```
 
-- Скачать файлы предпочтений `nsolid.pref` и `nodejs.pref`:
+- Скачать файлы предпочтений в `/etc/apt/preferences.d/`:
 
 ```bash
-curl -fsSLo '/etc/apt/preferences.d/nsolid.pref' 'https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896/nsolid.pref' && curl -fsSLo '/etc/apt/preferences.d/nodejs.pref' 'https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896/nodejs.pref'
+ f=('nodejs' 'nsolid'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
 ```
 
 ## Установка
@@ -73,5 +81,5 @@ curl -fsSLo '/etc/apt/preferences.d/nsolid.pref' 'https://lib.onl/ru/2025/02/138
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes nodejs
+ apt update && apt install --yes nodejs
 ```

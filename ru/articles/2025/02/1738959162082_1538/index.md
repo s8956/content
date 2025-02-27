@@ -50,18 +50,26 @@ draft: 0
 
 <!--more-->
 
+## Экспорт параметров
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+ export JDK_VER='21-jdk'
+```
+
 ## Репозиторий
 
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://packages.adoptium.net/artifactory/api/gpg/key/public' | gpg --dearmor -o '/etc/apt/keyrings/adoptium.gpg'
+ curl -fsSL 'https://packages.adoptium.net/artifactory/api/gpg/key/public' | gpg --dearmor -o '/etc/apt/keyrings/adoptium.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/adoptium.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Eclipse Temurin\nEnabled: yes\nTypes: deb\nURIs: https://packages.adoptium.net/artifactory/deb\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/adoptium.gpg\n" | tee '/etc/apt/sources.list.d/adoptium.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: Eclipse Temurin\nEnabled: yes\nTypes: deb\nURIs: https://packages.adoptium.net/artifactory/deb\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/adoptium.gpg\n" | tee '/etc/apt/sources.list.d/adoptium.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -69,5 +77,5 @@ curl -fsSL 'https://packages.adoptium.net/artifactory/api/gpg/key/public' | gpg 
 - Установить пакеты:
 
 ```bash
-v='21-jdk'; apt update && apt install temurin-${v}
+ apt update && apt install temurin-${JDK_VER}
 ```

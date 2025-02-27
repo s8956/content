@@ -58,17 +58,17 @@ apt update && apt install --yes fail2ban python3-systemd rsyslog
 
 ## Настройка
 
-- Создать файл локальной конфигурации `/etc/fail2ban/fail2ban.local` со следующим содержимым:
+- Скачать файлы локальной конфигурации в `/etc/fail2ban/`:
 
-{{< file "fail2ban.local" "ini" >}}
+```bash
+f=('fail2ban' 'jail'); d='/etc/fail2ban'; p='https://lib.onl/ru/2025/02/e69f2ca5-e02c-5aa2-a4ef-43b0b443b67e'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local" "${p}/${i}.local"; done
+```
 
-- Создать файл локальной конфигурации `/etc/fail2ban/jail.local` со следующим содержимым:
+- Скачать файлы локальной конфигурации в `/etc/fail2ban/action.d/`:
 
-{{< file "fail2ban.jail.local" "ini" >}}
-
-- Создать файл локальной конфигурации `/etc/fail2ban/action.d/nftables-common.local` со следующим содержимым:
-
-{{< file "fail2ban.action.nftables-common.local" "ini" >}}
+```bash
+f=('nftables-common'); d='/etc/fail2ban/action.d'; p='https://lib.onl/ru/2025/02/e69f2ca5-e02c-5aa2-a4ef-43b0b443b67e'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local" "${p}/action.${i}.local"; done
+```
 
 ## Тюрьмы
 
@@ -76,19 +76,19 @@ apt update && apt install --yes fail2ban python3-systemd rsyslog
 
 - Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/sshd.local` со следующим содержимым:
 
-{{< file "fail2ban.jail.sshd.local" "ini" >}}
+{{< file "jail.sshd.local" "ini" >}}
 
 ### Angie: BotSearch
 
 - Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/angie.botsearch.local` со следующим содержимым:
 
-{{< file "fail2ban.jail.angie.botsearch.local" "ini" >}}
+{{< file "jail.angie-botsearch.local" "ini" >}}
 
 ### Angie: LimitReq
 
 - Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/angie.limit-req.local` со следующим содержимым:
 
-{{< file "fail2ban.jail.angie.limit-req.local" "ini" >}}
+{{< file "jail.angie-limit-req.local" "ini" >}}
 
 - В файл конфигурации Angie добавить следующие строки:
 
@@ -105,7 +105,7 @@ http {
 
 - Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/asterisk.local` со следующим содержимым:
 
-{{< file "fail2ban.jail.asterisk.local" "ini" >}}
+{{< file "jail.asterisk.local" "ini" >}}
 
 ### Recidive
 
@@ -113,7 +113,7 @@ http {
 
 - Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/recidive.local` со следующим содержимым:
 
-{{< file "fail2ban.jail.recidive.local" "ini" >}}
+{{< file "jail.recidive.local" "ini" >}}
 
 #### Примеры
 
@@ -129,11 +129,11 @@ fail2ban-client set 'recidive' banip '192.168.1.2'
 
 - Создать файл конфигурации фильтра `/etc/fail2ban/filter.d/manual.conf` со следующим содержимым:
 
-{{< file "fail2ban.filter.manual.conf" "ini" >}}
+{{< file "filter.manual.conf" "ini" >}}
 
 - Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/manual.local` со следующим содержимым:
 
-{{< file "fail2ban.jail.manual.local" "ini" >}}
+{{< file "jail.manual.local" "ini" >}}
 
 #### Примеры
 

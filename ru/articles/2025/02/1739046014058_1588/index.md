@@ -55,13 +55,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
-. '/etc/os-release' && curl -fsSL "https://download.opensuse.org/repositories/home:rgerhards/Debian_${VERSION_ID}/Release.key" | gpg --dearmor -o '/etc/apt/keyrings/rsyslog.gpg'
+ . '/etc/os-release' && curl -fsSL "https://download.opensuse.org/repositories/home:rgerhards/Debian_${VERSION_ID}/Release.key" | gpg --dearmor -o '/etc/apt/keyrings/rsyslog.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/rsyslog.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Rsyslog\nEnabled: yes\nTypes: deb\nURIs: http://download.opensuse.org/repositories/home:/rgerhards/Debian_${VERSION_ID}/\nSuites: /\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/rsyslog.gpg\n" | tee '/etc/apt/sources.list.d/rsyslog.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: Rsyslog\nEnabled: yes\nTypes: deb\nURIs: http://download.opensuse.org/repositories/home:/rgerhards/Debian_${VERSION_ID}/\nSuites: /\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/rsyslog.gpg\n" | tee '/etc/apt/sources.list.d/rsyslog.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -69,11 +69,13 @@ draft: 0
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes rsyslog
+ apt update && apt install --yes rsyslog
 ```
 
 ## Настройка
 
-- Создать файл локальной конфигурации `/etc/rsyslog.d/90-rsyslog.local.conf` со следующим содержимым:
+- Скачать файлы локальной конфигурации в `/etc/rsyslog.d`:
 
-{{< file "rsyslog.local.conf" >}}
+```bash
+ f=('rsyslog'); d='/etc/rsyslog.d'; p='https://lib.onl/ru/2025/02/a931d52d-3358-57f7-8c66-b2bad6d3dcac'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${p}/${i}.conf"; done
+```

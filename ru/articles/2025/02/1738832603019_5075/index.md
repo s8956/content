@@ -83,5 +83,5 @@ draft: 0
 - Скачать файлы локальной конфигурации в `/etc/postgresql/17/main/conf.d/`:
 
 ```bash
- [[ ! -v 'PGSQL_VER' ]] && return; f=('pgsql' 'pgsql.zfs'); d="/etc/postgresql/${PGSQL_VER}/main/conf.d"; p='https://lib.onl/ru/2025/02/9c234b3c-704e-599f-9fd9-b3fbb70f7897'; for i in "${f[@]}"; do [[ -f "${d}/90-${i##*.}.local.conf" && ! -f "${d}/90-${i##*.}.local.conf.orig" ]] && mv "${d}/90-${i##*.}.local.conf" "${d}/90-${i##*.}.local.conf.orig"; curl -fsSLo "${d}/90-${i##*.}.local.conf" "${p}/${i}.conf" && chown postgres:postgres "${d}/90-${i##*.}.local.conf"; done
+ [[ ! -v 'PGSQL_VER' ]] && return; f=('pgsql' 'pgsql.zfs'); d="/etc/postgresql/${PGSQL_VER}/main/conf.d"; p='https://lib.onl/ru/2025/02/9c234b3c-704e-599f-9fd9-b3fbb70f7897'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i##*.}.local.conf" "${p}/${i}.conf" && chown postgres:postgres "${d}/90-${i##*.}.local.conf"; done
 ```

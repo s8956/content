@@ -53,13 +53,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055/gitlab.asc' | gpg --dearmor -o '/etc/apt/keyrings/gitlab.gpg'
+ curl -fsSL 'https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055/gitlab.asc' | gpg --dearmor -o '/etc/apt/keyrings/gitlab.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/gitlab.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: GitLab\nEnabled: yes\nTypes: deb\nURIs: https://packages.gitlab.com/gitlab/gitlab-ee/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/gitlab.gpg\n" | tee '/etc/apt/sources.list.d/gitlab.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: GitLab\nEnabled: yes\nTypes: deb\nURIs: https://packages.gitlab.com/gitlab/gitlab-ee/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/gitlab.gpg\n" | tee '/etc/apt/sources.list.d/gitlab.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -67,7 +67,7 @@ curl -fsSL 'https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055/gitl
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes gitlab-ee
+ apt update && apt install --yes gitlab-ee
 ```
 
 ## Настройка
@@ -75,7 +75,7 @@ apt update && apt install --yes gitlab-ee
 - Сохранить оригинальный файл конфигурации:
 
 ```bash
-f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+ f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
 ```
 
 - Добавить в конец файла `/etc/gitlab/gitlab.rb` следующую информацию:
@@ -87,16 +87,20 @@ f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 from_file '/etc/gitlab/gitlab.local.rb'
 ```
 
-- Создать файл локальной конфигурации `/etc/gitlab/gitlab.local.rb` со следующим содержимым:
+- Скачать файл локальной конфигурации в `/etc/gitlab/`:
 
-{{< file "gitlab.local.rb" "ruby" >}}
+```bash
+ f=('gitlab'); d='/etc/gitlab'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local.rb" "${p}/${i}.rb"; done
+```
 
 ## Миграция на внешний Angie
 
 - Установить {{< tag "Angie" >}} по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
-- Создать файл `/etc/angie/http.d/gitlab.ssl.conf` со следующим содержимым:
+- Скачать файл сайта `gitlab-ssl.conf` в `/etc/angie/http.d/`:
 
-{{< file "gitlab.angie.conf" "nginx" >}}
+```bash
+ f=('gitlab-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+```
 
 ## Миграция на внешний PostgreSQL
 

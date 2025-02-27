@@ -54,7 +54,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export ES_VER='8'
+ export ELASTICSEARCH_VER='8'
 ```
 
 ## Репозиторий
@@ -68,7 +68,7 @@ draft: 0
 - Создать файл репозитория `/etc/apt/sources.list.d/elasticsearch.sources`:
 
 ```bash
- [[ ! -v 'ES_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: ElasticSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.elastic.co/packages/${ES_VER}.x/apt\n#URIs: https://mirror.yandex.ru/mirrors/elastic/${ES_VER}\nSuites: stable\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/elasticsearch.gpg\n" | tee '/etc/apt/sources.list.d/elasticsearch.sources' > '/dev/null'
+ [[ ! -v 'ELASTICSEARCH_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: ElasticSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.elastic.co/packages/${ELASTICSEARCH_VER}.x/apt\n#URIs: https://mirror.yandex.ru/mirrors/elastic/${ELASTICSEARCH_VER}\nSuites: stable\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/elasticsearch.gpg\n" | tee '/etc/apt/sources.list.d/elasticsearch.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -81,14 +81,14 @@ draft: 0
 
 ## Настройка
 
-- Скачать файл основной конфигурации в `/etc/elasticsearch/`:
+- Скачать файл основной конфигурации `elasticsearch.yml` в `/etc/elasticsearch/`:
 
 ```bash
  f=('elasticsearch'); d='/etc/elasticsearch'; p='https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d'; for i in "${f[@]}"; do [[ -f "${d}/${i}.yml" && ! -f "${d}/${i}.yml.orig" ]] && mv "${d}/${i}.yml" "${d}/${i}.yml.orig"; curl -fsSLo "${d}/${i}.yml" "${p}/${i}.yml" && chown root:elasticsearch "${d}/${i}.yml" && chmod 660 "${d}/${i}.yml"; done
 ```
 
-- Скачать файл локальной конфигурации в `/etc/elasticsearch/jvm.options.d/`:
+- Скачать файл локальной конфигурации `90-jvm.local.options` в `/etc/elasticsearch/jvm.options.d/`:
 
 ```bash
- f=('elasticsearch.jvm'); d='/etc/elasticsearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d'; for i in "${f[@]}"; do [[ -f "${d}/90-${i##*.}.local.options" && ! -f "${d}/90-${i##*.}.local.options.orig" ]] && mv "${d}/90-${i##*.}.local.options" "${d}/90-${i##*.}.local.options.orig"; curl -fsSLo "${d}/90-${i##*.}.local.options" "${p}/${i}.options" && chown root:elasticsearch "${d}/90-${i##*.}.local.options" && chmod 660 "${d}/90-${i##*.}.local.options"; done
+ f=('jvm'); d='/etc/elasticsearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.options" "${p}/${i}.options" && chown root:elasticsearch "${d}/90-${i}.local.options" && chmod 660 "${d}/90-${i}.local.options"; done
 ```
