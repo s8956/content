@@ -48,18 +48,26 @@ draft: 0
 
 <!--more-->
 
+## Экспорт параметров
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+ export PGSQL_VER='17'
+```
+
 ## Репозиторий
 
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor -o '/etc/apt/keyrings/pgsql.gpg'
+ curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor -o '/etc/apt/keyrings/pgsql.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/pgsql.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: PostgreSQL\nEnabled: yes\nTypes: deb\nURIs: https://apt.postgresql.org/pub/repos/apt\n#URIs: https://mirror.yandex.ru/mirrors/postgresql\nSuites: ${VERSION_CODENAME}-pgdg\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/pgsql.gpg\n" | tee '/etc/apt/sources.list.d/pgsql.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: PostgreSQL\nEnabled: yes\nTypes: deb\nURIs: https://apt.postgresql.org/pub/repos/apt\n#URIs: https://mirror.yandex.ru/mirrors/postgresql\nSuites: ${VERSION_CODENAME}-pgdg\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/pgsql.gpg\n" | tee '/etc/apt/sources.list.d/pgsql.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -67,11 +75,13 @@ curl -fsSL 'https://www.postgresql.org/media/keys/ACCC4CF8.asc' | gpg --dearmor 
 - Установить пакеты:
 
 ```bash
-v='17'; apt update && apt install --yes postgresql-${v}
+ [[ ! -v 'PGSQL_VER' ]] && return; apt update && apt install --yes postgresql-${PGSQL_VER}
 ```
 
 ## Настройка
 
-- Создать файл локальной конфигурации `/etc/postgresql/17/main/conf.d/90-pgsql.local.conf` со следующим содержимым:
+- Скачать файлы локальной конфигурации в `/etc/postgresql/17/main/conf.d/`:
 
-{{< file "pgsql.local.conf" "ini" >}}
+```bash
+ [[ ! -v 'PGSQL_VER' ]] && return; f=('pgsql' 'pgsql.zfs'); d="/etc/postgresql/${PGSQL_VER}/main/conf.d"; p='https://lib.onl/ru/2025/02/9c234b3c-704e-599f-9fd9-b3fbb70f7897'; for i in "${f[@]}"; do [[ -f "${d}/90-${i##*.}.local.conf" && ! -f "${d}/90-${i##*.}.local.conf.orig" ]] && mv "${d}/90-${i##*.}.local.conf" "${d}/90-${i##*.}.local.conf.orig"; curl -fsSLo "${d}/90-${i##*.}.local.conf" "${p}/${i}.conf" && chown postgres:postgres "${d}/90-${i##*.}.local.conf"; done
+```

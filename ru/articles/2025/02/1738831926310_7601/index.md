@@ -90,5 +90,5 @@ draft: 0
 - Скачать файл локальной конфигурации в `/etc/opensearch/jvm.options.d/`:
 
 ```bash
- f=('jvm'); d='/etc/opensearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.options" && ! -f "${d}/90-${i}.local.options.orig" ]] && mv "${d}/90-${i}.local.options" "${d}/90-${i}.local.options.orig"; curl -fsSLo "${d}/90-${i}.local.options" "${p}/opensearch.${i}.local.options" && chown opensearch:opensearch "${d}/90-${i}.local.options" && chmod 640 "${d}/90-${i}.local.options"; done
+ f=('opensearch.jvm'); d='/etc/opensearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do [[ -f "${d}/90-${i##*.}.local.options" && ! -f "${d}/90-${i##*.}.local.options.orig" ]] && mv "${d}/90-${i##*.}.local.options" "${d}/90-${i##*.}.local.options.orig"; curl -fsSLo "${d}/90-${i##*.}.local.options" "${p}/${i}.options" && chown opensearch:opensearch "${d}/90-${i##*.}.local.options" && chmod 640 "${d}/90-${i##*.}.local.options"; done
 ```

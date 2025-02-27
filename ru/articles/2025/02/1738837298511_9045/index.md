@@ -48,18 +48,26 @@ draft: 0
 
 <!--more-->
 
+## Экспорт параметров
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+ export MDB_VER='8.0'
+```
+
 ## Репозиторий
 
 - Скачать и установить ключ репозитория:
 
 ```bash
-v='8.0'; curl -fsSL "https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109/mongodb-${v}.asc" | gpg --dearmor -o '/etc/apt/keyrings/mongodb.gpg'
+ [[ ! -v 'MDB_VER' ]] && return; curl -fsSL "https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109/mongodb-${MDB_VER}.asc" | gpg --dearmor -o '/etc/apt/keyrings/mongodb.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mongodb.sources`:
 
 ```bash
-v='8.0'; . '/etc/os-release' && echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\nTypes: deb\nURIs: http://repo.mongodb.org/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/${ID}\nSuites: ${VERSION_CODENAME}/mongodb-org/${v}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mongodb.gpg\n" | tee '/etc/apt/sources.list.d/mongodb.sources' > '/dev/null'
+ [[ ! -v 'MDB_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\nTypes: deb\nURIs: http://repo.mongodb.org/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/${ID}\nSuites: ${VERSION_CODENAME}/mongodb-org/${MDB_VER}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mongodb.gpg\n" | tee '/etc/apt/sources.list.d/mongodb.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -67,17 +75,13 @@ v='8.0'; . '/etc/os-release' && echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\n
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes mongodb-org
+ apt update && apt install --yes mongodb-org
 ```
 
 ## Настройка
 
-- Сохранить оригинальный файл конфигурации:
+- Скачать файл основной конфигурации в `/etc/`:
 
 ```bash
-f='/etc/mongod.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+ f=('mongod'); d="/etc"; p='https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```
-
-- Создать файл основной конфигурации `/etc/mongod.conf` со следующим содержимым:
-
-{{< file "mongod.conf" "yml" >}}

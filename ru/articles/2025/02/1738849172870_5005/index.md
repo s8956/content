@@ -50,18 +50,26 @@ draft: 0
 
 <!--more-->
 
+## Экспорт параметров
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+ export GLOG_VER='6.1'
+```
+
 ## Репозиторий
 
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3/graylog.gpg'
+ curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3/graylog.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/graylog.sources`:
 
 ```bash
-v='6.1'; . '/etc/os-release' && echo -e "X-Repolib-Name: Graylog\nEnabled: yes\nTypes: deb\nURIs: https://packages.graylog2.org/repo/${ID}\nSuites: stable\nComponents: ${v}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/graylog.gpg\n" | tee '/etc/apt/sources.list.d/graylog.sources' > '/dev/null'
+ [[ ! -v 'GLOG_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: Graylog\nEnabled: yes\nTypes: deb\nURIs: https://packages.graylog2.org/repo/${ID}\nSuites: stable\nComponents: ${GLOG_VER}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/graylog.gpg\n" | tee '/etc/apt/sources.list.d/graylog.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -69,20 +77,16 @@ v='6.1'; . '/etc/os-release' && echo -e "X-Repolib-Name: Graylog\nEnabled: yes\n
 - Установить пакеты:
 
 ```bash
-apt update && apt install --yes graylog-server
+ apt update && apt install --yes graylog-server
 ```
 
 ## Настройка
 
-- Сохранить оригинальный файл конфигурации:
+- Скачать файл основной конфигурации в `/etc/graylog/server/`:
 
 ```bash
-f='/etc/graylog/server/server.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
+f=('graylog.server'); d='/etc/graylog/server'; p='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do [[ -f "${d}/${i##*.}.conf" && ! -f "${d}/${i##*.}.conf.orig" ]] && mv "${d}/${i##*.}.conf" "${d}/${i##*.}.conf.orig"; curl -fsSLo "${d}/${i##*.}.conf" "${p}/${i}.conf"; done
 ```
-
-- Создать файл основной конфигурации `/etc/graylog/server/server.conf` со следующим содержимым:
-
-{{< file "graylog.server.conf" "ini" >}}
 
 - Создать пароль для `password_secret`:
 
@@ -99,6 +103,6 @@ echo -n 'Enter Password: ' && head -1 < '/dev/stdin' | tr -d '\n' | sha256sum | 
 ### Конфигурация PROXY-сервера
 
 - Установить {{< tag "Angie" >}} по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
-- Создать файл сайта `/etc/angie/http.d/graylog.conf` со следующим содержимым:
+- Скачать файл сайта в `/etc/angie/http.d/`:
 
-{{< file "graylog.angie.http.conf" "nginx" >}}
+{{< file "graylog.http.conf" "nginx" >}}

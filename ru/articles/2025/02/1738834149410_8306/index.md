@@ -49,18 +49,26 @@ draft: 0
 
 <!--more-->
 
+## Экспорт параметров
+
+- Экспортировать заранее подготовленные параметры в переменные окружения:
+
+```bash
+ export PGSQL_VER='17' && export TSDB_VER='2.18.*'
+```
+
 ## Репозиторий
 
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmor -o '/etc/apt/keyrings/timescaledb.gpg'
+ curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmor -o '/etc/apt/keyrings/timescaledb.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/timescaledb.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: TimescaleDB\nEnabled: yes\nTypes: deb\nURIs: https://packagecloud.io/timescale/timescaledb/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/timescaledb.gpg\n" | tee '/etc/apt/sources.list.d/timescaledb.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: TimescaleDB\nEnabled: yes\nTypes: deb\nURIs: https://packagecloud.io/timescale/timescaledb/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/timescaledb.gpg\n" | tee '/etc/apt/sources.list.d/timescaledb.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -68,5 +76,5 @@ curl -fsSL 'https://packagecloud.io/timescale/timescaledb/gpgkey' | gpg --dearmo
 - Установить пакеты:
 
 ```bash
-pgsql='17'; v='2.18.*'; apt update && apt install --yes timescaledb-2-postgresql-${pgsql}=${v} timescaledb-2-loader-postgresql-${pgsql}=${v} timescaledb-tools
+ [[ ! -v 'PGSQL_VER' || ! -v 'TSDB_VER' ]] && return; apt update && apt install --yes timescaledb-2-postgresql-${PGSQL_VER}=${TSDB_VER} timescaledb-2-loader-postgresql-${PGSQL_VER}=${TSDB_VER} timescaledb-tools
 ```

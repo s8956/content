@@ -88,20 +88,14 @@ draft: 0
 
 ## Настройка
 
-- Скачать файл локальной конфигурации в `/etc/php/*/fpm/conf.d/`:
+- Скачать файлы локальной конфигурации в `/etc/php/*/fpm/conf.d/`:
 
 ```bash
- [[ ! -v 'PHP_VER' ]] && return; f=('php'); d="/etc/php/${PHP_VER}/fpm/conf.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.ini" && ! -f "${d}/90-${i}.local.ini.orig" ]] && mv "${d}/90-${i}.local.ini" "${d}/90-${i}.local.ini.orig"; curl -fsSLo "${d}/90-${i}.local.ini" "${p}/${i}.ini"; done
-```
-
-- Скачать файлы локальной конфигурации модулей в `/etc/php/*/fpm/conf.d/`:
-
-```bash
- [[ ! -v 'PHP_VER' ]] && return; f=('cgi' 'date' 'mail' 'mbstring'); d="/etc/php/${PHP_VER}/fpm/conf.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do [[ -f "${d}/90-${i}.local.ini" && ! -f "${d}/90-${i}.local.ini.orig" ]] && mv "${d}/90-${i}.local.ini" "${d}/90-${i}.local.ini.orig"; curl -fsSLo "${d}/90-${i}.local.ini" "${p}/php.${i}.ini"; done
+ [[ ! -v 'PHP_VER' ]] && return; f=('php' 'php.cgi' 'php.date' 'php.mail' 'php.mbstring'); d="/etc/php/${PHP_VER}/fpm/conf.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do [[ -f "${d}/90-${i##*.}.local.ini" && ! -f "${d}/90-${i##*.}.local.ini.orig" ]] && mv "${d}/90-${i##*.}.local.ini" "${d}/90-${i##*.}.local.ini.orig"; curl -fsSLo "${d}/90-${i##*.}.local.ini" "${p}/${i}.ini"; done
 ```
 
 - Скачать файл конфигурации пула `www` в `/etc/php/*/fpm/pool.d/`:
 
 ```bash
- [[ ! -v 'PHP_VER' ]] && return; f=('www'); d="/etc/php/${PHP_VER}/fpm/pool.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/php.pool.${i}.conf"; done
+ [[ ! -v 'PHP_VER' ]] && return; f=('php.www'); d="/etc/php/${PHP_VER}/fpm/pool.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do [[ -f "${d}/${i##*.}.conf" && ! -f "${d}/${i##*.}.conf.orig" ]] && mv "${d}/${i##*.}.conf" "${d}/${i##*.}.conf.orig"; curl -fsSLo "${d}/${i##*.}.conf" "${p}/${i}.conf"; done
 ```
