@@ -87,7 +87,7 @@ draft: 0
  f=('elasticsearch'); d='/etc/elasticsearch'; p='https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d'; for i in "${f[@]}"; do [[ -f "${d}/${i}.yml" && ! -f "${d}/${i}.yml.orig" ]] && mv "${d}/${i}.yml" "${d}/${i}.yml.orig"; curl -fsSLo "${d}/${i}.yml" "${p}/${i}.yml" && chown root:elasticsearch "${d}/${i}.yml" && chmod 660 "${d}/${i}.yml"; done
 ```
 
-- Скачать файл локальной конфигурации `90-jvm.local.options` в `/etc/elasticsearch/jvm.options.d/`:
+- Скачать файлы локальной конфигурации в `/etc/elasticsearch/jvm.options.d/`:
 
 ```bash
  f=('jvm'); d='/etc/elasticsearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.options" "${p}/${i}.options" && chown root:elasticsearch "${d}/90-${i}.local.options" && chmod 660 "${d}/90-${i}.local.options"; done

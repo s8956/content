@@ -87,7 +87,7 @@ draft: 0
  f=('opensearch'); d='/etc/opensearch'; p='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do [[ -f "${d}/${i}.yml" && ! -f "${d}/${i}.yml.orig" ]] && mv "${d}/${i}.yml" "${d}/${i}.yml.orig"; curl -fsSLo "${d}/${i}.yml" "${p}/${i}.yml" && chown opensearch:opensearch "${d}/${i}.yml" && chmod 640 "${d}/${i}.yml"; done
 ```
 
-- Скачать файл локальной конфигурации `90-jvm.local.options` в `/etc/opensearch/jvm.options.d/`:
+- Скачать файлы локальной конфигурации в `/etc/opensearch/jvm.options.d/`:
 
 ```bash
  f=('jvm'); d='/etc/opensearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.options" "${p}/${i}.options" && chown opensearch:opensearch "${d}/90-${i}.local.options" && chmod 640 "${d}/90-${i}.local.options"; done
