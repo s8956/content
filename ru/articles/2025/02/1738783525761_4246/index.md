@@ -87,5 +87,5 @@ draft: 0
 - Скачать файлы стандартных сайтов (`80` и `443`) в `/etc/angie/http.d/`:
 
 ```bash
- f=('default' 'default-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i##*.}.conf" && ! -f "${d}/${i##*.}.conf.orig" ]] && mv "${d}/${i##*.}.conf" "${d}/${i##*.}.conf.orig"; curl -fsSLo "${d}/${i##*.}.conf" "${p}/http.${i}.conf"; done
+ f=('default' 'default-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/http.${i}.conf"; done
 ```
