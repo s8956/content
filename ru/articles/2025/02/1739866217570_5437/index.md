@@ -98,7 +98,7 @@ systemctl disable --now nginx.service
 ```
 
 - Установить {{< tag "Angie" >}} по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
-- Создать файл `/etc/angie/http.d/iredmail.ssl.conf` со следующим содержимым:
+- Создать файл `/etc/angie/http.d/iredmail-ssl.conf` со следующим содержимым:
 
 {{< file "irm.angie.conf" "nginx" >}}
 
