@@ -110,16 +110,16 @@ systemctl disable --now nginx.service
 
 ### PHP
 
-- Удалить пакеты старой версии {{< tag "PHP" >}}:
-
-```bash
-apt purge --yes 'php8*' && apt autoremove && rm -rf '/etc/php'
-```
-
 - Установить новую версию {{< tag "PHP" >}} по материалу {{< uuid "9bd1261d-3842-5859-8202-2e1d7a5ba9f4" >}}.
 - Создать файл `/etc/php/8.4/fpm/pool.d/iredmail.conf` со следующим содержимым:
 
 {{< file "irm.php.pool.conf" "ini" >}}
+
+- Удалить пакеты старой версии {{< tag "PHP" >}}:
+
+```bash
+apt purge --yes 'php8.2*' && apt autoremove
+```
 
 ### MariaDB
 
