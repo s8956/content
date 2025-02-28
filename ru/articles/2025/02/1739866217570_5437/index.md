@@ -60,7 +60,7 @@ draft: 0
 - Скачать и распаковать последнюю версию {{< tag "iRedMail" >}}:
 
 ```bash
-export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" && curl -fsSLo 'config' 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.config' || return
+export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedMail.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" && curl -fsSLo 'config' 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.config' || return
 ```
 
 {{< alert "tip" >}}
@@ -84,6 +84,12 @@ v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMa
 u=('MYSQL_ROOT_PASSWD' 'DOMAIN_ADMIN_PASSWD_PLAIN' 'SOGO_SIEVE_MASTER_PASSWD' 'AMAVISD_DB_PASSWD' 'FAIL2BAN_DB_PASSWD' 'IREDADMIN_DB_PASSWD' 'IREDAPD_DB_PASSWD' 'NETDATA_DB_PASSWD' 'RCM_DB_PASSWD' 'SOGO_DB_PASSWD' 'VMAIL_DB_ADMIN_PASSWD' 'VMAIL_DB_BIND_PASSWD'); for i in "${u[@]}"; do printf "%-25s = %s\n" "${i}" "$( < '/dev/urandom' tr -dc 'a-zA-Z0-9' | head -c "${1:-32}"; echo; )"; done
 ```
 {{< /alert >}}
+
+- Запустить установку {{< tag "iRedMail" >}}:
+
+```bash
+bash ./iRedMail.sh
+```
 
 ## Миграция компонентов
 
@@ -289,7 +295,7 @@ export RC_OLD='1.6.9'; export RC_NEW='1.6.10'
 - Запустить команду обновления {{< tag "RoundCube" >}}:
 
 ```bash
-curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_NEW}/roundcubemail-${RC_NEW}-complete.tar.gz" && tar -xzf "roundcubemail-${RC_NEW}-complete.tar.gz" && mv "roundcubemail-${RC_NEW}" '/opt/www' && cp "/opt/www/roundcubemail-${RC_OLD}/config/config.inc.php" "/opt/www/roundcubemail-${RC_NEW}/config/config.inc.php" && "/opt/www/roundcubemail-${RC_NEW}/bin/update.sh" -v "${RC_OLD}" && chown -R root:root "/opt/www/roundcubemail-${RC_NEW}" && chown www-data:www-data "/opt/www/roundcubemail-${RC_NEW}"/{logs,temp,config/config.inc.php} && unlink '/opt/www/roundcubemail' && ln -s "/opt/www/roundcubemail-${RC_NEW}" '/opt/www/roundcubemail'
+export IRM_DIR="${HOME}/iRM.RoundCube.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_NEW}/roundcubemail-${RC_NEW}-complete.tar.gz" && tar -xzf "roundcubemail-${RC_NEW}-complete.tar.gz" && mv "roundcubemail-${RC_NEW}" '/opt/www' && cp "/opt/www/roundcubemail-${RC_OLD}/config/config.inc.php" "/opt/www/roundcubemail-${RC_NEW}/config/config.inc.php" && "/opt/www/roundcubemail-${RC_NEW}/bin/update.sh" -v "${RC_OLD}" && chown -R root:root "/opt/www/roundcubemail-${RC_NEW}" && chown www-data:www-data "/opt/www/roundcubemail-${RC_NEW}"/{logs,temp,config/config.inc.php} && unlink '/opt/www/roundcubemail' && ln -s "/opt/www/roundcubemail-${RC_NEW}" '/opt/www/roundcubemail'
 ```
 
 ### iRedAdmin
@@ -297,7 +303,7 @@ curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_N
 - Запустить команду обновления {{< tag "iRedAdmin" >}}:
 
 ```bash
-export GH_NAME='iRedAdmin'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='iRedAdmin'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedAdmin.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ### iRedAPD
@@ -305,7 +311,7 @@ export GH_NAME='iRedAdmin'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "
 - Запустить команду обновления {{< tag "iRedAPD" >}}:
 
 ```bash
-export GH_NAME='iRedAPD'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='iRedAPD'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedAPD.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ### mlmmjadmin
@@ -313,7 +319,7 @@ export GH_NAME='iRedAPD'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "ht
 - Запустить команду обновления {{< tag "mlmmjadmin" >}}:
 
 ```bash
-export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"; curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.mlmmjadmin.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ### ClamAV
