@@ -97,5 +97,5 @@ draft: 0
 - Скачать файл конфигурации пула `main` в `/etc/php/*/fpm/pool.d/`:
 
 ```bash
- [[ ! -v 'PHP_VER' ]] && return; f=('main'); d="/etc/php/${PHP_VER}/fpm/pool.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/pool.${i}.conf"; done
+ [[ ! -v 'PHP_VER' ]] && return; f=('main'); d="/etc/php/${PHP_VER}/fpm/pool.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; [[ ! -d '/var/log/php-fpm' ]] && mkdir '/var/log/php-fpm'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/pool.${i}.conf"; done
 ```
