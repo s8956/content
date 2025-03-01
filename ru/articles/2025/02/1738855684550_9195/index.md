@@ -72,19 +72,10 @@ draft: 0
 
 ## Настройка
 
-- Сохранить оригинальный файл конфигурации:
+- Добавить в конец файла `/etc/gitlab/gitlab.rb` вызов локальной конфигурации:
 
 ```bash
- f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
-```
-
-- Добавить в конец файла `/etc/gitlab/gitlab.rb` следующую информацию:
-
-```ruby
-#################################################################################
-## Loading external configuration file
-#################################################################################
-from_file '/etc/gitlab/gitlab.local.rb'
+ f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig" && cp "${f}.orig" "${f}" && echo -e '\nfrom_file "/etc/gitlab/gitlab.local.rb"\n' | tee -a "${f}" > '/dev/null'
 ```
 
 - Скачать файл локальной конфигурации в `/etc/gitlab/`:
