@@ -1,0 +1,97 @@
+---
+# -------------------------------------------------------------------------------------------------------------------- #
+# GENERAL
+# -------------------------------------------------------------------------------------------------------------------- #
+
+title: 'AlviStack: Установка и настройка'
+description: ''
+images:
+  - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
+categories:
+  - 'linux'
+  - 'terminal'
+tags:
+  - 'debian'
+  - 'apt'
+  - 'install'
+  - 'ansible'
+  - 'ceph'
+  - 'etcd'
+  - 'git-lfs'
+  - 'git'
+  - 'podman'
+  - 'vagrant'
+  - 'yq'
+  - 'zstd'
+authors:
+  - 'KaiKimera'
+sources:
+  - ''
+license: 'CC-BY-SA-4.0'
+complexity: '0'
+toc: 1
+comments: 1
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# DATE
+# -------------------------------------------------------------------------------------------------------------------- #
+
+date: '2025-03-02T23:36:20+03:00'
+publishDate: '2025-03-02T23:36:20+03:00'
+lastMod: '2025-03-02T23:36:20+03:00'
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# META
+# -------------------------------------------------------------------------------------------------------------------- #
+
+type: 'articles'
+hash: 'dc9141c42dd5a4cfd40b8468694b9250a2a5b77a'
+uuid: 'dc9141c4-2dd5-54cf-b40b-8468694b9250'
+slug: 'dc9141c4-2dd5-54cf-b40b-8468694b9250'
+
+draft: 1
+---
+
+
+
+<!--more-->
+
+## Репозиторий
+
+- Скачать и установить ключ репозитория:
+
+```bash
+ . '/etc/os-release' && curl -fsSL "https://download.opensuse.org/repositories/home:alvistack/Debian_${VERSION_ID}/Release.key" | gpg --dearmor -o '/etc/apt/keyrings/alvistack.gpg'
+```
+
+- Создать файл репозитория `/etc/apt/sources.list.d/alvistack.sources`:
+
+```bash
+ . '/etc/os-release' && echo -e "X-Repolib-Name: AlviStack\nEnabled: yes\nTypes: deb\nURIs: https://download.opensuse.org/repositories/home:/alvistack/Debian_${VERSION_ID}\nSuites: /\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/alvistack.gpg"| tee '/etc/apt/sources.list.d/alvistack.sources' > '/dev/null'
+```
+
+- Скачать файлы предпочтений в `/etc/apt/preferences.d/`:
+
+```bash
+ f=('alvistack'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/03/dc9141c4-2dd5-54cf-b40b-8468694b9250'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
+```
+
+## Установка
+
+- Обновить базу пакетов:
+
+```bash
+ apt update
+```
+
+- Установить Podman:
+
+```bash
+ apt update && apt install --yes -t 'l=home:alvistack' podman podman-netavark podman-compose
+```
+
+- Установить Git:
+
+```bash
+ apt update && apt install --yes -t 'l=home:alvistack' git
+```
