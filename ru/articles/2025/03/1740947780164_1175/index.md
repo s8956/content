@@ -78,19 +78,13 @@ draft: 1
 
 ## Установка
 
-- Обновить базу пакетов:
-
-```bash
- apt update
-```
-
-- Установить Podman:
+- Установить {{< tag "Podman" >}}:
 
 ```bash
  apt update && apt install --yes -t 'l=home:alvistack' podman podman-netavark podman-compose
 ```
 
-- Установить Git:
+- Установить {{< tag "Git" >}}:
 
 ```bash
  apt update && apt install --yes -t 'l=home:alvistack' git
