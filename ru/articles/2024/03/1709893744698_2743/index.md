@@ -8,11 +8,9 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1461360228754-6e81c478b882'
 categories:
-  - 'bsd'
   - 'linux'
   - 'inDev'
 tags:
-  - 'freebsd'
   - 'linux'
   - 'fs'
   - 'zfs'
@@ -78,7 +76,7 @@ ls -l '/dev/disk/by-id/'
 - Создать обычный пул `data` из одного диска `pci-0000:01:00.0-scsi-0:1:0:0`:
 
 ```bash
-zpool create -o 'ashift=12' -O 'atime=off' 'data' 'pci-0000:01:00.0-scsi-0:1:0:0'
+p='data'; d=('pci-0000:01:00.0-scsi-0:1:0:0'); zpool create -o 'ashift=12' -O 'atime=off' "${p}" "${d[@]}"
 ```
 
 ### Расширение пула
@@ -90,7 +88,7 @@ zpool create -o 'ashift=12' -O 'atime=off' 'data' 'pci-0000:01:00.0-scsi-0:1:0:0
 - Добавить диск `pci-0000:01:00.0-scsi-0:1:1:0` в пул `data`:
 
 ```bash
-zpool add 'data' 'pci-0000:01:00.0-scsi-0:1:1:0'
+p='data'; d=('pci-0000:01:00.0-scsi-0:1:1:0'); zpool add "${p}" "${d[@]}"
 ```
 
 #### Расширение диска в пуле
@@ -98,14 +96,14 @@ zpool add 'data' 'pci-0000:01:00.0-scsi-0:1:1:0'
 - Обновить информацию об устройстве `sdb`, расширить существующий диск `sdb` и пул `data`:
 
 ```bash
-echo 1 > '/sys/block/sdb/device/rescan' && partprobe && zpool online -e 'data' 'sdb'
+p='data'; b='sdb'; d=('pci-0000:03:00.0-scsi-0:1:0:0'); echo 1 > "/sys/block/${b}/device/rescan" && zpool online -e "${p}" "${d[@]}"
 ```
 
 {{< alert "tip" >}}
 При необходимости можно включить автоматическое расширение пула `data`:
 
 ```bash
-zpool set 'autoexpand=on' 'data'
+p='data'; zpool set 'autoexpand=on' "${p}"
 ```
 {{< /alert >}}
 
@@ -118,7 +116,7 @@ zpool set 'autoexpand=on' 'data'
 - Подключить новый диск `pci-0000:03:00.0-scsi-0:1:1:0` к существующему диску `pci-0000:03:00.0-scsi-0:1:0:0` в пуле `data` для создания зеркала:
 
 ```bash
-zpool attach 'data' 'pci-0000:03:00.0-scsi-0:1:0:0' 'pci-0000:03:00.0-scsi-0:1:1:0'
+p='data'; d=('pci-0000:03:00.0-scsi-0:1:0:0' 'pci-0000:03:00.0-scsi-0:1:1:0'); zpool attach "${p}" "${d[@]}"
 ```
 
 #### Отключение второго диска
@@ -126,7 +124,7 @@ zpool attach 'data' 'pci-0000:03:00.0-scsi-0:1:0:0' 'pci-0000:03:00.0-scsi-0:1:1
 - Отключить диск `pci-0000:03:00.0-scsi-0:1:1:0` в пуле `data`:
 
 ```bash
-zpool detach 'data' 'pci-0000:03:00.0-scsi-0:1:1:0'
+p='data'; d=('pci-0000:03:00.0-scsi-0:1:1:0'); zpool detach "${p}" "${d[@]}"
 ```
 
 ### Импортирование пула
@@ -134,13 +132,13 @@ zpool detach 'data' 'pci-0000:03:00.0-scsi-0:1:1:0'
 - Импортировать пул `data`, состоящий из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
 ```bash
-zpool import -d 'pci-0000:01:00.0-scsi-0:1:0:0' -d 'pci-0000:01:00.0-scsi-0:1:1:0' 'data'
+p='data'; d=('-d' 'pci-0000:01:00.0-scsi-0:1:0:0' '-d' 'pci-0000:01:00.0-scsi-0:1:1:0'); zpool import "${d[@]}" "${p}"
 ```
 
 - ...или можно разрешить {{< tag "ZFS" >}} автоматически поискать диски пула `data`:
 
 ```bash
-zpool import -d '/dev/disk/by-path/' 'data'
+p='data'; d=('-d' '/dev/disk/by-path/'); zpool import "${d[@]}" "${p}"
 ```
 
 ### Переименования пула
@@ -148,13 +146,13 @@ zpool import -d '/dev/disk/by-path/' 'data'
 - Экспортировать пул `data`:
 
 ```bash
-zpool export 'data'
+p='data'; zpool export "${p}"
 ```
 
 - Импортировать пул `data` с новым именем:
 
 ```bash
-zpool import 'data' 'data_NEW'
+p=('data' 'data_NEW'); zpool import "${p[@]}"
 ```
 
 ### Обновление пула
@@ -168,7 +166,7 @@ zpool status -v
 - При появлении надписи `status: Some supported features are not enabled on the pool...` запустить обновление пула `data`:
 
 ```bash
-zpool upgrade 'data'
+p='data'; zpool upgrade "${p}"
 ```
 
 - ...или обновить сразу все пулы:
@@ -182,7 +180,7 @@ zpool upgrade -a
 - Удалить пул `data`:
 
 ```bash
-zpool destroy 'data'
+p='data'; zpool destroy "${p}"
 ```
 
 ### Список пулов
@@ -198,7 +196,7 @@ zpool list
 - Проверить статус пула `data`:
 
 ```bash
-zpool status -v 'data'
+p='data'; zpool status -v "${p}"
 ```
 
 ### Работа с RAID
@@ -210,7 +208,7 @@ zpool status -v 'data'
 - Создать **RAID-0** из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
 ```bash
-zpool create -o 'ashift=12' -O 'atime=off' 'data' 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
+p='data'; r0=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); zpool create -o 'ashift=12' -O 'atime=off' "${p}" "${r0[@]}"
 ```
 
 #### Mirror (RAID1)
@@ -218,7 +216,7 @@ zpool create -o 'ashift=12' -O 'atime=off' 'data' 'pci-0000:01:00.0-scsi-0:1:0:0
 - Создать зеркало (**RAID-1**) из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
 ```bash
-zpool create -o 'ashift=12' -O 'atime=off' 'data' mirror 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
+p='data'; r1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); zpool create -o 'ashift=12' -O 'atime=off' "${p}" mirror "${r1[@]}"
 ```
 
 #### RAID10
@@ -226,7 +224,7 @@ zpool create -o 'ashift=12' -O 'atime=off' 'data' mirror 'pci-0000:01:00.0-scsi-
 - Создать **RAID-10** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0`, `pci-0000:01:00.0-scsi-0:1:2:0` и `pci-0000:01:00.0-scsi-0:1:3:0`:
 
 ```bash
-zpool create -o 'ashift=12' -O 'atime=off' 'data' mirror 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' mirror 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'
+p='data'; r10m1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); r10m2=('pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'); zpool create -o 'ashift=12' -O 'atime=off' "${p0}" mirror "${r10m1[@]}" mirror "${r10m2[@]}"
 ```
 
 #### RAIDZ-1 (RAID5)
@@ -234,7 +232,7 @@ zpool create -o 'ashift=12' -O 'atime=off' 'data' mirror 'pci-0000:01:00.0-scsi-
 - Создать **RAID-5** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0` и `pci-0000:01:00.0-scsi-0:1:2:0`:
 
 ```bash
-zpool create -o 'ashift=12' -O 'atime=off' 'data' raidz 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0'
+p='data'; rz1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0'); zpool create -o 'ashift=12' -O 'atime=off' "${p}" raidz "${rz1[@]}"
 ```
 
 #### RAIDZ-2 (RAID6)
@@ -242,7 +240,7 @@ zpool create -o 'ashift=12' -O 'atime=off' 'data' raidz 'pci-0000:01:00.0-scsi-0
 - Создать **RAID-6** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0`, `pci-0000:01:00.0-scsi-0:1:2:0` и `pci-0000:01:00.0-scsi-0:1:3:0`
 
 ```bash
-zpool create -o 'ashift=12' -O 'atime=off' 'data' raidz2 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'
+p='data'; rz2=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'); zpool create -o 'ashift=12' -O 'atime=off' "${p}" raidz2 "${rz2[@]}"
 ```
 
 #### RAIDZ-3
@@ -250,7 +248,7 @@ zpool create -o 'ashift=12' -O 'atime=off' 'data' raidz2 'pci-0000:01:00.0-scsi-
 - Создать **RAIDZ-3** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0`, `pci-0000:01:00.0-scsi-0:1:2:0`, `pci-0000:01:00.0-scsi-0:1:3:0` и `pci-0000:01:00.0-scsi-0:1:4:0`:
 
 ```bash
-zpool create -o 'ashift=12' -O 'atime=off' 'data' raidz3 'pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0' 'pci-0000:01:00.0-scsi-0:1:4:0'
+p='data'; rz3=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0' 'pci-0000:01:00.0-scsi-0:1:4:0'); zpool create -o 'ashift=12' -O 'atime=off' "${p}" raidz3 "${rz3[@]}"
 ```
 
 ### Работа с ARC и ZIL
@@ -262,7 +260,7 @@ zpool create -o 'ashift=12' -O 'atime=off' 'data' raidz3 'pci-0000:01:00.0-scsi-
 - Добавить отдельный диск (**L2ARC**) `pci-0000:01:00.0-scsi-0:1:4:0` для работы с **ARC** в пул `data`:
 
 ```bash
-zpool add 'data' cache 'pci-0000:01:00.0-scsi-0:1:4:0'
+p='data'; d=('pci-0000:01:00.0-scsi-0:1:4:0'); zpool add "${p}" cache "${d[@]}"
 ```
 
 #### ZIL
@@ -270,7 +268,7 @@ zpool add 'data' cache 'pci-0000:01:00.0-scsi-0:1:4:0'
 - Добавить отдельный диск (**SLOG**) `pci-0000:01:00.0-scsi-0:1:5:0` для работы с **ZIL**  в пул `data`:
 
 ```bash
-zpool add 'data' log 'pci-0000:01:00.0-scsi-0:1:5:0'
+p='data'; d=('pci-0000:01:00.0-scsi-0:1:5:0'); zpool add "${p}" log "${d[@]}"
 ```
 
 ## Тома
@@ -280,25 +278,25 @@ zpool add 'data' log 'pci-0000:01:00.0-scsi-0:1:5:0'
 - Создать том `cloud` в пуле `data`:
 
 ```bash
-zfs create 'data/cloud'
+p='data'; v='cloud'; zfs create "${p}/${v}"
 ```
 
-- Создать том `cloud` в пуле `data` и с точкой монтирования `/opt/cloud`:
+- Создать том `cloud` с точкой монтирования `/opt/cloud` в пуле `data`:
 
 ```bash
-zfs create -o 'mountpoint=/opt/cloud' 'data/cloud'
+p='data'; v='cloud'; zfs create -o "mountpoint=/opt/${v}" "${p}/${v}"
 ```
 
-- Создать том `cloud` в пуле `data` и с алгоритмом компрессии `zstd`:
+- Создать том `cloud` с алгоритмом компрессии `zstd` в пуле `data`:
 
 ```bash
-zfs create -o 'compression=zstd' 'data/cloud'
+p='data'; v='cloud'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
-- Создать том `cloud` в пуле `data` с алгоритмом компрессии `zstd` и точкой монтирования `/opt/cloud`:
+- Создать том `cloud` с алгоритмом компрессии `zstd` и точкой монтирования `/opt/cloud` в пуле `data`:
 
 ```bash
-zfs create -o 'compression=zstd' -o 'mountpoint=/opt/cloud' 'data/cloud'
+p='data'; v='cloud'; zfs create -o 'compression=zstd' -o "mountpoint=/opt/${v}" "${p}/${v}"
 ```
 
 ### Удаление тома
@@ -306,15 +304,15 @@ zfs create -o 'compression=zstd' -o 'mountpoint=/opt/cloud' 'data/cloud'
 - Удалить том `cloud` в пуле `data`:
 
 ```bash
-zfs destroy 'data/cloud'
+p='data'; v='cloud'; zfs destroy "${p}/${v}"
 ```
 
 ### Создание зашифрованного тома
 
-- Создать том `secret` в пуле `data` и зашифровать его парольной фразой:
+- Создать том `secret` и зашифровать его парольной фразой в пуле `data`:
 
 ```bash
-zfs create -o 'encryption=on' -o 'keyformat=passphrase' 'data/secret'
+p='data'; v='secret'; zfs create -o 'encryption=on' -o 'keyformat=passphrase' "${p}/${v}"
 ```
 
 Где:
@@ -339,7 +337,7 @@ zfs list -t 'snapshot'
 - Показать список снимков тома `cloud` в пуле `data`:
 
 ```bash
-zfs list -r -t 'snapshot' -o 'name,creation' 'data/cloud'
+p='data'; v='cloud'; zfs list -r -t 'snapshot' -o 'name,creation' "${p}/${v}"
 ```
 
 ### Создание снимков
@@ -347,13 +345,13 @@ zfs list -r -t 'snapshot' -o 'name,creation' 'data/cloud'
 - Создать снимок `2024-08-21.19-32-02` тома `cloud` в пуле `data`:
 
 ```bash
-zfs snapshot "data/cloud@$( date '+%F.%H-%M-%S' )"
+p='data'; v='cloud'; s="$( date '+%F.%H-%M-%S' )"; zfs snapshot "${p}/${v}@${s}"
 ```
 
 - Создать снимок `2024-08-21.19-32-02` тома `cloud` и всех его дочерних томов в пуле `data`:
 
 ```bash
-zfs snapshot -r "data/cloud@$( date '+%F.%H-%M-%S' )"
+p='data'; v='cloud'; s="$( date '+%F.%H-%M-%S' )"; zfs snapshot -r "${p}/${v}@${s}"
 ```
 
 ### Переименование снимков
@@ -361,13 +359,13 @@ zfs snapshot -r "data/cloud@$( date '+%F.%H-%M-%S' )"
 - Переименовать снимок `name_OLD` тома `cloud` в пуле `data`:
 
 ```bash
-zfs rename 'data/cloud@name_OLD' 'name_NEW'
+p='data'; v='cloud'; zfs rename "${p}/${v}@name_OLD" 'name_NEW'
 ```
 
 - Переименовать снимок `name_OLD` тома `cloud` и во всех его дочерних томов в пуле `data`:
 
 ```bash
-zfs rename -r 'data/cloud@name_OLD' 'name_NEW'
+p='data'; v='cloud'; zfs rename -r "${p}/${v}@name_OLD" 'name_NEW'
 ```
 
 ### Откат данных к снимку
@@ -375,7 +373,7 @@ zfs rename -r 'data/cloud@name_OLD' 'name_NEW'
 - Выполнить откат данных к снимку `2024-08-21.19-32-02` тома `cloud` в пуле `data`:
 
 ```bash
-zfs rollback 'data/cloud@2024-08-21.19-32-02'
+p='data'; v='cloud'; s='2024-08-21.19-32-02'; zfs rollback "${p}/${v}@${s}"
 ```
 
 ### Удаление снимков
@@ -383,7 +381,7 @@ zfs rollback 'data/cloud@2024-08-21.19-32-02'
 - Удалить снимок `2024-08-21.19-32-02` тома `cloud` в пуле `data`:
 
 ```bash
-zfs destroy 'data/cloud@2024-08-21.19-32-02'
+p='data'; v='cloud'; s='2024-08-21.19-32-02'; zfs destroy "${p}/${v}@${s}"
 ```
 
 ## Оптимизации
@@ -395,19 +393,19 @@ zfs destroy 'data/cloud@2024-08-21.19-32-02'
 - Создать основной том `pgsql` с алгоритмом компрессии `zstd`:
 
 ```bash
-zfs create -o 'compression=zstd' 'data/pgsql'
+p='data'; v='pgsql'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
 - Создать специальный том `pgsql/main` с алгоритмом компрессии `zstd` и размером блока `32K` для баз данных:
 
 ```bash
-zfs create -o 'recordsize=32K' 'data/pgsql/main' && chmod 700 '/data/pgsql/main'
+p='data'; v='pgsql/main'; zfs create -o 'recordsize=32K' "${p}/${v}" && chmod 700 "/${p}/${v}"
 ```
 
 - Создать специальный том `pgsql/wal` с алгоритмом компрессии `zstd` и размером блока `32K` для WAL:
 
 ```bash
-zfs create -o 'recordsize=32K' 'data/pgsql/wal'
+p='data'; v='pgsql/wal'; zfs create -o 'recordsize=32K' "${p}/${v}"
 ```
 
 - Откорректировать настройки {{< tag "PostgreSQL" >}}:
@@ -424,19 +422,19 @@ wal_recycle = off
 - Создать основной том `mysql` с алгоритмом компрессии `zstd`:
 
 ```bash
-zfs create -o 'compression=zstd' 'data/mysql'
+p='data'; v='mysql'; zfs create -o 'compression=zstd' "${p}/${v}"
 ```
 
 - Создать специальный том `mysql/main` с алгоритмом компрессии `zstd` и размером блока `16K` для баз данных:
 
 ```bash
-zfs create -o 'recordsize=16K' 'data/mysql/main'
+p='data'; v='mysql/main'; zfs create -o 'recordsize=16K' "${p}/${v}"
 ```
 
 - Создать специальный том `mysql/log` с алгоритмом компрессии `zstd` для логирования:
 
 ```bash
-zfs create 'data/mysql/log'
+p='data'; v='mysql/log'; zfs create "${p}/${v}"
 ```
 
 - Откорректировать настройки {{< tag "MySQL" >}}:
