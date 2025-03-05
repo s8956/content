@@ -59,29 +59,52 @@ draft: 0
 sudo -u 'postgres' psql -c '\du'
 ```
 
-- Создать пользователя `DB_USER` с паролем:
+- Создать роль `DB_USER` с паролем:
 
 ```bash
 sudo -u 'postgres' createuser --pwprompt 'DB_USER'
 ```
 
-- Удалить пользователя `DB_USER`:
+- Переименовать роль `DB_USER` в `DB_USER_NEW`:
+
+```bash
+sudo -u 'postgres' psql -c 'alter role DB_USER rename to DB_USER_NEW;'
+```
+
+- Сделать роль `DB_USER` супер-пользователем:
+
+```bash
+sudo -u 'postgres' psql -c 'alter role DB_USER superuser;'
+```
+
+- Изменить пароль у роли `DB_USER`:
+
+```bash
+sudo -u 'postgres' psql -c "alter role DB_USER with password 'PASSWORD';"
+```
+
+- Удалить пароль у роли `DB_USER`:
+
+```bash
+sudo -u 'postgres' psql -c 'alter role DB_USER with password null;'
+```
+
+- Удалить роль `DB_USER`:
 
 ```bash
 sudo -u 'postgres' dropuser 'DB_USER'
 ```
-- Изменить пользователя всех баз данных с `DB_USER_OLD` на `DB_USER_NEW`:
+- Изменить роль владельца у всех баз данных с `DB_USER` на `DB_USER_NEW`:
 
 ```bash
-sudo -u 'postgres' psql -c 'reassign owned by DB_USER_OLD to DB_USER_NEW;'
+sudo -u 'postgres' psql -c 'reassign owned by DB_USER to DB_USER_NEW;'
 ```
 
-- Изменить пользователя таблиц базы данных `DB_NAME` с `DB_USER_OLD` на `DB_USER_NEW`:
+- Изменить роль у таблиц базы данных `DB_NAME` с `DB_USER` на `DB_USER_NEW`:
 
 ```bash
-sudo -u 'postgres' psql -c '\c DB_NAME' -c 'reassign owned by DB_USER_OLD to DB_USER_NEW;'
+sudo -u 'postgres' psql -c '\c DB_NAME' -c 'reassign owned by DB_USER to DB_USER_NEW;'
 ```
-
 
 ## Базы данных
 
