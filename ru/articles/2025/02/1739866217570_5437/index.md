@@ -177,19 +177,19 @@ sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysql
 - Переместить ключи **DKIM** со старого сервера на новый сервер:
 
 ```bash
-d='/var/lib/dkim/'; rsync -a -e 'ssh -p 22' "${d}" "root@192.168.1.2:${d}"
+d='/var/lib/dkim/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
 ```
 
 - Переместить базу данных **Fail2Ban** со старого сервера на новый сервер:
 
 ```bash
-d='/var/lib/fail2ban/'; rsync -a -e 'ssh -p 22' "${d}" "root@192.168.1.2:${d}"
+d='/var/lib/fail2ban/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
 ```
 
 - Переместить профили пользователей и письма со старого сервера на новый сервер:
 
 ```bash
-d='/var/vmail/vmail1/'; rsync -a -e 'ssh -p 22' "${d}" "root@192.168.1.2:${d}"
+d='/var/vmail/vmail1/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
 ```
 
 ### Миграция баз данных
