@@ -81,6 +81,12 @@ python3 '/opt/iredapd/tools/wblist_admin.py' --list --whitelist
 python3 '/opt/iredapd/tools/wblist_admin.py' --add --whitelist '192.168.1.10' 'user@domain.com' '@iredmail.org' '@.example.com'
 ```
 
+- Удалить из белого списка IP-адрес, email, домен и суб-домен:
+
+```bash
+python3 '/opt/iredapd/tools/wblist_admin.py' --delete --whitelist '192.168.1.10' 'user@domain.com' '@iredmail.org' '@.example.com'
+```
+
 - Создать для локального почтового домена `@domain.com` белый список и внести в него IP-адрес `192.168.1.10` и email `user@example.com`:
 
 ```bash
@@ -123,6 +129,12 @@ python3 '/opt/iredapd/tools/wblist_admin.py' --list --blacklist
 
 ```bash
 python3 '/opt/iredapd/tools/wblist_admin.py' --add --blacklist '202.96.134.133' 'bad-user@domain.com' '@bad-domain.com' '@.sub-domain.com'
+```
+
+- Удалить из чёрного списка IP-адрес, email, домен и суб-домен:
+
+```bash
+python3 '/opt/iredapd/tools/wblist_admin.py' --delete --blacklist '202.96.134.133' 'bad-user@domain.com' '@bad-domain.com' '@.sub-domain.com'
 ```
 
 - Создать для локального почтового домена `@domain.com` чёрный список и внести в него IP-адрес `172.16.1.10` и email `bad-user@example.com`:
