@@ -200,12 +200,6 @@ d='/var/vmail/vmail1/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}
 f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a -e 'ssh -p 22' "${f}" 'root@192.168.1.2:/root/'
 ```
 
-- Удалить текущие пустые базы данных на новом сервере:
-
-```bash
-curl -fsSL 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.mariadb.drop.database.sql' | mariadb --user='root' --password
-```
-
 - Импортировать файл `iRedMail.backup.sql.xz` с базами данных старого сервера на новом сервере:
 
 ```bash
@@ -219,10 +213,6 @@ f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 f='iRedMail.backup.sql'; xz -d "${f}.xz" && sed -i 's/NO_AUTO_CREATE_USER//' "${f}" && xz -9 "${f}"
 ```
 {{< /alert >}}
-
-- Импортировать шаблон для создания технических пользователей {{< tag "iRedMail" >}}:
-
-{{< file "irm.mariadb.create.user.sql" "sql" >}}
 
 - [Обновить](#схемы-баз-данных) схемы баз данных.
 
