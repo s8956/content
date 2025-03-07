@@ -300,7 +300,7 @@ cd '/opt/www/roundcubemail' && ./bin/updatedb.sh --package='roundcube' --dir='SQ
 RoundCube использует верификацию адресов электронной почты при помощи регулярного выражения. Если RoundCube разворачивается в организации с односимвольной доменной зоной, то он не сможет воспринимать подобный домен в качестве валидного и, соответственно, адреса электронной почты в этом домене для него будут недействительными. Исправить подобную "особенность" можно при помощи следующей команды:
 
 ```bash
-f=('js/common.js' 'js/common.min.js' 'lib/Roundcube/rcube_string_replacer.php'); for i in "${f[@]}"; do sed -i -e 's|{2,}|{1,}|g' "/opt/www/roundcubemail/program/${i}"; done
+f=('js/common.js' 'js/common.min.js' 'lib/Roundcube/rcube_string_replacer.php'); p='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${p}/${i}" "${p}/${i}.orig" && sed -i -e 's|{2,}|{1,}|g' "${p}/${i}"; done
 ```
 {{< /alert >}}
 
