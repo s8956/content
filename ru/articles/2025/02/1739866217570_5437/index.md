@@ -154,6 +154,8 @@ f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 
 #### Особенности
 
+##### MySQL: Deprecated program name
+
 Если на почтовый адрес присылаются уведомления `mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead`, то необходимо выполнить команды для исправления файлов.
 
 - Исправление файла `/usr/local/bin/fail2ban_banned_db`:
@@ -166,6 +168,28 @@ sed -i -e 's|CMD_SQL="mysql |CMD_SQL="mariadb |g' '/usr/local/bin/fail2ban_banne
 
 ```bash
 sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysqldump |CMD_MYSQLDUMP="mariadb-dump |g' '/var/vmail/backup/backup_mysql.sh'
+```
+
+##### UTF8MB4
+
+Чтобы перевести таблицы на UTF8MB4, выполним следующие шаги:
+
+- Экспортируем базы данных:
+
+```bash
+f='iRedMail.backup.utf8mb4.sql'; mariadb-dump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' --result-file="${f}"
+```
+
+- Заменяем `utf8mb3` на `utf8mb4`:
+
+```bash
+f='iRedMail.backup.utf8mb4.sql'; sed -i -e 's|utf8mb3_general_ci|utf8mb4_unicode_ci|g' -e 's|utf8mb3|utf8mb4|g' "${f}"
+```
+
+- Импортируем базы данных:
+
+```bash
+f='iRedMail.backup.utf8mb4.sql'; mariadb --user='root' --password < "${f}"
 ```
 
 ## Миграция данных
