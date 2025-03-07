@@ -154,6 +154,8 @@ f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 
 #### Особенности
 
+В этом разделе представлены корректировки и дополнительные модификации для работы с базами данных.
+
 ##### MySQL: Deprecated program name
 
 Если на почтовый адрес присылаются уведомления `mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead`, то необходимо выполнить команды для исправления файлов.
