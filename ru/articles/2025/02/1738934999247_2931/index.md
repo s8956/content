@@ -67,7 +67,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes redis
+ apt update && apt install --yes redis && systemctl enable --now redis-server.service
 ```
 
 ## Настройка
