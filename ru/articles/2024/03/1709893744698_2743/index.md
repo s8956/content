@@ -559,13 +559,13 @@ wal_recycle = off
 - Создать основной том `mysql` с алгоритмом компрессии `zstd`:
 
 ```bash
-p='data'; v='mysql'; o=('compression=zstd'); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='mysql'; o=('compression=zstd' 'primarycache=metadata'); zfs create "${o[@]/#/-o }" "${p}/${v}"
 ```
 
 - Создать специальный том `mysql/main` с алгоритмом компрессии `zstd` и размером блока `16K` для баз данных:
 
 ```bash
-p='data'; v='mysql/main'; o=('recordsize=16K'); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='mysql/main'; o=('recordsize=16K' 'logbias=throughput'); zfs create "${o[@]/#/-o }" "${p}/${v}"
 ```
 
 - Создать специальный том `mysql/log` с алгоритмом компрессии `zstd` для логирования:
