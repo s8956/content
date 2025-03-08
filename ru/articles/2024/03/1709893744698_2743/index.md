@@ -93,7 +93,7 @@ p='data'; d=('pci-0000:01:00.0-scsi-0:1:1:0'); zpool add "${p}" "${d[@]}"
 
 #### Расширение диска в пуле
 
-- Обновить информацию об устройстве `sdb`, расширить существующий диск `sdb` и пул `data`:
+- Обновить информацию об устройстве `sdb`, на котором располагается пул `data` и расширить его:
 
 ```bash
 p='data'; b='sdb'; d=('pci-0000:03:00.0-scsi-0:1:0:0'); echo 1 > "/sys/block/${b}/device/rescan" && zpool online -e "${p}" "${d[@]}"
@@ -127,7 +127,39 @@ p='data'; d=('pci-0000:03:00.0-scsi-0:1:0:0' 'pci-0000:03:00.0-scsi-0:1:1:0'); z
 p='data'; d=('pci-0000:03:00.0-scsi-0:1:1:0'); zpool detach "${p}" "${d[@]}"
 ```
 
+### Экспортирование пула
+
+- Экспортировать все пулы:
+
+```bash
+zpool export -a
+```
+
+- Экспортировать пул `data`:
+
+```bash
+p='data'; zpool export "${p}"
+```
+
 ### Импортирование пула
+
+- Посмотреть список пулов для импорта:
+
+```bash
+zpool import
+```
+
+- Импортировать пул `data`:
+
+```bash
+p='data'; zpool import "${p}"
+```
+
+- Импортировать пул `data` с новым именем `data_NEW`:
+
+```bash
+p=('data' 'data_NEW'); zpool import "${p[@]}"
+```
 
 - Импортировать пул `data`, состоящий из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
@@ -149,7 +181,7 @@ p='data'; d=('-d' '/dev/disk/by-path/'); zpool import "${d[@]}" "${p}"
 p='data'; zpool export "${p}"
 ```
 
-- Импортировать пул `data` с новым именем:
+- Импортировать пул `data` с новым именем `data_NEW`:
 
 ```bash
 p=('data' 'data_NEW'); zpool import "${p[@]}"
@@ -183,6 +215,20 @@ zpool upgrade -a
 p='data'; zpool destroy "${p}"
 ```
 
+### Восстановление пула
+
+- Показать список уничтоженных пулов:
+
+```bash
+zpool import -D
+```
+
+- Восстановить уничтоженный пул `data`:
+
+```bash
+p='data'; zpool import -D "${p}"
+```
+
 ### Список пулов
 
 Вывести список всех пулов в системе:
@@ -197,6 +243,38 @@ zpool list
 
 ```bash
 p='data'; zpool status -v "${p}"
+```
+
+### Свойства пула
+
+- Показать все свойства всех пулов:
+
+```bash
+zpool get all
+```
+
+- Показать все свойства пула `data`:
+
+```bash
+p='data'; zpool get all "${p}"
+```
+
+- Показать свойства `autoexpand`, `ashift` и `fragmentation` всех пулов:
+
+```bash
+n=('autoexpand' 'ashift' 'fragmentation'); zpool get "$( echo "${n[@]}" | tr ' ' ',' )"
+```
+
+- Показать свойства `autoexpand`, `ashift` и `fragmentation` пула `data`:
+
+```bash
+p='data'; n=('autoexpand' 'ashift' 'fragmentation'); zpool get "$( echo "${n[@]}" | tr ' ' ',' )" "${p}"
+```
+
+- Установить свойство `autoexpand` в `on` пула `data`:
+
+```bash
+p='data'; zpool set 'autoexpand=on' "${p}"
 ```
 
 ### Работа с RAID
@@ -323,6 +401,50 @@ p='data'; v='secret'; zfs create -o 'encryption=on' -o 'keyformat=passphrase' "$
 {{< alert "tip" >}}
 При создании тома `secret` ZFS попросит ввести парольную фразу для шифрования данных.
 {{< /alert >}}
+
+### Свойства тома
+
+- Показать все свойства всех томов:
+
+```bash
+zfs get all
+```
+
+- Показать все свойства тома `cloud` в пуле `data`:
+
+```bash
+p='data'; v='cloud'; zfs get all "${p}/${v}"
+```
+
+- Показать свойства `compressratio`, `compression`, `mountpoint` и `atime` тома `cloud` в пуле `data`:
+
+```bash
+p='data'; v='cloud'; n=('compressratio' 'compression' 'mountpoint' 'atime'); zfs get "$( echo "${n[@]}" | tr ' ' ',' )" "${p}/${v}"
+```
+
+- Показать свойства `compressratio`, `compression`, `mountpoint` и `atime` тома `cloud` и во всех его под-томах в пуле `data`:
+
+```bash
+p='data'; v='cloud'; n=('compressratio' 'compression' 'mountpoint' 'atime'); zfs get -r "$( echo "${n[@]}" | tr ' ' ',' )" "${p}/${v}"
+```
+
+- Установить свойство `compression` в `zstd` тома `cloud` в пуле `data`:
+
+```bash
+p='data'; v='cloud'; zfs set 'compression=zstd' "${p}/${v}"
+```
+
+- Вернуть свойство `compression` к стандартному наследуемому значению тома `cloud` в пуле `data`:
+
+```bash
+p='data'; v='cloud'; zfs inherit 'compression' "${p}/${v}"
+```
+
+- Вернуть свойство `compression` к стандартному наследуемому значению тома `cloud` и во всех его под-томах в пуле `data`:
+
+```bash
+p='data'; v='cloud'; zfs inherit -r 'compression' "${p}/${v}"
+```
 
 ## Снимки
 
