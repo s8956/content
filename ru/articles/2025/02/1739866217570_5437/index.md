@@ -232,7 +232,7 @@ f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transact
 f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 ```
 
-{{< alert tip >}}
+{{< alert "tip" >}}
 Если при импорте файла появляется ошибка `ERROR 1231 (42000) at line *: Variable 'sql_mode' can't be set to the value of 'NO_AUTO_CREATE_USER'`, то её можно исправить путём удаления директивы `NO_AUTO_CREATE_USER` из файла:
 
 ```bash
