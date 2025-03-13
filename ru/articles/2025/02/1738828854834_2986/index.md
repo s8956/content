@@ -74,11 +74,11 @@ apt update && apt install --yes mysql-server
 
 ### Основная конфигурация
 
-- Создать файл `/etc/mysql/mysql.conf.d/mysqld.local.cnf` для конфигурации `mysqld` со следующим содержимым:
+- Создать файл `/etc/mysql/mysql.conf.d/mysqld.local.cnf` для конфигурации `mysqld` со следующим содержанием:
 
 {{< file "mysql.mysqld.local.cnf" "ini" >}}
 
-- Создать файл `/etc/mysql/mysql.conf.d/mysqldump.local.cnf` для конфигурации `mysqldump` со следующим содержимым:
+- Создать файл `/etc/mysql/mysql.conf.d/mysqldump.local.cnf` для конфигурации `mysqldump` со следующим содержанием:
 
 {{< file "mysql.mysqldump.local.cnf" "ini" >}}
 

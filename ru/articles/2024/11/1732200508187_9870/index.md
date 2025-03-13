@@ -95,13 +95,13 @@ DBPassword=password
 
 ### Настройка Angie
 
-- Создать файл `/etc/angie/http.d/zabbix.conf` со следующем содержимым:
+- Создать файл `/etc/angie/http.d/zabbix.conf` со следующим содержанием:
 
 {{< file "angie.zabbix.conf" "nginx" >}}
 
 ### Настройка PHP-FPM
 
-- Создать файл `/etc/php/8.3/fpm/pool.d/zabbix.conf` со следующем содержимым:
+- Создать файл `/etc/php/8.3/fpm/pool.d/zabbix.conf` со следующим содержанием:
 
 {{< file "php-fpm.zabbix.conf" "ini" >}}
 

@@ -104,7 +104,7 @@ systemctl disable --now nginx.service
 ```
 
 - Установить {{< tag "Angie" >}} по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
-- Создать файл `/etc/angie/http.d/iredmail-ssl.conf` со следующим содержимым:
+- Создать файл `/etc/angie/http.d/iredmail-ssl.conf` со следующим содержанием:
 
 {{< file "irm.angie.conf" "nginx" >}}
 
@@ -117,7 +117,7 @@ apt purge --yes 'php8.2*' && apt autoremove && rm -rf '/etc/php'
 ```
 
 - Установить новую версию {{< tag "PHP" >}} по материалу {{< uuid "9bd1261d-3842-5859-8202-2e1d7a5ba9f4" >}}.
-- Создать файл `/etc/php/8.4/fpm/pool.d/iredmail.conf` со следующим содержимым:
+- Создать файл `/etc/php/8.4/fpm/pool.d/iredmail.conf` со следующим содержанием:
 
 {{< file "irm.php.pool.conf" "ini" >}}
 

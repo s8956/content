@@ -63,7 +63,7 @@ apt update && apt install --yes squid
 f='/etc/squid/squid.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"
 ```
 
-- Создать файл основной конфигурации `/etc/squid/squid.conf` со следующим содержимым:
+- Создать файл основной конфигурации `/etc/squid/squid.conf` со следующим содержанием:
 
 {{< file "squid.conf" "squid" >}}
 

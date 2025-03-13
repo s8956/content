@@ -74,19 +74,19 @@ apt update && apt install --yes fail2ban python3-systemd rsyslog
 
 ### SSH
 
-- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/sshd.local` со следующим содержимым:
+- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/sshd.local` со следующим содержанием:
 
 {{< file "jail.sshd.local" "ini" >}}
 
 ### Angie: BotSearch
 
-- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/angie.botsearch.local` со следующим содержимым:
+- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/angie.botsearch.local` со следующим содержанием:
 
 {{< file "jail.angie-botsearch.local" "ini" >}}
 
 ### Angie: LimitReq
 
-- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/angie.limit-req.local` со следующим содержимым:
+- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/angie.limit-req.local` со следующим содержанием:
 
 {{< file "jail.angie-limit-req.local" "ini" >}}
 
@@ -103,7 +103,7 @@ http {
 
 ### Asterisk
 
-- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/asterisk.local` со следующим содержимым:
+- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/asterisk.local` со следующим содержанием:
 
 {{< file "jail.asterisk.local" "ini" >}}
 
@@ -111,7 +111,7 @@ http {
 
 Настройка тюрьмы для долгосрочной блокировки повторяющихся инцидентов.
 
-- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/recidive.local` со следующим содержимым:
+- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/recidive.local` со следующим содержанием:
 
 {{< file "jail.recidive.local" "ini" >}}
 
@@ -127,11 +127,11 @@ fail2ban-client set 'recidive' banip '192.168.1.2'
 
 Настройка тюрьмы для перманентной блокировки.
 
-- Создать файл конфигурации фильтра `/etc/fail2ban/filter.d/manual.conf` со следующим содержимым:
+- Создать файл конфигурации фильтра `/etc/fail2ban/filter.d/manual.conf` со следующим содержанием:
 
 {{< file "filter.manual.conf" "ini" >}}
 
-- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/manual.local` со следующим содержимым:
+- Создать файл конфигурации тюрьмы `/etc/fail2ban/jail.d/manual.local` со следующим содержанием:
 
 {{< file "jail.manual.local" "ini" >}}
 

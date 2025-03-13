@@ -84,11 +84,11 @@ Unattended-Upgrade::Origins-Pattern {
 };
 ```
 
-- Создать файл `/etc/apt/apt.conf.d/52unattended-upgrades-local` со следующим содержимым:
+- Создать файл `/etc/apt/apt.conf.d/52unattended-upgrades-local` со следующим содержанием:
 
 {{< file "52unattended-upgrades-local" "c" >}}
 
-- Создать файл `/etc/apt/apt.conf.d/20auto-upgrades` со следующим содержимым:
+- Создать файл `/etc/apt/apt.conf.d/20auto-upgrades` со следующим содержанием:
 
 {{< file "20auto-upgrades" "c" >}}
 
