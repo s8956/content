@@ -3,10 +3,10 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'Firefox: User.JS'
+title: 'Thunderbird: User.JS'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1591867756492-7562b91a9597'
+  - 'https://images.unsplash.com/photo-1552697439-d2a5941dcee0'
 categories:
   - 'network'
   - 'diy'
@@ -14,12 +14,12 @@ categories:
   - 'windows'
 tags:
   - 'mozilla'
-  - 'firefox'
+  - 'thunderbird'
   - 'user.js'
 authors:
   - 'KaiKimera'
 sources:
-  - 'https://github.com/yokoffing/Betterfox'
+  - 'https://github.com/HorlogeSkynet/thunderbird-user.js/tree/master'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -29,29 +29,29 @@ comments: 1
 # DATE
 # -------------------------------------------------------------------------------------------------------------------- #
 
-date: '2025-03-13T11:54:24+03:00'
-publishDate: '2025-03-13T11:54:24+03:00'
-lastMod: '2025-03-13T11:54:24+03:00'
+date: '2025-03-13T21:17:26+03:00'
+publishDate: '2025-03-13T21:17:26+03:00'
+lastMod: '2025-03-13T21:17:26+03:00'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # META
 # -------------------------------------------------------------------------------------------------------------------- #
 
 type: 'articles'
-hash: 'b9981fdb4d61c3c75e9d509bc7a1f87795d392fa'
-uuid: 'b9981fdb-4d61-53c7-be9d-509bc7a1f877'
-slug: 'b9981fdb-4d61-53c7-be9d-509bc7a1f877'
+hash: 'a48f1b27ea02636872bf36d37256bbbfe1145cca'
+uuid: 'a48f1b27-ea02-5368-a2bf-36d37256bbbf'
+slug: 'a48f1b27-ea02-5368-a2bf-36d37256bbbf'
 
 draft: 0
 ---
 
-Настройка Mozilla Firefox при помощи `user.js`.
+Настройка Thunderbird при помощи `user.js`.
 
 <!--more-->
 
 ## Установка
 
-- Открыть страницу **Help** / **More Troubleshooting Information**.
+- Открыть страницу **Help** / **Troubleshooting Information**.
 - На строке **Profile Folder** нажать кнопку {{< key "Open Folder" >}}.
 - В открывшейся директории создать файл `user.js` со следующим содержанием:
 
