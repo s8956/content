@@ -19,7 +19,7 @@ tags:
 authors:
   - 'KaiKimera'
 sources:
-  - 'https://github.com/HorlogeSkynet/thunderbird-user.js/tree/master'
+  - 'https://github.com/HorlogeSkynet/thunderbird-user.js'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
