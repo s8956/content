@@ -67,5 +67,5 @@ draft: 1
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+ apt update && apt install --yes iptables docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```

@@ -41,7 +41,7 @@ hash: 'f2d035758435b182025dac2a22100055e6b81721'
 uuid: 'f2d03575-8435-5182-925d-ac2a22100055'
 slug: 'f2d03575-8435-5182-925d-ac2a22100055'
 
-draft: 0
+draft: 1
 ---
 
 Инструкция по установке и первичной настройке {{< tag "GitLab" >}}.
@@ -84,7 +84,9 @@ draft: 0
  f=('gitlab'); d='/etc/gitlab'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local.rb" "${p}/${i}.rb"; done
 ```
 
-## Миграция на внешний Angie
+## Миграция
+
+### Angie
 
 - Установить {{< tag "Angie" >}} по материалу {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}}.
 - Скачать файл сайта `gitlab-ssl.conf` в `/etc/angie/http.d/`:
@@ -93,7 +95,7 @@ draft: 0
  f=('gitlab-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```
 
-## Миграция на внешний PostgreSQL
+### PostgreSQL
 
 - Установить {{< tag "PostgreSQL" >}} по материалу {{< uuid "9c234b3c-704e-599f-9fd9-b3fbb70f7897" >}}.
 
@@ -140,3 +142,39 @@ gitlab_rails['db_encoding'] = 'unicode'
 gitlab_rails['db_host'] = '/run/postgresql'
 gitlab_rails['db_password'] = '*****'
 ```
+
+## Лицензия
+
+{{< alert "important" >}}
+Лицензия предоставляется как есть и исключительно для изучения и тестирования возможностей GitLab. Обязательно приобретите настоящую лицензию для получения технической поддержки и полноценного использования GitLab.
+{{< /alert >}}
+
+### Генератор лицензии
+
+- Скачать и распаковать генератор:
+
+```bash
+ f=('license.gen'); d='~'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.tar.xz" "${p}/${i}.tar.xz" && tar -xJf "${d}/${i}.tar.xz"; done
+```
+
+- Запустить создание образа:
+
+```bash
+docker build 'license.gen' -t 'gitlab-license-generator:main'
+```
+
+- Сгенерировать ключ лицензии:
+
+```bash
+docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='GitLab' -e LICENSE_COMPANY='GitLab' -e LICENSE_EMAIL='license@example.com' -e LICENSE_PLAN='ultimate' -e LICENSE_USER_COUNT='2147483647' -e LICENSE_EXPIRE_YEAR='2500' 'gitlab-license-generator:main'
+```
+
+### Готовая лицензия
+
+- Скачать открытый ключ и заменить им оригинальный файл:
+
+```bash
+ f=('public'); d='/opt/gitlab/embedded/service/gitlab-rails'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; [[ -f "${d}/license_encryption_key.pub" && ! -f "${d}/license_encryption_key.pub.orig" ]] && mv "${d}/license_encryption_key.pub" "${d}/license_encryption_key.pub.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/license_encryption_key.pub" "${p}/${i}.key"
+```
+
+- Установить [файл лицензии](license.key) в Admin / Settings / General / Add License.
