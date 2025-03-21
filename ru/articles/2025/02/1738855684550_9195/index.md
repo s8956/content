@@ -154,7 +154,7 @@ gitlab_rails['db_password'] = '*****'
 - Скачать и распаковать генератор:
 
 ```bash
- f=('license.gen'); d='~'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.tar.xz" "${p}/${i}.tar.xz" && tar -xJf "${d}/${i}.tar.xz"; done
+ f=('license.gen'); d="${HOME}"; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.tar.xz" "${p}/${i}.tar.xz" && tar -xJf "${d}/${i}.tar.xz"; done
 ```
 
 - Запустить создание образа:
