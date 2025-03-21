@@ -160,10 +160,10 @@ gitlab_rails['db_password'] = '*****'
 - Запустить создание образа:
 
 ```bash
-docker build 'license.gen' -t 'gitlab-license-generator:main'
+docker build "${HOME}/license.gen" -t 'gitlab-license-generator:main'
 ```
 
-- Сгенерировать ключ лицензии:
+- Создать ключ лицензии в директории `./license`:
 
 ```bash
 docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='GitLab' -e LICENSE_COMPANY='GitLab' -e LICENSE_EMAIL='license@example.com' -e LICENSE_PLAN='ultimate' -e LICENSE_USER_COUNT='2147483647' -e LICENSE_EXPIRE_YEAR='2500' 'gitlab-license-generator:main'
@@ -171,7 +171,7 @@ docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='Git
 
 ### Готовая лицензия
 
-- Скачать открытый ключ и заменить им оригинальный файл:
+- Скачать открытый ключ в директорию `/opt/gitlab/embedded/service/gitlab-rails` и заменить им оригинальный файл `license_encryption_key.pub`:
 
 ```bash
  f=('public'); d='/opt/gitlab/embedded/service/gitlab-rails'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; [[ -f "${d}/license_encryption_key.pub" && ! -f "${d}/license_encryption_key.pub.orig" ]] && mv "${d}/license_encryption_key.pub" "${d}/license_encryption_key.pub.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/license_encryption_key.pub" "${p}/${i}.key"
