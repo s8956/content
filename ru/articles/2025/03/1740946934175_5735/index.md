@@ -44,7 +44,7 @@ slug: '654d7f55-10b0-58e0-a57c-26e445b44ab2'
 draft: 1
 ---
 
-
+Инструкция по установке и первичной настройке {{< tag "Docker" >}}.
 
 <!--more-->
 
@@ -68,4 +68,18 @@ draft: 1
 
 ```bash
  apt update && apt install --yes iptables docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+## Настройка
+
+- Скачать файл конфигурации службы `daemon.json` в `/etc/docker/`:
+
+```bash
+ f=('daemon'); d='/etc/docker'; p='https://lib.onl/ru/2025/02/654d7f55-10b0-58e0-a57c-26e445b44ab2'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.json" "${p}/${i}.json"; done
+```
+
+- Перезапустить службу:
+
+```bash
+ systemctl restart docker.service
 ```

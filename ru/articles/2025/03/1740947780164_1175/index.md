@@ -83,9 +83,3 @@ draft: 1
 ```bash
  apt update && apt install --yes -t 'l=home:alvistack' podman podman-netavark podman-compose
 ```
-
-- Установить {{< tag "Git" >}}:
-
-```bash
- apt update && apt install --yes -t 'l=home:alvistack' git
-```

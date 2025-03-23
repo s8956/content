@@ -62,6 +62,8 @@ draft: 0
  . '/etc/os-release' && echo -e "X-Repolib-Name: GitLab\nEnabled: yes\nTypes: deb\nURIs: https://packages.gitlab.com/gitlab/gitlab-ee/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/gitlab.gpg\n" | tee '/etc/apt/sources.list.d/gitlab.sources' > '/dev/null'
 ```
 
+- Для использования всех возможностей поискового движка необходимо установить {{< tag "ElasticSearch" >}} по инструкции {{< uuid "6542fa14-41f4-5309-98c0-a3bac519b93d" >}} или {{< tag "OpenSearch" >}} по инструкции {{< uuid "0c18558e-b4e1-5713-aead-9b767d14e99c" >}}.
+
 ## Установка
 
 - Установить пакеты:
@@ -178,3 +180,21 @@ docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='Git
 ```
 
 - Установить [файл лицензии](license.key) в Admin / Settings / General / Add License.
+
+## ZFS
+
+{{< alert "important" >}}
+В этом разделе приведены параметры файловой системы ZFS, на которую будет устанавливаться GitLab. Эти параметры необходимо настроить до начала установки GitLab.
+{{< /alert >}}
+
+- Создать тома `elasticsearch` и `gitlab` с алгоритмом компрессии `zstd` в пуле `data`:
+
+```bash
+for i in 'elasticsearch' 'gitlab'; do zfs create -o 'compression=zstd' "data/${i}"; done
+```
+
+- Установить точку монтирования тома `gitlab` на `/var/opt/gitlab`:
+
+```bash
+p='data'; v='gitlab'; zfs set "mountpoint=/var/opt/${v}" "${p}/${v}"
+```
