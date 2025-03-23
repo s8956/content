@@ -190,11 +190,11 @@ docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='Git
 - Создать тома `elasticsearch` и `gitlab` с алгоритмом компрессии `zstd` в пуле `data`:
 
 ```bash
-for i in 'elasticsearch' 'gitlab'; do zfs create -o 'compression=zstd' "data/${i}"; done
+ for i in 'elasticsearch' 'gitlab'; do zfs create -o 'compression=zstd' "data/${i}"; done
 ```
 
 - Установить точку монтирования тома `gitlab` на `/var/opt/gitlab`:
 
 ```bash
-p='data'; v='gitlab'; zfs set "mountpoint=/var/opt/${v}" "${p}/${v}"
+ p='data'; v='gitlab'; zfs set "mountpoint=/var/opt/${v}" "${p}/${v}"
 ```
