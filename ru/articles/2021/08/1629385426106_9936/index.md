@@ -55,7 +55,7 @@ find "/home/user" -type f -mtime +3
 Далее, конструируем конвейер, и при помощи `xargs` указываем команду удаления `rm -f`:
 
 ```bash
-find "/home/user" -type f -mtime +3 -print0 | xargs -0 rm -f
+find "/home/user" -type f -mtime +3 -print0 | xargs -0 rm -f --
 ```
 
 Сам скрипт провожу ниже.
