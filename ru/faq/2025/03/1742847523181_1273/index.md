@@ -8,14 +8,13 @@ description: ''
 images:
   - 'https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'grep'
+  - 'xargs'
+  - 'rm'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
-  - ''
+  - 'https://superuser.com/a/585436'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # DATE
@@ -34,7 +33,7 @@ hash: '4ffca4b4d28b82df6e52a3dbfdea54617e426514'
 uuid: '4ffca4b4-d28b-52df-ae52-a3dbfdea5461'
 slug: '4ffca4b4-d28b-52df-ae52-a3dbfdea5461'
 
-draft: 1
+draft: 0
 ---
 
 В директории присутствует множество файлов. В файлах находятся строки. Как удалить файлы с определённой строкой внутри?
