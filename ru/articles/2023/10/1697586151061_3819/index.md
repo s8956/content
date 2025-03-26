@@ -285,11 +285,11 @@ wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash
 Например:
 
 ```bash
-curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2'
+curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2'
 ```
 
 ```bash
-wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2'
+wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2'
 ```
 
 Таким образом, сертификат будет сгенерирован с заданными параметрами и заверен собственной подписью.
