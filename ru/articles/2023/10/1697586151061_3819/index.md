@@ -266,30 +266,52 @@ bash bash.openssl.ca.sh cert
 
 Скрипт можно удалённо запросить из репозитория или запустить локально на хосте. Скрипт принимает следующие параметры согласно очерёдности:
 
-1. `CN` - CN (Common Name).
-2. `subjectAltName` - subjectAltName (Alternative Name).
-3. `[TRUE|FALSE]` - является ли сертификат сертификатом центра сертификации и можно ли при помощи него заверять другие сертификаты. Параметр принимает значение `TRUE` или `FALSE`. По умолчанию `FALSE`.
+- `CN` - CN (Common Name).
+- `subjectAltName` - subjectAltName (Alternative Name).
+- `keyUsage` - использование ключа (key usage extension).
+  - `digitalSignature`
+  - `nonRepudiation`
+  - `keyEncipherment`
+  - `dataEncipherment`
+  - `keyAgreement`
+  - `keyCertSign`
+  - `cRLSign`
+  - `encipherOnly`
+  - `decipherOnly`
+- `extendedKeyUsage` - расширенное использование ключа (extended key usage).
+  - `serverAuth` - SSL/TLS WWW Server Authentication.
+  - `clientAuth` - SSL/TLS WWW Client Authentication.
+  - `codeSigning` - Code Signing.
+  - `emailProtection` - E-mail Protection (S/MIME).
+  - `timeStamping` - Trusted Timestamping.
+  - `OCSPSigning` - OCSP Signing.
+  - `ipsecIKE` - ipsec Internet Key Exchange.
+  - `msCodeInd` - Microsoft Individual Code Signing (authenticode).
+  - `msCodeCom` - Microsoft Commercial Code Signing (authenticode).
+  - `msCTLSign` - Microsoft Trust List Signing.
+  - `msEFS` - Microsoft Encrypted File System.
+- `[TRUE|FALSE]` - является ли сертификат сертификатом центра сертификации и можно ли при помощи него заверять другие сертификаты. Параметр принимает значение `TRUE` или `FALSE`. По умолчанию `FALSE`.
 
 #### Удалённый запрос скрипта
 
 В терминале выполнить команду, подставив свои значения:
 
 ```bash
-curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>'
+curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>' '<keyUsage>' '<extendedKeyUsage>' '[TRUE|FALSE]'
 ```
 
 ```bash
-wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>'
+wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>' '<keyUsage>' '<extendedKeyUsage>' '[TRUE|FALSE]'
 ```
 
 Например:
 
 ```bash
-curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2'
+curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
 ```
 
 ```bash
-wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2'
+wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
 ```
 
 Таким образом, сертификат будет сгенерирован с заданными параметрами и заверен собственной подписью.
