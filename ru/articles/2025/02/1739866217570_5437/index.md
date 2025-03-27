@@ -330,6 +330,14 @@ f=('js/common.js' 'js/common.min.js' 'lib/Roundcube/rcube_string_replacer.php');
 ```
 {{< /alert >}}
 
+{{< alert "tip" >}}
+RoundCube может работать на новой версии PHP, но при этом выдавать ошибки вида `Depecrecation in...`. Ничего страшного в этом нет, это информационные сообщения о том, что в будущих выпусках PHP данная функция будет исключена. Чтобы скрыть замусоривание журнала подобными ошибками, можно поменять конфигурационный массив в файле `./program/lib/Roundcube/bootstrap.php`:
+
+```bash
+f=('lib/Roundcube/bootstrap.php'); p='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${p}/${i}" "${p}/${i}.orig" && sed -i -e 's|E_ALL & ~E_NOTICE & ~E_STRICT|E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT|g' "${p}/${i}"; done
+```
+{{< /alert >}}
+
 ### iRedAdmin
 
 - Запустить команду обновления {{< tag "iRedAdmin" >}}:
