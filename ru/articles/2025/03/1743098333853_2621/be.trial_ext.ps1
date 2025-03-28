@@ -65,12 +65,12 @@ function Start-TrialExt() {
     $ObjValue = $GetObj.SD
 
     try {
-      New-ItemProperty -Path "${Path}" -Name 'SD_bak' -PropertyType 'Binary' -Value "${ObjValue}" -ErrorAction 'Stop'
+      New-ItemProperty -Path "${Path}" -Name 'SD_bak' -PropertyType 'Binary' -Value $ObjValue -ErrorAction 'Stop'
     } catch [System.IO.IOException] {
-      Set-ItemProperty -Path "${Path}" -Name 'SD_bak' -Value "${ObjValue}"
+      Set-ItemProperty -Path "${Path}" -Name 'SD_bak' -Value $ObjValue
     }
 
-    Set-ItemProperty -Path "${Path}" -Name "${ObjName}" -Value "${ObjValue}"
+    Set-ItemProperty -Path "${Path}" -Name "${ObjName}" -Value $ObjValue
   } else {
     Write-Error 'The SD array does not exist or is not long enough.'
   }
