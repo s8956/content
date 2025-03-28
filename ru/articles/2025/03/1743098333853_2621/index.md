@@ -40,7 +40,7 @@ hash: '0e079d06d87d60dec8e2713a8ddb8fd61b1cf670'
 uuid: '0e079d06-d87d-50de-b8e2-713a8ddb8fd6'
 slug: '0e079d06-d87d-50de-b8e2-713a8ddb8fd6'
 
-draft: 1
+draft: 0
 ---
 
 В этой заметке я расскажу о способе увеличения пробного периода Veritas Backup Exec при помощи специального скрипта на {{< tag "PowerShell" >}}.
@@ -59,4 +59,20 @@ draft: 1
 
 ## Скрипт
 
+Скрипт изменяет реестр ОС MS {{< tag "Windows" >}} и увеличивает пробный период работы Veritas Backup Exec до 2036 года.
+
+### Приложение
+
 {{< file "be.trial_ext.ps1" "powershell" >}}
+
+#### Параметры
+
+- `-Version` - версия Veritas Backup Exec. Формат: `NN.N`. По умолчанию: `23.0`.
+
+#### Примеры
+
+- Увеличить пробный период работы Veritas Backup Exec версии `25.0` до 2036 года:
+
+```terminal {os=windows,mode=root}
+D:\Downloads\be.trial_ext.ps1 -Version '25.0'
+```
