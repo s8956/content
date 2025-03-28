@@ -77,7 +77,7 @@ draft: 0
 
 #### Примеры
 
-- Увеличить пробный период работы Veritas Backup Exec версии `25.0` до 2036 года:
+- Увеличить пробный период работы Veritas Backup Exec версии `25.0` до 2050 года:
 
 ```terminal {os=windows,mode=root}
 D:\Downloads\be.trial_ext.ps1 -Version '25.0'
