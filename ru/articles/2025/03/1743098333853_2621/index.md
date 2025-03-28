@@ -50,7 +50,13 @@ draft: 0
 ## Подготовка
 
 - Установить чистый Veritas Backup Exec.
-- Зайти в настройки Backup Exec и отключить синхронизацию с порталом лицензирования.
+- Зайти в настройки Backup Exec и отключить:
+  - Preferences:
+    - Show splash screen at startup;
+    - Enable auto synchronization of the licenses with the Licensing Portal;
+    - Allow Backup Exec to report anonymous usage information.
+  - Arctera Update:
+    - Check for updates daily.
 - Создать и запустить какое-нибудь задание.
 - Проверить, что в директориях появились следующие файлы:
   - `C:\Program Files\Veritas\Backup Exec\Data\ETL_COPY.txt`.
