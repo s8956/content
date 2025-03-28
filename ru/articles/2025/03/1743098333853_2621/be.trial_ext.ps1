@@ -54,8 +54,8 @@ function Start-TrialExt() {
     # Year.
     $GetObj.SD[660] = 0x32
     $GetObj.SD[662] = 0x30
-    $GetObj.SD[664] = 0x33
-    $GetObj.SD[666] = 0x36
+    $GetObj.SD[664] = 0x35
+    $GetObj.SD[666] = 0x30
     # Month.
     $GetObj.SD[670] = 0x30
     $GetObj.SD[672] = 0x31
