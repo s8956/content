@@ -17,7 +17,7 @@ tags:
 authors:
   - 'KaiKimera'
 sources:
-  - ''
+  - 'https://forum.ru-board.com/topic.cgi?forum=35&topic=5286'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -61,7 +61,7 @@ draft: 0
 - Проверить, что в директориях появились следующие файлы:
   - `C:\Program Files\Veritas\Backup Exec\Data\ETL_COPY.txt`.
   - `C:\ProgramData\Veritas Shared\Licenses\Backup Exec\<BE_VER>\<BE_ID>_QTY999999_BACKUP_EXEC_UNLIMITED_CAPACITY_INITIAL_60_DAY_EVALUATION_LICENSE_<BE_ID>.slf`.
-- Запустить скрипт `be.trial_ext.ps1`.
+- Запустить скрипт `app.be.trial.ps1`.
 
 ## Скрипт
 
@@ -69,7 +69,7 @@ draft: 0
 
 ### Приложение
 
-{{< file "be.trial_ext.ps1" "powershell" >}}
+{{< file "app.be.trial.ps1" "powershell" >}}
 
 #### Параметры
 
@@ -80,5 +80,5 @@ draft: 0
 - Увеличить пробный период работы Veritas Backup Exec версии `25.0` до 2050 года:
 
 ```terminal {os=windows,mode=root}
-D:\Downloads\be.trial_ext.ps1 -Version '25.0'
+D:\Downloads\app.be.trial.ps1 -Version '25.0'
 ```
