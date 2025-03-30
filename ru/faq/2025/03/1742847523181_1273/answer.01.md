@@ -1,7 +1,7 @@
 Для удаления файлов, содержащих определённую подстроку, необходимо выполнить следующую команду:
 
 ```bash
-grep -lRIZ "foo" '/path/to/dir' | xargs -0 rm -f --
+grep -lRIZ 'foo' '/path/to/dir' | xargs -0 rm -f --
 ```
 
 Где:
