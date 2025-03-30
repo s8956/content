@@ -72,7 +72,7 @@ cp '/usr/share/doc/dovecot-core/examples/decode2text.sh' '/usr/local/bin/dovecot
 - Перезапустить сервис `dovecot` и запустить индексирование писем:
 
 ```bash
-systemctl restart dovecot.service && doveadm index -A \*
+systemctl restart dovecot.service && doveadm index -A -q \*
 ```
 
 ## Задание
