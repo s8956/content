@@ -103,9 +103,9 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 
 #### Задание
 
-- Создать файл `/etc/cron.d/app_acme` со следующим содержанием:
+- Создать файл `/etc/cron.d/app_acme_example_com` со следующим содержанием:
 
-{{< file "cron.http.app_acme" "bash" >}}
+{{< file "cron.http.app_acme_example_com" "bash" >}}
 
 ## Метод DNS-01
 
@@ -153,9 +153,9 @@ CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --path='/etc/ssl/acme' --emai
 
 #### Задание
 
-- Создать файл `/etc/cron.d/app_acme` со следующим содержанием:
+- Создать файл `/etc/cron.d/app_acme_example_com` со следующим содержанием:
 
-{{< file "cron.dns.app_acme" "bash" >}}
+{{< file "cron.dns.app_acme_example_com" "bash" >}}
 
 ## Метод TLS-ALPN-01
 
@@ -225,9 +225,9 @@ stream {
 
 #### Задание
 
-- Создать файл `/etc/cron.d/app_acme` со следующим содержанием:
+- Создать файл `/etc/cron.d/app_acme_example_com` со следующим содержанием:
 
-{{< file "cron.tls.app_acme" "bash" >}}
+{{< file "cron.tls.app_acme_example_com" "bash" >}}
 
 ## Hook
 
