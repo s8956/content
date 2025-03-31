@@ -64,10 +64,10 @@ apt install --yes -t 'stable-backports' dovecot-fts-xapian && apt install --yes 
 cp '/usr/share/doc/dovecot-core/examples/decode2text.sh' '/usr/local/bin/dovecot-decode2text.sh'
 ```
 
-- В файле `/etc/dovecot/conf.d/10-mail.conf` добавить в переменную `mail_plugins` плагины `fts fts_xapian`.
-- Создать файл `/etc/dovecot/conf.d/90-fts.conf` со следующим содержанием:
+- В файле `/etc/dovecot/dovecot.conf` добавить в переменную `mail_plugins` плагины `fts fts_xapian`.
+- В файле `/etc/dovecot/dovecot.conf` добавить следующее содержимое:
 
-{{< file "90-fts.conf" >}}
+{{< file "dovecot.conf" >}}
 
 - Перезапустить сервис `dovecot` и запустить индексирование писем:
 
