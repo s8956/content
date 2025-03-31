@@ -76,7 +76,7 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/etc/ssl/acme`:
+- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/root/apps/acme/`:
 
 ```bash
 APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' run
@@ -85,7 +85,7 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mai
 #### Параметры
 
 - `--accept-tos` - автоматически принять соглашение.
-- `--path` - путь к хранилищу сертификатов (`/etc/ssl/acme`).
+- `--path` - путь к хранилищу сертификатов (`/root/apps/acme/`).
 - `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.com`).
 - `--domains` - список доменов для получения сертификата (`example.com` и `mail.example.co`).
 - `--http` - получение сертификата методом `HTTP-01`.
@@ -93,7 +93,7 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mai
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/etc/ssl/acme` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
 APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' --renew-hook="${HOME}/apps/acme/hook.sh" renew
@@ -126,7 +126,7 @@ Let’s Encrypt проверяет принадлежность домена к�
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `*.example.com` в директорию `/etc/ssl/acme`:
+- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `*.example.com` в директорию `/root/apps/acme/`:
 
 ```bash
 CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' run
@@ -135,7 +135,7 @@ CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --
 #### Параметры
 - `CF_DNS_API_TOKEN` - токен доступа {{< tag "LeGo" >}} к редактированию зоны `example.com`.
 - `--accept-tos` - автоматически принять соглашение.
-- `--path` - путь к хранилищу сертификатов (`/etc/ssl/acme`).
+- `--path` - путь к хранилищу сертификатов (`/root/apps/acme`).
 - `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.com`).
 - `--domains` - список доменов для получения сертификата (`example.com` и `*.example.com`).
 - `--dns` - получение сертификата методом `DNS-01`.
@@ -143,7 +143,7 @@ CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.com` и `*.example.com` в директории `/etc/ssl/acme` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат для доменов `example.com` и `*.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
 CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/hook.sh" renew
@@ -198,7 +198,7 @@ stream {
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/etc/ssl/acme`:
+- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/root/apps/acme/`:
 
 ```bash
 APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' run
@@ -207,7 +207,7 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mai
 #### Параметры
 
 - `--accept-tos` - автоматически принять соглашение.
-- `--path` - путь к хранилищу сертификатов (`/etc/ssl/acme`).
+- `--path` - путь к хранилищу сертификатов (`/root/apps/acme/`).
 - `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.com`).
 - `--domains` - список доменов для получения сертификата (`example.com` и `mail.example.co`).
 - `--tls` - получение сертификата методом `TLS-ALPN-01`.
@@ -215,7 +215,7 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mai
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/etc/ssl/acme` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
 APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/hook.sh" renew
