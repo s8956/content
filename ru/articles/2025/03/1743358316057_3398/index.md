@@ -59,13 +59,16 @@ apt install --yes -t 'stable-backports' dovecot-fts-xapian && apt install --yes 
 
 ## Настойка
 
-- Копировать файл `decode2text.sh` для расшифровки вложений в письмах в `/usr/local/bin/dovecot-decode2text.sh`:
+- Создать файл `/usr/lib/dovecot/decode2text.sh` со следующим содержанием:
+
+{{< file "decode2text.sh" "bash" >}}
+
+- Применить к файлу `/usr/lib/dovecot/decode2text.sh` бит исполнения:
 
 ```bash
-cp '/usr/share/doc/dovecot-core/examples/decode2text.sh' '/usr/local/bin/dovecot-decode2text.sh'
+chmod +x '/usr/lib/dovecot/decode2text.sh'
 ```
 
-- В файле `/etc/dovecot/dovecot.conf` добавить в переменную `mail_plugins` плагины `fts fts_xapian`.
 - В файле `/etc/dovecot/dovecot.conf` добавить следующее содержимое:
 
 {{< file "dovecot.conf" >}}
