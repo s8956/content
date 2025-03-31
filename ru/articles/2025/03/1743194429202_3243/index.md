@@ -245,6 +245,8 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com
 
 ## Конфигурация приложений
 
+В этом разделе представлены настройки использования сертификата Let’s Encrypt для различных приложений.
+
 ### Postfix
 
 - Настроить параметры в `/etc/postfix/main.cf` для домена `example.com`:
