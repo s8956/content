@@ -23,6 +23,7 @@ authors:
 sources:
   - 'https://go-acme.github.io/lego/'
   - 'https://github.com/go-acme/lego/blob/master/docs/data/zz_cli_help.toml'
+  - 'https://github.com/acmesh-official/acme.sh/wiki/TLS-ALPN-without-downtime'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
