@@ -267,7 +267,7 @@ ssl_ca = </etc/ssl/acme/example.com.crt
 
 ### MariaDB
 
-- Настроить параметры в `/etc/dovecot/dovecot.conf` для домена `example.com`:
+- Настроить параметры в `/etc/mysql/my.cnf` для домена `example.com`:
 
 ```ini
 [mysqld]
