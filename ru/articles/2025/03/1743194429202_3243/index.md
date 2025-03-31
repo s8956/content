@@ -97,7 +97,7 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mai
 - Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' --renew-hook="${HOME}/apps/acme/hook.sh" renew
+APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' --renew-hook="${APP}/hook.sh" renew
 ```
 
 #### Параметры
@@ -147,7 +147,7 @@ CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --
 - Обновить сертификат для доменов `example.com` и `*.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/hook.sh" renew
+CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${APP}/hook.sh" renew
 ```
 
 #### Параметры
@@ -179,7 +179,7 @@ CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}"
 
 К сожалению, метод проверки требует не занятого порта `443`. Если какой то сервис уже занимает порт `443`, то этот сервис на время проверки необходимо выключить. Чтобы обойти данное ограничение, можно до-настроить Angie таким образом, чтобы он соединения `TLS-ALPN` перенаправлял на сервис проверки сертификатов, а остальные соединения направлял на виртуальные хосты HTTPS.
 
-- На всех виртуальных хостах изменить порт 443 на 8443.
+- На всех виртуальных хостах изменить порт `443` на `8443`.
 - Создать балансировщик нагрузки `ALPN`, добавив в файл `/etc/angie/angie.conf` следующую конфигурацию:
 
 ```nginx
@@ -219,7 +219,7 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mai
 - Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/hook.sh" renew
+APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' --renew-hook="${APP}/hook.sh" renew
 ```
 
 #### Параметры
