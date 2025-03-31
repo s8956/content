@@ -18,7 +18,8 @@ tags:
 authors:
   - 'KaiKimera'
 sources:
-  - ''
+  - 'https://forum.iredmail.org/post88511.html#p88511'
+  - 'https://github.com/grosjo/fts-xapian'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
