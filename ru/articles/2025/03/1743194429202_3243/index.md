@@ -233,6 +233,10 @@ stream {
 
 ## Hook
 
-- Создать файл `/root/apps/acme/hook.sh` со следующим содержанием:
+- Создать файл приложения `/root/apps/acme/hook.sh` со следующим содержанием:
 
 {{< file "hook.sh" "bash" >}}
+
+- Создать файл настроек `/root/apps/acme/hook.conf` со следующим содержанием:
+
+{{< file "hook.conf" "ini" >}}
