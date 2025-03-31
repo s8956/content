@@ -24,6 +24,7 @@ sources:
   - 'https://go-acme.github.io/lego/'
   - 'https://github.com/go-acme/lego/blob/master/docs/data/zz_cli_help.toml'
   - 'https://github.com/acmesh-official/acme.sh/wiki/TLS-ALPN-without-downtime'
+  - 'https://docs.iredmail.org/letsencrypt.html'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -241,3 +242,46 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com
 - Создать файл настроек `/root/apps/acme/hook.conf` со следующим содержанием:
 
 {{< file "hook.conf" "ini" >}}
+
+## Конфигурация приложений
+
+### Postfix
+
+- Настроить параметры в `/etc/postfix/main.cf` для домена `example.com`:
+
+```ini
+smtpd_tls_cert_file = /etc/ssl/acme/example.com.crt
+smtpd_tls_key_file = /etc/ssl/acme/example.com.key
+smtpd_tls_CAfile = /etc/ssl/acme/example.com.crt
+```
+
+### Dovecot
+
+- Настроить параметры в `/etc/dovecot/dovecot.conf` для домена `example.com`:
+
+```ini
+ssl_cert = </etc/ssl/acme/example.com.crt
+ssl_key = </etc/ssl/acme/example.com.key
+ssl_ca = </etc/ssl/acme/example.com.crt
+```
+
+### MariaDB
+
+- Настроить параметры в `/etc/dovecot/dovecot.conf` для домена `example.com`:
+
+```ini
+[mysqld]
+ssl-cert = '/etc/ssl/acme/example.com.crt'
+ssl-key = '/etc/ssl/acme/example.com.key'
+ssl-ca = '/etc/ssl/acme/example.com.crt'
+```
+
+### OpenLDAP
+
+- Настроить параметры в `/etc/ldap/slapd.conf` для домена `example.com`:
+
+```
+TLSCertificateFile /etc/ssl/acme/example.com.crt
+TLSCertificateKeyFile /etc/ssl/acme/example.com.key
+TLSCACertificateFile /etc/ssl/acme/example.com.crt
+```
