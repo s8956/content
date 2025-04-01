@@ -69,7 +69,8 @@ apt install --yes -t 'stable-backports' dovecot-fts-xapian && apt install --yes 
 chmod +x '/usr/lib/dovecot/decode2text.sh'
 ```
 
-- В файле `/etc/dovecot/dovecot.conf` добавить следующее содержимое:
+- В файле `/etc/dovecot/dovecot.conf` к директиве `mail_plugins` добавить `fts fts_xapian`.
+- В файл `/etc/dovecot/dovecot.conf` добавить следующее содержимое:
 
 {{< file "dovecot.conf" >}}
 
