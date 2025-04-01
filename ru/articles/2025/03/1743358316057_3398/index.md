@@ -10,7 +10,6 @@ images:
 categories:
   - 'linux'
   - 'terminal'
-  - 'inDev'
 tags:
   - 'debian'
   - 'email'
@@ -59,16 +58,6 @@ apt install --yes -t 'stable-backports' dovecot-fts-xapian && apt install --yes 
 
 ## Настойка
 
-- Создать файл `/usr/lib/dovecot/decode2text.sh` со следующим содержанием:
-
-{{< file "decode2text.sh" "bash" >}}
-
-- Применить к файлу `/usr/lib/dovecot/decode2text.sh` бит исполнения:
-
-```bash
-chmod +x '/usr/lib/dovecot/decode2text.sh'
-```
-
 - В файле `/etc/dovecot/dovecot.conf` к директиве `mail_plugins` добавить `fts fts_xapian`.
 - В файл `/etc/dovecot/dovecot.conf` добавить следующее содержимое:
 
@@ -79,6 +68,24 @@ chmod +x '/usr/lib/dovecot/decode2text.sh'
 ```bash
 systemctl restart dovecot.service && doveadm index -A -q \*
 ```
+
+### Декодирование вложений
+
+{{< alert "important" >}}
+Данный скрипт переделан под актуальную версию Bash, использовать аккуратно, не проверялся.
+{{< /alert >}}
+
+- Создать файл `/usr/lib/dovecot/decode2text.sh` со следующим содержанием:
+
+{{< file "decode2text.sh" "bash" >}}
+
+- Применить к файлу `/usr/lib/dovecot/decode2text.sh` бит исполнения:
+
+```bash
+chmod +x '/usr/lib/dovecot/decode2text.sh'
+```
+
+- Раскомментировать строки `service decode2text { <...> }` в файле `/etc/dovecot/dovecot.conf`.
 
 ## Задание
 
