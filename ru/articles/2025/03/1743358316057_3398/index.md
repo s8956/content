@@ -14,6 +14,9 @@ tags:
   - 'debian'
   - 'email'
   - 'dovecot'
+  - 'fts'
+  - 'xapian'
+  - 'decode2text'
 authors:
   - 'KaiKimera'
 sources:
