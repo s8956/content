@@ -19,6 +19,9 @@ authors:
 sources:
   - 'https://forum.iredmail.org/post88511.html#p88511'
   - 'https://github.com/grosjo/fts-xapian'
+  - 'https://doc.dovecot.org/main/core/man/doveadm-force-resync.1.html'
+  - 'https://doc.dovecot.org/main/core/man/doveadm-fts.1.html'
+  - 'https://doc.dovecot.org/main/core/man/doveadm-index.1.html'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -92,3 +95,41 @@ chmod +x '/usr/lib/dovecot/decode2text.sh'
 - Создать файл `/etc/cron.d/dovecot_fts_optimize` со следующим содержанием:
 
 {{< file "dovecot_fts_optimize" "bash" >}}
+
+## Команды
+
+- Восстановить повреждённые почтовые ящики всех пользователей:
+
+```bash
+doveadm force-resync -A \*
+```
+
+- Восстановить повреждённый почтовый ящик пользователя `bob`:
+
+```bash
+doveadm force-resync -u 'bob' \*
+```
+
+- Просканировать и сопоставить письма в почтовых ящиках с письмами в индексе полнотекстового поиска для всех пользователей:
+
+```bash
+doveadm fts rescan -A
+```
+
+- Просканировать и сопоставить письма в почтовом ящике с письмами в индексе полнотекстового поиска для пользователя `bob`:
+
+```bash
+doveadm fts rescan -u 'bob'
+```
+
+- Добавить неиндексированные письма из почтовых ящиков в файл индекса/кэша для всех пользователей:
+
+```bash
+doveadm index -A -q \*
+```
+
+- Добавить неиндексированные письма из почтового ящика в файл индекса/кэша для пользователя `bob`:
+
+```bash
+doveadm index -u 'bob' -q \*
+```
