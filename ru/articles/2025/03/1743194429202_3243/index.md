@@ -81,7 +81,7 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 - Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/root/apps/acme/`:
 
 ```bash
-APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' run
+"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' run
 ```
 
 #### Параметры
@@ -98,7 +98,7 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mai
 - Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' --renew-hook="${APP}/hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' --renew-hook="${HOME}/apps/acme/hook.sh" renew
 ```
 
 #### Параметры
@@ -131,7 +131,7 @@ Let’s Encrypt проверяет принадлежность домена к�
 - Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `*.example.com` в директорию `/root/apps/acme/`:
 
 ```bash
-CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' run
+CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' run
 ```
 
 #### Параметры
@@ -148,7 +148,7 @@ CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --
 - Обновить сертификат для доменов `example.com` и `*.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${APP}/hook.sh" renew
+CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/hook.sh" renew
 ```
 
 #### Параметры
@@ -184,17 +184,13 @@ CF_DNS_API_TOKEN='TOKEN'; APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}"
 - Создать балансировщик нагрузки `ALPN`, добавив в файл `/etc/angie/angie.conf` следующую конфигурацию:
 
 ```nginx
-stream {
-  map $ssl_preread_alpn_protocols $tls_port {
-    ~\bacme-tls/1\b 10443;
-    default 8443;
-  }
+# -------------------------------------------------------------------------------------------------------------------- #
+# ACME: TLS-ALPN
+# -------------------------------------------------------------------------------------------------------------------- #
 
-  server {
-    listen 443;
-    proxy_pass 127.0.0.1:$tls_port;
-    ssl_preread on;
-  }
+stream {
+  map $ssl_preread_alpn_protocols $tls_port { ~\bacme-tls/1\b 10443; default 8443; }
+  server { listen 443; proxy_pass 127.0.0.1:$tls_port; ssl_preread on; }
 }
 ```
 
@@ -203,7 +199,7 @@ stream {
 - Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/root/apps/acme/`:
 
 ```bash
-APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' run
+"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' run
 ```
 
 #### Параметры
@@ -220,7 +216,7 @@ APP="${HOME}/apps/acme"; "${APP}/lego" --accept-tos --path="${APP}" --email='mai
 - Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-APP="${HOME}/apps/acme"; "${APP}/lego" --path="${APP}" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' --renew-hook="${APP}/hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/hook.sh" renew
 ```
 
 #### Параметры
