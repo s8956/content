@@ -292,6 +292,10 @@ ssl_ca = '/etc/ssl/acme/example.com.crt'
 - Настроить параметры в `/etc/ldap/slapd.conf` для домена `example.com`:
 
 ```
+# -------------------------------------------------------------------------------------------------------------------- #
+# SSL / TLS
+# -------------------------------------------------------------------------------------------------------------------- #
+
 TLSCertificateFile /etc/ssl/acme/example.com.crt
 TLSCertificateKeyFile /etc/ssl/acme/example.com.key
 TLSCACertificateFile /etc/ssl/acme/example.com.crt
