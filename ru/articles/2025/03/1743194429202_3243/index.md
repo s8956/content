@@ -248,6 +248,10 @@ stream {
 - Настроить параметры в `/etc/postfix/main.cf` для домена `example.com`:
 
 ```ini
+# -------------------------------------------------------------------------------------------------------------------- #
+# SSL / TLS
+# -------------------------------------------------------------------------------------------------------------------- #
+
 smtpd_tls_cert_file = /etc/ssl/acme/example.com.crt
 smtpd_tls_key_file = /etc/ssl/acme/example.com.key
 smtpd_tls_CAfile = /etc/ssl/acme/example.com.crt
@@ -258,6 +262,10 @@ smtpd_tls_CAfile = /etc/ssl/acme/example.com.crt
 - Настроить параметры в `/etc/dovecot/dovecot.conf` для домена `example.com`:
 
 ```ini
+# -------------------------------------------------------------------------------------------------------------------- #
+# SSL / TLS
+# -------------------------------------------------------------------------------------------------------------------- #
+
 ssl_cert = </etc/ssl/acme/example.com.crt
 ssl_key = </etc/ssl/acme/example.com.key
 ssl_ca = </etc/ssl/acme/example.com.crt
@@ -268,10 +276,15 @@ ssl_ca = </etc/ssl/acme/example.com.crt
 - Настроить параметры в `/etc/mysql/my.cnf` для домена `example.com`:
 
 ```ini
-[mysqld]
-ssl-cert = '/etc/ssl/acme/example.com.crt'
-ssl-key = '/etc/ssl/acme/example.com.key'
-ssl-ca = '/etc/ssl/acme/example.com.crt'
+[mariadbd]
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# SSL / TLS
+# -------------------------------------------------------------------------------------------------------------------- #
+
+ssl_cert = '/etc/ssl/acme/example.com.crt'
+ssl_key = '/etc/ssl/acme/example.com.key'
+ssl_ca = '/etc/ssl/acme/example.com.crt'
 ```
 
 ### OpenLDAP
