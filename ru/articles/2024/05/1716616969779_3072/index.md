@@ -131,6 +131,12 @@ python3 '/opt/iredapd/tools/wblist_admin.py' --list --blacklist
 python3 '/opt/iredapd/tools/wblist_admin.py' --add --blacklist '202.96.134.133' 'bad-user@domain.com' '@bad-domain.com' '@.sub-domain.com'
 ```
 
+- Добавить в чёрный список имя отправителя (`sender`):
+
+```bash
+python3 '/opt/iredapd/tools/wblist_admin.py' --add --blacklist 'sender@*'
+```
+
 - Удалить из чёрного списка IP-адрес, email, домен и суб-домен:
 
 ```bash
