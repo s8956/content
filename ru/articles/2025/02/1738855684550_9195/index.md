@@ -108,31 +108,31 @@ draft: 0
 - Остановить все сервисы GitLab, кроме {{< tag "PostgreSQL" >}}:
 
 ```bash
-gitlab-ctl stop && gitlab-ctl start postgresql && gitlab-ctl status
+ gitlab-ctl stop && gitlab-ctl start postgresql && gitlab-ctl status
 ```
 
 - Экспортировать базу данных `gitlabhq_production` в файл `/tmp/gitlabhq_production.sql`:
 
 ```bash
-sudo -u 'gitlab-psql' /opt/gitlab/embedded/bin/pg_dump --host='/var/opt/gitlab/postgresql' --username='gitlab-psql' --dbname='gitlabhq_production' --clean --create --file='/tmp/gitlabhq_production.sql'
+ sudo -u 'gitlab-psql' /opt/gitlab/embedded/bin/pg_dump --host='/var/opt/gitlab/postgresql' --username='gitlab-psql' --dbname='gitlabhq_production' --clean --create --file='/tmp/gitlabhq_production.sql'
 ```
 
-- Создать роль `gitlab` на внешнем {{< tag "PostgreSQL" >}}:
+- Создать роль `gitlab` и базу данных `gitlabhq_production` на внешнем {{< tag "PostgreSQL" >}}:
 
 ```bash
-sudo -u 'postgres' createuser --pwprompt 'gitlab'
-```
-
-- Импортировать файл `/tmp/gitlabhq_production.sql` во внешний {{< tag "PostgreSQL" >}}:
-
-```bash
-sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
+ u='gitlab'; d='gitlabhq_production'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}"
 ```
 
 - Создать расширения для базы данных `gitlabhq_production` во внешнем {{< tag "PostgreSQL" >}}:
 
 ```bash
-echo 'create extension if not exists pg_trgm; create extension if not exists btree_gist; create extension if not exists plpgsql;' | sudo -u 'postgres' psql 'gitlabhq_production'
+ d='gitlabhq_production'; echo 'create extension if not exists pg_trgm; create extension if not exists btree_gist; create extension if not exists plpgsql;' | sudo -u 'postgres' psql "${d}"
+```
+
+- Импортировать файл `/tmp/gitlabhq_production.sql` во внешний {{< tag "PostgreSQL" >}}:
+
+```bash
+ sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
 ```
 
 - Добавить настройки в файл конфигурации `/etc/gitlab/gitlab.rb`:
@@ -162,13 +162,13 @@ gitlab_rails['db_password'] = '*****'
 - Запустить создание образа:
 
 ```bash
-docker build "${HOME}/license.gen" -t 'gitlab-license-generator:main'
+ docker build "${HOME}/license.gen" -t 'gitlab-license-generator:main'
 ```
 
 - Создать ключ лицензии в директории `./license`:
 
 ```bash
-docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='GitLab' -e LICENSE_COMPANY='GitLab' -e LICENSE_EMAIL='license@example.com' -e LICENSE_PLAN='ultimate' -e LICENSE_USER_COUNT='2147483647' -e LICENSE_EXPIRE_YEAR='2500' 'gitlab-license-generator:main'
+ docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='GitLab' -e LICENSE_COMPANY='GitLab' -e LICENSE_EMAIL='license@example.com' -e LICENSE_PLAN='ultimate' -e LICENSE_USER_COUNT='2147483647' -e LICENSE_EXPIRE_YEAR='2500' 'gitlab-license-generator:main'
 ```
 
 ### Готовая лицензия

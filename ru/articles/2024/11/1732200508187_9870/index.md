@@ -102,13 +102,13 @@ draft: 0
 - Создать пользователя и базу данных `zabbix`, импортировать схему для базы данных `zabbix`:
 
 ```bash
- u='zabbix'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${u}" && zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u "${u}" psql "${u}"
+ u='zabbix'; d='zabbix'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}" && zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u "${u}" psql "${d}"
 ```
 
 - Добавить расширение, импортировать схему TimescaleDB для базы данных `zabbix`:
 
 ```bash
- u='zabbix'; echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql "${u}" && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u "${u}" psql "${u}"
+ u='zabbix'; d='zabbix'; echo 'create extension if not exists timescaledb cascade;' | sudo -u 'postgres' psql "${d}" && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u "${u}" psql "${d}"
 ```
 
 - Открыть файл `/etc/zabbix/zabbix_server.conf` и отредактировать параметр:
@@ -170,13 +170,13 @@ DBPassword=password
 - Создать расширение `timescaledb` для базы данных `zabbix`:
 
 ```bash
- echo 'CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;' | sudo -u 'postgres' psql 'zabbix'
+ echo 'create extension if not exists timescaledb cascade;' | sudo -u 'postgres' psql 'zabbix'
 ```
 
 - Остановить процессы `timescaledb` в базе данных `zabbix` перед восстановлением:
 
 ```bash
- echo 'SELECT timescaledb_pre_restore();' | sudo -u 'postgres' psql 'zabbix'
+ echo 'select timescaledb_pre_restore();' | sudo -u 'postgres' psql 'zabbix'
 ```
 
 - Восстановить информацию в базе данных `zabbix` из файла `zabbix.backup.sql.xz`:
@@ -188,7 +188,7 @@ DBPassword=password
 - Запустить процессы `timescaledb` после восстановления базы данных `zabbix`:
 
 ```bash
- echo 'SELECT timescaledb_post_restore();' | sudo -u 'postgres' psql 'zabbix'
+ echo 'select timescaledb_post_restore();' | sudo -u 'postgres' psql 'zabbix'
 ```
 
 - Запустить Vacuum после восстановления базы данных `zabbix`:
@@ -242,7 +242,7 @@ DBPassword=password
 Если обновляются пакеты TimescaleDB, то по завершении процесса обновления, необходимо выполнить следующую команду:
 
 ```bash
- echo "ALTER EXTENSION timescaledb UPDATE;" | sudo -u 'postgres' psql 'zabbix'
+ echo "alter extension timescaledb update;" | sudo -u 'postgres' psql 'zabbix'
 ```
 
 Эта команда обновит расширение TimescaleDB, подключённое к базе данных `zabbix`.
