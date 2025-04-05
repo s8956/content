@@ -10,6 +10,7 @@ images:
 categories:
   - 'linux'
   - 'terminal'
+  - 'inDev'
 tags:
   - 'debian'
   - 'apt'
@@ -123,13 +124,13 @@ draft: 0
  u='gitlab'; d='gitlabhq_production'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}"
 ```
 
-- Создать расширения для базы данных `gitlabhq_production` во внешнем {{< tag "PostgreSQL" >}}:
+- Создать расширения для базы данных `gitlabhq_production` на внешнем {{< tag "PostgreSQL" >}}:
 
 ```bash
  d='gitlabhq_production'; echo 'create extension if not exists pg_trgm; create extension if not exists btree_gist; create extension if not exists plpgsql;' | sudo -u 'postgres' psql "${d}"
 ```
 
-- Импортировать файл `/tmp/gitlabhq_production.sql` во внешний {{< tag "PostgreSQL" >}}:
+- Импортировать файл `/tmp/gitlabhq_production.sql` на внешний {{< tag "PostgreSQL" >}}:
 
 ```bash
  sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
