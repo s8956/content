@@ -85,3 +85,48 @@ draft: 0
 ```bash
  f=('mongod'); d="/etc"; p='https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```
+
+### Включение авторизации
+
+- Запустить командную оболочку `mongosh`:
+
+```bash
+mongosh
+```
+
+- Перейти в базу данных `admin`:
+
+```js
+use admin
+```
+
+- Создать пользователя `admin` с паролем `PASSWORD` и ролью `root` для базы данных `admin`:
+
+```js
+db.createUser({user: "admin", pwd: "PASSWORD", roles: [{role: "root", db: "admin"}]})
+```
+
+- Выйти из командной оболочки `mongosh`:
+
+```js
+quit()
+```
+
+- Добавить в файл `/etc/mongod.conf` следующие строки для включения авторизации:
+
+```yaml
+security:
+  authorization: enabled
+```
+
+- Перезапустить mongod:
+
+```bash
+systemctl restart mongod
+```
+
+- Запустить командную оболочку `mongosh` с включённой авторизацией:
+
+```bash
+mongosh 'mongodb://localhost:27017' --username 'admin' --authenticationDatabase 'admin'
+```
