@@ -13,16 +13,16 @@
 sed -i 's|example.old|example.new|g' '/etc/hosts'
 ```
 
-- Изменить домен в `/etc/postfix/main.cf`:
-
-```bash
-sed -i 's|example.old|example.new|g' '/etc/postfix/main.cf'
-```
-
 - Изменить домен в `/etc/resolv.conf`:
 
 ```bash
 sed -i 's|example.old|example.new|g' '/etc/resolv.conf'
+```
+
+- Изменить домен в `/etc/postfix/main.cf`:
+
+```bash
+sed -i 's|example.old|example.new|g' '/etc/postfix/main.cf'
 ```
 
 - Перезагрузить PVE:
