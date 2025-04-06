@@ -30,7 +30,7 @@ systemctl restart networking.service
 Удобнее будет использовать команду в одну строку, не забыв отредактировать параметры под себя:
 
 ```bash
-o='10.1.1.1/16'; n='10.1.2.2/16'; sed -i "s|${o}|${n}|g" '/etc/network/interfaces' && sed -i "s|${o}|${n}|g" '/etc/hosts' && systemctl restart networking.service
+ o='10.1.1.1/16'; n='10.1.2.2/16'; sed -i "s|${o}|${n}|g" '/etc/network/interfaces' && sed -i "s|${o}|${n}|g" '/etc/hosts' && systemctl restart networking.service
 ```
 
 #### Параметры
