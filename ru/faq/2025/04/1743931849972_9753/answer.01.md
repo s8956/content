@@ -34,7 +34,7 @@ shutdown -r now
 ### Команда в одну строку
 
 ```bash
- o='example.old'; n='example.new'; sed -i "s|${o}|${n}|g" '/etc/hosts' && sed -i "s|${o}|${n}|g" '/etc/postfix/main.cf' && sed -i "s|${o}|${n}|g" '/etc/resolv.conf'
+ o='example.old'; n='example.new'; f=('hosts' 'resolv.conf' 'postfix/main.cf'); for i in "${f[@]}"; do sed -i "s|${o}|${n}|g" "/etc/${i}"; done
 ```
 
 #### Параметры
