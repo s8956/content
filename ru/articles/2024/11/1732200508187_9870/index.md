@@ -271,5 +271,5 @@ DBPassword=password
 - Настроить IP-адреса серверов Zabbix (`s`) и hostname клиента (`h`):
 
 ```bash
- s='192.168.1.2,192.168.1.3'; h='SrvHost'; f='/etc/zabbix/zabbix_agentd.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig"; sed -i -e "s|Server=127.0.0.1|Server=${s}|g" -e "s|ServerActive=127.0.0.1|ServerActive=${s}|g" -e "s|Hostname=Zabbix server|Hostname=${h}|g" "${f}"
+ s='192.168.1.2,192.168.1.3'; h='SrvHost'; f='/etc/zabbix/zabbix_agent2.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && cp "${f}" "${f}.orig"; sed -i -e "s|^Server=127.0.0.1|Server=${s}|g" -e "s|^ServerActive=127.0.0.1|ServerActive=${s}|g" -e "s|^Hostname=Zabbix server|Hostname=${h}|g" "${f}"
 ```
