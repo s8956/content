@@ -81,7 +81,7 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 - Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/root/apps/acme/`:
 
 ```bash
-"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' run
+"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port ':8080' run
 ```
 
 #### Параметры
@@ -91,14 +91,14 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 - `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.com`).
 - `--domains` - список доменов для получения сертификата (`example.com` и `mail.example.co`).
 - `--http` - получение сертификата методом `HTTP-01`.
-- `--http.webroot` - WEB-директория сервера для интеграции идентификатора `.well-known/acme-challenge`.
+- `--http.port` - порт `8080`, на котором работает LeGo. Angie из статьи {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}} перебрасывает запросы к `.well-known/acme-challenge` на порт `8080`.
 
 ### Обновление сертификата
 
 - Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.webroot='/var/www/html' --renew-hook="${HOME}/apps/acme/hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port ':8080' --renew-hook="${HOME}/apps/acme/hook.sh" renew
 ```
 
 #### Параметры
