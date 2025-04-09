@@ -81,7 +81,7 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 - Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/root/apps/acme/`:
 
 ```bash
-"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port ':8080' run
+"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port=':8080' run
 ```
 
 #### Параметры
@@ -98,7 +98,7 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 - Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port ':8080' --renew-hook="${HOME}/apps/acme/hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port=':8080' --renew-hook="${HOME}/apps/acme/hook.sh" renew
 ```
 
 #### Параметры
