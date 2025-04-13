@@ -91,7 +91,7 @@ ls -l '/dev/disk/by-id/'
 - Создать обычный пул `data` из одного диска `pci-0000:01:00.0-scsi-0:1:0:0`:
 
 ```bash
-p='data'; d=('pci-0000:01:00.0-scsi-0:1:0:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]/#/-o }" "${O[@]/#/-O }" "${p}" "${d[@]}"
+p='data'; d=('pci-0000:01:00.0-scsi-0:1:0:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" "${d[@]}"
 ```
 
 ### Расширение пула
@@ -289,7 +289,7 @@ p='data'; o=('autoexpand' 'ashift' 'fragmentation'); zpool get "$( echo "${o[@]}
 - Установить свойство `autoexpand` в `on` пула `data`:
 
 ```bash
-p='data'; o=('autoexpand=on'); zpool set "${o[@]}" "${p}"
+p='data'; o=('-o' 'autoexpand=on'); zpool set "${o[@]}" "${p}"
 ```
 
 ### Работа с RAID
@@ -301,7 +301,7 @@ p='data'; o=('autoexpand=on'); zpool set "${o[@]}" "${p}"
 - Создать **RAID-0** из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
 ```bash
-p='data'; r0=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]/#/-o }" "${O[@]/#/-O }" "${p}" "${r0[@]}"
+p='data'; r0=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); o=('-o' 'ashift=12'); O=('-O' 'atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" "${r0[@]}"
 ```
 
 #### Mirror (RAID1)
@@ -309,7 +309,7 @@ p='data'; r0=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); 
 - Создать зеркало (**RAID-1**) из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
 ```bash
-p='data'; r1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]/#/-o }" "${O[@]/#/-O }" "${p}" mirror "${r1[@]}"
+p='data'; r1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); o=('-o' 'ashift=12'); O=('-O' 'atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" mirror "${r1[@]}"
 ```
 
 #### RAID10
@@ -317,7 +317,7 @@ p='data'; r1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); 
 - Создать **RAID-10** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0`, `pci-0000:01:00.0-scsi-0:1:2:0` и `pci-0000:01:00.0-scsi-0:1:3:0`:
 
 ```bash
-p='data'; r10m1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); r10m2=('pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]/#/-o }" "${O[@]/#/-O }" "${p}" mirror "${r10m1[@]}" mirror "${r10m2[@]}"
+p='data'; r10m1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); r10m2=('pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'); o=('-o' 'ashift=12'); O=('-O' 'atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" mirror "${r10m1[@]}" mirror "${r10m2[@]}"
 ```
 
 #### RAIDZ-1 (RAID5)
@@ -325,7 +325,7 @@ p='data'; r10m1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'
 - Создать **RAID-5** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0` и `pci-0000:01:00.0-scsi-0:1:2:0`:
 
 ```bash
-p='data'; rz1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]/#/-o }" "${O[@]/#/-O }" "${p}" raidz "${rz1[@]}"
+p='data'; rz1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0'); o=('-o' 'ashift=12'); O=('-O' 'atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" raidz "${rz1[@]}"
 ```
 
 #### RAIDZ-2 (RAID6)
@@ -333,7 +333,7 @@ p='data'; rz1=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' '
 - Создать **RAID-6** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0`, `pci-0000:01:00.0-scsi-0:1:2:0` и `pci-0000:01:00.0-scsi-0:1:3:0`
 
 ```bash
-p='data'; rz2=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]/#/-o }" "${O[@]/#/-O }" "${p}" raidz2 "${rz2[@]}"
+p='data'; rz2=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0'); o=('-o' 'ashift=12'); O=('-O' 'atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" raidz2 "${rz2[@]}"
 ```
 
 #### RAIDZ-3
@@ -341,7 +341,7 @@ p='data'; rz2=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' '
 - Создать **RAIDZ-3** из дисков `pci-0000:01:00.0-scsi-0:1:0:0`, `pci-0000:01:00.0-scsi-0:1:1:0`, `pci-0000:01:00.0-scsi-0:1:2:0`, `pci-0000:01:00.0-scsi-0:1:3:0` и `pci-0000:01:00.0-scsi-0:1:4:0`:
 
 ```bash
-p='data'; rz3=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0' 'pci-0000:01:00.0-scsi-0:1:4:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]/#/-o }" "${O[@]/#/-O }" "${p}" raidz3 "${rz3[@]}"
+p='data'; rz3=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0' 'pci-0000:01:00.0-scsi-0:1:2:0' 'pci-0000:01:00.0-scsi-0:1:3:0' 'pci-0000:01:00.0-scsi-0:1:4:0'); o=('-o' 'ashift=12'); O=('-O' 'atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" raidz3 "${rz3[@]}"
 ```
 
 ### Работа с ARC и ZIL
@@ -377,19 +377,19 @@ p='data'; v='cloud'; zfs create "${p}/${v}"
 - Создать том `cloud` с точкой монтирования `/opt/cloud` в пуле `data`:
 
 ```bash
-p='data'; v='cloud'; o=("mountpoint=/opt/${v}"); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='cloud'; o=('-o' "mountpoint=/opt/${v}"); zfs create "${o[@]}" "${p}/${v}"
 ```
 
 - Создать том `cloud` с алгоритмом компрессии `zstd` в пуле `data`:
 
 ```bash
-p='data'; v='cloud'; o=('compression=zstd'); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='cloud'; o=('-o' 'compression=zstd'); zfs create "${o[@]}" "${p}/${v}"
 ```
 
 - Создать том `cloud` с алгоритмом компрессии `zstd` и точкой монтирования `/opt/cloud` в пуле `data`:
 
 ```bash
-p='data'; v='cloud'; o=('compression=zstd' "mountpoint=/opt/${v}"); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='cloud'; o=('-o' 'compression=zstd' '-o' "mountpoint=/opt/${v}"); zfs create "${o[@]}" "${p}/${v}"
 ```
 
 ### Удаление тома
@@ -405,7 +405,7 @@ p='data'; v='cloud'; zfs destroy "${p}/${v}"
 - Создать том `secret` и зашифровать его парольной фразой в пуле `data`:
 
 ```bash
-p='data'; v='secret'; o=('encryption=on' 'keyformat=passphrase'); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='secret'; o=('-o' 'encryption=on' '-o' 'keyformat=passphrase'); zfs create "${o[@]}" "${p}/${v}"
 ```
 
 Где:
@@ -446,19 +446,19 @@ p='data'; v='cloud'; o=('compressratio' 'compression' 'mountpoint' 'atime'); zfs
 - Установить свойство `compression` в `zstd` тома `cloud` в пуле `data`:
 
 ```bash
-p='data'; v='cloud'; o=('compression=zstd'); zfs set "${o[@]}" "${p}/${v}"
+p='data'; v='cloud'; o=('-o' 'compression=zstd'); zfs set "${o[@]}" "${p}/${v}"
 ```
 
 - Вернуть свойство `compression` к стандартному наследуемому значению тома `cloud` в пуле `data`:
 
 ```bash
-p='data'; v='cloud'; o=('compression'); zfs inherit "${o[@]}" "${p}/${v}"
+p='data'; v='cloud'; o=('-o' 'compression'); zfs inherit "${o[@]}" "${p}/${v}"
 ```
 
 - Вернуть свойство `compression` к стандартному наследуемому значению тома `cloud` и во всех его под-томах в пуле `data`:
 
 ```bash
-p='data'; v='cloud'; o=('compression'); zfs inherit -r "${o[@]}" "${p}/${v}"
+p='data'; v='cloud'; o=('-o' 'compression'); zfs inherit -r "${o[@]}" "${p}/${v}"
 ```
 
 ## Снимки
@@ -530,19 +530,19 @@ p='data'; v='cloud'; s='2024-08-21.19-32-02'; zfs destroy "${p}/${v}@${s}"
 - Создать основной том `pgsql` с алгоритмом компрессии `zstd`:
 
 ```bash
-p='data'; v='pgsql'; o=('compression=zstd'); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='pgsql'; o=('-o' 'compression=zstd'); zfs create "${o[@]}" "${p}/${v}"
 ```
 
 - Создать специальный том `pgsql/main` с алгоритмом компрессии `zstd` и размером блока `32K` для баз данных:
 
 ```bash
-p='data'; v='pgsql/main'; o=('recordsize=32K'); zfs create "${o[@]/#/-o }" "${p}/${v}" && chmod 700 "/${p}/${v}"
+p='data'; v='pgsql/main'; o=('-o' 'recordsize=32K'); zfs create "${o[@]}" "${p}/${v}" && chmod 700 "/${p}/${v}"
 ```
 
 - Создать специальный том `pgsql/wal` с алгоритмом компрессии `zstd` и размером блока `32K` для WAL:
 
 ```bash
-p='data'; v='pgsql/wal'; o=('recordsize=32K'); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='pgsql/wal'; o=('-o' 'recordsize=32K'); zfs create "${o[@]}" "${p}/${v}"
 ```
 
 - Откорректировать настройки {{< tag "PostgreSQL" >}}:
@@ -559,13 +559,13 @@ wal_recycle = off
 - Создать основной том `mysql` с алгоритмом компрессии `zstd`:
 
 ```bash
-p='data'; v='mysql'; o=('compression=zstd' 'primarycache=metadata'); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='mysql'; o=('-o' 'compression=zstd' '-o' 'primarycache=metadata'); zfs create "${o[@]}" "${p}/${v}"
 ```
 
 - Создать специальный том `mysql/main` с алгоритмом компрессии `zstd` и размером блока `16K` для баз данных:
 
 ```bash
-p='data'; v='mysql/main'; o=('recordsize=16K' 'logbias=throughput'); zfs create "${o[@]/#/-o }" "${p}/${v}"
+p='data'; v='mysql/main'; o=('-o' 'recordsize=16K' '-o' 'logbias=throughput'); zfs create "${o[@]}" "${p}/${v}"
 ```
 
 - Создать специальный том `mysql/log` с алгоритмом компрессии `zstd` для логирования:
