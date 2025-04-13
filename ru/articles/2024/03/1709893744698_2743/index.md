@@ -91,7 +91,7 @@ ls -l '/dev/disk/by-id/'
 - Создать обычный пул `data` из одного диска `pci-0000:01:00.0-scsi-0:1:0:0`:
 
 ```bash
-p='data'; d=('pci-0000:01:00.0-scsi-0:1:0:0'); o=('ashift=12'); O=('atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" "${d[@]}"
+p='data'; d=('pci-0000:01:00.0-scsi-0:1:0:0'); o=('-o' 'ashift=12'); O=('-O' 'atime=off'); zpool create "${o[@]}" "${O[@]}" "${p}" "${d[@]}"
 ```
 
 ### Расширение пула
@@ -118,7 +118,7 @@ p='data'; b='sdb'; d=('pci-0000:03:00.0-scsi-0:1:0:0'); echo 1 > "/sys/block/${b
 При необходимости можно включить автоматическое расширение пула `data`:
 
 ```bash
-p='data'; o=('autoexpand=on'); zpool set "${o[@]}" "${p}"
+p='data'; o=('-o' 'autoexpand=on'); zpool set "${o[@]}" "${p}"
 ```
 {{< /alert >}}
 
@@ -179,13 +179,13 @@ p=('data' 'data_NEW'); zpool import "${p[@]}"
 - Импортировать пул `data`, состоящий из дисков `pci-0000:01:00.0-scsi-0:1:0:0` и `pci-0000:01:00.0-scsi-0:1:1:0`:
 
 ```bash
-p='data'; d=('pci-0000:01:00.0-scsi-0:1:0:0' 'pci-0000:01:00.0-scsi-0:1:1:0'); zpool import "${d[@]/#/-d }" "${p}"
+p='data'; d=('-d' 'pci-0000:01:00.0-scsi-0:1:0:0' '-d' 'pci-0000:01:00.0-scsi-0:1:1:0'); zpool import "${d[@]}" "${p}"
 ```
 
 - ...или можно разрешить {{< tag "ZFS" >}} автоматически поискать диски пула `data`:
 
 ```bash
-p='data'; d=('/dev/disk/by-path/'); zpool import "${d[@]/#/-d }" "${p}"
+p='data'; d=('-d' '/dev/disk/by-path/'); zpool import "${d[@]}" "${p}"
 ```
 
 ### Переименования пула
