@@ -256,8 +256,7 @@ f='iRedMail.backup.sql'; xz -d "${f}.xz" && sed -i 's/NO_AUTO_CREATE_USER//' "${
 export GH_URL='https://raw.githubusercontent.com/iredmail/iRedMail/refs/heads/master/update'
 ```
 
-#### Версии iRedMail
-
+{{< accordion-item "Версии iRedMail" >}}
 - `1.4.0`:
 
 ```bash
@@ -299,6 +298,13 @@ curl -fsSL "${GH_URL}/1.7.1/amavisd.mysql" | mariadb --user='root' --password --
 ```bash
 curl -fsSL "${GH_URL}/1.7.2/vmail.mysql" | mariadb --user='root' --password --database='vmail'
 ```
+
+- `1.7.3`:
+
+```bash
+curl -fsSL "${GH_URL}/1.7.3/vmail.mysql" | mariadb --user='root' --password --database='vmail'
+```
+{{< /accordion-item >}}
 
 ### RoundCube
 
