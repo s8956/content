@@ -185,7 +185,7 @@ f='iRedMail.backup.utf8mb4.sql'; mariadb-dump --user='root' --password --single-
 - Заменить `utf8mb3` на `utf8mb4`:
 
 ```bash
-f='iRedMail.backup.utf8mb4.sql'; sed -i -e 's|utf8mb3_general_ci|utf8mb4_unicode_ci|g' -e 's|utf8mb3|utf8mb4|g' "${f}"
+f='iRedMail.backup.utf8mb4.sql'; sed -i -e 's|utf8mb3|utf8mb4|g' -e 's|_general_ci|_unicode_ci|g' "${f}"
 ```
 
 - Импортировать базы данных:
