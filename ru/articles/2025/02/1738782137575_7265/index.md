@@ -65,17 +65,29 @@ draft: 0
 ```
 
 {{< alert "tip" >}}
-Ключ можно скачать с зеркала:
+Ключ можно скачать со следующих зеркал:
 
 ```bash
  curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.su/php/apt.gpg'
+```
+
+```bash
+ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.metanet.ch/sury/php/apt.gpg'
+```
+
+```bash
+ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://debian.octopuce.fr/sury-php/apt.gpg'
+```
+
+```bash
+ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php/apt.gpg'
 ```
 {{< /alert >}}
 
 - Создать файл репозитория `/etc/apt/sources.list.d/php.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: PHP\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/php\n#URIs: https://packages.sury.su/php\n#URIs: https://mirror.metanet.ch/sury/php\n#URIs: https://debian.octopuce.fr/sury-php\n#URIs: https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/php.gpg\n" | tee '/etc/apt/sources.list.d/php.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: PHP\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/php\n#URIs: https://packages.sury.su/php\n#URIs: https://mirror.metanet.ch/sury/php\n#URIs: https://debian.octopuce.fr/sury-php\n#URIs: https://mirror.yandex.ru/mirrors/packages.sury.org/php\n#URIs: https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/php.gpg\n" | tee '/etc/apt/sources.list.d/php.sources' > '/dev/null'
 ```
 
 ## Установка
