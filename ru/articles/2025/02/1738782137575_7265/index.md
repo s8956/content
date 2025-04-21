@@ -80,6 +80,10 @@ draft: 0
 ```
 
 ```bash
+ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.yandex.ru/mirrors/packages.sury.org/php/apt.gpg'
+```
+
+```bash
  curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php/apt.gpg'
 ```
 {{< /alert >}}
