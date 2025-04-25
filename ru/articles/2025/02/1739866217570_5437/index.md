@@ -377,7 +377,7 @@ RoundCube может работать на новой версии PHP, но п�
 - Установка командной строки антивируса и утилит для работы с архивами:
 
 ```bash
-apt install --yes clamav && apt install --yes arj cabextract cpio lhasa lzop nomarch pax unrar-free unzip
+apt install --yes clamav libclamunrar && apt install --yes arj cabextract cpio lhasa lzop nomarch pax unrar unzip
 ```
 
 - Удаление старого пакета `p7zip` и установка нового `7zip`:
