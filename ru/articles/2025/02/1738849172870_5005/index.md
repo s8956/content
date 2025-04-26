@@ -69,7 +69,7 @@ draft: 0
 - Создать файл репозитория `/etc/apt/sources.list.d/graylog.sources`:
 
 ```bash
- [[ ! -v 'GRAYLOG_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: Graylog\nEnabled: yes\nTypes: deb\nURIs: https://packages.graylog2.org/repo/${ID}\nSuites: stable\nComponents: ${GRAYLOG_VER}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/graylog.gpg\n" | tee '/etc/apt/sources.list.d/graylog.sources' > '/dev/null'
+ [[ ! -v 'GRAYLOG_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: Graylog\nEnabled: yes\nTypes: deb\nURIs: https://packages.graylog2.org/repo/${ID}\nSuites: stable\nComponents: ${GRAYLOG_VER}\nSigned-By: /etc/apt/keyrings/graylog.gpg\n" | tee '/etc/apt/sources.list.d/graylog.sources' > '/dev/null'
 ```
 
 ## Установка

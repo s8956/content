@@ -60,7 +60,7 @@ draft: 0
 - Создать файл репозитория `/etc/apt/sources.list.d/gitlab.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: GitLab\nEnabled: yes\nTypes: deb\nURIs: https://packages.gitlab.com/gitlab/gitlab-ee/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/gitlab.gpg\n" | tee '/etc/apt/sources.list.d/gitlab.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: GitLab\nEnabled: yes\nTypes: deb\nURIs: https://packages.gitlab.com/gitlab/gitlab-ee/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/gitlab.gpg\n" | tee '/etc/apt/sources.list.d/gitlab.sources' > '/dev/null'
 ```
 
 - Для использования всех возможностей поискового движка необходимо установить {{< tag "ElasticSearch" >}} по инструкции {{< uuid "6542fa14-41f4-5309-98c0-a3bac519b93d" >}} или {{< tag "OpenSearch" >}} по инструкции {{< uuid "0c18558e-b4e1-5713-aead-9b767d14e99c" >}}.

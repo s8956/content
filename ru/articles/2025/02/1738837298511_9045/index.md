@@ -67,7 +67,7 @@ draft: 0
 - Создать файл репозитория `/etc/apt/sources.list.d/mongodb.sources`:
 
 ```bash
- [[ ! -v 'MONGODB_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\nTypes: deb\nURIs: http://repo.mongodb.org/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/${ID}\nSuites: ${VERSION_CODENAME}/mongodb-org/${MONGODB_VER}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mongodb.gpg\n" | tee '/etc/apt/sources.list.d/mongodb.sources' > '/dev/null'
+ [[ ! -v 'MONGODB_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\nTypes: deb\nURIs: http://repo.mongodb.org/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/${ID}\nSuites: ${VERSION_CODENAME}/mongodb-org/${MONGODB_VER}\nComponents: main\nSigned-By: /etc/apt/keyrings/mongodb.gpg\n" | tee '/etc/apt/sources.list.d/mongodb.sources' > '/dev/null'
 ```
 
 ## Установка

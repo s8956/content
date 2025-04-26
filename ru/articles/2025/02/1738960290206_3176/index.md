@@ -59,7 +59,7 @@ curl -fsSL 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmo
 - Создать файл репозитория `/etc/apt/sources.list.d/caddy.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Caddy\nEnabled: yes\nTypes: deb\nURIs: https://dl.cloudsmith.io/public/caddy/stable/deb/${ID}\nSuites: any-version\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/caddy.gpg\n" | tee '/etc/apt/sources.list.d/caddy.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Caddy\nEnabled: yes\nTypes: deb\nURIs: https://dl.cloudsmith.io/public/caddy/stable/deb/${ID}\nSuites: any-version\nComponents: main\nSigned-By: /etc/apt/keyrings/caddy.gpg\n" | tee '/etc/apt/sources.list.d/caddy.sources' > '/dev/null'
 ```
 
 ## Установка

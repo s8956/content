@@ -59,7 +59,7 @@ draft: 0
 - Создать файл репозитория `/etc/apt/sources.list.d/docker.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: Docker\nEnabled: yes\nTypes: deb\nURIs: https://download.docker.com/linux/debian\nSuites: ${VERSION_CODENAME}\nComponents: stable\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/docker.gpg"| tee '/etc/apt/sources.list.d/docker.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: Docker\nEnabled: yes\nTypes: deb\nURIs: https://download.docker.com/linux/debian\nSuites: ${VERSION_CODENAME}\nComponents: stable\nSigned-By: /etc/apt/keyrings/docker.gpg"| tee '/etc/apt/sources.list.d/docker.sources' > '/dev/null'
 ```
 
 ## Установка

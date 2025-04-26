@@ -59,7 +59,7 @@ curl -fsSL 'https://lib.onl/ru/2025/02/f29ee2b5-891d-591e-8b21-69f494cd11c0/mysq
 - Создать файл репозитория `/etc/apt/sources.list.d/mysql.sources`:
 
 ```bash
-v='8.4-lts'; . '/etc/os-release' && echo -e "X-Repolib-Name: MySQL\nEnabled: yes\nTypes: deb\nURIs: http://repo.mysql.com/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mysql.com/apt/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: mysql-${v}\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/mysql.gpg\n" | tee '/etc/apt/sources.list.d/mysql.sources' > '/dev/null'
+v='8.4-lts'; . '/etc/os-release' && echo -e "X-Repolib-Name: MySQL\nEnabled: yes\nTypes: deb\nURIs: http://repo.mysql.com/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mysql.com/apt/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: mysql-${v}\nSigned-By: /etc/apt/keyrings/mysql.gpg\n" | tee '/etc/apt/sources.list.d/mysql.sources' > '/dev/null'
 ```
 
 ## Установка

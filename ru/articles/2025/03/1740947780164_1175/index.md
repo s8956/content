@@ -67,7 +67,7 @@ draft: 1
 - Создать файл репозитория `/etc/apt/sources.list.d/alvistack.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: AlviStack\nEnabled: yes\nTypes: deb\nURIs: https://download.opensuse.org/repositories/home:/alvistack/Debian_${VERSION_ID}\nSuites: /\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/alvistack.gpg"| tee '/etc/apt/sources.list.d/alvistack.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: AlviStack\nEnabled: yes\nTypes: deb\nURIs: https://download.opensuse.org/repositories/home:/alvistack/Debian_${VERSION_ID}\nSuites: /\nSigned-By: /etc/apt/keyrings/alvistack.gpg"| tee '/etc/apt/sources.list.d/alvistack.sources' > '/dev/null'
 ```
 
 - Скачать файлы предпочтений в `/etc/apt/preferences.d/`:

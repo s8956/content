@@ -68,7 +68,7 @@ draft: 0
 - Создать файл репозитория `/etc/apt/sources.list.d/opensearch.sources`:
 
 ```bash
- [[ ! -v 'OPENSEARCH_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: OpenSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.opensearch.org/releases/bundle/opensearch/${OPENSEARCH_VER%%.*}.x/apt\nSuites: stable\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/opensearch.gpg\n" | tee '/etc/apt/sources.list.d/opensearch.sources' > '/dev/null'
+ [[ ! -v 'OPENSEARCH_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: OpenSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.opensearch.org/releases/bundle/opensearch/${OPENSEARCH_VER%%.*}.x/apt\nSuites: stable\nComponents: main\nSigned-By: /etc/apt/keyrings/opensearch.gpg\n" | tee '/etc/apt/sources.list.d/opensearch.sources' > '/dev/null'
 ```
 
 ## Установка

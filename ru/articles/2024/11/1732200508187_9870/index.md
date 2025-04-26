@@ -71,7 +71,7 @@ draft: 0
 - Создать файл репозитория `/etc/apt/sources.list.d/zabbix.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: Zabbix\nEnabled: yes\nTypes: deb\nURIs: https://repo.zabbix.com/zabbix/${ZABBIX_VER}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nArchitectures: $( dpkg --print-architecture )\nSigned-By: /etc/apt/keyrings/zabbix.gpg\n" | tee '/etc/apt/sources.list.d/zabbix.sources' > '/dev/null'
+ . '/etc/os-release' && echo -e "X-Repolib-Name: Zabbix\nEnabled: yes\nTypes: deb\nURIs: https://repo.zabbix.com/zabbix/${ZABBIX_VER}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/zabbix.gpg\n" | tee '/etc/apt/sources.list.d/zabbix.sources' > '/dev/null'
 ```
 
 ## Zabbix Server
