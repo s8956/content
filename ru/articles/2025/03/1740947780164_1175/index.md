@@ -61,19 +61,19 @@ draft: 1
 - Скачать и установить ключ репозитория:
 
 ```bash
- . '/etc/os-release' && curl -fsSL "https://download.opensuse.org/repositories/home:alvistack/Debian_${VERSION_ID}/Release.key" | gpg --dearmor -o '/etc/apt/keyrings/alvistack.gpg'
+. '/etc/os-release' && curl -fsSL "https://download.opensuse.org/repositories/home:alvistack/Debian_${VERSION_ID}/Release.key" | gpg --dearmor -o '/etc/apt/keyrings/alvistack.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/alvistack.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: AlviStack\nEnabled: yes\nTypes: deb\nURIs: https://download.opensuse.org/repositories/home:/alvistack/Debian_${VERSION_ID}\nSuites: /\nSigned-By: /etc/apt/keyrings/alvistack.gpg"| tee '/etc/apt/sources.list.d/alvistack.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: AlviStack\nEnabled: yes\nTypes: deb\nURIs: https://download.opensuse.org/repositories/home:/alvistack/Debian_${VERSION_ID}\nSuites: /\nSigned-By: /etc/apt/keyrings/alvistack.gpg"| tee '/etc/apt/sources.list.d/alvistack.sources' > '/dev/null'
 ```
 
 - Скачать файлы предпочтений в `/etc/apt/preferences.d/`:
 
 ```bash
- f=('alvistack'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/03/dc9141c4-2dd5-54cf-b40b-8468694b9250'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
+f=('alvistack'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/03/dc9141c4-2dd5-54cf-b40b-8468694b9250'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
 ```
 
 ## Установка
@@ -81,5 +81,5 @@ draft: 1
 - Установить {{< tag "Podman" >}}:
 
 ```bash
- apt update && apt install --yes -t 'l=home:alvistack' podman podman-netavark podman-compose
+apt update && apt install --yes -t 'l=home:alvistack' podman podman-netavark podman-compose
 ```

@@ -53,13 +53,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSL 'https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263/redis.asc' | gpg --dearmor -o '/etc/apt/keyrings/redis.gpg'
+curl -fsSL 'https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263/redis.asc' | gpg --dearmor -o '/etc/apt/keyrings/redis.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/redis.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: Redis\nEnabled: yes\nTypes: deb\nURIs: https://packages.redis.io/deb\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/redis.gpg\n" | tee '/etc/apt/sources.list.d/redis.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Redis\nEnabled: yes\nTypes: deb\nURIs: https://packages.redis.io/deb\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/redis.gpg\n" | tee '/etc/apt/sources.list.d/redis.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -67,7 +67,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes redis && systemctl enable --now redis-server.service
+apt update && apt install --yes redis && systemctl enable --now redis-server.service
 ```
 
 ## Настройка
@@ -75,11 +75,11 @@ draft: 0
 - Добавить директиву `include` в основной файл конфигурации `redis.conf`:
 
 ```bash
- f='/etc/redis/redis.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig" && cp "${f}.orig" "${f}" && echo -e '\ninclude /etc/redis/conf.d/*.conf\n' | tee -a "${f}" > '/dev/null'
+f='/etc/redis/redis.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig" && cp "${f}.orig" "${f}" && echo -e '\ninclude /etc/redis/conf.d/*.conf\n' | tee -a "${f}" > '/dev/null'
 ```
 
 - Скачать файлы локальной конфигурации в `/etc/redis/conf.d/`:
 
 ```bash
- f=('redis'); d='/etc/redis/conf.d'; p='https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263'; [[ ! -d "${d}" ]] && mkdir "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${p}/${i}.conf"; done
+f=('redis'); d='/etc/redis/conf.d'; p='https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263'; [[ ! -d "${d}" ]] && mkdir "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${p}/${i}.conf"; done
 ```

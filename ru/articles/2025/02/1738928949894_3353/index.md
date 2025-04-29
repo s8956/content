@@ -53,7 +53,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export MARIADB_VER='11.4'
+export MARIADB_VER='11.4'
 ```
 
 ## Репозиторий
@@ -61,13 +61,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/mariadb.gpg' 'https://mariadb.org/mariadb_release_signing_key.pgp'
+curl -fsSLo '/etc/apt/keyrings/mariadb.gpg' 'https://mariadb.org/mariadb_release_signing_key.pgp'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mariadb.sources`:
 
 ```bash
- [[ ! -v 'MARIADB_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: MariaDB\nEnabled: yes\nTypes: deb\nURIs: https://mirror.netcologne.de/mariadb/repo/${MARIADB_VER}/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/mariadb/repo/${MARIADB_VER}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/mariadb.gpg\n" | tee '/etc/apt/sources.list.d/mariadb.sources' > '/dev/null'
+[[ ! -v 'MARIADB_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: MariaDB\nEnabled: yes\nTypes: deb\nURIs: https://mirror.netcologne.de/mariadb/repo/${MARIADB_VER}/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/mariadb/repo/${MARIADB_VER}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/mariadb.gpg\n" | tee '/etc/apt/sources.list.d/mariadb.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -75,7 +75,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes mariadb-server && systemctl stop mariadb.service
+apt update && apt install --yes mariadb-server && systemctl stop mariadb.service
 ```
 
 ## Настройка
@@ -83,19 +83,19 @@ draft: 0
 - Скачать файлы локальной конфигурации в `/etc/mysql/mariadb.conf.d/`:
 
 ```bash
- f=('server' 'mariadb-dump'); d='/etc/mysql/mariadb.conf.d'; p='https://lib.onl/ru/2025/02/0068df20-232a-55a2-a487-52dc746a4f47'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.cnf" "${p}/${i}.cnf"; done
+f=('server' 'mariadb-dump'); d='/etc/mysql/mariadb.conf.d'; p='https://lib.onl/ru/2025/02/0068df20-232a-55a2-a487-52dc746a4f47'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.cnf" "${p}/${i}.cnf"; done
 ```
 
 - Удалить файлы в директории `/var/lib/mysql` и инициализировать стандартные базы данных:
 
 ```bash
- rm -rf /var/lib/mysql/* && mariadb-install-db --user='mysql' && systemctl start mariadb.service
+rm -rf /var/lib/mysql/* && mariadb-install-db --user='mysql' && systemctl start mariadb.service
 ```
 
 - Запустить скрипт безопасной установки:
 
 ```bash
- mariadb-secure-installation && systemctl restart mariadb.service
+mariadb-secure-installation && systemctl restart mariadb.service
 ```
 
 - Создать пользователя `root` для подключения `127.0.0.1` и с любых хостов (`%`):

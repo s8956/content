@@ -54,7 +54,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export OPENSEARCH_VER='2.19.0'
+export OPENSEARCH_VER='2.19.0'
 ```
 
 ## Репозиторий
@@ -62,13 +62,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSL 'https://artifacts.opensearch.org/publickeys/opensearch.pgp' | gpg --dearmor -o '/etc/apt/keyrings/opensearch.gpg'
+curl -fsSL 'https://artifacts.opensearch.org/publickeys/opensearch.pgp' | gpg --dearmor -o '/etc/apt/keyrings/opensearch.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/opensearch.sources`:
 
 ```bash
- [[ ! -v 'OPENSEARCH_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: OpenSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.opensearch.org/releases/bundle/opensearch/${OPENSEARCH_VER%%.*}.x/apt\nSuites: stable\nComponents: main\nSigned-By: /etc/apt/keyrings/opensearch.gpg\n" | tee '/etc/apt/sources.list.d/opensearch.sources' > '/dev/null'
+[[ ! -v 'OPENSEARCH_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: OpenSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.opensearch.org/releases/bundle/opensearch/${OPENSEARCH_VER%%.*}.x/apt\nSuites: stable\nComponents: main\nSigned-By: /etc/apt/keyrings/opensearch.gpg\n" | tee '/etc/apt/sources.list.d/opensearch.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -76,7 +76,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- [[ ! -v 'OPENSEARCH_VER' ]] && return; apt update && apt install --yes opensearch=${OPENSEARCH_VER} && apt-mark hold opensearch=${OPENSEARCH_VER}
+[[ ! -v 'OPENSEARCH_VER' ]] && return; apt update && apt install --yes opensearch=${OPENSEARCH_VER} && apt-mark hold opensearch=${OPENSEARCH_VER}
 ```
 
 ## Настройка
@@ -84,11 +84,11 @@ draft: 0
 - Скачать файл основной конфигурации `opensearch.yml` в `/etc/opensearch/`:
 
 ```bash
- f=('opensearch'); d='/etc/opensearch'; p='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do [[ -f "${d}/${i}.yml" && ! -f "${d}/${i}.yml.orig" ]] && mv "${d}/${i}.yml" "${d}/${i}.yml.orig"; curl -fsSLo "${d}/${i}.yml" "${p}/${i}.yml" && chown opensearch:opensearch "${d}/${i}.yml" && chmod 640 "${d}/${i}.yml"; done
+f=('opensearch'); d='/etc/opensearch'; p='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do [[ -f "${d}/${i}.yml" && ! -f "${d}/${i}.yml.orig" ]] && mv "${d}/${i}.yml" "${d}/${i}.yml.orig"; curl -fsSLo "${d}/${i}.yml" "${p}/${i}.yml" && chown opensearch:opensearch "${d}/${i}.yml" && chmod 640 "${d}/${i}.yml"; done
 ```
 
 - Скачать файлы локальной конфигурации в `/etc/opensearch/jvm.options.d/`:
 
 ```bash
- f=('jvm'); d='/etc/opensearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.options" "${p}/${i}.options" && chown opensearch:opensearch "${d}/90-${i}.local.options" && chmod 640 "${d}/90-${i}.local.options"; done
+f=('jvm'); d='/etc/opensearch/jvm.options.d'; p='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.options" "${p}/${i}.options" && chown opensearch:opensearch "${d}/90-${i}.local.options" && chmod 640 "${d}/90-${i}.local.options"; done
 ```

@@ -53,7 +53,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export PHP_VER='8.4'
+export PHP_VER='8.4'
 ```
 
 ## Репозиторий
@@ -61,37 +61,37 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4/php.gpg'
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4/php.gpg'
 ```
 
 {{< alert "tip" >}}
 Ключ можно скачать со следующих зеркал:
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.su/php/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://packages.sury.su/php/apt.gpg'
 ```
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.metanet.ch/sury/php/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.metanet.ch/sury/php/apt.gpg'
 ```
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://debian.octopuce.fr/sury-php/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://debian.octopuce.fr/sury-php/apt.gpg'
 ```
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.yandex.ru/mirrors/packages.sury.org/php/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://mirror.yandex.ru/mirrors/packages.sury.org/php/apt.gpg'
 ```
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php/apt.gpg'
+curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php/apt.gpg'
 ```
 {{< /alert >}}
 
 - Создать файл репозитория `/etc/apt/sources.list.d/php.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: PHP\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/php\n#URIs: https://packages.sury.su/php\n#URIs: https://mirror.metanet.ch/sury/php\n#URIs: https://debian.octopuce.fr/sury-php\n#URIs: https://mirror.yandex.ru/mirrors/packages.sury.org/php\n#URIs: https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/php.gpg\n" | tee '/etc/apt/sources.list.d/php.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: PHP\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/php\n#URIs: https://packages.sury.su/php\n#URIs: https://mirror.metanet.ch/sury/php\n#URIs: https://debian.octopuce.fr/sury-php\n#URIs: https://mirror.yandex.ru/mirrors/packages.sury.org/php\n#URIs: https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/php.gpg\n" | tee '/etc/apt/sources.list.d/php.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -99,7 +99,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- [[ ! -v 'PHP_VER' ]] && return; apt update && apt install --yes php${PHP_VER} php${PHP_VER}-{fpm,bcmath,bz2,cli,curl,gd,gmp,imagick,imap,intl,ldap,mbstring,memcached,mysql,odbc,opcache,pgsql,redis,uploadprogress,xml,zip,zstd}
+[[ ! -v 'PHP_VER' ]] && return; apt update && apt install --yes php${PHP_VER} php${PHP_VER}-{fpm,bcmath,bz2,cli,curl,gd,gmp,imagick,imap,intl,ldap,mbstring,memcached,mysql,odbc,opcache,pgsql,redis,uploadprogress,xml,zip,zstd}
 ```
 
 ## Настройка
@@ -107,11 +107,11 @@ draft: 0
 - Скачать файлы локальной конфигурации в `/etc/php/<VER>/fpm/conf.d/`:
 
 ```bash
- [[ ! -v 'PHP_VER' ]] && return; f=('php' 'php.cgi' 'php.date' 'php.mail' 'php.mbstring'); d="/etc/php/${PHP_VER}/fpm/conf.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i##*.}.local.ini" "${p}/${i}.ini"; done
+[[ ! -v 'PHP_VER' ]] && return; f=('php' 'php.cgi' 'php.date' 'php.mail' 'php.mbstring'); d="/etc/php/${PHP_VER}/fpm/conf.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i##*.}.local.ini" "${p}/${i}.ini"; done
 ```
 
 - Скачать файл конфигурации пула `main` в `/etc/php/<VER>/fpm/pool.d/`:
 
 ```bash
- [[ ! -v 'PHP_VER' ]] && return; f=('main'); d="/etc/php/${PHP_VER}/fpm/pool.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; [[ ! -d '/var/log/php-fpm' ]] && mkdir '/var/log/php-fpm'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/pool.${i}.conf"; done
+[[ ! -v 'PHP_VER' ]] && return; f=('main'); d="/etc/php/${PHP_VER}/fpm/pool.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; [[ ! -d '/var/log/php-fpm' ]] && mkdir '/var/log/php-fpm'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/pool.${i}.conf"; done
 ```

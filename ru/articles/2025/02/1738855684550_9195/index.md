@@ -54,13 +54,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSL 'https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055/gitlab.asc' | gpg --dearmor -o '/etc/apt/keyrings/gitlab.gpg'
+curl -fsSL 'https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055/gitlab.asc' | gpg --dearmor -o '/etc/apt/keyrings/gitlab.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/gitlab.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: GitLab\nEnabled: yes\nTypes: deb\nURIs: https://packages.gitlab.com/gitlab/gitlab-ee/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/gitlab.gpg\n" | tee '/etc/apt/sources.list.d/gitlab.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: GitLab\nEnabled: yes\nTypes: deb\nURIs: https://packages.gitlab.com/gitlab/gitlab-ee/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/packages.gitlab.com/gitlab/gitlab-ce\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/gitlab.gpg\n" | tee '/etc/apt/sources.list.d/gitlab.sources' > '/dev/null'
 ```
 
 - Для использования всех возможностей поискового движка необходимо установить {{< tag "ElasticSearch" >}} по инструкции {{< uuid "6542fa14-41f4-5309-98c0-a3bac519b93d" >}} или {{< tag "OpenSearch" >}} по инструкции {{< uuid "0c18558e-b4e1-5713-aead-9b767d14e99c" >}}.
@@ -70,7 +70,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes gitlab-ee
+apt update && apt install --yes gitlab-ee
 ```
 
 ## Настройка
@@ -78,13 +78,13 @@ draft: 0
 - Добавить в конец файла `/etc/gitlab/gitlab.rb` вызов локальной конфигурации:
 
 ```bash
- f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig" && cp "${f}.orig" "${f}" && echo -e '\nfrom_file "/etc/gitlab/gitlab.local.rb"\n' | tee -a "${f}" > '/dev/null'
+f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f}.orig" && cp "${f}.orig" "${f}" && echo -e '\nfrom_file "/etc/gitlab/gitlab.local.rb"\n' | tee -a "${f}" > '/dev/null'
 ```
 
 - Скачать файл локальной конфигурации в `/etc/gitlab/`:
 
 ```bash
- f=('gitlab'); d='/etc/gitlab'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local.rb" "${p}/${i}.rb"; done
+f=('gitlab'); d='/etc/gitlab'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local.rb" "${p}/${i}.rb"; done
 ```
 
 ## Миграция
@@ -95,7 +95,7 @@ draft: 0
 - Скачать файл сайта `gitlab-ssl.conf` в `/etc/angie/http.d/`:
 
 ```bash
- f=('gitlab-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('gitlab-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```
 
 ### PostgreSQL
@@ -109,31 +109,31 @@ draft: 0
 - Остановить все сервисы GitLab, кроме {{< tag "PostgreSQL" >}}:
 
 ```bash
- gitlab-ctl stop && gitlab-ctl start postgresql && gitlab-ctl status
+gitlab-ctl stop && gitlab-ctl start postgresql && gitlab-ctl status
 ```
 
 - Экспортировать базу данных `gitlabhq_production` в файл `/tmp/gitlabhq_production.sql`:
 
 ```bash
- sudo -u 'gitlab-psql' /opt/gitlab/embedded/bin/pg_dump --host='/var/opt/gitlab/postgresql' --username='gitlab-psql' --dbname='gitlabhq_production' --clean --create --file='/tmp/gitlabhq_production.sql'
+sudo -u 'gitlab-psql' '/opt/gitlab/embedded/bin/pg_dump' --host='/var/opt/gitlab/postgresql' --username='gitlab-psql' --dbname='gitlabhq_production' --clean --create --file='/tmp/gitlabhq_production.sql'
 ```
 
 - Создать роль `gitlab` и базу данных `gitlabhq_production` на внешнем {{< tag "PostgreSQL" >}}:
 
 ```bash
- u='gitlab'; d='gitlabhq_production'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}"
+u='gitlab'; d='gitlabhq_production'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}"
 ```
 
 - Создать расширения для базы данных `gitlabhq_production` на внешнем {{< tag "PostgreSQL" >}}:
 
 ```bash
- d='gitlabhq_production'; echo 'create extension if not exists pg_trgm; create extension if not exists btree_gist; create extension if not exists plpgsql;' | sudo -u 'postgres' psql "${d}"
+d='gitlabhq_production'; echo 'create extension if not exists pg_trgm; create extension if not exists btree_gist; create extension if not exists plpgsql;' | sudo -u 'postgres' psql "${d}"
 ```
 
 - Импортировать файл `/tmp/gitlabhq_production.sql` на внешний {{< tag "PostgreSQL" >}}:
 
 ```bash
- sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
+sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
 ```
 
 - Добавить настройки в файл конфигурации `/etc/gitlab/gitlab.rb`:
@@ -157,19 +157,19 @@ gitlab_rails['db_password'] = '*****'
 - Скачать и распаковать генератор:
 
 ```bash
- f=('license.gen'); d="${HOME}"; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.tar.xz" "${p}/${i}.tar.xz" && tar -xJf "${d}/${i}.tar.xz"; done
+f=('license.gen'); d="${HOME}"; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.tar.xz" "${p}/${i}.tar.xz" && tar -xJf "${d}/${i}.tar.xz"; done
 ```
 
 - Запустить создание образа:
 
 ```bash
- docker build "${HOME}/license.gen" -t 'gitlab-license-generator:main'
+docker build "${HOME}/license.gen" -t 'gitlab-license-generator:main'
 ```
 
 - Создать ключ лицензии в директории `./license`:
 
 ```bash
- docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='GitLab' -e LICENSE_COMPANY='GitLab' -e LICENSE_EMAIL='license@example.com' -e LICENSE_PLAN='ultimate' -e LICENSE_USER_COUNT='2147483647' -e LICENSE_EXPIRE_YEAR='2500' 'gitlab-license-generator:main'
+docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='GitLab' -e LICENSE_COMPANY='GitLab' -e LICENSE_EMAIL='license@example.com' -e LICENSE_PLAN='ultimate' -e LICENSE_USER_COUNT='2147483647' -e LICENSE_EXPIRE_YEAR='2500' 'gitlab-license-generator:main'
 ```
 
 ### Готовая лицензия
@@ -177,7 +177,7 @@ gitlab_rails['db_password'] = '*****'
 - Скачать открытый ключ в директорию `/opt/gitlab/embedded/service/gitlab-rails` и заменить им оригинальный файл `license_encryption_key.pub`:
 
 ```bash
- f=('public'); d='/opt/gitlab/embedded/service/gitlab-rails'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; [[ -f "${d}/.license_encryption_key.pub" && ! -f "${d}/.license_encryption_key.pub.orig" ]] && mv "${d}/.license_encryption_key.pub" "${d}/.license_encryption_key.pub.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/.license_encryption_key.pub" "${p}/${i}.key"
+f=('public'); d='/opt/gitlab/embedded/service/gitlab-rails'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; [[ -f "${d}/.license_encryption_key.pub" && ! -f "${d}/.license_encryption_key.pub.orig" ]] && mv "${d}/.license_encryption_key.pub" "${d}/.license_encryption_key.pub.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/.license_encryption_key.pub" "${p}/${i}.key"
 ```
 
 - Установить [файл лицензии](license.key) в Admin / Settings / General / Add License.
@@ -191,11 +191,11 @@ gitlab_rails['db_password'] = '*****'
 - Создать тома `elasticsearch` и `gitlab` с алгоритмом компрессии `zstd` в пуле `data`:
 
 ```bash
- for i in 'elasticsearch' 'gitlab'; do zfs create -o 'compression=zstd' "data/${i}"; done
+for i in 'elasticsearch' 'gitlab'; do zfs create -o 'compression=zstd' "data/${i}"; done
 ```
 
 - Установить точку монтирования тома `gitlab` на `/var/opt/gitlab`:
 
 ```bash
- p='data'; v='gitlab'; zfs set "mountpoint=/var/opt/${v}" "${p}/${v}"
+p='data'; v='gitlab'; zfs set "mountpoint=/var/opt/${v}" "${p}/${v}"
 ```

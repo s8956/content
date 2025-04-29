@@ -60,14 +60,14 @@ draft: 0
 - Скачать и распаковать последнюю версию {{< tag "iRedMail" >}}:
 
 ```bash
- export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedMail.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" && curl -fsSLo 'config' 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.config' || return
+export GH_NAME='iRedMail'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedMail.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}" && curl -fsSLo 'config' 'https://lib.onl/ru/2025/02/7deb49ab-bb4f-50e6-b196-82b4a9778a2d/irm.config' || return
 ```
 
 {{< alert "tip" >}}
 Если требуется конкретная версия iRedMail, то можно воспользоваться командой:
 
 ```bash
- v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMail/archive/refs/tags/${v}.tar.gz" && tar -xzf "iRedMail-${v}.tar.gz" && cd "iRedMail-${v}" || exit
+v='1.7.2'; curl -fSLo "iRedMail-${v}.tar.gz" "https://github.com/iredmail/iRedMail/archive/refs/tags/${v}.tar.gz" && tar -xzf "iRedMail-${v}.tar.gz" && cd "iRedMail-${v}" || exit
 ```
 {{< /alert >}}
 
@@ -81,7 +81,7 @@ draft: 0
 Для генерации паролей можно воспользоваться командой:
 
 ```bash
- u=('MYSQL_ROOT_PASSWD' 'DOMAIN_ADMIN_PASSWD_PLAIN' 'SOGO_SIEVE_MASTER_PASSWD' 'AMAVISD_DB_PASSWD' 'FAIL2BAN_DB_PASSWD' 'IREDADMIN_DB_PASSWD' 'IREDAPD_DB_PASSWD' 'NETDATA_DB_PASSWD' 'RCM_DB_PASSWD' 'SOGO_DB_PASSWD' 'VMAIL_DB_ADMIN_PASSWD' 'VMAIL_DB_BIND_PASSWD'); for i in "${u[@]}"; do printf "%-25s = %s\n" "${i}" "$( < '/dev/urandom' tr -dc 'a-zA-Z0-9' | head -c "${1:-32}"; echo; )"; done
+u=('MYSQL_ROOT_PASSWD' 'DOMAIN_ADMIN_PASSWD_PLAIN' 'SOGO_SIEVE_MASTER_PASSWD' 'AMAVISD_DB_PASSWD' 'FAIL2BAN_DB_PASSWD' 'IREDADMIN_DB_PASSWD' 'IREDAPD_DB_PASSWD' 'NETDATA_DB_PASSWD' 'RCM_DB_PASSWD' 'SOGO_DB_PASSWD' 'VMAIL_DB_ADMIN_PASSWD' 'VMAIL_DB_BIND_PASSWD'); for i in "${u[@]}"; do printf "%-25s = %s\n" "${i}" "$( < '/dev/urandom' tr -dc 'a-zA-Z0-9' | head -c "${1:-32}"; echo; )"; done
 ```
 {{< /alert >}}
 
@@ -126,7 +126,7 @@ apt purge --yes 'php8.2*' && apt autoremove && rm -rf '/etc/php'
 - Сделать экспорт баз данных СУБД {{< tag "MariaDB" >}} в файл `iRedMail.backup.sql.xz`:
 
 ```bash
- f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}"
+f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}"
 ```
 
 - Удалить пакеты старой версии СУБД {{< tag "MariaDB" >}}:
@@ -145,7 +145,7 @@ apt install --yes mariadb-server-compat mariadb-client-compat dovecot-mysql post
 - Импортировать ранее созданный файл `iRedMail.backup.sql.xz` в новую версию СУБД {{< tag "MariaDB" >}}:
 
 ```bash
- f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
+f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 ```
 
 - Импортировать шаблон для создания технических пользователей {{< tag "iRedMail" >}}:
@@ -179,19 +179,19 @@ sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysql
 - Экспортировать базы данных:
 
 ```bash
- f='iRedMail.backup.utf8mb4.sql'; mariadb-dump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' --result-file="${f}"
+f='iRedMail.backup.utf8mb4.sql'; mariadb-dump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' --result-file="${f}"
 ```
 
 - Заменить `utf8mb3` на `utf8mb4`:
 
 ```bash
- f='iRedMail.backup.utf8mb4.sql'; sed -i -e 's|utf8mb3|utf8mb4|g' -e 's|_general_ci|_unicode_ci|g' "${f}"
+f='iRedMail.backup.utf8mb4.sql'; sed -i -e 's|utf8mb3|utf8mb4|g' -e 's|_general_ci|_unicode_ci|g' "${f}"
 ```
 
 - Импортировать базы данных:
 
 ```bash
- f='iRedMail.backup.utf8mb4.sql'; mariadb --user='root' --password < "${f}"
+f='iRedMail.backup.utf8mb4.sql'; mariadb --user='root' --password < "${f}"
 ```
 
 ## Миграция данных
@@ -203,19 +203,19 @@ sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysql
 - Переместить ключи **DKIM** со старого сервера на новый сервер:
 
 ```bash
- d='/var/lib/dkim/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
+d='/var/lib/dkim/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
 ```
 
 - Переместить базу данных **Fail2Ban** со старого сервера на новый сервер:
 
 ```bash
- d='/var/lib/fail2ban/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
+d='/var/lib/fail2ban/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
 ```
 
 - Переместить профили пользователей и письма со старого сервера на новый сервер:
 
 ```bash
- d='/var/vmail/vmail1/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
+d='/var/vmail/vmail1/'; rsync -a -e 'ssh -p 22' -P "${d}" "root@192.168.1.2:${d}"
 ```
 
 ### Миграция баз данных
@@ -223,20 +223,20 @@ sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysql
 - Экспортировать базы данных старого сервера в файл `iRedMail.backup.sql.xz` и переместить на новый сервер:
 
 ```bash
- f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a -e 'ssh -p 22' "${f}" 'root@192.168.1.2:/root/'
+f='iRedMail.backup.sql.xz'; mysqldump --user='root' --password --single-transaction --databases 'amavisd' 'fail2ban' 'iredadmin' 'iredapd' 'roundcubemail' 'vmail' | xz -9 > "${f}" && rsync -a -e 'ssh -p 22' "${f}" 'root@192.168.1.2:/root/'
 ```
 
 - Импортировать файл `iRedMail.backup.sql.xz` с базами данных старого сервера на новом сервере:
 
 ```bash
- f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
+f='iRedMail.backup.sql.xz'; xzcat "${f}" | mariadb --user='root' --password
 ```
 
 {{< alert "tip" >}}
 Если при импорте файла появляется ошибка `ERROR 1231 (42000) at line *: Variable 'sql_mode' can't be set to the value of 'NO_AUTO_CREATE_USER'`, то её можно исправить путём удаления директивы `NO_AUTO_CREATE_USER` из файла:
 
 ```bash
- f='iRedMail.backup.sql'; xz -d "${f}.xz" && sed -i 's/NO_AUTO_CREATE_USER//' "${f}" && xz -9 "${f}"
+f='iRedMail.backup.sql'; xz -d "${f}.xz" && sed -i 's/NO_AUTO_CREATE_USER//' "${f}" && xz -9 "${f}"
 ```
 {{< /alert >}}
 
@@ -253,56 +253,56 @@ sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysql
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export GH_URL='https://raw.githubusercontent.com/iredmail/iRedMail/refs/heads/master/update'
+export GH_URL='https://raw.githubusercontent.com/iredmail/iRedMail/refs/heads/master/update'
 ```
 
 {{< accordion-item "Версии iRedMail" >}}
 - `1.4.0`:
 
 ```bash
- curl -fsSL "${GH_URL}/1.4.0/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
+curl -fsSL "${GH_URL}/1.4.0/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
 ```
 
 - `1.4.1`:
 
 ```bash
- curl -fsSL "${GH_URL}/1.4.1/iredmail.mysql" | mariadb --user='root' --password --database='vmail' && curl -fsSL "${GH_URL}/1.4.1/sogo.mysql" | mariadb --user='root' --password --database='sogo'
+curl -fsSL "${GH_URL}/1.4.1/iredmail.mysql" | mariadb --user='root' --password --database='vmail' && curl -fsSL "${GH_URL}/1.4.1/sogo.mysql" | mariadb --user='root' --password --database='sogo'
 ```
 
 - `1.4.2`:
 
 ```bash
- curl -fsSL "${GH_URL}/1.4.2/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
+curl -fsSL "${GH_URL}/1.4.2/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
 ```
 
 - `1.6.3`:
 
 ```bash
- curl -fsSL "${GH_URL}/1.6.3/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
+curl -fsSL "${GH_URL}/1.6.3/iredmail.mysql" | mariadb --user='root' --password --database='vmail'
 ```
 
 - `1.7.0`:
 
 ```bash
- curl -fsSL "${GH_URL}/1.7.0/fail2ban.mysql" | mariadb --user='root' --password --database='fail2ban'
+curl -fsSL "${GH_URL}/1.7.0/fail2ban.mysql" | mariadb --user='root' --password --database='fail2ban'
 ```
 
 - `1.7.1`:
 
 ```bash
- curl -fsSL "${GH_URL}/1.7.1/amavisd.mysql" | mariadb --user='root' --password --database='amavisd'
+curl -fsSL "${GH_URL}/1.7.1/amavisd.mysql" | mariadb --user='root' --password --database='amavisd'
 ```
 
 - `1.7.2`:
 
 ```bash
- curl -fsSL "${GH_URL}/1.7.2/vmail.mysql" | mariadb --user='root' --password --database='vmail'
+curl -fsSL "${GH_URL}/1.7.2/vmail.mysql" | mariadb --user='root' --password --database='vmail'
 ```
 
 - `1.7.3`:
 
 ```bash
- curl -fsSL "${GH_URL}/1.7.3/vmail.mysql" | mariadb --user='root' --password --database='vmail'
+curl -fsSL "${GH_URL}/1.7.3/vmail.mysql" | mariadb --user='root' --password --database='vmail'
 ```
 {{< /accordion-item >}}
 
@@ -311,13 +311,13 @@ sed -i -e 's|CMD_MYSQL="mysql |CMD_MYSQL="mariadb |g' -e 's|CMD_MYSQLDUMP="mysql
 - Экспортировать заранее подготовленные параметры в переменные окружения, которые содержат информацию о старой версии `RC_OLD` и новой версии `RC_NEW` {{< tag "RoundCube" >}}:
 
 ```bash
- export RC_OLD='1.6.9'; export RC_NEW='1.6.10'
+export RC_OLD='1.6.9'; export RC_NEW='1.6.10'
 ```
 
 - Запустить команду обновления {{< tag "RoundCube" >}}:
 
 ```bash
- export IRM_DIR="${HOME}/iRM.RoundCube.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_NEW}/roundcubemail-${RC_NEW}-complete.tar.gz" && tar -xzf "roundcubemail-${RC_NEW}-complete.tar.gz" && mv "roundcubemail-${RC_NEW}" '/opt/www' && cp "/opt/www/roundcubemail-${RC_OLD}/config/config.inc.php" "/opt/www/roundcubemail-${RC_NEW}/config/config.inc.php" && "/opt/www/roundcubemail-${RC_NEW}/bin/update.sh" -v "${RC_OLD}" && chown -R root:root "/opt/www/roundcubemail-${RC_NEW}" && chown www-data:www-data "/opt/www/roundcubemail-${RC_NEW}"/{logs,temp,config/config.inc.php} && unlink '/opt/www/roundcubemail' && ln -s "/opt/www/roundcubemail-${RC_NEW}" '/opt/www/roundcubemail'
+export IRM_DIR="${HOME}/iRM.RoundCube.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_NEW}/roundcubemail-${RC_NEW}-complete.tar.gz" && tar -xzf "roundcubemail-${RC_NEW}-complete.tar.gz" && mv "roundcubemail-${RC_NEW}" '/opt/www' && cp "/opt/www/roundcubemail-${RC_OLD}/config/config.inc.php" "/opt/www/roundcubemail-${RC_NEW}/config/config.inc.php" && "/opt/www/roundcubemail-${RC_NEW}/bin/update.sh" -v "${RC_OLD}" && chown -R root:root "/opt/www/roundcubemail-${RC_NEW}" && chown www-data:www-data "/opt/www/roundcubemail-${RC_NEW}"/{logs,temp,config/config.inc.php} && unlink '/opt/www/roundcubemail' && ln -s "/opt/www/roundcubemail-${RC_NEW}" '/opt/www/roundcubemail'
 ```
 
 {{< alert "tip" >}}
@@ -332,7 +332,7 @@ cd '/opt/www/roundcubemail' && ./bin/updatedb.sh --package='roundcube' --dir='SQ
 RoundCube использует верификацию адресов электронной почты при помощи регулярного выражения. Если RoundCube разворачивается в организации с односимвольной доменной зоной, то он не сможет воспринимать подобный домен в качестве валидного и, соответственно, адреса электронной почты в этом домене для него будут недействительными. Исправить подобную "особенность" можно при помощи следующей команды:
 
 ```bash
- f=('js/common.js' 'js/common.min.js' 'lib/Roundcube/rcube_string_replacer.php'); p='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${p}/${i}" "${p}/${i}.orig" && sed -i 's|{2,}|{1,}|g' "${p}/${i}"; done
+f=('js/common.js' 'js/common.min.js' 'lib/Roundcube/rcube_string_replacer.php'); p='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${p}/${i}" "${p}/${i}.orig" && sed -i 's|{2,}|{1,}|g' "${p}/${i}"; done
 ```
 {{< /alert >}}
 
@@ -340,7 +340,7 @@ RoundCube использует верификацию адресов элект�
 RoundCube может работать на новой версии PHP, но при этом выдавать ошибки вида `Depecrecation in...`. Ничего страшного в этом нет, это информационные сообщения о том, что в будущих выпусках PHP данная функция будет исключена. Чтобы скрыть замусоривание журнала подобными ошибками, можно поменять конфигурационный массив в файле `./program/lib/Roundcube/bootstrap.php`:
 
 ```bash
- f=('lib/Roundcube/bootstrap.php'); p='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${p}/${i}" "${p}/${i}.orig" && sed -i 's|E_ALL \& ~E_NOTICE \& ~E_STRICT|E_ALL \& ~E_DEPRECATED \& ~E_NOTICE \& ~E_STRICT|g' "${p}/${i}"; done
+f=('lib/Roundcube/bootstrap.php'); p='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${p}/${i}" "${p}/${i}.orig" && sed -i 's|E_ALL \& ~E_NOTICE \& ~E_STRICT|E_ALL \& ~E_DEPRECATED \& ~E_NOTICE \& ~E_STRICT|g' "${p}/${i}"; done
 ```
 {{< /alert >}}
 
@@ -349,7 +349,7 @@ RoundCube может работать на новой версии PHP, но п�
 - Запустить команду обновления {{< tag "iRedAdmin" >}}:
 
 ```bash
- export GH_NAME='iRedAdmin'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedAdmin.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='iRedAdmin'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedAdmin.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ### iRedAPD
@@ -357,7 +357,7 @@ RoundCube может работать на новой версии PHP, но п�
 - Запустить команду обновления {{< tag "iRedAPD" >}}:
 
 ```bash
- export GH_NAME='iRedAPD'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedAPD.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='iRedAPD'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.iRedAPD.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ### mlmmjadmin
@@ -365,7 +365,7 @@ RoundCube может работать на новой версии PHP, но п�
 - Запустить команду обновления {{< tag "mlmmjadmin" >}}:
 
 ```bash
- export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.mlmmjadmin.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
+export GH_NAME='mlmmjadmin'; export GH_API="gh.api.${GH_NAME}.json"; export IRM_DIR="${HOME}/iRM.mlmmjadmin.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fsSL "https://api.github.com/repos/iredmail/${GH_NAME}/tags" | tee "${GH_API}" > '/dev/null'; url="$( grep '"tarball_url":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' )"; ver="$( echo "${url}" | awk -F '/' '{ print $(NF) }' )"; cid="$( grep '"sha":' < "${GH_API}" | head -n 1 | awk -F '"' '{ print $(NF-1) }' | head -c 7 )"; curl -fSLOJ "${url}" && tar -xzf ./*"${cid}.tar.gz" && mv ./*"${cid}" "${GH_NAME}-${ver}" && cd "${GH_NAME}-${ver}/tools/" && bash "upgrade_$( echo "${GH_NAME}" | tr '[:upper:]' '[:lower:]' ).sh"
 ```
 
 ## Дополнительные настройки
@@ -389,7 +389,7 @@ apt purge --yes p7zip && apt install --yes -t 'stable-backports' 7zip 7zip-rar
 - Генерация DKIM записи (длина ключа `1024`):
 
 ```bash
- d='example.com'; p="/var/lib/dkim/${d}.pem"; amavisd genrsa "${p}" 1024 && chown amavis:amavis "${p}" && chmod 0400 "${p}"
+d='example.com'; p="/var/lib/dkim/${d}.pem"; amavisd genrsa "${p}" 1024 && chown amavis:amavis "${p}" && chmod 0400 "${p}"
 ```
 
 ### ClamAV
@@ -397,5 +397,5 @@ apt purge --yes p7zip && apt install --yes -t 'stable-backports' 7zip 7zip-rar
 - Настройка российского зеркала обновлений {{< tag "ClamAV" >}}:
 
 ```bash
-sed -i 's|ScriptedUpdates yes|ScriptedUpdates no|g' '/etc/clamav/freshclam.conf' && echo -e 'PrivateMirror https://clamav-mirror.ru/\nPrivateMirror https://mirror.truenetwork.ru/clamav/\nPrivateMirror http://mirror.truenetwork.ru/clamav/\n' | tee -a '/etc/clamav/freshclam.conf' > '/dev/null' && rm -rf '/var/lib/clamav/freshclam.dat' && systemctl stop clamav-freshclam.service && freshclam -vvv && systemctl restart clamav-freshclam.service && systemctl restart clamav-daemon.service
+sed -i 's|ScriptedUpdates yes|ScriptedUpdates no|g' '/etc/clamav/freshclam.conf' && echo -e 'PrivateMirror https://clamav-mirror.ru\nPrivateMirror https://mirror.truenetwork.ru/clamav\nPrivateMirror http://mirror.truenetwork.ru/clamav\n' | tee -a '/etc/clamav/freshclam.conf' > '/dev/null' && rm -rf '/var/lib/clamav/freshclam.dat' && systemctl stop clamav-freshclam.service && freshclam -vvv && systemctl restart clamav-freshclam.service && systemctl restart clamav-daemon.service
 ```

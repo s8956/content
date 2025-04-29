@@ -61,13 +61,13 @@ apt update && apt install --yes fail2ban python3-systemd rsyslog
 - Скачать файлы локальной конфигурации в `/etc/fail2ban/`:
 
 ```bash
- f=('fail2ban' 'jail'); d='/etc/fail2ban'; p='https://lib.onl/ru/2025/02/e69f2ca5-e02c-5aa2-a4ef-43b0b443b67e'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local" "${p}/${i}.local"; done
+f=('fail2ban' 'jail'); d='/etc/fail2ban'; p='https://lib.onl/ru/2025/02/e69f2ca5-e02c-5aa2-a4ef-43b0b443b67e'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local" "${p}/${i}.local"; done
 ```
 
 - Скачать файлы локальной конфигурации в `/etc/fail2ban/action.d/`:
 
 ```bash
- f=('nftables-common'); d='/etc/fail2ban/action.d'; p='https://lib.onl/ru/2025/02/e69f2ca5-e02c-5aa2-a4ef-43b0b443b67e'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local" "${p}/action.${i}.local"; done
+f=('nftables-common'); d='/etc/fail2ban/action.d'; p='https://lib.onl/ru/2025/02/e69f2ca5-e02c-5aa2-a4ef-43b0b443b67e'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local" "${p}/action.${i}.local"; done
 ```
 
 ## Тюрьмы

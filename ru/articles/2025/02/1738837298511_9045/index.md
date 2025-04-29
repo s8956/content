@@ -53,7 +53,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export MONGODB_VER='8.0'
+export MONGODB_VER='8.0'
 ```
 
 ## Репозиторий
@@ -61,13 +61,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- [[ ! -v 'MONGODB_VER' ]] && return; curl -fsSL "https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109/mongodb-${MONGODB_VER}.asc" | gpg --dearmor -o '/etc/apt/keyrings/mongodb.gpg'
+[[ ! -v 'MONGODB_VER' ]] && return; curl -fsSL "https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109/mongodb-${MONGODB_VER}.asc" | gpg --dearmor -o '/etc/apt/keyrings/mongodb.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/mongodb.sources`:
 
 ```bash
- [[ ! -v 'MONGODB_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\nTypes: deb\nURIs: http://repo.mongodb.org/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/${ID}\nSuites: ${VERSION_CODENAME}/mongodb-org/${MONGODB_VER}\nComponents: main\nSigned-By: /etc/apt/keyrings/mongodb.gpg\n" | tee '/etc/apt/sources.list.d/mongodb.sources' > '/dev/null'
+[[ ! -v 'MONGODB_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: MongoDB\nEnabled: yes\nTypes: deb\nURIs: http://repo.mongodb.org/apt/${ID}\n#URIs: https://mirror.yandex.ru/mirrors/repo.mongodb.org/apt/${ID}\nSuites: ${VERSION_CODENAME}/mongodb-org/${MONGODB_VER}\nComponents: main\nSigned-By: /etc/apt/keyrings/mongodb.gpg\n" | tee '/etc/apt/sources.list.d/mongodb.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -75,7 +75,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes mongodb-org
+apt update && apt install --yes mongodb-org
 ```
 
 ## Настройка
@@ -83,7 +83,7 @@ draft: 0
 - Скачать файл основной конфигурации `mongod.conf` в `/etc/`:
 
 ```bash
- f=('mongod'); d="/etc"; p='https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('mongod'); d='/etc'; p='https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```
 
 ### Включение авторизации

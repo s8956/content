@@ -55,7 +55,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export GRAYLOG_VER='6.1'
+export GRAYLOG_VER='6.1'
 ```
 
 ## Репозиторий
@@ -63,13 +63,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3/graylog.gpg'
+curl -fsSLo '/etc/apt/keyrings/graylog.gpg' 'https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3/graylog.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/graylog.sources`:
 
 ```bash
- [[ ! -v 'GRAYLOG_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: Graylog\nEnabled: yes\nTypes: deb\nURIs: https://packages.graylog2.org/repo/${ID}\nSuites: stable\nComponents: ${GRAYLOG_VER}\nSigned-By: /etc/apt/keyrings/graylog.gpg\n" | tee '/etc/apt/sources.list.d/graylog.sources' > '/dev/null'
+[[ ! -v 'GRAYLOG_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: Graylog\nEnabled: yes\nTypes: deb\nURIs: https://packages.graylog2.org/repo/${ID}\nSuites: stable\nComponents: ${GRAYLOG_VER}\nSigned-By: /etc/apt/keyrings/graylog.gpg\n" | tee '/etc/apt/sources.list.d/graylog.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -77,7 +77,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes graylog-server
+apt update && apt install --yes graylog-server
 ```
 
 ## Настройка
@@ -85,19 +85,19 @@ draft: 0
 - Скачать файл основной конфигурации `server.conf` в `/etc/graylog/server/`:
 
 ```bash
- f=('server'); d='/etc/graylog/server'; p='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('server'); d='/etc/graylog/server'; p='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```
 
 - Создать пароль для `password_secret`:
 
 ```bash
- < '/dev/urandom' tr -dc 'a-zA-Z0-9' | head -c "${1:-96}"; echo;
+< '/dev/urandom' tr -dc 'a-zA-Z0-9' | head -c "${1:-96}"; echo;
 ```
 
 - Создать хэш пароля `password_secret` для `root_password_sha2`:
 
 ```bash
- echo -n 'Enter Password: ' && head -1 < '/dev/stdin' | tr -d '\n' | sha256sum | cut -d ' ' -f1
+echo -n 'Enter Password: ' && head -1 < '/dev/stdin' | tr -d '\n' | sha256sum | cut -d ' ' -f1
 ```
 
 ### Конфигурация PROXY-сервера
@@ -106,5 +106,5 @@ draft: 0
 - Скачать файл сайта `graylog-ssl.conf` в `/etc/angie/http.d/`:
 
 ```bash
- f=('graylog-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('graylog-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
 ```

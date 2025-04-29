@@ -53,19 +53,19 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSLo '/etc/apt/keyrings/syncthing.gpg' 'https://syncthing.net/release-key.gpg'
+curl -fsSLo '/etc/apt/keyrings/syncthing.gpg' 'https://syncthing.net/release-key.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/syncthing.sources`:
 
 ```bash
- echo -e "X-Repolib-Name: Syncthing\nEnabled: yes\nTypes: deb\nURIs: https://apt.syncthing.net\nSuites: syncthing\nComponents: stable\nSigned-By: /etc/apt/keyrings/syncthing.gpg\n" | tee '/etc/apt/sources.list.d/syncthing.sources' > '/dev/null'
+echo -e "X-Repolib-Name: Syncthing\nEnabled: yes\nTypes: deb\nURIs: https://apt.syncthing.net\nSuites: syncthing\nComponents: stable\nSigned-By: /etc/apt/keyrings/syncthing.gpg\n" | tee '/etc/apt/sources.list.d/syncthing.sources' > '/dev/null'
 ```
 
 - Скачать файл предпочтений `syncthing.pref`:
 
 ```bash
- f=('syncthing'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
+f=('syncthing'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
 ```
 
 ## Установка
@@ -73,7 +73,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes syncthing
+apt update && apt install --yes syncthing
 ```
 
 ## Настройка
@@ -81,7 +81,7 @@ draft: 0
 - Скачать юнит для запуска {{< tag "Syncthing" >}} под обычным пользователем:
 
 ```bash
- f=('syncthing@'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.service" "${p}/${i}.service"; done
+f=('syncthing@'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.service" "${p}/${i}.service"; done
 ```
 
 - Запустить сервис {{< tag "Syncthing" >}} под пользователем `USER`:

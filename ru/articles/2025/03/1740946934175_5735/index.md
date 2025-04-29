@@ -53,13 +53,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSL 'https://download.docker.com/linux/debian/gpg' | gpg --dearmor -o '/etc/apt/keyrings/docker.gpg'
+curl -fsSL 'https://download.docker.com/linux/debian/gpg' | gpg --dearmor -o '/etc/apt/keyrings/docker.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/docker.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: Docker\nEnabled: yes\nTypes: deb\nURIs: https://download.docker.com/linux/debian\nSuites: ${VERSION_CODENAME}\nComponents: stable\nSigned-By: /etc/apt/keyrings/docker.gpg"| tee '/etc/apt/sources.list.d/docker.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Docker\nEnabled: yes\nTypes: deb\nURIs: https://download.docker.com/linux/debian\nSuites: ${VERSION_CODENAME}\nComponents: stable\nSigned-By: /etc/apt/keyrings/docker.gpg"| tee '/etc/apt/sources.list.d/docker.sources' > '/dev/null'
 ```
 
 ## Установка
@@ -67,7 +67,7 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes iptables docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt update && apt install --yes iptables docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 ## Настройка
@@ -75,11 +75,11 @@ draft: 0
 - Скачать файл конфигурации службы `daemon.json` в `/etc/docker/`:
 
 ```bash
- f=('daemon'); d='/etc/docker'; p='https://lib.onl/ru/2025/02/654d7f55-10b0-58e0-a57c-26e445b44ab2'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.json" "${p}/${i}.json"; done
+f=('daemon'); d='/etc/docker'; p='https://lib.onl/ru/2025/02/654d7f55-10b0-58e0-a57c-26e445b44ab2'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.json" "${p}/${i}.json"; done
 ```
 
 - Перезапустить службу:
 
 ```bash
- systemctl restart docker.service
+systemctl restart docker.service
 ```

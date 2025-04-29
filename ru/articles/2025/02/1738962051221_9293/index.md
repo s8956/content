@@ -53,7 +53,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export NODE_VER='22'
+export NODE_VER='22'
 ```
 
 ## Репозиторий
@@ -61,19 +61,19 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSL 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key' | gpg --dearmor -o '/etc/apt/keyrings/nodesource.gpg'
+curl -fsSL 'https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key' | gpg --dearmor -o '/etc/apt/keyrings/nodesource.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/nodesource.sources`:
 
 ```bash
- echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${NODE_VER}.x\nSuites: nodistro\nComponents: main\nSigned-By: /etc/apt/keyrings/nodesource.gpg\n" | tee '/etc/apt/sources.list.d/nodesource.sources' > '/dev/null'
+echo -e "X-Repolib-Name: Node.js\nEnabled: yes\nTypes: deb\nURIs: https://deb.nodesource.com/node_${NODE_VER}.x\nSuites: nodistro\nComponents: main\nSigned-By: /etc/apt/keyrings/nodesource.gpg\n" | tee '/etc/apt/sources.list.d/nodesource.sources' > '/dev/null'
 ```
 
 - Скачать файлы предпочтений в `/etc/apt/preferences.d/`:
 
 ```bash
- f=('nodejs' 'nsolid'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
+f=('nodejs' 'nsolid'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
 ```
 
 ## Установка
@@ -81,5 +81,5 @@ draft: 0
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes nodejs
+apt update && apt install --yes nodejs
 ```
