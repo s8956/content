@@ -63,7 +63,7 @@ apt install --yes clamdscan python3-venv
 - Создать директорию `/var/lib/fangfrisch` и окружение:
 
 ```bash
-d='/var/lib/fangfrisch'; mkdir -m 0770 "${d}" && chgrp 'clamav' "${d}" && cd "${d}" && python3 -m 'venv' 'venv' && source 'venv/bin/activate'
+d='/var/lib/fangfrisch'; mkdir "${d}" && chown clamav:clamav "${d}" && cd "${d}" && python3 -m 'venv' 'venv' && source 'venv/bin/activate' && pip install fangfrisch
 ```
 
 ## Настройка
