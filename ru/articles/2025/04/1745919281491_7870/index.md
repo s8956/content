@@ -54,10 +54,10 @@ draft: 0
 
 ## Установка
 
-- Установить пакеты:
+- Установить пакеты ClamAV, утилиты для работы с архивами и пакет развёртывания виртуальной среды Python:
 
 ```bash
-apt install --yes clamdscan python3-venv
+apt install --yes clamav clamdscan libclamunrar && apt install --yes arj cabextract cpio lhasa lzop nomarch pax unrar unzip && apt install --yes python3-venv
 ```
 
 - Создать директорию `/var/lib/fangfrisch` и окружение:
