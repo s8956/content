@@ -57,7 +57,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
- export ZABBIX_VER='7.0'
+export ZABBIX_VER='7.0'
 ```
 
 ## Репозиторий
@@ -65,13 +65,13 @@ draft: 0
 - Скачать и установить ключ репозитория:
 
 ```bash
- curl -fsSL 'https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-B5333005' | gpg --dearmor -o '/etc/apt/keyrings/zabbix.gpg'
+curl -fsSL 'https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-B5333005' | gpg --dearmor -o '/etc/apt/keyrings/zabbix.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/zabbix.sources`:
 
 ```bash
- . '/etc/os-release' && echo -e "X-Repolib-Name: Zabbix\nEnabled: yes\nTypes: deb\nURIs: https://repo.zabbix.com/zabbix/${ZABBIX_VER}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/zabbix.gpg\n" | tee '/etc/apt/sources.list.d/zabbix.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Zabbix\nEnabled: yes\nTypes: deb\nURIs: https://repo.zabbix.com/zabbix/${ZABBIX_VER}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/zabbix.gpg\n" | tee '/etc/apt/sources.list.d/zabbix.sources' > '/dev/null'
 ```
 
 ## Zabbix Server
@@ -94,7 +94,7 @@ draft: 0
 - Установить пакеты сервера Zabbix:
 
 ```bash
- apt update && apt install --yes zabbix-server-pgsql zabbix-frontend-php zabbix-sql-scripts zabbix-agent2
+apt update && apt install --yes zabbix-server-pgsql zabbix-frontend-php zabbix-sql-scripts zabbix-agent2
 ```
 
 ### Настройка базы данных
@@ -102,13 +102,13 @@ draft: 0
 - Создать пользователя и базу данных `zabbix`, импортировать схему для базы данных `zabbix`:
 
 ```bash
- u='zabbix'; d='zabbix'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}" && zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u "${u}" psql "${d}"
+u='zabbix'; d='zabbix'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}" && zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u "${u}" psql "${d}"
 ```
 
 - Добавить расширение, импортировать схему TimescaleDB для базы данных `zabbix`:
 
 ```bash
- u='zabbix'; d='zabbix'; echo 'create extension if not exists timescaledb cascade;' | sudo -u 'postgres' psql "${d}" && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u "${u}" psql "${d}"
+u='zabbix'; d='zabbix'; echo 'create extension if not exists timescaledb cascade;' | sudo -u 'postgres' psql "${d}" && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u "${u}" psql "${d}"
 ```
 
 - Открыть файл `/etc/zabbix/zabbix_server.conf` и отредактировать параметр:
@@ -134,13 +134,13 @@ DBPassword=password
 - Перезапустить сервер Zabbix и сопутствующие службы:
 
 ```bash
- systemctl restart zabbix-server zabbix-agent2 angie php${PHP_VER}-fpm
+systemctl restart zabbix-server zabbix-agent2 angie php${PHP_VER}-fpm
 ```
 
 - Включить автоматический запуск сервера Zabbix и сопутствующих служб:
 
 ```bash
- systemctl enable zabbix-server zabbix-agent2 angie php${PHP_VER}-fpm
+systemctl enable zabbix-server zabbix-agent2 angie php${PHP_VER}-fpm
 ```
 
 - Для запуска мастера установки, необходимо в браузере открыть домен, указанный в конфигурации Angie.
@@ -150,7 +150,7 @@ DBPassword=password
 - Создать резервную копию базы данных `zabbix`:
 
 ```bash
- f='zabbix.backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='zabbix' --password --dbname='zabbix' --file="${f}" && xz "${f}" && rm -f "${f}"
+f='zabbix.backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='zabbix' --password --dbname='zabbix' --file="${f}" && xz "${f}" && rm -f "${f}"
 ```
 
 ### Восстановление
@@ -158,43 +158,43 @@ DBPassword=password
 - Удалить существующую базу данных `zabbix`:
 
 ```bash
- sudo -u 'postgres' dropdb 'zabbix'
+sudo -u 'postgres' dropdb 'zabbix'
 ```
 
 - Создать новую базу данных `zabbix` с владельцем `zabbix`:
 
 ```bash
- sudo -u 'postgres' createdb -O 'zabbix' 'zabbix'
+sudo -u 'postgres' createdb -O 'zabbix' 'zabbix'
 ```
 
 - Создать расширение `timescaledb` для базы данных `zabbix`:
 
 ```bash
- echo 'create extension if not exists timescaledb cascade;' | sudo -u 'postgres' psql 'zabbix'
+echo 'create extension if not exists timescaledb cascade;' | sudo -u 'postgres' psql 'zabbix'
 ```
 
 - Остановить процессы `timescaledb` в базе данных `zabbix` перед восстановлением:
 
 ```bash
- echo 'select timescaledb_pre_restore();' | sudo -u 'postgres' psql 'zabbix'
+echo 'select timescaledb_pre_restore();' | sudo -u 'postgres' psql 'zabbix'
 ```
 
 - Восстановить информацию в базе данных `zabbix` из файла `zabbix.backup.sql.xz`:
 
 ```bash
- f='zabbix.backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --dbname='zabbix' --file="${f}"
+f='zabbix.backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --dbname='zabbix' --file="${f}"
 ```
 
 - Запустить процессы `timescaledb` после восстановления базы данных `zabbix`:
 
 ```bash
- echo 'select timescaledb_post_restore();' | sudo -u 'postgres' psql 'zabbix'
+echo 'select timescaledb_post_restore();' | sudo -u 'postgres' psql 'zabbix'
 ```
 
 - Запустить Vacuum после восстановления базы данных `zabbix`:
 
 ```bash
- sudo -u 'postgres' vacuumdb --all --analyze
+sudo -u 'postgres' vacuumdb --all --analyze
 ```
 
 ### Обновление
@@ -209,19 +209,19 @@ DBPassword=password
 - Остановка служб Zabbix:
 
 ```bash
- systemctl stop zabbix-server zabbix-agent2
+systemctl stop zabbix-server zabbix-agent2
 ```
 
 - Обновление пакетов Zabbix:
 
 ```bash
- apt update && apt install --only-upgrade zabbix-server-pgsql zabbix-frontend-php zabbix-sql-scripts zabbix-agent2
+apt update && apt install --only-upgrade zabbix-server-pgsql zabbix-frontend-php zabbix-sql-scripts zabbix-agent2
 ```
 
 - Запуск служб Zabbix:
 
 ```bash
- systemctl start zabbix-server zabbix-agent2
+systemctl start zabbix-server zabbix-agent2
 ```
 
 #### Обновление TimescaleDB
@@ -229,20 +229,20 @@ DBPassword=password
 - Остановка служб Zabbix:
 
 ```bash
- systemctl stop zabbix-server zabbix-agent2
+systemctl stop zabbix-server zabbix-agent2
 ```
 
 - Обновление схемы TimescaleDB:
 
 ```bash
- cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u 'zabbix' psql 'zabbix'
+cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u 'zabbix' psql 'zabbix'
 ```
 
 {{< alert "tip" >}}
 Если обновляются пакеты TimescaleDB, то по завершении процесса обновления, необходимо выполнить следующую команду:
 
 ```bash
- echo "alter extension timescaledb update;" | sudo -u 'postgres' psql 'zabbix'
+echo "alter extension timescaledb update;" | sudo -u 'postgres' psql 'zabbix'
 ```
 
 Эта команда обновит расширение TimescaleDB, подключённое к базе данных `zabbix`.
@@ -251,7 +251,7 @@ DBPassword=password
 - Запуск служб Zabbix:
 
 ```bash
- systemctl start zabbix-server zabbix-agent2
+systemctl start zabbix-server zabbix-agent2
 ```
 
 ## Zabbix Agent
@@ -263,7 +263,7 @@ DBPassword=password
 - Установить пакеты:
 
 ```bash
- apt update && apt install --yes zabbix-agent2
+apt update && apt install --yes zabbix-agent2
 ```
 
 ### Настройка
@@ -271,5 +271,5 @@ DBPassword=password
 - Настроить IP-адреса серверов Zabbix (`s`) и hostname клиента (`h`):
 
 ```bash
- s='192.168.1.2,192.168.1.3'; h='SrvHost'; f='/etc/zabbix/zabbix_agent2.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && cp "${f}" "${f}.orig"; sed -i -e "s|^Server=127.0.0.1|Server=${s}|g" -e "s|^ServerActive=127.0.0.1|ServerActive=${s}|g" -e "s|^Hostname=Zabbix server|Hostname=${h}|g" "${f}"
+s='192.168.1.2,192.168.1.3'; h='SrvHost'; f='/etc/zabbix/zabbix_agent2.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && cp "${f}" "${f}.orig"; sed -i -e "s|^Server=127.0.0.1|Server=${s}|g" -e "s|^ServerActive=127.0.0.1|ServerActive=${s}|g" -e "s|^Hostname=Zabbix server|Hostname=${h}|g" "${f}"
 ```
