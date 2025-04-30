@@ -173,7 +173,7 @@ sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 - Восстановить данные в новую базу данных `DB_NAME` из файла `backup.sql.xz`:
 
 ```bash
-f='backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --dbname='DB_NAME' --file="${f}"
+f='backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --no-psqlrc --dbname='DB_NAME' --file="${f}"
 ```
 
 ## Очистка и анализ
