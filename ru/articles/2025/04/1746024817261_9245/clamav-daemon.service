@@ -1,6 +1,6 @@
 [Unit]
 Description=Clam AntiVirus userspace daemon
-Documentation=man:clamd(8) man:clamd.conf(5) https://docs.clamav.net/
+Documentation=https://docs.clamav.net/
 Requires=clamav-daemon.socket
 # Check for database existence
 ConditionPathExistsGlob=/var/lib/clamav/main.{c[vl]d,inc}
