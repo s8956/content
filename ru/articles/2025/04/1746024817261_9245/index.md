@@ -83,3 +83,9 @@ f=('clamonacc.service' 'daemon.service' 'daemon.socket' 'freshclam-once.service'
 ```bash
 f=('clamd.conf' 'freshclam.conf'); d='/usr/local/etc'; p='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${p}/${i}"; done
 ```
+
+- Запустить скачивание и обновление баз данных:
+
+```bash
+freshclam
+```
