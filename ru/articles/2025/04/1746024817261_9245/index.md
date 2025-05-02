@@ -6,20 +6,21 @@
 title: 'ClamAV: Установка и настройка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1640552435388-a54879e72b28'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'security'
+  - 'network'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'debian'
+  - 'clamav'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
-  - ''
+  - 'https://www.clamav.net/downloads'
+  - 'https://docs.clamav.net/manual/Installing.html'
+  - 'https://docs.clamav.net/manual/Installing/Add-clamav-user.html'
+  - 'https://docs.clamav.net/manual/Usage/Configuration.html'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -42,10 +43,10 @@ hash: 'd5729fa5d717e6c9af9645530459d0f87cc38d3c'
 uuid: 'd5729fa5-d717-56c9-af96-45530459d0f8'
 slug: 'd5729fa5-d717-56c9-af96-45530459d0f8'
 
-draft: 1
+draft: 0
 ---
 
-
+Инструкция по установке {{< tag "ClamAV" >}} из официального пакета Cisco Talos.
 
 <!--more-->
 
@@ -54,7 +55,7 @@ draft: 1
 - Скачать и установить `clamav.linux.x86_64.deb`:
 
 ```bash
-v='1.4.2'; curl -fSLo "clamav-${v}.linux.x86_64.deb" "https://www.clamav.net/downloads/production/clamav-${v}.linux.x86_64.deb" && apt install --yes "clamav-${v}.linux.x86_64.deb"
+v='1.4.2'; curl -fSLo "clamav-${v}.linux.x86_64.deb" "https://www.clamav.net/downloads/production/clamav-${v}.linux.x86_64.deb" && apt install --yes ./"clamav-${v}.linux.x86_64.deb"
 ```
 
 - Создать пользователя `clamav` с домашней директорией `/var/lib/clamav`:
