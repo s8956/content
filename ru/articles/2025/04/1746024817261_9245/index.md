@@ -61,13 +61,13 @@ v='1.4.2'; curl -fSLo "clamav-${v}.linux.x86_64.deb" "https://www.clamav.net/dow
 - Создать пользователя `clamav` с домашней директорией `/var/lib/clamav`:
 
 ```bash
-u='clamav'; d='/var/lib/clamav'; adduser --system --no-create-home --disabled-login --disabled-password --shell '/bin/false' --group --home "${d}" "${u}" && chown ${u}:${u} "${d}"
+u='clamav'; d='/var/lib/clamav'; adduser --system --no-create-home --disabled-login --disabled-password --shell '/bin/false' --group --home "${d}" "${u}" && chown "${u}":"${u}" "${d}"
 ```
 
 - Создать директорию `/var/log/clamav` для логирования:
 
 ```bash
-u='clamav'; d='/var/log/clamav'; mkdir "${d}" && chown ${u}:${u} "${d}"
+u='clamav'; d='/var/log/clamav'; install -d -g "${u}" -o "${u}" "${d}"
 ```
 
 - Скачать файлы сервисов для `systemd`:
