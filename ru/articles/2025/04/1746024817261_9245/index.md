@@ -13,7 +13,9 @@ categories:
   - 'network'
 tags:
   - 'debian'
+  - 'apt'
   - 'clamav'
+  - 'install'
 authors:
   - 'KaiKimera'
 sources:
