@@ -91,7 +91,7 @@ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://ftp.mpi-inf.mpg.de/mirrors/linu
 - Создать файл репозитория `/etc/apt/sources.list.d/php.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: PHP\nEnabled: yes\nTypes: deb\nURIs: https://packages.sury.org/php\n#URIs: https://packages.sury.su/php\n#URIs: https://mirror.metanet.ch/sury/php\n#URIs: https://debian.octopuce.fr/sury-php\n#URIs: https://mirror.yandex.ru/mirrors/packages.sury.org/php\n#URIs: https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/php.gpg\n" | tee '/etc/apt/sources.list.d/php.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: PHP\nTypes: deb\nURIs: https://packages.sury.org/php\n#URIs: https://packages.sury.su/php\n#URIs: https://mirror.metanet.ch/sury/php\n#URIs: https://debian.octopuce.fr/sury-php\n#URIs: https://mirror.yandex.ru/mirrors/packages.sury.org/php\n#URIs: https://ftp.mpi-inf.mpg.de/mirrors/linux/mirror/deb.sury.org/repositories/php\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/php.gpg\n" | tee '/etc/apt/sources.list.d/php.sources' > '/dev/null'
 ```
 
 ## Установка

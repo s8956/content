@@ -68,7 +68,7 @@ curl -fsSL 'https://lib.onl/ru/2025/02/6542fa14-41f4-5309-98c0-a3bac519b93d/elas
 - Создать файл репозитория `/etc/apt/sources.list.d/elasticsearch.sources`:
 
 ```bash
-[[ ! -v 'ELASTICSEARCH_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: ElasticSearch\nEnabled: yes\nTypes: deb\nURIs: https://artifacts.elastic.co/packages/${ELASTICSEARCH_VER}.x/apt\n#URIs: https://mirror.yandex.ru/mirrors/elastic/${ELASTICSEARCH_VER}\nSuites: stable\nComponents: main\nSigned-By: /etc/apt/keyrings/elasticsearch.gpg\n" | tee '/etc/apt/sources.list.d/elasticsearch.sources' > '/dev/null'
+[[ ! -v 'ELASTICSEARCH_VER' ]] && return; . '/etc/os-release' && echo -e "X-Repolib-Name: ElasticSearch\nTypes: deb\nURIs: https://artifacts.elastic.co/packages/${ELASTICSEARCH_VER}.x/apt\n#URIs: https://mirror.yandex.ru/mirrors/elastic/${ELASTICSEARCH_VER}\nSuites: stable\nComponents: main\nSigned-By: /etc/apt/keyrings/elasticsearch.gpg\n" | tee '/etc/apt/sources.list.d/elasticsearch.sources' > '/dev/null'
 ```
 
 ## Установка

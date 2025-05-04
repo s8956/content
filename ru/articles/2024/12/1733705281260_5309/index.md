@@ -64,7 +64,7 @@ curl -fsSL 'https://haproxy.debian.net/bernat.debian.org.gpg' | gpg --dearmor -o
 - Создать файл репозитория `/etc/apt/sources.list.d/haproxy.sources`:
 
 ```bash
-v='3.0'; . '/etc/os-release' && echo -e "X-Repolib-Name: HAProxy\nEnabled: yes\nTypes: deb\nURIs: http://haproxy.debian.net\nSuites: ${VERSION_CODENAME}-backports-${v}\nComponents: main\nSigned-By: /etc/apt/keyrings/haproxy.gpg\n" | tee '/etc/apt/sources.list.d/haproxy.sources' > '/dev/null'
+v='3.0'; . '/etc/os-release' && echo -e "X-Repolib-Name: HAProxy\nTypes: deb\nURIs: http://haproxy.debian.net\nSuites: ${VERSION_CODENAME}-backports-${v}\nComponents: main\nSigned-By: /etc/apt/keyrings/haproxy.gpg\n" | tee '/etc/apt/sources.list.d/haproxy.sources' > '/dev/null'
 ```
 
 ## Установка

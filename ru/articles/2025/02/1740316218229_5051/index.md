@@ -59,7 +59,7 @@ curl -fsSLo '/etc/apt/keyrings/syncthing.gpg' 'https://syncthing.net/release-key
 - Создать файл репозитория `/etc/apt/sources.list.d/syncthing.sources`:
 
 ```bash
-echo -e "X-Repolib-Name: Syncthing\nEnabled: yes\nTypes: deb\nURIs: https://apt.syncthing.net\nSuites: syncthing\nComponents: stable\nSigned-By: /etc/apt/keyrings/syncthing.gpg\n" | tee '/etc/apt/sources.list.d/syncthing.sources' > '/dev/null'
+echo -e "X-Repolib-Name: Syncthing\nTypes: deb\nURIs: https://apt.syncthing.net\nSuites: syncthing\nComponents: stable\nSigned-By: /etc/apt/keyrings/syncthing.gpg\n" | tee '/etc/apt/sources.list.d/syncthing.sources' > '/dev/null'
 ```
 
 - Скачать файл предпочтений `syncthing.pref`:

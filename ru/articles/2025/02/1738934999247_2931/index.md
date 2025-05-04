@@ -59,7 +59,7 @@ curl -fsSL 'https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263/redi
 - Создать файл репозитория `/etc/apt/sources.list.d/redis.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Redis\nEnabled: yes\nTypes: deb\nURIs: https://packages.redis.io/deb\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/redis.gpg\n" | tee '/etc/apt/sources.list.d/redis.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Redis\nTypes: deb\nURIs: https://packages.redis.io/deb\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/redis.gpg\n" | tee '/etc/apt/sources.list.d/redis.sources' > '/dev/null'
 ```
 
 ## Установка

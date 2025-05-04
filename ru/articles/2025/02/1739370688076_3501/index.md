@@ -60,7 +60,7 @@ curl -fsSL 'https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-
 - Создать файл репозитория `/etc/apt/sources.list.d/phusion.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Phusion\nEnabled: yes\nTypes: deb\nURIs: https://oss-binaries.phusionpassenger.com/apt/passenger\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/phusion.gpg\n" | tee '/etc/apt/sources.list.d/phusion.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Phusion\nTypes: deb\nURIs: https://oss-binaries.phusionpassenger.com/apt/passenger\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/phusion.gpg\n" | tee '/etc/apt/sources.list.d/phusion.sources' > '/dev/null'
 ```
 
 ## Установка
