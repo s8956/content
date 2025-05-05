@@ -66,7 +66,15 @@ v='1.4.2'; curl -fSLo "clamav-${v}.linux.x86_64.deb" "https://www.clamav.net/dow
 u='clamav'; d='/var/lib/clamav'; adduser --system --no-create-home --disabled-login --disabled-password --shell '/bin/false' --group --home "${d}" "${u}" && chown "${u}":"${u}" "${d}"
 ```
 
-- Создать директории `/run/clamav` и `/var/log/clamav`:
+{{< alert "tip" >}}
+Если планируется интеграция ClamAV с Amavis, то пользователя `clamav` необходимо добавить в группу `amavis`:
+
+```bash
+u='clamav'; g='amavis'; usermod -aG "${g}" "${u}"
+```
+{{< /alert >}}
+
+- Создать директории `/run/clamav` и`/var/log/clamav` для логирования:
 
 ```bash
 u='clamav'; for i in '/run/clamav' '/var/log/clamav'; do install -d -g "${u}" -o "${u}" "${i}";done
