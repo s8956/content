@@ -45,7 +45,7 @@ hash: 'd5729fa5d717e6c9af9645530459d0f87cc38d3c'
 uuid: 'd5729fa5-d717-56c9-af96-45530459d0f8'
 slug: 'd5729fa5-d717-56c9-af96-45530459d0f8'
 
-draft: 0
+draft: 1
 ---
 
 Инструкция по установке {{< tag "ClamAV" >}} из официального пакета Cisco Talos.
@@ -66,10 +66,10 @@ v='1.4.2'; curl -fSLo "clamav-${v}.linux.x86_64.deb" "https://www.clamav.net/dow
 u='clamav'; d='/var/lib/clamav'; adduser --system --no-create-home --disabled-login --disabled-password --shell '/bin/false' --group --home "${d}" "${u}" && chown "${u}":"${u}" "${d}"
 ```
 
-- Создать директорию `/var/log/clamav` для логирования:
+- Создать директории `/run/clamav` и `/var/log/clamav`:
 
 ```bash
-u='clamav'; d='/var/log/clamav'; install -d -g "${u}" -o "${u}" "${d}"
+u='clamav'; for i in '/run/clamav' '/var/log/clamav'; do install -d -g "${u}" -o "${u}" "${i}";done
 ```
 
 - Скачать файлы сервисов для `systemd`:
