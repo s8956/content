@@ -74,10 +74,10 @@ u='clamav'; g='amavis'; usermod -aG "${g}" "${u}"
 ```
 {{< /alert >}}
 
-- Создать директории `/run/clamav` и`/var/log/clamav` для логирования:
+- Создать директории `/run/clamav` и`/var/log/clamav`:
 
 ```bash
-u='clamav'; for i in '/run/clamav' '/var/log/clamav'; do install -d -g "${u}" -o "${u}" "${i}";done
+u='clamav'; d=("/run/${u}" "/var/log/${u}"); for i in "${d[@]}"; do install -d -g "${u}" -o "${u}" "${i}"; done
 ```
 
 - Скачать файлы сервисов для `systemd`:
