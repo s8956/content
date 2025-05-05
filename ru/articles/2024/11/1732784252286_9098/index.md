@@ -94,6 +94,7 @@ sudo -u 'postgres' psql -c 'alter role DB_USER with password null;'
 ```bash
 sudo -u 'postgres' dropuser 'DB_USER'
 ```
+
 - Изменить роль владельца у всех баз данных с `DB_USER` на `DB_USER_NEW`:
 
 ```bash
@@ -150,10 +151,10 @@ sudo -u 'postgres' dropdb 'DB_NAME'
 Использовать перенаправление для резервного копирования и восстановления базы данных не рекомендуется. Резервная копия базы данных может оказаться повреждённой.
 {{< /alert >}}
 
-- Создать резервную копию базы данных `DB_NAME` при помощи пользователя `DB_USER` и записать в файл `backup.sql.xz`:
+- Создать резервную копию базы данных `DB_NAME` при помощи пользователя `DB_USER` и записать в файл `DB_NAME.DATE.sql.xz`:
 
 ```bash
-f='backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='DB_USER' --password --dbname='DB_NAME' --file="${f}" && xz "${f}" && rm -f "${f}"
+u='DB_USER'; d='DB_NAME'; f="${d}.$( date -u '+%Y-%m-%d.%H-%M-%S' ).sql"; sudo -u 'postgres' pg_dump --host='127.0.0.1' --port='5432' --username="${u}" --password --dbname="${d}" --file="${f}" && xz "${f}" && rm -f "${f}"
 ```
 
 ## Восстановление
@@ -170,10 +171,10 @@ sudo -u 'postgres' dropdb 'DB_NAME'
 sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 ```
 
-- Восстановить данные в новую базу данных `DB_NAME` из файла `backup.sql.xz`:
+- Восстановить данные в новую базу данных `DB_NAME` из файла `DB_NAME.sql.xz`:
 
 ```bash
-f='backup.sql'; xz -d "${f}.xz" && sudo -u 'postgres' psql --no-psqlrc --dbname='DB_NAME' --file="${f}"
+d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && sudo -u 'postgres' psql --no-psqlrc --dbname="${d}" --file="${f}"
 ```
 
 ## Очистка и анализ
