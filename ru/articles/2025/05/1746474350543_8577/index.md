@@ -80,7 +80,7 @@ cd '/srv/pve' && python3 'server.py'
 ## Установка Proxmox VE
 
 - Запустить установщик Proxmox VE и в главном меню выбрать **Advanced Options** / **Automatic**.
-- После загрузки среды ввести команду (`192.168.1.2` - заменить на свой IP-адрес):
+- После загрузки среды ввести команду (`192.168.1.2` - заменить на IP-адрес сервера):
 
 ```bash
 proxmox-fetch-answer http http://192.168.1.2:8000/answer > /run/automatic-installer-answers && exit
