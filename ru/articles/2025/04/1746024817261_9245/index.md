@@ -45,7 +45,7 @@ hash: 'd5729fa5d717e6c9af9645530459d0f87cc38d3c'
 uuid: 'd5729fa5-d717-56c9-af96-45530459d0f8'
 slug: 'd5729fa5-d717-56c9-af96-45530459d0f8'
 
-draft: 1
+draft: 0
 ---
 
 Инструкция по установке {{< tag "ClamAV" >}} из официального пакета Cisco Talos.
@@ -63,7 +63,7 @@ v='1.4.2'; curl -fSLo "clamav-${v}.linux.x86_64.deb" "https://www.clamav.net/dow
 - Создать пользователя `clamav` с домашней директорией `/var/lib/clamav`:
 
 ```bash
-u='clamav'; d='/var/lib/clamav'; adduser --system --no-create-home --disabled-login --disabled-password --shell '/bin/false' --group --home "${d}" "${u}" && chown "${u}":"${u}" "${d}"
+u='clamav'; d='/var/lib/clamav'; mkdir "${d}" && adduser --system --no-create-home --disabled-login --disabled-password --shell '/bin/false' --group --home "${d}" "${u}" && chown "${u}":"${u}" "${d}"
 ```
 
 {{< alert "tip" >}}
@@ -83,7 +83,7 @@ u='clamav'; d=("/run/${u}" "/var/log/${u}"); for i in "${d[@]}"; do install -d -
 - Скачать файлы сервисов для `systemd`:
 
 ```bash
-f=('clamonacc.service' 'daemon.service' 'daemon.socket' 'freshclam-once.service' 'freshclam-once.timer' 'freshclam.service'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/clamav-${i}" "${p}/clamav-${i}"; done
+f=('clamonacc.service' 'daemon.service' 'freshclam.service'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/clamav-${i}" "${p}/clamav-${i}"; done
 ```
 
 ## Настройка
