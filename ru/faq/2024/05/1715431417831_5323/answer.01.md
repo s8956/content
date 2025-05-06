@@ -2,21 +2,21 @@
 
 ## Вводные данные
 
-- Старый IP: `10.1.1.1/16`.
-- Новый IP: `10.1.2.2/16`.
+- Старый IP: `10.0.1.1/16`.
+- Новый IP: `10.0.2.2/16`.
 
 ## Изменение IP-адреса
 
 - Изменить IP-адрес в файле `/etc/network/interfaces`:
 
 ```bash
-sed -i 's|10.1.1.1/16|10.1.2.2/16|g' '/etc/network/interfaces'
+sed -i 's|10.0.1.1/16|10.0.2.2/16|g' '/etc/network/interfaces'
 ```
 
 - Изменить IP-адрес в файле `/etc/hosts`:
 
 ```bash
-sed -i 's|10.1.1.1|10.1.2.2|g' '/etc/hosts'
+sed -i 's|10.0.1.1|10.0.2.2|g' '/etc/hosts'
 ```
 
 - Перезагрузить сервис `networking`:
@@ -30,7 +30,7 @@ systemctl restart networking.service
 Удобнее будет использовать команду в одну строку, не забыв отредактировать параметры под себя:
 
 ```bash
-o='10.1.1.1/16'; n='10.1.2.2/16'; f=('hosts' 'network/interfaces'); for i in "${f[@]}"; do sed -i "s|${o}|${n}|g" "/etc/${i}"; done; systemctl restart networking.service
+o='10.0.1.1/16'; n='10.0.2.2/16'; f=('hosts' 'network/interfaces'); for i in "${f[@]}"; do sed -i "s|${o}|${n}|g" "/etc/${i}"; done; systemctl restart networking.service
 ```
 
 #### Параметры
