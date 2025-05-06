@@ -57,7 +57,7 @@ draft: 0
 - Скачать и установить `clamav.linux.x86_64.deb`:
 
 ```bash
-v='1.4.2'; curl -fSLo "clamav-${v}.linux.x86_64.deb" "https://www.clamav.net/downloads/production/clamav-${v}.linux.x86_64.deb" && apt install --yes ./"clamav-${v}.linux.x86_64.deb"
+v='1.4.2'; curl -fSLo "/tmp/clamav-${v}.linux.x86_64.deb" "https://www.clamav.net/downloads/production/clamav-${v}.linux.x86_64.deb" && apt install --yes "/tmp/clamav-${v}.linux.x86_64.deb"
 ```
 
 - Создать пользователя `clamav` с домашней директорией `/var/lib/clamav`:
