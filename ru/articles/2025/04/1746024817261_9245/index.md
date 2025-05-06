@@ -83,7 +83,7 @@ u='clamav'; d=("/run/${u}" "/var/log/${u}"); for i in "${d[@]}"; do install -d -
 - Скачать файлы сервисов для `systemd`:
 
 ```bash
-f=('clamonacc.service' 'daemon.service' 'freshclam.service'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/clamav-${i}" "${p}/clamav-${i}"; done
+f=('clamonacc.service' 'daemon.service' 'daemon.socket' 'freshclam.service'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/clamav-${i}" "${p}/clamav-${i}"; done
 ```
 
 ## Настройка
