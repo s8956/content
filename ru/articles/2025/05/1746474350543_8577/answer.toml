@@ -12,5 +12,5 @@ source = "from-dhcp"
 
 [disk-setup]
 filesystem = "xfs"
-# disk-list = ["sda"]
-filter.ID_MODEL = "CT250MX500*"
+disk-list = ["sda"]
+# filter.ID_MODEL = "CT250MX500*"

@@ -3,23 +3,22 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: '1746474350543_8577'
+title: 'Proxmox VE: Автоматическая установка'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1647427060118-4911c9821b82'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'terminal'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'proxmox'
+  - 'pve'
+  - 'automatic'
+  - 'install'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
-  - ''
+  - 'https://pve.proxmox.com/wiki/Automated_Installation'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -42,13 +41,51 @@ hash: 'a279ac90f943246a2730efc79ae19fd450cce638'
 uuid: 'a279ac90-f943-546a-9730-efc79ae19fd4'
 slug: 'a279ac90-f943-546a-9730-efc79ae19fd4'
 
-draft: 1
+draft: 0
 ---
 
-
+Автоматическая установка Proxmox VE требует запуска отдельного http-сервера, который на запрос Proxmox VE будет отдавать специальный файл ответов.
 
 <!--more-->
 
+## Подготовка сервера
+
+- Установить необходимые пакеты:
+
+```bash
+apt install --yes python3-aiohttp
+```
+
+- Создать директорию `/srv/pve`:
+
+```bash
+mkdir '/srv/pve'
+```
+
+- Создать файл сервера `/srv/pve/server.py` со следующим содержанием:
+
 {{< file "server.py" "python" >}}
 
+- Создать файл ответов `/srv/pve/answer.toml` со следующим содержанием:
+
 {{< file "answer.toml" "toml" >}}
+
+- Отредактировать файл ответов `/srv/pve/answer.toml` согласно своим предпочтениям.
+- Запустить файл сервера:
+
+```bash
+cd '/srv/pve' && python3 'server.py'
+```
+
+## Установка Proxmox VE
+
+- Запустить установщик Proxmox VE и в главном меню выбрать **Advanced Options** / **Automatic**.
+- После загрузки среды ввести команду (`192.168.1.2` - заменить на свой IP-адрес):
+
+```bash
+proxmox-fetch-answer http http://192.168.1.2:8000/answer > /run/automatic-installer-answers && exit
+```
+
+- После установки Proxmox VE, при необходимости, выполнить следующие инструкции:
+  - {{< uuid "0ffc8c06-f871-5059-b380-1ea488d2c24c" >}}
+  - {{< uuid "ffbb2491-6784-510a-a067-2f08cc76c221" >}}
