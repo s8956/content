@@ -158,7 +158,7 @@ f='zabbix.backup.sql'; pg_dump --host='127.0.0.1' --port='5432' --username='zabb
 - Удалить существующую базу данных `zabbix`:
 
 ```bash
-sudo -u 'postgres' dropdb 'zabbix'
+sudo -u 'postgres' dropdb --if-exists 'zabbix'
 ```
 
 - Создать новую базу данных `zabbix` с владельцем `zabbix`:

@@ -142,7 +142,7 @@ sudo -u 'postgres' createdb --owner='DB_USER' --template='template0' 'DB_NAME'
 - Удалить базу данных `DB_NAME`:
 
 ```bash
-sudo -u 'postgres' dropdb 'DB_NAME'
+sudo -u 'postgres' dropdb --if-exists 'DB_NAME'
 ```
 
 ## Резервное копирование
@@ -162,7 +162,7 @@ u='DB_USER'; d='DB_NAME'; f="${d}.$( date -u '+%Y-%m-%d.%H-%M-%S' ).sql"; sudo -
 - Удалить старую базу данных `DB_NAME` (при необходимости):
 
 ```bash
-sudo -u 'postgres' dropdb 'DB_NAME'
+sudo -u 'postgres' dropdb --if-exists 'DB_NAME'
 ```
 
 - Создать новую базу данных `DB_NAME` с владельцем `DB_USER`:
@@ -174,7 +174,7 @@ sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 - Восстановить данные в новую базу данных `DB_NAME` из файла `DB_NAME.sql.xz`:
 
 ```bash
-d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && sudo -u 'postgres' psql --no-psqlrc --dbname="${d}" --file="${f}"
+d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && sudo -u 'postgres' psql --no-psqlrc --dbname="${d}" --file="${f}" --single-transaction
 ```
 
 ## Очистка и анализ

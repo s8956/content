@@ -133,7 +133,7 @@ d='gitlabhq_production'; echo 'create extension if not exists pg_trgm; create ex
 - Импортировать файл `/tmp/gitlabhq_production.sql` на внешний {{< tag "PostgreSQL" >}}:
 
 ```bash
-sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql'
+sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql' --single-transaction
 ```
 
 - Добавить настройки в файл конфигурации `/etc/gitlab/gitlab.rb`:
