@@ -121,7 +121,7 @@ sudo -u 'gitlab-psql' '/opt/gitlab/embedded/bin/pg_dump' --host='/var/opt/gitlab
 - Создать роль `gitlab` и базу данных `gitlabhq_production` на внешнем {{< tag "PostgreSQL" >}}:
 
 ```bash
-u='gitlab'; d='gitlabhq_production'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}"
+u='gitlab'; d='gitlabhq_production'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb --owner="${u}" "${d}"
 ```
 
 - Создать расширения для базы данных `gitlabhq_production` на внешнем {{< tag "PostgreSQL" >}}:
@@ -133,7 +133,7 @@ d='gitlabhq_production'; echo 'create extension if not exists pg_trgm; create ex
 - Импортировать файл `/tmp/gitlabhq_production.sql` на внешний {{< tag "PostgreSQL" >}}:
 
 ```bash
-sudo -u 'postgres' psql --file='/tmp/gitlabhq_production.sql' --single-transaction
+sudo -u 'postgres' psql --dbname='gitlabhq_production' --file='/tmp/gitlabhq_production.sql' --single-transaction
 ```
 
 - Добавить настройки в файл конфигурации `/etc/gitlab/gitlab.rb`:

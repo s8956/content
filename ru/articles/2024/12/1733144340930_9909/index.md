@@ -121,13 +121,13 @@ echo "grant create, alter, drop, insert, update, delete, select, references, rel
 - Дать все права на базу данных `DB_NAME` пользователю `DB_USER`:
 
 ```bash
-echo "grant all on DB_NAME.* to 'DB_USER'@'127.0.01'; flush privileges;" | mariadb --user='root' --password
+echo "grant all on DB_NAME.* to 'DB_USER'@'127.0.0.1'; flush privileges;" | mariadb --user='root' --password
 ```
 
 - Дать все права на все базы данных пользователю `DB_USER`:
 
 ```bash
-echo "grant all on *.* to 'DB_USER'@'127.0.01'; flush privileges;" | mariadb --user='root' --password
+echo "grant all on *.* to 'DB_USER'@'127.0.0.1'; flush privileges;" | mariadb --user='root' --password
 ```
 
 - Отозвать все права пользователя `DB_USER` у базы данных `DB_NAME`:
@@ -175,19 +175,19 @@ echo "create database if not exists DB_NAME character set 'utf8mb4' collate 'utf
 - Дать все права на базу данных `DB_NAME` пользователю `DB_USER`:
 
 ```bash
-echo "grant all privileges on DB_NAME.* to 'DB_USER'@'127.0.01'; flush privileges;" | mariadb --user='root' --password
+echo "grant all privileges on DB_NAME.* to 'DB_USER'@'127.0.0.1'; flush privileges;" | mariadb --user='root' --password
 ```
 
-- Импортировать данные в новую базу данных `DB_NAME` из файла `backup.sql.xz`:
+- Импортировать данные в новую базу данных `DB_NAME` из файла `DB_NAME.sql.xz`:
 
 ```bash
-f='backup.sql'; xz -d "${f}.xz" && mariadb --user='root' --password --database='DB_NAME' < "${f}"
+d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && mariadb --user='root' --password --database="${d}" < "${f}"
 ```
 
 {{< alert "tip" >}}
 Импортировать данных можно при помощи конвейера:
 
 ```bash
-f='backup.sql'; xzcat "${f}.xz" | mariadb --user='root' --password --database='DB_NAME'
+d='DB_NAME'; f="${d}.sql"; xzcat "${f}.xz" | mariadb --user='root' --password --database="${d}"
 ```
 {{< /alert >}}

@@ -130,13 +130,13 @@ sudo -u 'postgres' psql -c '\c DB_NAME' -c '\dt *.*'
 - Создать базу данных `DB_NAME` с владельцем `DB_USER`:
 
 ```bash
-sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
+sudo -u 'postgres' createdb --owner='DB_USER' --locale='C' 'DB_NAME'
 ```
 
 - Создать базу данных `DB_NAME` из шаблона `template0` с владельцем `DB_USER`:
 
 ```bash
-sudo -u 'postgres' createdb --owner='DB_USER' --template='template0' 'DB_NAME'
+sudo -u 'postgres' createdb --owner='DB_USER' --locale='C' --template='template0' 'DB_NAME'
 ```
 
 - Удалить базу данных `DB_NAME`:

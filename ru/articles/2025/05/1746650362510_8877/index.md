@@ -3,7 +3,7 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: 'PostgreSQL: Резервное копирование и восстановление базы данных'
+title: 'SQL: Резервное копирование и восстановление базы данных'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
@@ -49,20 +49,103 @@ draft: 1
 
 <!--more-->
 
-{{< file "app.pgsql.backup.sh" "bash" >}}
+## Восстановление
 
-{{< file "app.pgsql.backup.conf" "ini" >}}
+### MariaDB
 
-{{< file "app_pgsql_backup" "bash" >}}
+- Удалить базу данных `DB_NAME`:
+
+```bash
+echo 'drop database if exists DB_NAME;' | mariadb --user='root' --password
+```
+
+- Создать базу данных `DB_NAME` с кодировкой `utf8mb4` и сопоставлением `utf8mb4_unicode_ci`:
+
+```bash
+echo "create database if not exists DB_NAME character set 'utf8mb4' collate 'utf8mb4_unicode_ci';" | mariadb --user='root' --password
+```
+
+- Дать все права на базу данных `DB_NAME` пользователю `DB_USER`:
+
+```bash
+echo "grant all privileges on DB_NAME.* to 'DB_USER'@'127.0.0.1'; flush privileges;" | mariadb --user='root' --password
+```
+
+- Импортировать данные в новую базу данных `DB_NAME` из файла `DB_NAME.sql.xz`:
+
+```bash
+d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && mariadb --user='root' --password --database="${d}" < "${f}"
+```
+
+### PostgreSQL
+
+- Удалить базу данных `DB_NAME`:
 
 ```bash
 sudo -u 'postgres' dropdb --if-exists 'DB_NAME'
 ```
 
+- Создать базу данных `DB_NAME` с владельцем `DB_USER`:
+
 ```bash
 sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 ```
 
+- Восстановить базу данных `DB_NAME` под пользователем `DB_USER` из файла `DB_NAME.sql.xz`:
+
 ```bash
-d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && sudo -u 'postgres' psql --username='' --password --dbname="${d}" --file="${f}" --no-psqlrc --single-transaction
+u='DB_USER'; d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && sudo -u 'postgres' psql --username="${u}" --password --dbname="${d}" --file="${f}" --no-psqlrc --single-transaction
 ```
+
+## Установка
+
+- Скопировать файлы `app.sql.backup.conf` и `app.sql.backup.sh` в директорию `/root/apps/sql/`.
+- Указать бит выполнения для `*.sh` скриптов: `chmod +x /root/apps/sql/*.sh`.
+- Скопировать файл `app_sql_backup` в директорию `/etc/cron.d/`.
+- Настроить параметры скрипта в файле `app.sql.backup.conf`.
+
+## Скрипт
+
+Скрипт состоит из трёх компонентов:
+
+- Файл с настройками.
+- Приложение.
+- Задание для CRON.
+
+### Настройка
+
+{{< file "app.sql.backup.conf" "ini" >}}
+
+#### Параметры
+
+{{< alert "tip" >}}
+Некоторые параметры, указанные здесь, отсутствуют в конфигурационном файле. Это означает, что они имеют значения, установленные по умолчанию. Для переопределения этих значений, необходимо добавить отсутствующие параметры в конфигурационный файл.
+{{< /alert >}}
+
+- `SQL_TYPE` - тип базы данных:
+  - `mysql` - MySQL / MariaDB.
+  - `pgsql` - PostgreSQL.
+- `SQL_DATA` - директория для хранения дампов базы данных.
+- `SQL_DAYS` - дни, по прошествии которых, старые файлы будут удалены. По умолчанию: `30`.
+- `SQL_HOST` - хост для соединения с базой данных. По умолчанию: `127.0.0.1`.
+- `SQL_PORT` - порт для соединения с базой данных. По умолчанию: `27017` (`mongo`) / `3306` (`mysql`) / `5432` (`pgsql`).
+- `SQL_USER` - имя пользователь для соединения с базой данных. По умолчанию: `admin` (`mongo`) / `root` (`mysql`) / `postgres` (`pgsql`).
+- `SQL_PASS` - пароль для соединения с базой данных.
+- `SQL_DB` - массив названий баз данных для резервного копирования.
+- `SYNC_HOST` - IP-адрес удалённого хранилища для соединения по SSH.
+- `SYNC_PORT` - порт удалённого хранилища для соединения по SSH. По умолчанию: `22`.
+- `SYNC_USER` - имя пользователя удалённого хранилища для соединения по SSH. По умолчанию: `root`.
+- `SYNC_PASS` - пароль пользователя удалённого хранилища для соединения по SSH.
+- `SYNC_DST` - директория удалённого хранилища для синхронизации дампов базы данных.
+
+### Приложение
+
+Приложение забирает параметры из файла настроек и обрабатывает значения.
+
+{{< file "app.sql.backup.sh" "bash" >}}
+
+### Задание
+
+Задание запускает скрипт каждый день в `6:00` (перед рабочим днём) и в `22:00` (после рабочего дня).
+
+{{< file "app_sql_backup" "bash" >}}
