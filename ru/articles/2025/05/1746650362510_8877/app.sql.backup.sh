@@ -87,18 +87,11 @@ _timestamp() {
 
 _dump() {
   case "${SQL_TYPE}" in
-    # 'mongo') _mongo "${1}" "${2}" ;;
     'mysql') _mysql "${1}" "${2}" ;;
     'pgsql') _pgsql "${1}" "${2}" ;;
     *) echo >&2 'SQL_TYPE does not exist!'; exit 1 ;;
   esac
 }
-
-# _mongo() {
-#   mongodump --host="${SQL_HOST:-127.0.0.1}" --port="${SQL_PORT:-27017}" \
-#     --username="${SQL_USER:-admin}" --password="${SQL_PASS}" \
-#     --db="${1}" --out="${2}"
-# }
 
 _mysql() {
   local cmd; cmd='mariadb-dump'; [[ $( command -v 'mysqldump' ) ]] && cmd='mysqldump'
