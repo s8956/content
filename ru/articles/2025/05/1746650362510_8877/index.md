@@ -99,7 +99,7 @@ sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 - Восстановить базу данных `DB_NAME` под пользователем `DB_USER` из файла `DB_NAME.sql.xz`:
 
 ```bash
-u='DB_USER'; d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && sudo -u 'postgres' psql --username="${u}" --password --dbname="${d}" --file="${f}" --no-psqlrc --single-transaction
+u='DB_USER'; d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && psql --host='127.0.0.1' --port='5432' --username="${u}" --password --dbname="${d}" --file="${f}" --no-psqlrc --single-transaction
 ```
 
 ## Установка
