@@ -32,9 +32,7 @@ MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 # INITIALIZATION
 # -------------------------------------------------------------------------------------------------------------------- #
 
-run() {
-  { sql_backup && sql_remove; } && { [[ -n "${SYNC_HOST}" && -n "${SYNC_PASS}" ]] && fs_sync; }
-}
+run() { sql_backup && sql_remove && fs_sync; }
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # SQL: BACKUP
@@ -47,8 +45,7 @@ sql_backup() {
     local ts; ts="$( _timestamp )"
     local file; file="${i}.${id}.${ts}.sql"
     { [[ ! -d "${SQL_DATA}" ]] && mkdir -p "${SQL_DATA}"; } && cd "${SQL_DATA}" \
-      && _dump "${i}" "${file}" && _pack "${file}" \
-      && _mail "$( hostname -f ) / SQL: ${i}" "The '${i}' database is saved in the file '${file}'!" 'SUCCESS'
+      && _dump "${i}" "${file}" && _pack "${file}"
   done
 }
 
@@ -67,9 +64,12 @@ sql_remove() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 fs_sync() {
-  rsync -a --delete --quiet -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
-    "${SQL_DATA}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/" \
-    && _mail "$( hostname -f ) / SYNC" 'The database files are synchronized!' 'SUCCESS'
+  if [[ -n "${SYNC_HOST}" && -n "${SYNC_PASS}" ]]; then
+    rsync -a --delete --quiet -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
+      "${SQL_DATA}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/"
+  else
+    return 0
+  fi
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -111,7 +111,7 @@ _pack() {
 }
 
 _mail() {
-  local id; id="#ID:$( hostname -f ):$(dmidecode -s system-uuid)"
+  local id; id="#ID:$( hostname -f ):$( dmidecode -s system-uuid )"
   local type; type="#TYPE:BACKUP:${3}"
   printf '%s\n\n-- \n%s\n%s' "${2}" "${id^^}" "${type^^}" | mail -s "${1}" "${MAIL_TO}"
 }
