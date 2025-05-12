@@ -21,8 +21,8 @@ sources:
   - 'https://dev.mysql.com/doc/refman/en/mysqldump.html'
   - 'https://mariadb.com/kb/en/mariadb-command-line-client'
   - 'https://mariadb.com/kb/en/mariadb-dump'
-  - 'https://postgresql.org/docs/current/app-pgdump.html'
-  - 'https://postgresql.org/docs/current/app-psql.html'
+  - 'https://www.postgresql.org/docs/current/app-pgdump.html'
+  - 'https://www.postgresql.org/docs/current/app-psql.html'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
@@ -53,6 +53,8 @@ draft: 1
 <!--more-->
 
 ## Восстановление
+
+Набор команд, описывающий алгоритм восстановления резервной копии базы данных.
 
 ### MariaDB
 
@@ -131,8 +133,8 @@ u='DB_USER'; d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && sudo -u 'postgres' ps
 - `SQL_DATA` - директория для хранения дампов базы данных.
 - `SQL_DAYS` - дни, по прошествии которых, старые файлы будут удалены. По умолчанию: `30`.
 - `SQL_HOST` - хост для соединения с базой данных. По умолчанию: `127.0.0.1`.
-- `SQL_PORT` - порт для соединения с базой данных. По умолчанию: `27017` (`mongo`) / `3306` (`mysql`) / `5432` (`pgsql`).
-- `SQL_USER` - имя пользователь для соединения с базой данных. По умолчанию: `admin` (`mongo`) / `root` (`mysql`) / `postgres` (`pgsql`).
+- `SQL_PORT` - порт для соединения с базой данных. По умолчанию: `3306` (`mysql`) / `5432` (`pgsql`).
+- `SQL_USER` - имя пользователь для соединения с базой данных. По умолчанию: `root` (`mysql`) / `postgres` (`pgsql`).
 - `SQL_PASS` - пароль для соединения с базой данных.
 - `SQL_DB` - массив названий баз данных для резервного копирования.
 - `SYNC_HOST` - IP-адрес удалённого хранилища для соединения по SSH.

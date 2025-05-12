@@ -24,7 +24,7 @@ SQL_DATA="${SQL_DATA:?}"; readonly SQL_DATA
 SQL_PASS="${SQL_PASS:?}"; readonly SQL_PASS
 SQL_DB=("${SQL_DB[@]:?}"); readonly SQL_DB
 SYNC_HOST="${SYNC_HOST?}"; readonly SYNC_HOST
-SYNC_PASS="${SYNC_PASS:?}"; readonly SYNC_PASS
+SYNC_PASS="${SYNC_PASS?}"; readonly SYNC_PASS
 SYNC_DST="${SYNC_DST:?}"; readonly SYNC_DST
 MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 
@@ -33,7 +33,7 @@ MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 # -------------------------------------------------------------------------------------------------------------------- #
 
 run() {
-  { sql_backup && sql_remove; } && { [[ -n "${SYNC_HOST}" ]] && fs_sync; }
+  { sql_backup && sql_remove; } && { [[ -n "${SYNC_HOST}" && -n "${SYNC_PASS}" ]] && fs_sync; }
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -43,7 +43,6 @@ run() {
 
 sql_backup() {
   local id; id="$( _id )"
-
   for i in "${SQL_DB[@]}"; do
     local ts; ts="$( _timestamp )"
     local file; file="${i}.${id}.${ts}.sql"
