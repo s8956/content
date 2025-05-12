@@ -6,20 +6,23 @@
 title: 'SQL: Резервное копирование и восстановление базы данных'
 description: ''
 images:
-  - 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a'
+  - 'https://images.unsplash.com/photo-1540396792185-d6bdfdc4cd3c'
 categories:
-  - 'cat_01'
-  - 'cat_02'
-  - 'cat_03'
+  - 'linux'
+  - 'scripts'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'mariadb'
+  - 'mysql'
+  - 'postgresql'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
-  - ''
+  - 'https://dev.mysql.com/doc/refman/en/mysql.html'
+  - 'https://dev.mysql.com/doc/refman/en/mysqldump.html'
+  - 'https://mariadb.com/kb/en/mariadb-command-line-client'
+  - 'https://mariadb.com/kb/en/mariadb-dump'
+  - 'https://postgresql.org/docs/current/app-pgdump.html'
+  - 'https://postgresql.org/docs/current/app-psql.html'
 license: 'CC-BY-SA-4.0'
 complexity: '0'
 toc: 1
