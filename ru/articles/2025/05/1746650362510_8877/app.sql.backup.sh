@@ -53,8 +53,8 @@ sql_backup() {
     local ts; ts="$( _timestamp )"
     local file; file="${i}.${id}.${ts}.sql"
 
-    { [[ ! -d "${SQL_DATA}" ]] && mkdir -p "${SQL_DATA}"; } && cd "${SQL_DATA}" \
-      && _dump "${i}" "${file}" && _pack "${file}"
+    [[ ! -d "${SQL_DATA}" ]] && mkdir -p "${SQL_DATA}"; cd "${SQL_DATA}" || exit 1
+    _dump "${i}" "${file}" && _pack "${file}"
   done
 }
 
