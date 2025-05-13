@@ -14,6 +14,7 @@ tags:
   - 'debian'
   - 'apt'
   - 'postgresql'
+  - 'pgsql'
   - 'install'
 authors:
   - 'KaiKimera'

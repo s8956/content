@@ -14,6 +14,7 @@ categories:
 tags:
   - 'sql'
   - 'postgresql'
+  - 'pgsql'
 authors:
   - 'KaiKimera'
 sources:

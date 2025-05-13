@@ -14,7 +14,9 @@ categories:
 tags:
   - 'mariadb'
   - 'mysql'
+  - 'pgsql'
   - 'postgresql'
+  - 'rsync'
 authors:
   - 'KaiKimera'
 sources:
@@ -46,10 +48,10 @@ hash: '57f8f8c0b963e708d310129ea98a2423766812bb'
 uuid: '57f8f8c0-b963-5708-b310-129ea98a2423'
 slug: '57f8f8c0-b963-5708-b310-129ea98a2423'
 
-draft: 1
+draft: 0
 ---
 
-
+Написал скрипт, при помощи которого можно делать резервные копии баз данных {{< tag "PgSQL" >}} / {{< tag "MariaDB" >}} и отправлять их в удалённое хранилище через {{< tag "Rsync" >}}.
 
 <!--more-->
 
@@ -84,8 +86,8 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 
 Создать файл `/root/.pgpass` со следующим содержанием (`PASSWORD` заменить на пароль пользователя `backup`):
 
-```
-127.0.0.1:5432:*:backup:PASSWORD
+```bash
+f='/root/.pgpass'; echo '127.0.0.1:5432:*:backup:PASSWORD' > "${f}" && chmod 600 "${f}"
 ```
 
 ## Скрипт
