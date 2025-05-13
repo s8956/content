@@ -22,6 +22,7 @@ SRC_NAME="$( basename "$( readlink -f "${BASH_SOURCE[0]}" )" )" # Source name.
 SQL_ON="${SQL_ON:?}"; readonly SQL_ON
 SQL_TYPE="${SQL_TYPE:?}"; readonly SQL_TYPE
 SQL_DATA="${SQL_DATA:?}"; readonly SQL_DATA
+SQL_USER="${SQL_USER:?}"; readonly SQL_USER
 SQL_PASS="${SQL_PASS:?}"; readonly SQL_PASS
 SQL_DB=("${SQL_DB[@]:?}"); readonly SQL_DB
 SYNC_ON="${SYNC_ON:?}"; readonly SYNC_ON
