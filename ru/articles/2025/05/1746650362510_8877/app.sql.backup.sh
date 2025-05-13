@@ -23,8 +23,10 @@ SQL_TYPE="${SQL_TYPE:?}"; readonly SQL_TYPE
 SQL_DATA="${SQL_DATA:?}"; readonly SQL_DATA
 SQL_PASS="${SQL_PASS:?}"; readonly SQL_PASS
 SQL_DB=("${SQL_DB[@]:?}"); readonly SQL_DB
-SYNC_HOST="${SYNC_HOST?}"; readonly SYNC_HOST
-SYNC_PASS="${SYNC_PASS?}"; readonly SYNC_PASS
+SYNC_ON="${SYNC_ON:?}"; readonly SYNC_ON
+SYNC_HOST="${SYNC_HOST:?}"; readonly SYNC_HOST
+SYNC_USER="${SYNC_USER:?}"; readonly SYNC_USER
+SYNC_PASS="${SYNC_PASS:?}"; readonly SYNC_PASS
 SYNC_DST="${SYNC_DST:?}"; readonly SYNC_DST
 MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 
@@ -64,7 +66,7 @@ sql_remove() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 fs_sync() {
-  if [[ -n "${SYNC_HOST}" && -n "${SYNC_PASS}" ]]; then
+  if (( "${SYNC_ON}" )); then
     rsync -a --delete --quiet -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
       "${SQL_DATA}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/"
   else
