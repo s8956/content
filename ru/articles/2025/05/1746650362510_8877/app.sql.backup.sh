@@ -19,6 +19,7 @@ SRC_NAME="$( basename "$( readlink -f "${BASH_SOURCE[0]}" )" )" # Source name.
 . "${SRC_DIR}/${SRC_NAME%.*}.conf" # Loading configuration file.
 
 # Parameters.
+SQL_ON="${SQL_ON:?}"; readonly SQL_ON
 SQL_TYPE="${SQL_TYPE:?}"; readonly SQL_TYPE
 SQL_DATA="${SQL_DATA:?}"; readonly SQL_DATA
 SQL_PASS="${SQL_PASS:?}"; readonly SQL_PASS
@@ -34,7 +35,10 @@ MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 # INITIALIZATION
 # -------------------------------------------------------------------------------------------------------------------- #
 
-run() { sql_backup && sql_remove && fs_sync; }
+run() {
+  (( ! "${SQL_ON}" )) && return 0
+  sql_backup && sql_remove && fs_sync
+}
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # SQL: BACKUP
@@ -66,12 +70,9 @@ sql_remove() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 fs_sync() {
-  if (( "${SYNC_ON}" )); then
-    rsync -a --delete --quiet -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
-      "${SQL_DATA}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/"
-  else
-    return 0
-  fi
+  (( ! "${SYNC_ON}" )) && return 0
+  rsync -a --delete --quiet -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
+    "${SQL_DATA}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/"
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
