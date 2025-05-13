@@ -103,7 +103,7 @@ _dump() {
 _mysql() {
   local db; db="${1}"
   local file; file="${2}"
-  local cmd; cmd='mariadb-dump'; [[ $( command -v 'mysqldump' ) ]] && cmd='mysqldump'
+  local cmd; cmd='mariadb-dump'; [[ "$( command -v 'mysqldump' )" ]] && cmd='mysqldump'
 
   "${cmd}" --host="${SQL_HOST:-127.0.0.1}" --port="${SQL_PORT:-3306}" \
     --user="${SQL_USER:-root}" --password="${SQL_PASS}" \
