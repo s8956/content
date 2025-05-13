@@ -37,8 +37,7 @@ MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 # -------------------------------------------------------------------------------------------------------------------- #
 
 run() {
-  (( ! "${SQL_ON}" )) && return 0
-  sql_backup && sql_remove && fs_sync
+  (( ! "${SQL_ON}" )) && return 0; sql_backup && sql_remove && fs_sync
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -73,8 +72,7 @@ sql_remove() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 fs_sync() {
-  (( ! "${SYNC_ON}" )) && return 0
-  rsync -a --delete --quiet -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
+  (( ! "${SYNC_ON}" )) && return 0; rsync -a --delete --quiet -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
     "${SQL_DATA}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/"
 }
 
@@ -91,40 +89,29 @@ _timestamp() {
 }
 
 _dump() {
-  local db; db="${1}"
-  local file; file="${2}"
-
   case "${SQL_TYPE}" in
-    'mysql') _mysql "${db}" "${file}" ;;
-    'pgsql') _pgsql "${db}" "${file}" ;;
+    'mysql') _mysql "${1}" "${2}" ;;
+    'pgsql') _pgsql "${1}" "${2}" ;;
     *) echo >&2 'SQL_TYPE does not exist!'; exit 1 ;;
   esac
 }
 
 _mysql() {
-  local db; db="${1}"
-  local file; file="${2}"
   local cmd; cmd='mariadb-dump'; [[ "$( command -v 'mysqldump' )" ]] && cmd='mysqldump'
-
   "${cmd}" --host="${SQL_HOST:-127.0.0.1}" --port="${SQL_PORT:-3306}" \
     --user="${SQL_USER:-root}" --password="${SQL_PASS}" \
-    --single-transaction --skip-lock-tables "${db}" --result-file="${file}"
+    --single-transaction --skip-lock-tables "${1}" --result-file="${2}"
 }
 
 _pgsql() {
-  local db; db="${1}"
-  local file; file="${2}"
-
   pg_dump --host="${SQL_HOST:-127.0.0.1}" --port="${SQL_PORT:-5432}" \
     --username="${SQL_USER:-postgres}" --no-password \
-    --dbname="${db}" --file="${file}" \
+    --dbname="${1}" --file="${2}" \
     --clean --if-exists --no-owner --no-privileges --quote-all-identifiers
 }
 
 _pack() {
-  local file; file="${1}"
-
-  xz "${file}" && { [[ -f "${file}" ]] && rm -f "${file}"; }
+  xz "${1}"
 }
 
 _mail() {
