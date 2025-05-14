@@ -57,6 +57,12 @@ draft: 0
 
 ## Установка
 
+- Установить пакеты:
+
+```bash
+apt install --yes sshpass
+```
+
 - Скопировать файлы `app.sql.backup.conf` и `app.sql.backup.sh` в директорию `/root/apps/sql/`.
 - Указать бит выполнения для `*.sh` скриптов: `chmod +x /root/apps/sql/*.sh`.
 - Скопировать файл `app_sql_backup` в директорию `/etc/cron.d/`.
