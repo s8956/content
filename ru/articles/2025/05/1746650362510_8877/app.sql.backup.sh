@@ -134,7 +134,7 @@ _enc() {
   (( ! "${ENC_ON}" )) && return 0;
   local file; file="${1}"
   local pass; pass="${2}"
-  openssl enc -aes-256-cbc -salt -pbkdf2 -in "${file}" -out "${file}.enc" -pass "pass:${pass}"
+  openssl enc -aes-256-cbc -salt -pbkdf2 -in "${file}" -out "${file}.enc" -pass "pass:${pass}" && rm -f "${file}"
 }
 
 _mail() {
