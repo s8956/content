@@ -75,7 +75,6 @@ sql_remove() {
 
 fs_sync() {
   (( ! "${SYNC_ON}" )) && return 0
-  # cmd=('-am' '--delete' '--quiet'); (( "${ENC_ON}" )) && cmd+=('--include "*/"' '--include="*.enc"' '--exclude="*"')
   rsync -am --delete --quiet -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
     "${SQL_DATA}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/"
 }
