@@ -56,8 +56,7 @@ sql_backup() {
     local dir; dir="${SQL_DATA}/$( _dir )"
     local file; file="${i}.${id}.${ts}.sql"
     [[ ! -d "${dir}" ]] && mkdir -p "${dir}"; cd "${dir}" || exit 1
-    _dump "${i}" "${file}" && _xz "${file}" \
-      && _enc "${file}.xz" "${file}.xz.enc" "${ENC_PASS}" && _sum "${file}.xz.enc" \
+    _dump "${i}" "${file}" && _pack "${file}" && _enc "${file}" "${ENC_PASS}" && _sum "${file}" \
       && _mail "$( hostname -f ) / SQL: ${i}" "The '${i}' database is saved in the file '${file}'!" 'SUCCESS'
   done
 }
@@ -129,30 +128,34 @@ _pgsql() {
     --clean --if-exists --no-owner --no-privileges --quote-all-identifiers
 }
 
-_xz() {
+_pack() {
   local file; file="${1}"
   xz "${file}"
 }
 
 _enc() {
   (( ! "${ENC_ON}" )) && return 0;
-  local in; in="${1}"
-  local out; out="${2}"
-  local pass; pass="${3}"
+  local in; in="${1}.xz"
+  local out; out="${in}.enc"
+  local pass; pass="${2}"
   openssl enc -aes-256-cbc -salt -pbkdf2 -in "${in}" -out "${out}" -pass "pass:${pass}" && rm -f "${in}"
 }
 
 _sum() {
   (( ! "${SUM_ON}" )) && return 0;
-  local file; file="${1}"
-  sha256sum "${file}" | sed 's| .*/|  |g' | tee "${file}.sum" > '/dev/null'
+  local in; in="${1}.xz"; (( "${ENC_ON}" )) && in="${1}.xz.enc"
+  local out; out="${in}.sum"
+  sha256sum "${in}" | sed 's| .*/|  |g' | tee "${out}" > '/dev/null'
 }
 
 _mail() {
   (( ! "${MAIL_ON}" )) && return 0;
+  local subj; subj="${1}"
+  local body; body="${2}"
+  local status; status="${3}"
   local id; id="#ID:$( hostname -f ):$( dmidecode -s system-uuid )"
-  local type; type="#TYPE:BACKUP:${3}"
-  printf '%s\n\n-- \n%s\n%s' "${2}" "${id^^}" "${type^^}" | mail -s "${1}" "${MAIL_TO}"
+  local type; type="#TYPE:BACKUP:${status}"
+  printf '%s\n\n-- \n%s\n%s' "${body}" "${id^^}" "${type^^}" | mail -s "${subj}" "${MAIL_TO}"
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
