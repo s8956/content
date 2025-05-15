@@ -29,6 +29,7 @@ SYNC_HOST="${SYNC_HOST:?}"; readonly SYNC_HOST
 SYNC_USER="${SYNC_USER:?}"; readonly SYNC_USER
 SYNC_PASS="${SYNC_PASS:?}"; readonly SYNC_PASS
 SYNC_DST="${SYNC_DST:?}"; readonly SYNC_DST
+SUM_ON="${SUM_ON:?}"; readonly SUM_ON
 ENC_ON="${ENC_ON:?}"; readonly ENC_ON
 ENC_PASS="${ENC_PASS:?}"; readonly ENC_PASS
 MAIL_ON="${MAIL_ON:?}"; readonly MAIL_ON
@@ -55,7 +56,8 @@ sql_backup() {
     local dir; dir="${SQL_DATA}/$( _dir )"
     local file; file="${i}.${id}.${ts}.sql"
     [[ ! -d "${dir}" ]] && mkdir -p "${dir}"; cd "${dir}" || exit 1
-    _dump "${i}" "${file}" && _pack "${file}" && _enc "${file}.xz" "${ENC_PASS}" \
+    _dump "${i}" "${file}" && _xz "${file}" \
+      && _enc "${file}.xz" "${file}.xz.enc" "${ENC_PASS}" && _sum "${file}.xz.enc" \
       && _mail "$( hostname -f ) / SQL: ${i}" "The '${i}' database is saved in the file '${file}'!" 'SUCCESS'
   done
 }
@@ -127,16 +129,23 @@ _pgsql() {
     --clean --if-exists --no-owner --no-privileges --quote-all-identifiers
 }
 
-_pack() {
+_xz() {
   local file; file="${1}"
   xz "${file}"
 }
 
 _enc() {
   (( ! "${ENC_ON}" )) && return 0;
+  local in; in="${1}"
+  local out; out="${2}"
+  local pass; pass="${3}"
+  openssl enc -aes-256-cbc -salt -pbkdf2 -in "${in}" -out "${out}" -pass "pass:${pass}" && rm -f "${in}"
+}
+
+_sum() {
+  (( ! "${SUM_ON}" )) && return 0;
   local file; file="${1}"
-  local pass; pass="${2}"
-  openssl enc -aes-256-cbc -salt -pbkdf2 -in "${file}" -out "${file}.enc" -pass "pass:${pass}" && rm -f "${file}"
+  sha256sum "${file}" | sed 's| .*/|  |g' | tee "${file}.sum" > '/dev/null'
 }
 
 _mail() {
