@@ -31,6 +31,7 @@ SYNC_PASS="${SYNC_PASS:?}"; readonly SYNC_PASS
 SYNC_DST="${SYNC_DST:?}"; readonly SYNC_DST
 ENC_ON="${ENC_ON:?}"; readonly ENC_ON
 ENC_PASS="${ENC_PASS:?}"; readonly ENC_PASS
+MAIL_ON="${MAIL_ON:?}"; readonly MAIL_ON
 MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 
 # -------------------------------------------------------------------------------------------------------------------- #
