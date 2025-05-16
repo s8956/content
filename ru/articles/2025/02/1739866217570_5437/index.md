@@ -389,7 +389,7 @@ apt purge --yes p7zip && apt install --yes -t 'stable-backports' 7zip 7zip-rar
 - Генерация DKIM записи (длина ключа `1024`):
 
 ```bash
-d='example.com'; p="/var/lib/dkim/${d}.pem"; amavisd genrsa "${p}" 1024 && chown amavis:amavis "${p}" && chmod 0400 "${p}"
+d='example.com'; f="/var/lib/dkim/${d}.pem"; amavisd genrsa "${f}" 1024 && chown amavis:amavis "${f}" && chmod 0400 "${f}"
 ```
 
 ### ClamAV
