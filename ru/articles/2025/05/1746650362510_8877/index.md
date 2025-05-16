@@ -64,8 +64,17 @@ apt install --yes sshpass
 ```
 
 - Скопировать файлы `app.sql.backup.conf` и `app.sql.backup.sh` в директорию `/root/apps/sql/`.
-- Указать бит выполнения для `*.sh` скриптов: `chmod +x /root/apps/sql/*.sh`.
+
+```bash
+f=('app.sql.backup.conf' 'app.sql.backup.sh'); d='/root/apps/sql'; s='https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${s}/${i}"; done && chmod +x "${d}"/*.sh
+```
+
 - Скопировать файл `app_sql_backup` в директорию `/etc/cron.d/`.
+
+```bash
+f=('app_sql_backup'); d='/etc/cron.d'; s='https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${s}/${i}"; done
+```
+
 - Настроить параметры скрипта в файле `app.sql.backup.conf`.
 
 ### MariaDB

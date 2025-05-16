@@ -83,7 +83,7 @@ apt update && apt install --yes mariadb-server && systemctl stop mariadb.service
 - Скачать файлы локальной конфигурации в `/etc/mysql/mariadb.conf.d/`:
 
 ```bash
-f=('server' 'mariadb-dump'); d='/etc/mysql/mariadb.conf.d'; p='https://lib.onl/ru/2025/02/0068df20-232a-55a2-a487-52dc746a4f47'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.cnf" "${p}/${i}.cnf"; done
+f=('server' 'mariadb-dump'); d='/etc/mysql/mariadb.conf.d'; s='https://lib.onl/ru/2025/02/0068df20-232a-55a2-a487-52dc746a4f47'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.cnf" "${s}/${i}.cnf"; done
 ```
 
 - Удалить файлы в директории `/var/lib/mysql` и инициализировать стандартные базы данных:

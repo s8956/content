@@ -75,7 +75,7 @@ apt update && apt install --yes iptables docker-ce docker-ce-cli containerd.io d
 - Скачать файл конфигурации службы `daemon.json` в `/etc/docker/`:
 
 ```bash
-f=('daemon'); d='/etc/docker'; p='https://lib.onl/ru/2025/02/654d7f55-10b0-58e0-a57c-26e445b44ab2'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.json" "${p}/${i}.json"; done
+f=('daemon'); d='/etc/docker'; s='https://lib.onl/ru/2025/02/654d7f55-10b0-58e0-a57c-26e445b44ab2'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.json" "${s}/${i}.json"; done
 ```
 
 - Перезапустить службу:

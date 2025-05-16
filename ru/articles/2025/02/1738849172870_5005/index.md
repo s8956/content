@@ -85,7 +85,7 @@ apt update && apt install --yes graylog-server
 - Скачать файл основной конфигурации `server.conf` в `/etc/graylog/server/`:
 
 ```bash
-f=('server'); d='/etc/graylog/server'; p='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('server'); d='/etc/graylog/server'; s='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${s}/${i}.conf"; done
 ```
 
 - Создать пароль для `password_secret`:
@@ -106,5 +106,5 @@ echo -n 'Enter Password: ' && head -1 < '/dev/stdin' | tr -d '\n' | sha256sum | 
 - Скачать файл сайта `graylog-ssl.conf` в `/etc/angie/http.d/`:
 
 ```bash
-f=('graylog-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('graylog-ssl'); d='/etc/angie/http.d'; s='https://lib.onl/ru/2025/02/21804a64-d47a-5563-a050-47029e5cb5a3'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${s}/${i}.conf"; done
 ```

@@ -81,5 +81,5 @@ apt update && apt install --yes rsyslog
 - Скачать файлы локальной конфигурации в `/etc/rsyslog.d/`:
 
 ```bash
-f=('rsyslog'); d='/etc/rsyslog.d'; p='https://lib.onl/ru/2025/02/a931d52d-3358-57f7-8c66-b2bad6d3dcac'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${p}/${i}.conf"; done
+f=('rsyslog'); d='/etc/rsyslog.d'; s='https://lib.onl/ru/2025/02/a931d52d-3358-57f7-8c66-b2bad6d3dcac'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${s}/${i}.conf"; done
 ```

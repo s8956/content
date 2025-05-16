@@ -83,7 +83,7 @@ apt update && apt install --yes mongodb-org
 - Скачать файл основной конфигурации `mongod.conf` в `/etc/`:
 
 ```bash
-f=('mongod'); d='/etc'; p='https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('mongod'); d='/etc'; s='https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f27ea376109'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${s}/${i}.conf"; done
 ```
 
 ### Включение авторизации

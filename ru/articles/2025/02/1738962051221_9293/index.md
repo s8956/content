@@ -73,7 +73,7 @@ echo -e "X-Repolib-Name: Node.js\nTypes: deb\nURIs: https://deb.nodesource.com/n
 - Скачать файлы предпочтений в `/etc/apt/preferences.d/`:
 
 ```bash
-f=('nodejs' 'nsolid'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
+f=('nodejs' 'nsolid'); d='/etc/apt/preferences.d'; s='https://lib.onl/ru/2025/02/138218c7-d9a9-5eeb-a4cf-31ba8dc24896'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${s}/${i}.pref"; done
 ```
 
 ## Установка

@@ -75,17 +75,17 @@ apt update && apt install --yes angie angie-module-brotli angie-module-zstd
 - Скачать файл основной конфигурации `angie.conf` в `/etc/angie/`:
 
 ```bash
-f=('angie'); d='/etc/angie'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('angie'); d='/etc/angie'; s='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${s}/${i}.conf"; done
 ```
 
 - Скачать файлы локальной конфигурации модулей в `/etc/angie/conf.d/`:
 
 ```bash
-f=('http.acme' 'http.brotli' 'http.core' 'http.gzip' 'http.headers' 'http.proxy' 'http.real_ip' 'http.ssl' 'http.v3' 'http.zstd'); d='/etc/angie/conf.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; [[ ! -d "${d}" ]] && mkdir "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${p}/module.${i}.conf"; done
+f=('http.acme' 'http.brotli' 'http.core' 'http.gzip' 'http.headers' 'http.proxy' 'http.real_ip' 'http.ssl' 'http.v3' 'http.zstd'); d='/etc/angie/conf.d'; s='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; [[ ! -d "${d}" ]] && mkdir "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${s}/module.${i}.conf"; done
 ```
 
 - Скачать файлы стандартных сайтов (`80` и `443`) в `/etc/angie/http.d/`:
 
 ```bash
-f=('default' 'default-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${p}/http.${i}.conf"; done
+f=('default' 'default-ssl'); d='/etc/angie/http.d'; s='https://lib.onl/ru/2025/02/b825cd19-f0f5-5a63-acb2-00784311b738'; for i in "${f[@]}"; do [[ -f "${d}/${i}.conf" && ! -f "${d}/${i}.conf.orig" ]] && mv "${d}/${i}.conf" "${d}/${i}.conf.orig"; curl -fsSLo "${d}/${i}.conf" "${s}/http.${i}.conf"; done
 ```

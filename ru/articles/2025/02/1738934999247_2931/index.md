@@ -81,5 +81,5 @@ f='/etc/redis/redis.conf'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 - Скачать файлы локальной конфигурации в `/etc/redis/conf.d/`:
 
 ```bash
-f=('redis'); d='/etc/redis/conf.d'; p='https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263'; [[ ! -d "${d}" ]] && mkdir "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${p}/${i}.conf"; done
+f=('redis'); d='/etc/redis/conf.d'; s='https://lib.onl/ru/2025/02/0b81ff23-9991-59cc-8c64-370b86ad2263'; [[ ! -d "${d}" ]] && mkdir "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${s}/${i}.conf"; done
 ```

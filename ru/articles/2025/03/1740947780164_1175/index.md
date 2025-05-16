@@ -73,7 +73,7 @@ draft: 1
 - Скачать файлы предпочтений в `/etc/apt/preferences.d/`:
 
 ```bash
-f=('alvistack'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/03/dc9141c4-2dd5-54cf-b40b-8468694b9250'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
+f=('alvistack'); d='/etc/apt/preferences.d'; s='https://lib.onl/ru/2025/03/dc9141c4-2dd5-54cf-b40b-8468694b9250'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${s}/${i}.pref"; done
 ```
 
 ## Установка

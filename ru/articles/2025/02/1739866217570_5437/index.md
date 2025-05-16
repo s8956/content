@@ -332,7 +332,7 @@ cd '/opt/www/roundcubemail' && ./bin/updatedb.sh --package='roundcube' --dir='SQ
 RoundCube использует верификацию адресов электронной почты при помощи регулярного выражения. Если RoundCube разворачивается в организации с односимвольной доменной зоной, то он не сможет воспринимать подобный домен в качестве валидного и, соответственно, адреса электронной почты в этом домене для него будут недействительными. Исправить подобную "особенность" можно при помощи следующей команды:
 
 ```bash
-f=('js/common.js' 'js/common.min.js' 'lib/Roundcube/rcube_string_replacer.php'); p='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${p}/${i}" "${p}/${i}.orig" && sed -i 's|{2,}|{1,}|g' "${p}/${i}"; done
+f=('js/common.js' 'js/common.min.js' 'lib/Roundcube/rcube_string_replacer.php'); d='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${d}/${i}" "${d}/${i}.orig" && sed -i 's|{2,}|{1,}|g' "${d}/${i}"; done
 ```
 {{< /alert >}}
 
@@ -340,7 +340,7 @@ f=('js/common.js' 'js/common.min.js' 'lib/Roundcube/rcube_string_replacer.php');
 RoundCube может работать на новой версии PHP, но при этом выдавать ошибки вида `Depecrecation in...`. Ничего страшного в этом нет, это информационные сообщения о том, что в будущих выпусках PHP данная функция будет исключена. Чтобы скрыть замусоривание журнала подобными ошибками, можно поменять конфигурационный массив в файле `./program/lib/Roundcube/bootstrap.php`:
 
 ```bash
-f=('lib/Roundcube/bootstrap.php'); p='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${p}/${i}" "${p}/${i}.orig" && sed -i 's|E_ALL \& ~E_NOTICE \& ~E_STRICT|E_ALL \& ~E_DEPRECATED \& ~E_NOTICE \& ~E_STRICT|g' "${p}/${i}"; done
+f=('lib/Roundcube/bootstrap.php'); d='/opt/www/roundcubemail/program'; for i in "${f[@]}"; do cp "${d}/${i}" "${d}/${i}.orig" && sed -i 's|E_ALL \& ~E_NOTICE \& ~E_STRICT|E_ALL \& ~E_DEPRECATED \& ~E_NOTICE \& ~E_STRICT|g' "${d}/${i}"; done
 ```
 {{< /alert >}}
 

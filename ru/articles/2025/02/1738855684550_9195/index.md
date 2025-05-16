@@ -84,7 +84,7 @@ f='/etc/gitlab/gitlab.rb'; [[ -f "${f}" && ! -f "${f}.orig" ]] && mv "${f}" "${f
 - Скачать файл локальной конфигурации в `/etc/gitlab/`:
 
 ```bash
-f=('gitlab'); d='/etc/gitlab'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local.rb" "${p}/${i}.rb"; done
+f=('gitlab'); d='/etc/gitlab'; s='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.local.rb" "${s}/${i}.rb"; done
 ```
 
 ## Миграция
@@ -95,7 +95,7 @@ f=('gitlab'); d='/etc/gitlab'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-
 - Скачать файл сайта `gitlab-ssl.conf` в `/etc/angie/http.d/`:
 
 ```bash
-f=('gitlab-ssl'); d='/etc/angie/http.d'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/${i}.conf"; done
+f=('gitlab-ssl'); d='/etc/angie/http.d'; s='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${s}/${i}.conf"; done
 ```
 
 ### PostgreSQL
@@ -157,7 +157,7 @@ gitlab_rails['db_password'] = '*****'
 - Скачать и распаковать генератор:
 
 ```bash
-f=('license.gen'); d="${HOME}"; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.tar.xz" "${p}/${i}.tar.xz" && tar -xJf "${d}/${i}.tar.xz"; done
+f=('license.gen'); d="${HOME}"; s='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.tar.xz" "${s}/${i}.tar.xz" && tar -xJf "${d}/${i}.tar.xz"; done
 ```
 
 - Запустить создание образа:
@@ -177,7 +177,7 @@ docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='Git
 - Скачать открытый ключ в директорию `/opt/gitlab/embedded/service/gitlab-rails` и заменить им оригинальный файл `license_encryption_key.pub`:
 
 ```bash
-f=('public'); d='/opt/gitlab/embedded/service/gitlab-rails'; p='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; [[ -f "${d}/.license_encryption_key.pub" && ! -f "${d}/.license_encryption_key.pub.orig" ]] && mv "${d}/.license_encryption_key.pub" "${d}/.license_encryption_key.pub.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/.license_encryption_key.pub" "${p}/${i}.key"
+f=('public'); d='/opt/gitlab/embedded/service/gitlab-rails'; s='https://lib.onl/ru/2025/02/f2d03575-8435-5182-925d-ac2a22100055'; [[ -f "${d}/.license_encryption_key.pub" && ! -f "${d}/.license_encryption_key.pub.orig" ]] && mv "${d}/.license_encryption_key.pub" "${d}/.license_encryption_key.pub.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/.license_encryption_key.pub" "${s}/${i}.key"
 ```
 
 - Установить [файл лицензии](license.key) в Admin / Settings / General / Add License.

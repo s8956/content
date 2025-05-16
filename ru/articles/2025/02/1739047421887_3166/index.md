@@ -77,5 +77,5 @@ apt update && apt install --yes syslog-ng
 - Создать файлы локальной конфигурации в `/etc/syslog-ng/conf.d/`:
 
 ```bash
-f=('syslog-ng'); d='/etc/syslog-ng/conf.d'; p='https://lib.onl/ru/2025/02/24f7d6b6-531f-5283-b693-4ca9d034f604'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${p}/${i}.conf"; done
+f=('syslog-ng'); d='/etc/syslog-ng/conf.d'; s='https://lib.onl/ru/2025/02/24f7d6b6-531f-5283-b693-4ca9d034f604'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i}.local.conf" "${s}/${i}.conf"; done
 ```

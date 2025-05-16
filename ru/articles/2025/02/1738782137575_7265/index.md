@@ -107,11 +107,11 @@ curl -fsSLo '/etc/apt/keyrings/php.gpg' 'https://ftp.mpi-inf.mpg.de/mirrors/linu
 - Скачать файлы локальной конфигурации в `/etc/php/<VER>/fpm/conf.d/`:
 
 ```bash
-[[ ! -v 'PHP_VER' ]] && return; f=('php' 'php.cgi' 'php.date' 'php.mail' 'php.mbstring'); d="/etc/php/${PHP_VER}/fpm/conf.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i##*.}.local.ini" "${p}/${i}.ini"; done
+[[ ! -v 'PHP_VER' ]] && return; f=('php' 'php.cgi' 'php.date' 'php.mail' 'php.mbstring'); d="/etc/php/${PHP_VER}/fpm/conf.d"; s='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; for i in "${f[@]}"; do curl -fsSLo "${d}/90-${i##*.}.local.ini" "${s}/${i}.ini"; done
 ```
 
 - Скачать файл конфигурации пула `main` в `/etc/php/<VER>/fpm/pool.d/`:
 
 ```bash
-[[ ! -v 'PHP_VER' ]] && return; f=('main'); d="/etc/php/${PHP_VER}/fpm/pool.d"; p='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; [[ ! -d '/var/log/php-fpm' ]] && mkdir '/var/log/php-fpm'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${p}/pool.${i}.conf"; done
+[[ ! -v 'PHP_VER' ]] && return; f=('main'); d="/etc/php/${PHP_VER}/fpm/pool.d"; s='https://lib.onl/ru/2025/02/9bd1261d-3842-5859-8202-2e1d7a5ba9f4'; [[ ! -d '/var/log/php-fpm' ]] && mkdir '/var/log/php-fpm'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.conf" "${s}/pool.${i}.conf"; done
 ```

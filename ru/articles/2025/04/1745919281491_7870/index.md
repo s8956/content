@@ -87,7 +87,7 @@ sudo -u 'clamav' '/var/lib/fangfrisch/venv/bin/fangfrisch' --conf '/etc/fangfris
 - Скачать файлы сервиса и таймера в `/etc/systemd/system` и обновить список сервисов `systemd`:
 
 ```bash
-f=('fangfrisch.service' 'fangfrisch.timer'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/04/96bdcb5c-a58b-58ae-9e6b-536b49bf1c51'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${p}/${i}"; done; systemctl daemon-reload
+f=('fangfrisch.service' 'fangfrisch.timer'); d='/etc/systemd/system'; s='https://lib.onl/ru/2025/04/96bdcb5c-a58b-58ae-9e6b-536b49bf1c51'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${s}/${i}"; done; systemctl daemon-reload
 ```
 
 - Включить и запустить таймер `fangfrisch.timer`:

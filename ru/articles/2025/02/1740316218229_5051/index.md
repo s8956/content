@@ -65,7 +65,7 @@ echo -e "X-Repolib-Name: Syncthing\nTypes: deb\nURIs: https://apt.syncthing.net\
 - Скачать файл предпочтений `syncthing.pref`:
 
 ```bash
-f=('syncthing'); d='/etc/apt/preferences.d'; p='https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${p}/${i}.pref"; done
+f=('syncthing'); d='/etc/apt/preferences.d'; s='https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.pref" "${s}/${i}.pref"; done
 ```
 
 ## Установка
@@ -81,7 +81,7 @@ apt update && apt install --yes syncthing
 - Скачать юнит для запуска {{< tag "Syncthing" >}} под обычным пользователем:
 
 ```bash
-f=('syncthing@'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.service" "${p}/${i}.service"; done
+f=('syncthing@'); d='/etc/systemd/system'; s='https://lib.onl/ru/2025/02/261ad6ab-a4a5-57f9-aae2-da4d1095e6fc'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}.service" "${s}/${i}.service"; done
 ```
 
 - Запустить сервис {{< tag "Syncthing" >}} под пользователем `USER`:

@@ -84,7 +84,7 @@ u='clamav'; d=("/run/${u}" "/var/log/${u}"); for i in "${d[@]}"; do install -d -
 - Скачать файлы сервисов для `systemd`:
 
 ```bash
-f=('clamonacc.service' 'daemon.service' 'freshclam.service'); d='/etc/systemd/system'; p='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/clamav-${i}" "${p}/clamav-${i}"; done
+f=('clamonacc.service' 'daemon.service' 'freshclam.service'); d='/etc/systemd/system'; s='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/clamav-${i}" "${s}/clamav-${i}"; done
 ```
 
 ## Настройка
@@ -92,7 +92,7 @@ f=('clamonacc.service' 'daemon.service' 'freshclam.service'); d='/etc/systemd/sy
 - Скачать файлы конфигурации `clamd.conf` и `freshclam.conf`:
 
 ```bash
-f=('clamd.conf' 'freshclam.conf'); d='/usr/local/etc'; p='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${p}/${i}"; done
+f=('clamd.conf' 'freshclam.conf'); d='/usr/local/etc'; s='https://lib.onl/ru/2025/04/d5729fa5-d717-56c9-af96-45530459d0f8'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${s}/${i}"; done
 ```
 
 - Запустить скачивание и обновление баз данных:
