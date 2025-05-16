@@ -57,38 +57,32 @@ draft: 0
 
 ## Установка
 
-- Установить пакеты:
+- Экспортировать параметры в переменные окружения и установить необходимые пакеты:
 
 ```bash
-apt install --yes sshpass
+export LIB_SRC='https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423' && apt install --yes sshpass
 ```
 
 - Скопировать файлы `app.sql.backup.conf` и `app.sql.backup.sh` в директорию `/root/apps/sql/`.
 
 ```bash
-f=('app.sql.backup.conf' 'app.sql.backup.sh'); d='/root/apps/sql'; s='https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${s}/${i}"; done && chmod +x "${d}"/*.sh
+f=('app.sql.backup.conf' 'app.sql.backup.sh'); d='/root/apps/sql'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
 ```
 
 - Скопировать файл `app_sql_backup` в директорию `/etc/cron.d/`.
 
 ```bash
-f=('app_sql_backup'); d='/etc/cron.d'; s='https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${s}/${i}"; done
+f=('app_sql_backup'); d='/etc/cron.d'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done
 ```
 
 - Настроить параметры скрипта в файле `app.sql.backup.conf`.
 
 ### MariaDB
 
-- Создать пользователя `backup@127.0.0.1` с паролем `PASSWORD`:
+- Создать пользователя `backup@127.0.0.1` с паролем `PASSWORD` и дать ему разрешения на все базы данных:
 
 ```bash
-echo "create user 'backup'@'127.0.0.1' identified by 'PASSWORD';" | mariadb --user='root' --password
-```
-
-- Дать все разрешения на все базы данных пользователю `backup@127.0.0.1`:
-
-```bash
-echo "grant all on *.* to 'backup'@'127.0.0.1'; flush privileges;" | mariadb --user='root' --password
+echo "create user 'backup'@'127.0.0.1' identified by 'PASSWORD'; grant all on *.* to 'backup'@'127.0.0.1'; flush privileges;" | mariadb --user='root' --password
 ```
 
 ### PostgreSQL

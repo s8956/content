@@ -13,6 +13,7 @@ categories:
   - 'security'
   - 'terminal'
   - 'inDev'
+  - 'scripts'
 tags:
   - 'debian'
   - 'acme'
