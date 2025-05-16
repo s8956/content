@@ -60,13 +60,13 @@ export LIB_SRC='https://lib.onl/ru/2024/10/0a633c87-935c-54ba-bedf-9c95152b6b51'
 - Скопировать файлы `app.asterisk.room_close.conf` и `app.asterisk.room_close.sh` в директорию `/root/apps/asterisk/`.
 
 ```bash
-f=('app.asterisk.room_close.conf' 'app.asterisk.room_close.sh'); d='/root/apps/asterisk'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
+f=('app.asterisk.room_close.conf' 'app.asterisk.room_close.sh'); d='/root/apps/asterisk'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
 ```
 
 - Скопировать файл `app_asterisk_room_close` в директорию `/etc/cron.d/`.
 
 ```bash
-f=('app_asterisk_room_close'); d='/etc/cron.d'; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done
+f=('app_asterisk_room_close'); d='/etc/cron.d'; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done
 ```
 
 - Настроить параметры скрипта в файле `app.asterisk.room_close.conf`.
