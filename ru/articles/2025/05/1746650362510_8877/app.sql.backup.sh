@@ -45,7 +45,7 @@ MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 
 run() {
   (( ! "${SQL_ON}" )) && return 0
-  sql_backup && fs_sync && fs_cleanup
+  sql_backup && fs_sync && fs_clean
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -83,11 +83,11 @@ fs_sync() {
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# FS: CLEANUP
+# FS: CLEAN
 # Cleaning the file system.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-fs_cleanup() {
+fs_clean() {
   find "${SQL_DATA}" -type 'f' -mtime "+${SQL_DAYS:-30}" -print0 | xargs -0 rm -f --
   find "${SQL_DATA}" -type 'd' -empty -delete
 }
