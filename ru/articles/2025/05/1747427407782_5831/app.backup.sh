@@ -1,13 +1,13 @@
 #!/usr/bin/env -S bash -eu
 # -------------------------------------------------------------------------------------------------------------------- #
-# SQL DATABASE BACKUP.
-# Backup of PostgreSQL and MariaDB databases.
+#
+#
 # -------------------------------------------------------------------------------------------------------------------- #
 # @package    Bash
 # @author     Kai Kimera
 # @license    MIT
 # @version    0.1.0
-# @link       https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423/
+# @link
 # -------------------------------------------------------------------------------------------------------------------- #
 
 (( EUID != 0 )) && { echo >&2 'This script should be run as root!'; exit 1; }
@@ -19,11 +19,10 @@ SRC_NAME="$( basename "$( readlink -f "${BASH_SOURCE[0]}" )" )" # Source name.
 . "${SRC_DIR}/${SRC_NAME%.*}.conf" # Loading configuration file.
 
 # Parameters.
-SQL_ON="${SQL_ON:?}"; readonly SQL_ON
-SQL_DATA="${SQL_DATA:?}"; readonly SQL_DATA
-SQL_USER="${SQL_USER:?}"; readonly SQL_USER
-SQL_PASS="${SQL_PASS:?}"; readonly SQL_PASS
-SQL_DB=("${SQL_DB[@]:?}"); readonly SQL_DB
+FS_ON="${FS_ON:?}"; readonly FS_ON
+FS_SRC=("${FS_SRC[@]}"); readonly FS_SRC
+FS_DST="${FS_DST:?}"; readonly FS_DST
+ENC_PASS="${ENC_PASS:?}"; readonly ENC_PASS
 SYNC_ON="${SYNC_ON:?}"; readonly SYNC_ON
 SYNC_HOST="${SYNC_HOST:?}"; readonly SYNC_HOST
 SYNC_USER="${SYNC_USER:?}"; readonly SYNC_USER
@@ -33,9 +32,6 @@ SYNC_DEL="${SYNC_DEL:?}"; readonly SYNC_DEL
 SYNC_RSF="${SYNC_RSF:?}"; readonly SYNC_RSF
 SYNC_PED="${SYNC_PED:?}"; readonly SYNC_PED
 SYNC_CVS="${SYNC_CVS:?}"; readonly SYNC_CVS
-SUM_ON="${SUM_ON:?}"; readonly SUM_ON
-ENC_ON="${ENC_ON:?}"; readonly ENC_ON
-ENC_PASS="${ENC_PASS:?}"; readonly ENC_PASS
 MAIL_ON="${MAIL_ON:?}"; readonly MAIL_ON
 MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 
@@ -44,30 +40,26 @@ MAIL_TO="${MAIL_TO:?}"; readonly MAIL_TO
 # -------------------------------------------------------------------------------------------------------------------- #
 
 run() {
-  (( ! "${SQL_ON}" )) && return 0
-  sql_backup && fs_sync && fs_clean
+  (( ! "${FS_ON}" )) && return 0
+  fs_backup && fs_sync && fs_clean
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# SQL: BACKUP
-# Creating a database dump.
+# FS: BACKUP
 # -------------------------------------------------------------------------------------------------------------------- #
 
-sql_backup() {
-  local id; id="$( _id )"
-  for i in "${SQL_DB[@]}"; do
-    local ts; ts="$( _timestamp )"
-    local dir; dir="${SQL_DATA}/$( _dir )"
-    local file; file="${i}.${id}.${ts}.sql"
-    [[ ! -d "${dir}" ]] && mkdir -p "${dir}"; cd "${dir}" || exit 1
-    _dump "${i}" "${file}" && _pack "${file}" && _enc "${file}" "${ENC_PASS}" && _sum "${file}" \
-      && _mail "$( hostname -f ) / SQL: ${i}" "The '${i}' database is saved in the file '${file}'!" 'SUCCESS'
-  done
+fs_backup() {
+  local ts; ts="$( _timestamp )"
+  local dir; dir="${FS_DST}/$( _dir )"
+  local file; file="$( hostname -f ).${ts}.tar.xz.enc"
+  for i in "${!FS_SRC[@]}"; do [[ -e "${FS_SRC[i]}" ]] || unset 'FS_SRC[i]'; done
+  [[ ! -d "${dir}" ]] && mkdir -p "${dir}"; cd "${dir}" || exit 1
+  tar -cf - "${FS_SRC[@]}" | xz -v | _enc "${dir}/${file}" && _sum "${dir}/${file}"
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # FS: SYNC
-# Sending database dumps to remote storage.
+# Sending file system backup to remote storage.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 fs_sync() {
@@ -78,7 +70,7 @@ fs_sync() {
   (( "${SYNC_PED}" )) && opts+=('--prune-empty-dirs')
   (( "${SYNC_CVS}" )) && opts+=('--cvs-exclude')
   rsync "${opts[@]}" -e "sshpass -p '${SYNC_PASS}' ssh -p ${SYNC_PORT:-22}" \
-    "${SQL_DATA}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/" \
+    "${FS_DST}/" "${SYNC_USER:-root}@${SYNC_HOST}:${SYNC_DST}/" \
     && _mail "$( hostname -f ) / SYNC" 'The database files are synchronized!' 'SUCCESS'
 }
 
@@ -88,17 +80,13 @@ fs_sync() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 fs_clean() {
-  find "${SQL_DATA}" -type 'f' -mtime "+${SQL_DAYS:-30}" -print0 | xargs -0 rm -f --
-  find "${SQL_DATA}" -mindepth 1 -type 'd' -not -name 'lost+found' -empty -delete
+  find "${FS_DST}" -type 'f' -mtime "+${FS_DAYS:-30}" -print0 | xargs -0 rm -f --
+  find "${FS_DST}" -mindepth 1 -type 'd' -not -name 'lost+found' -empty -delete
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # ------------------------------------------------< COMMON FUNCTIONS >------------------------------------------------ #
 # -------------------------------------------------------------------------------------------------------------------- #
-
-_id() {
-  date -u '+%s'
-}
 
 _timestamp() {
   date -u '+%Y-%m-%d.%H-%M-%S'
@@ -108,63 +96,16 @@ _dir() {
   echo "$( date -u '+%Y' )/$( date -u '+%m' )/$( date -u '+%d' )"
 }
 
-_dump() {
-  local dbms; dbms="${1%%.*}"
-  local db; db="${1##*.}"
-  local file; file="${2}"
-  case "${dbms}" in
-    'mysql') _mysql "${db}" "${file}" ;;
-    'pgsql') _pgsql "${db}" "${file}" ;;
-    *) echo >&2 'DBMS does not exist!'; exit 1 ;;
-  esac
-}
-
-_mysql() {
-  local db; db="${1}"
-  local file; file="${2}"
-  local cmd; cmd='mariadb-dump'; [[ "$( command -v 'mysqldump' )" ]] && cmd='mysqldump'
-  "${cmd}" --host="${SQL_HOST:-127.0.0.1}" --port="${SQL_PORT:-3306}" \
-    --user="${SQL_USER:-root}" --password="${SQL_PASS}" \
-    --single-transaction --skip-lock-tables "${db}" --result-file="${file}"
-}
-
-_pgsql() {
-  local db; db="${1}"
-  local file; file="${2}"
-  PGPASSWORD="${SQL_PASS}" pg_dump --host="${SQL_HOST:-127.0.0.1}" --port="${SQL_PORT:-5432}" \
-    --username="${SQL_USER:-postgres}" --no-password \
-    --dbname="${db}" --file="${file}" \
-    --clean --if-exists --no-owner --no-privileges --quote-all-identifiers
-}
-
-_pack() {
-  local file; file="${1}"
-  xz "${file}"
-}
-
 _enc() {
-  (( ! "${ENC_ON}" )) && return 0;
-  local in; in="${1}.xz"
-  local out; out="${in}.enc"
-  local pass; pass="${2}"
-  openssl enc -aes-256-cbc -salt -pbkdf2 -in "${in}" -out "${out}" -pass "pass:${pass}" && rm -f "${in}"
+  local out; out="${1}"
+  local pass; pass="${ENC_PASS}"
+  openssl enc -aes-256-cbc -salt -pbkdf2 -out "${out}" -pass "pass:${pass}"
 }
 
 _sum() {
-  (( ! "${SUM_ON}" )) && return 0;
-  local in; in="${1}.xz"; (( "${ENC_ON}" )) && in="${1}.xz.enc"
+  local in; in="${1}"
   local out; out="${in}.sum"
   sha256sum "${in}" | sed 's| .*/|  |g' | tee "${out}" > '/dev/null'
-}
-
-_mail() {
-  (( ! "${MAIL_ON}" )) && return 0;
-  local subj; subj="${1}"
-  local body; body="${2}"
-  local status; status="${3}"
-  local id; id="#ID:$( hostname -f ):$( dmidecode -s system-uuid )"
-  local type; type="#TYPE:BACKUP:${status}"
-  printf '%s\n\n-- \n%s\n%s' "${body}" "${id^^}" "${type^^}" | mail -s "${subj}" "${MAIL_TO}"
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
