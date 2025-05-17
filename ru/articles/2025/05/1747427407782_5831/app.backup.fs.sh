@@ -45,7 +45,7 @@ run() { backup && sync && clean; }
 backup() {
   local ts; ts="$( _timestamp )"
   local tree; tree="${FS_DST}/$( _tree )"
-  local file; file="$( hostname -f ).${ts}.tar.xz.enc"
+  local file; file="$( hostname -f ).${ts}.tar.xz.gpg"
   for i in "${!FS_SRC[@]}"; do [[ -e "${FS_SRC[i]}" ]] || unset 'FS_SRC[i]'; done
   [[ ! -d "${tree}" ]] && mkdir -p "${tree}"; cd "${tree}" || _err "Directory '${tree}' not found!"
   tar -cf - "${FS_SRC[@]}" | xz | _enc "${tree}/${file}" && _sum "${tree}/${file}"
@@ -92,7 +92,10 @@ _tree() {
 _enc() {
   local out; out="${1}"
   local pass; pass="${ENC_PASS}"
-  openssl enc -aes-256-cbc -salt -pbkdf2 -out "${out}" -pass "pass:${pass}"
+  gpg --batch --passphrase "${pass}" --symmetric --output "${out}" \
+    --s2k-cipher-algo "${ENC_S2K_CIPHER:-AES256}" \
+    --s2k-digest-algo "${ENC_S2K_DIGEST:-SHA512}" \
+    --s2k-count "${ENC_S2K_COUNT:-65536}"
 }
 
 _sum() {

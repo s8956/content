@@ -50,7 +50,7 @@ backup() {
   for i in "${SQL_SRC[@]}"; do
     local ts; ts="$( _timestamp )"
     local tree; tree="${SQL_DST}/$( _tree )"
-    local file; file="${i}.${id}.${ts}.sql.xz.enc"
+    local file; file="${i}.${id}.${ts}.sql.xz.gpg"
     [[ ! -d "${tree}" ]] && mkdir -p "${tree}"; cd "${tree}" || _err "Directory '${tree}' not found!"
     _dump "${i}" | xz | _enc "${file}" && _sum "${file}"
   done
@@ -126,7 +126,10 @@ _pgsql() {
 _enc() {
   local out; out="${1}"
   local pass; pass="${ENC_PASS}"
-  openssl enc -aes-256-cbc -salt -pbkdf2 -out "${out}" -pass "pass:${pass}"
+  gpg --batch --passphrase "${pass}" --symmetric --output "${out}" \
+    --s2k-cipher-algo "${ENC_S2K_CIPHER:-AES256}" \
+    --s2k-digest-algo "${ENC_S2K_DIGEST:-SHA512}" \
+    --s2k-count "${ENC_S2K_COUNT:-65536}"
 }
 
 _sum() {
