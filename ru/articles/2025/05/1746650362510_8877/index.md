@@ -17,6 +17,7 @@ tags:
   - 'pgsql'
   - 'postgresql'
   - 'rsync'
+  - 'openssl'
 authors:
   - 'KaiKimera'
 sources:
@@ -63,10 +64,10 @@ draft: 0
 export LIB_SRC='https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423' && apt install --yes sshpass
 ```
 
-- Скопировать файлы `app.backup.sql.conf` и `app.backup.sql.sh` в директорию `/root/apps/sql/`.
+- Скопировать файлы `app.backup.sql.conf` и `app.backup.sql.sh` в директорию `/root/apps/backup/`.
 
 ```bash
-f=('app.backup.sql.conf' 'app.backup.sql.sh'); d='/root/apps/sql'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
+f=('app.backup.sql.conf' 'app.backup.sql.sh'); d='/root/apps/backup'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
 ```
 
 - Скопировать файл `app_backup_sql` в директорию `/etc/cron.d/`.
@@ -111,9 +112,6 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 Некоторые параметры, указанные здесь, отсутствуют в конфигурационном файле. Это означает, что они имеют значения, установленные по умолчанию. Для переопределения этих значений, необходимо добавить отсутствующие параметры в конфигурационный файл.
 {{< /alert >}}
 
-- `SQL_ON` - включение / отключение создание резервных копий баз данных.
-  - `0` - резервная копия базы данных отключена.
-  - `1` - резервная копия базы данных включена.
 - `SQL_SRC` - массив названий баз данных для резервного копирования. Название базы данных должно содержать имя DBMS, разделённое точкой.
   - `mysql` - MySQL / MariaDB.
   - `pgsql` - PostgreSQL.
@@ -123,13 +121,7 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 - `SQL_USER` - имя пользователь для соединения с DBMS. По умолчанию: `root` (`mysql`) / `postgres` (`pgsql`).
 - `SQL_PASS` - пароль для соединения с DBMS. Для PostgreSQL этот параметр не используется, так как пароль пользователя сохраняется в файл `~/.pgpass`.
 - `SQL_DAYS` - дни, по прошествии которых, старые файлы будут удалены. По умолчанию: `30`.
-- `ENC_ON` - включение / отключение функции шифрования.
-  - `0` - шифрование отключено.
-  - `1` - шифрование включено.
 - `ENC_PASS` - секретная фраза для шифрования.
-- `SUM_ON` - включение / отключение функции вычисления хеш-суммы.
-  - `0` - хеш-сумма отключена.
-  - `1` - хеш-сумма включена.
 - `SYNC_ON` - включение / отключение функции синхронизации.
   - `0` - синхронизация отключена.
   - `1` - синхронизация включена.
@@ -150,10 +142,6 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 - `SYNC_CVS` - параметр добавляет опцию `--cvs-exclude`, которая исключает из процесса синхронизации нежелательные элементы, например: `CWRCS`, `SCCS`, `CVS`, `CVS.adm`, `RCSLOG`, `cvslog.*`, `tags`, `TAGS`, `.make.state`, `.nse_depinfo`, `*~`, `#*`, `.#*`, `,*`, `_$*`, `*$`, `*.old`, `*.bak`, `*.BAK`, `*.orig`, `*.rej`, `.del-*`, `*.a`, `*.olb`, `*.o`, `*.obj`, `*.so`, `*.exe`, `*.Z`, `*.elc`, `*.ln`, `core`, `.svn/`, `.git/`, `.bzr/`.
   - `0` - опция отключена.
   - `1` - опция включена.
-- `MAIL_ON` - включение / отключение функции отправки email.
-  - `0` - отправка email отключена.
-  - `1` - отправка email включена.
-- `MAIL_TO` - адрес email для уведомлений.
 
 ### Приложение
 
@@ -163,7 +151,7 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 
 ### Задание
 
-Задание запускает скрипт каждый день в `6:00` (перед рабочим днём) и в `22:00` (после рабочего дня).
+Задание запускает скрипт каждый день в `6:15` (перед рабочим днём) и в `22:15` (после рабочего дня).
 
 {{< file "app_backup_sql" "bash" >}}
 
