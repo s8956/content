@@ -54,7 +54,7 @@ fs_backup() {
   local file; file="$( hostname -f ).${ts}.tar.xz.enc"
   for i in "${!FS_SRC[@]}"; do [[ -e "${FS_SRC[i]}" ]] || unset 'FS_SRC[i]'; done
   [[ ! -d "${dir}" ]] && mkdir -p "${dir}"; cd "${dir}" || exit 1
-  tar -cf - "${FS_SRC[@]}" | xz -v | _enc "${dir}/${file}" && _sum "${dir}/${file}"
+  tar -cf - "${FS_SRC[@]}" | xz | _enc "${dir}/${file}" && _sum "${dir}/${file}"
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #

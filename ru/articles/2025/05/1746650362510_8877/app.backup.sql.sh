@@ -60,7 +60,7 @@ sql_backup() {
     local dir; dir="${SQL_DST}/$( _dir )"
     local file; file="${i}.${id}.${ts}.sql"
     [[ ! -d "${dir}" ]] && mkdir -p "${dir}"; cd "${dir}" || exit 1
-    _dump "${i}" "${file}" && _pack "${file}" && _enc "${file}" && _sum "${file}" \
+    _dump "${i}" "${file}" && xz "${file}" && _enc "${file}" && _sum "${file}" \
       && _mail "$( hostname -f ) / SQL: ${i}" "The '${i}' database is saved in the file '${file}'!" 'SUCCESS'
   done
 }
@@ -135,11 +135,6 @@ _pgsql() {
     --username="${SQL_USER:-postgres}" --no-password \
     --dbname="${db}" --file="${file}" \
     --clean --if-exists --no-owner --no-privileges --quote-all-identifiers
-}
-
-_pack() {
-  local file; file="${1}"
-  xz "${file}"
 }
 
 _enc() {
