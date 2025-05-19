@@ -21,6 +21,7 @@ SRC_NAME="$( basename "$( readlink -f "${BASH_SOURCE[0]}" )" )" # Source name.
 # Parameters.
 FS_SRC=("${FS_SRC[@]}"); readonly FS_SRC
 FS_DST="${FS_DST:?}"; readonly FS_DST
+ENC_ON="${ENC_ON:?}"; readonly ENC_ON
 ENC_PASS="${ENC_PASS:?}"; readonly ENC_PASS
 SYNC_ON="${SYNC_ON:?}"; readonly SYNC_ON
 SYNC_HOST="${SYNC_HOST:?}"; readonly SYNC_HOST
@@ -92,14 +93,18 @@ _tree() {
 _enc() {
   local out; out="${1}"
   local pass; pass="${ENC_PASS}"
-  gpg --batch --passphrase "${pass}" --symmetric --output "${out}" \
-    --s2k-cipher-algo "${ENC_S2K_CIPHER:-AES256}" \
-    --s2k-digest-algo "${ENC_S2K_DIGEST:-SHA512}" \
-    --s2k-count "${ENC_S2K_COUNT:-65536}"
+  if (( "${ENC_ON}" )); then
+    gpg --batch --passphrase "${pass}" --symmetric --output "${out}.gpg" \
+      --s2k-cipher-algo "${ENC_S2K_CIPHER:-AES256}" \
+      --s2k-digest-algo "${ENC_S2K_DIGEST:-SHA512}" \
+      --s2k-count "${ENC_S2K_COUNT:-65536}"
+  else
+    cat < '/dev/stdin' > "${out}"
+  fi
 }
 
 _sum() {
-  local in; in="${1}"
+  local in; in="${1}"; (( "${ENC_ON}" )) && in="${1}.gpg"
   local out; out="${in}.sum"
   sha256sum "${in}" | sed 's| .*/|  |g' | tee "${out}" > '/dev/null'
 }
