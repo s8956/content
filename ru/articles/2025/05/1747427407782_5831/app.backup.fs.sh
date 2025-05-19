@@ -22,6 +22,7 @@ SRC_NAME="$( basename "$( readlink -f "${BASH_SOURCE[0]}" )" )" # Source name.
 FS_SRC=("${FS_SRC[@]}"); readonly FS_SRC
 FS_DST="${FS_DST:?}"; readonly FS_DST
 ENC_ON="${ENC_ON:?}"; readonly ENC_ON
+ENC_APP="${ENC_APP:?}"; readonly ENC_APP
 ENC_PASS="${ENC_PASS:?}"; readonly ENC_PASS
 SYNC_ON="${SYNC_ON:?}"; readonly SYNC_ON
 SYNC_HOST="${SYNC_HOST:?}"; readonly SYNC_HOST
@@ -34,30 +35,97 @@ SYNC_PED="${SYNC_PED:?}"; readonly SYNC_PED
 SYNC_CVS="${SYNC_CVS:?}"; readonly SYNC_CVS
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# INITIALIZATION
+# COMMON: ERROR
 # -------------------------------------------------------------------------------------------------------------------- #
 
-run() { backup && sync && clean; }
+function _err() {
+  echo >&2 "[$( date +'%Y-%m-%dT%H:%M:%S%z' )]: $*"; exit 1
+}
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# FS: BACKUP
+# COMMON: TIMESTAMP
 # -------------------------------------------------------------------------------------------------------------------- #
 
-backup() {
+function _timestamp() {
+  date -u '+%Y-%m-%d.%H-%M-%S'
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# COMMON: DIRECTORY TREE
+# -------------------------------------------------------------------------------------------------------------------- #
+
+function _tree() {
+  echo "$( date -u '+%Y' )/$( date -u '+%m' )/$( date -u '+%d' )"
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# COMMON: ENCRYPTION
+# -------------------------------------------------------------------------------------------------------------------- #
+
+function _gpg() {
+  local out; out="${1}.gpg"
+  local pass; pass="${2}"
+  gpg --batch --passphrase "${pass}" --symmetric --output "${out}" \
+    --s2k-cipher-algo "${ENC_S2K_CIPHER:-AES256}" \
+    --s2k-digest-algo "${ENC_S2K_DIGEST:-SHA512}" \
+    --s2k-count "${ENC_S2K_COUNT:-65536}"
+}
+
+function _ssl() {
+  local out; out="${1}.enc"
+  local pass; pass="${2}"
+  openssl enc -aes-256-cbc -salt -pbkdf2 -out "${out}" -pass "pass:${pass}"
+}
+
+function _enc() {
+  local out; out="${1}"
+  local pass; pass="${ENC_PASS}"
+  if (( "${ENC_ON}" )); then
+    case "${ENC_APP}" in
+      'gpg') _gpg "${out}" "${pass}" ;;
+      'ssl') _ssl "${out}" "${pass}" ;;
+      *) _err 'ENC_APP does not exist!' ;;
+    esac
+  else
+    cat < '/dev/stdin' > "${out}"
+  fi
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# COMMON: CHECKSUM
+# -------------------------------------------------------------------------------------------------------------------- #
+
+function _sum() {
+  local in; in="${1}"
+  if (( "${ENC_ON}" )); then
+    case "${ENC_APP}" in
+      'gpg') in="${1}.gpg" ;;
+      'ssl') in="${1}.enc" ;;
+      *) _err 'ENC_APP does not exist!' ;;
+    esac
+  fi
+  local out; out="${in}.txt"
+  sha256sum "${in}" | sed 's| .*/|  |g' | tee "${out}" > '/dev/null'
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# MAIN: BACKUP FILES
+# -------------------------------------------------------------------------------------------------------------------- #
+
+function backup() {
   local ts; ts="$( _timestamp )"
   local tree; tree="${FS_DST}/$( _tree )"
-  local file; file="$( hostname -f ).${ts}.tar.xz.gpg"
+  local file; file="$( hostname -f ).${ts}.tar.xz"
   for i in "${!FS_SRC[@]}"; do [[ -e "${FS_SRC[i]}" ]] || unset 'FS_SRC[i]'; done
   [[ ! -d "${tree}" ]] && mkdir -p "${tree}"; cd "${tree}" || _err "Directory '${tree}' not found!"
   tar -cf - "${FS_SRC[@]}" | xz | _enc "${tree}/${file}" && _sum "${tree}/${file}"
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# FS: SYNC
-# Sending file system backup to remote storage.
+# MAIN: SYNCHRONIZATION
 # -------------------------------------------------------------------------------------------------------------------- #
 
-sync() {
+function sync() {
   (( ! "${SYNC_ON}" )) && return 0
   local opts; opts=('--archive' '--quiet')
   (( "${SYNC_DEL}" )) && opts+=('--delete')
@@ -69,52 +137,18 @@ sync() {
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# FS: CLEAN
-# Cleaning the file system.
+# MAIN: CLEAN FILESYSTEM
 # -------------------------------------------------------------------------------------------------------------------- #
 
-clean() {
+function clean() {
   find "${FS_DST}" -type 'f' -mtime "+${FS_DAYS:-30}" -print0 | xargs -0 rm -f --
   find "${FS_DST}" -mindepth 1 -type 'd' -not -name 'lost+found' -empty -delete
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# ------------------------------------------------< COMMON FUNCTIONS >------------------------------------------------ #
+# MAIN
 # -------------------------------------------------------------------------------------------------------------------- #
 
-_timestamp() {
-  date -u '+%Y-%m-%d.%H-%M-%S'
-}
-
-_tree() {
-  echo "$( date -u '+%Y' )/$( date -u '+%m' )/$( date -u '+%d' )"
-}
-
-_enc() {
-  local out; out="${1}"
-  local pass; pass="${ENC_PASS}"
-  if (( "${ENC_ON}" )); then
-    gpg --batch --passphrase "${pass}" --symmetric --output "${out}.gpg" \
-      --s2k-cipher-algo "${ENC_S2K_CIPHER:-AES256}" \
-      --s2k-digest-algo "${ENC_S2K_DIGEST:-SHA512}" \
-      --s2k-count "${ENC_S2K_COUNT:-65536}"
-  else
-    cat < '/dev/stdin' > "${out}"
-  fi
-}
-
-_sum() {
-  local in; in="${1}"; (( "${ENC_ON}" )) && in="${1}.gpg"
-  local out; out="${in}.sum"
-  sha256sum "${in}" | sed 's| .*/|  |g' | tee "${out}" > '/dev/null'
-}
-
-_err() {
-  echo >&2 "[$( date +'%Y-%m-%dT%H:%M:%S%z' )]: $*"; exit 1
-}
-
-# -------------------------------------------------------------------------------------------------------------------- #
-# -------------------------------------------------< RUNNING SCRIPT >------------------------------------------------- #
-# -------------------------------------------------------------------------------------------------------------------- #
-
-run && exit 0 || exit 1
+function main() {
+  backup && sync && clean
+}; main "$@"
