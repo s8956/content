@@ -12,9 +12,10 @@ categories:
   - 'scripts'
   - 'inDev'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'debian'
+  - 'gpg'
+  - 'openssl'
+  - 'rsync'
 authors:
   - 'KaiKimera'
 sources:
@@ -41,10 +42,10 @@ hash: '302e6636dc2135859bc9b8dd757b6ee1a8bc65e2'
 uuid: '302e6636-dc21-5585-9bc9-b8dd757b6ee1'
 slug: '302e6636-dc21-5585-9bc9-b8dd757b6ee1'
 
-draft: 1
+draft: 0
 ---
 
-
+Сделал скрипт для резервного копировать файловой системы. Скрипт может шифровать полученный архив и передавать его в удалённое хранилище.
 
 <!--more-->
 

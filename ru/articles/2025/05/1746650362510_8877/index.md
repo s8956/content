@@ -12,12 +12,14 @@ categories:
   - 'scripts'
   - 'inDev'
 tags:
+  - 'debian'
+  - 'gpg'
   - 'mariadb'
   - 'mysql'
+  - 'openssl'
   - 'pgsql'
   - 'postgresql'
   - 'rsync'
-  - 'openssl'
 authors:
   - 'KaiKimera'
 sources:
