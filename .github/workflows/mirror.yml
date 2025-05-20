@@ -19,7 +19,7 @@ jobs:
     env:
       DOMAIN: 'https://gitlab.com'
       VERSION: 'v4'
-      NSID: '69852292'
+      NSID: '85611856'
     steps:
       - name: 'Get repository name'
         shell: bash

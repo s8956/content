@@ -66,19 +66,19 @@ draft: 0
 export LIB_SRC='https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423' && apt install --yes sshpass
 ```
 
-- Скопировать файлы `app.backup.sql.conf` и `app.backup.sql.sh` в директорию `/root/apps/backup/`.
+- Скопировать файлы `app.backup.db.conf` и `app.backup.db.sh` в директорию `/root/apps/backup/`.
 
 ```bash
-f=('app.backup.sql.conf' 'app.backup.sql.sh'); d='/root/apps/backup'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
+f=('app.backup.db.conf' 'app.backup.db.sh'); d='/root/apps/backup'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
 ```
 
-- Скопировать файл `app_backup_sql` в директорию `/etc/cron.d/`.
+- Скопировать файл `app_backup_db` в директорию `/etc/cron.d/`.
 
 ```bash
-f=('app_backup_sql'); d='/etc/cron.d'; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done
+f=('app_backup_db'); d='/etc/cron.d'; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done
 ```
 
-- Настроить параметры скрипта в файле `app.backup.sql.conf`.
+- Настроить параметры скрипта в файле `app.backup.db.conf`.
 
 ### MariaDB
 
@@ -106,7 +106,7 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 
 ### Настройка
 
-{{< file "app.backup.sql.conf" "ini" >}}
+{{< file "app.backup.db.conf" "ini" >}}
 
 #### Параметры
 
@@ -114,15 +114,15 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 Некоторые параметры, указанные здесь, отсутствуют в конфигурационном файле. Это означает, что они имеют значения, установленные по умолчанию. Для переопределения этих значений, необходимо добавить отсутствующие параметры в конфигурационный файл.
 {{< /alert >}}
 
-- `SQL_SRC` - массив названий баз данных для резервного копирования. Название базы данных должно содержать имя DBMS, разделённое точкой.
+- `DB_SRC` - массив названий баз данных для резервного копирования. Название базы данных должно содержать имя DBMS, разделённое точкой.
   - `mysql` - MySQL / MariaDB.
   - `pgsql` - PostgreSQL.
-- `SQL_DST` - директория для хранения дампов баз данных.
-- `SQL_HOST` - хост для соединения с DBMS. По умолчанию: `127.0.0.1`.
-- `SQL_PORT` - порт для соединения с DBMS. По умолчанию: `3306` (`mysql`) / `5432` (`pgsql`).
-- `SQL_USER` - имя пользователь для соединения с DBMS. По умолчанию: `root` (`mysql`) / `postgres` (`pgsql`).
-- `SQL_PASS` - пароль для соединения с DBMS.
-- `SQL_DAYS` - дни, по прошествии которых, старые файлы будут удалены. По умолчанию: `30`.
+- `DB_DST` - директория для хранения дампов баз данных.
+- `DB_HOST` - хост для соединения с DBMS. По умолчанию: `127.0.0.1`.
+- `DB_PORT` - порт для соединения с DBMS. По умолчанию: `3306` (`mysql`) / `5432` (`pgsql`).
+- `DB_USER` - имя пользователь для соединения с DBMS. По умолчанию: `root` (`mysql`) / `postgres` (`pgsql`).
+- `DB_PASS` - пароль для соединения с DBMS.
+- `FS_DAYS` - дни, по прошествии которых, старые файлы будут удалены. По умолчанию: `30`.
 - `ENC_ON` - включение / отключение функции шифрования.
   - `0` - шифрование отключено.
   - `1` - шифрование включено.
@@ -161,13 +161,13 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 
 Приложение забирает параметры из файла настроек и обрабатывает значения.
 
-{{< file "app.backup.sql.sh" "bash" >}}
+{{< file "app.backup.db.sh" "bash" >}}
 
 ### Задание
 
 Задание запускает скрипт каждый день в `22:15` (после рабочего дня).
 
-{{< file "app_backup_sql" "bash" >}}
+{{< file "app_backup_db" "bash" >}}
 
 ## Восстановление
 
