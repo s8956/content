@@ -184,6 +184,4 @@ function clean() {
 # MAIN
 # -------------------------------------------------------------------------------------------------------------------- #
 
-function main() {
-  backup && sync && clean
-}; main "$@"
+function main() { backup && sync && clean; }; main "$@"

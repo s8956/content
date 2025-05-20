@@ -18,40 +18,48 @@
 
 # Specifies the number of days to make a certificate valid for.
 # Default is 10 years.
-days='3650'
+DAYS='3650'
 
 # The two-letter country code where your company is legally located.
-country='RU'
+COUNTRY='RU'
 
 # The state/province where your company is legally located.
-state='Russia'
+STATE='Russia'
 
 # The city where your company is legally located.
-city='Moscow'
+CITY='Moscow'
 
 # Your company's legally registered name (e.g., YourCompany, Inc.).
-org='LocalHost'
+ORG='LocalHost'
 
 # Your company's organizational unit.
-ou='IT Department'
+OU='IT Department'
 
 # Common name (CN). The fully-qualified domain name (FQDN) (e.g., www.example.com).
-cn="${1:?}"
+CN="${1:?}"
 
 # Your email address.
-email='mail@localhost'
+EMAIL='mail@localhost'
 
 # Additional subject identities.
-san="${2}"; [[ -z "${2}" ]] && san="DNS:${cn}, DNS:*.${cn}, DNS:*.localdomain, DNS:*.local, IP:127.0.0.1"
+SAN="${2}"; [[ -z "${2}" ]] && SAN="DNS:${CN}, DNS:*.${CN}, DNS:*.localdomain, DNS:*.local, IP:127.0.0.1"
 
 # Key usage extensions.
-ku="${3}"; [[ -z "${3}" ]] && ku='digitalSignature, nonRepudiation, keyEncipherment'
+KU="${3}"; [[ -z "${3}" ]] && KU='digitalSignature, nonRepudiation, keyEncipherment'
 
 # Extended key usage.
-eku="${4}"; [[ -z "${4}" ]] && eku='serverAuth, clientAuth'
+EKU="${4}"; [[ -z "${4}" ]] && EKU='serverAuth, clientAuth'
 
 # Certificate authority.
-ca="${5:-FALSE}"
+CA="${5:-FALSE}"
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# TITLE
+# -------------------------------------------------------------------------------------------------------------------- #
+
+function _title() {
+  echo '' && echo "${1}" && echo ''
+}
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # GENERATOR
@@ -59,29 +67,25 @@ ca="${5:-FALSE}"
 # -------------------------------------------------------------------------------------------------------------------- #
 
 function gen() {
-  echo '' && echo "--- [SSL] SELF SIGNED CERTIFICATE: '${cn}'" && echo ''
-  openssl ecparam -genkey -name 'prime256v1' | openssl ec -out "${cn}.key" \
+  _title "--- [SSL] SELF SIGNED CERTIFICATE: '${CN}'"
+  openssl ecparam -genkey -name 'prime256v1' | openssl ec -out "${CN}.key" \
     && openssl req -new -sha256 \
-    -key "${cn}.key" \
-    -out "${cn}.csr" \
-    -subj "/C=${country}/ST=${state}/L=${city}/O=${org}/OU=${ou}/CN=${cn}/emailAddress=${email}" \
-    -addext "basicConstraints = critical, CA:${ca}" \
+    -key "${CN}.key" \
+    -out "${CN}.csr" \
+    -subj "/C=${COUNTRY}/ST=${STATE}/L=${CITY}/O=${ORG}/OU=${OU}/CN=${CN}/emailAddress=${EMAIL}" \
+    -addext "basicConstraints = critical, CA:${CA}" \
     -addext 'nsCertType = server, client' \
     -addext 'nsComment = OpenSSL Self-Signed Certificate' \
-    -addext "keyUsage = critical, ${ku}" \
-    -addext "extendedKeyUsage = ${eku}" \
-    -addext "subjectAltName = ${san}" \
-    && openssl x509 -req -sha256 -days "${days}" -copy_extensions 'copyall' \
-    -key "${cn}.key" \
-    -in "${cn}.csr" \
-    -out "${cn}.crt" \
-    && openssl x509 -in "${cn}.crt" -text -noout
+    -addext "keyUsage = critical, ${KU}" \
+    -addext "extendedKeyUsage = ${EKU}" \
+    -addext "subjectAltName = ${SAN}" \
+    && openssl x509 -req -sha256 -days "${DAYS}" -copy_extensions 'copyall' \
+    -key "${CN}.key" -in "${CN}.csr" -out "${CN}.crt" \
+    && openssl x509 -in "${CN}.crt" -text -noout
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # MAIN
 # -------------------------------------------------------------------------------------------------------------------- #
 
-function main() {
-  gen
-}; main "$@"
+function main() { gen; }; main "$@"
