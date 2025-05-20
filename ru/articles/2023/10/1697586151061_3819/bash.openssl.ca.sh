@@ -41,27 +41,55 @@ ts="$( date -u '+%s' )"
 # Suffix.
 sfx="$( shuf -i '1000-9999' -n 1 --random-source='/dev/random' )"
 
+# -------------------------------------------------------------------------------------------------------------------- #
+# ERROR
+# -------------------------------------------------------------------------------------------------------------------- #
+
 function _err() {
   echo >&2 "[$( date +'%Y-%m-%dT%H:%M:%S%z' )]: $*"; exit 1
 }
 
+# -------------------------------------------------------------------------------------------------------------------- #
+# PRINT HEADER
+# -------------------------------------------------------------------------------------------------------------------- #
+
+function _title() {
+  echo '' && echo "${1}" && echo ''
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# CERTIFICATE: VERIFY
+# -------------------------------------------------------------------------------------------------------------------- #
+
 function _verify() {
-  echo '' && echo "--- [SSL] CERTIFICATE VERIFICATION" && echo ''
+  _title '--- [SSL] CERTIFICATE VERIFICATION'
   for i in "${1}" "${2}"; do [[ ! -f "${i}" ]] && { _err "'${i}' not found!"; }; done
   openssl verify -CAfile "${1}" "${2}"
 }
 
+# -------------------------------------------------------------------------------------------------------------------- #
+# CERTIFICATE: INFO
+# -------------------------------------------------------------------------------------------------------------------- #
+
 function _info() {
-  echo '' && echo "--- [SSL] CERTIFICATE DETAILS" && echo ''
+  _title '--- [SSL] CERTIFICATE DETAILS'
   [[ ! -f "${1}" ]] && { _err "'${i}' not found!"; }
   openssl x509 -in "${1}" -text -noout
 }
 
+# -------------------------------------------------------------------------------------------------------------------- #
+# CERTIFICATE: EXPORT
+# -------------------------------------------------------------------------------------------------------------------- #
+
 function _export() {
-  echo '' && echo "--- [SSL] EXPORTING A CERTIFICATE" && echo ''
+  _title '--- [SSL] EXPORTING A CERTIFICATE'
   for i in "${1}" "${2}"; do [[ ! -f "${i}" ]] && { _err "'${i}' not found!"; }; done
   openssl pkcs12 -export -inkey "${1}" -in "${2}" -out "${3}"
 }
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# CERTIFICATE: V3EXT CLIENT
+# -------------------------------------------------------------------------------------------------------------------- #
 
 function _v3ext_client() {
   cat > "${1}" <<EOF
@@ -74,6 +102,10 @@ extendedKeyUsage = clientAuth, emailProtection
 EOF
   echo -n "${1}"
 }
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# CERTIFICATE: V3EXT SERVER
+# -------------------------------------------------------------------------------------------------------------------- #
 
 function _v3ext_server() {
   cat > "${1}" <<EOF
@@ -93,6 +125,10 @@ EOF
   echo -n "${1}"
 }
 
+# -------------------------------------------------------------------------------------------------------------------- #
+# CERTIFICATE AUTHORITY GENERATOR
+# -------------------------------------------------------------------------------------------------------------------- #
+
 function ca() {
   local name="${1:-example.com}"
   local email="${2:-mail@example.com}"
@@ -104,14 +140,17 @@ basicConstraints = critical, CA:TRUE
 keyUsage = critical, digitalSignature, cRLSign, keyCertSign
 EOF
 
-  echo '' && echo "--- [SSL-CA] CREATING A CA CERTIFICATE" && echo ''
+  _title '--- [SSL-CA] CREATING A CA CERTIFICATE'
   openssl ecparam -genkey -name 'secp384r1' | openssl ec -aes256 -out "${ca}.key" \
     && openssl req -new -sha384 -key "${ca}.key" -out "${ca}.csr" \
     -subj "/C=${country}/ST=${state}/L=${city}/O=${org}/emailAddress=${email}/CN=${name}" \
-    && openssl x509 -req -extfile "${v3ext_ca}" -sha384 -days "${days}" -key "${ca}.key" -in "${ca}.csr" -out "${ca}.crt"
-
-    _info "${ca}.crt"
+    && openssl x509 -req -extfile "${v3ext_ca}" -sha384 -days "${days}" \
+    -key "${ca}.key" -in "${ca}.csr" -out "${ca}.crt" && _info "${ca}.crt"
 }
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# CERTIFICATE GENERATOR
+# -------------------------------------------------------------------------------------------------------------------- #
 
 function cert() {
   local name; name="${1:-example.com}"
@@ -127,15 +166,15 @@ function cert() {
     v3ext="$( _v3ext_server "${file}.v3ext" "${name}" )"
   fi
 
-  echo '' && echo "--- [SSL] CREATING A ${type^^} CERTIFICATE" && echo ''
+  _title "--- [SSL] CREATING A ${type^^} CERTIFICATE"
   openssl ecparam -genkey -name 'prime256v1' | openssl ec -out "${file}.key" \
     && openssl req -new -key "${file}.key" -out "${file}.csr" \
     -subj "/C=${country}/ST=${state}/L=${city}/O=${org}/emailAddress=${email}/CN=${name}" \
     && openssl x509 -req -extfile "${v3ext}" -days "${days}" -in "${file}.csr" \
     -CA "${ca}.crt" -CAkey "${ca}.key" -CAcreateserial -CAserial "${file}.srl" -out "${file}.crt" \
-    && cat "${file}.key" "${file}.crt" "${ca}.crt" > "${file}.crt.chain"
-
-  _verify "${ca}.crt" "${file}.crt" && _info "${file}.crt" && _export "${file}.key" "${file}.crt" "${file}.p12"
+    && cat "${file}.key" "${file}.crt" "${ca}.crt" > "${file}.crt.chain" \
+    && _verify "${ca}.crt" "${file}.crt" && _info "${file}.crt" \
+    && _export "${file}.key" "${file}.crt" "${file}.p12"
 }
 
 "$@"
