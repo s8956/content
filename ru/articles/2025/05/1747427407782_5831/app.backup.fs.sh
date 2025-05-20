@@ -74,7 +74,7 @@ function _gpg() {
 function _ssl() {
   local out; out="${1}.ssl"
   local pass; pass="${2}"
-  openssl enc "-${ENC_SSL_CIPHER:-aes-256-cbc}" -out "${out}" -pass "pass:${pass}" \
+  openssl enc "-${ENC_SSL_CIPHER:-aes-256-cfb}" -out "${out}" -pass "pass:${pass}" \
     -salt -md "${ENC_SSL_DIGEST:-sha512}" -iter "${ENC_SSL_COUNT:-65536}" -pbkdf2
 }
 
