@@ -37,7 +37,7 @@ $Path = "HKLM:\Software\Veritas\Backup Exec For Windows\Common\Backup Exec\${Ver
 $ObjName = 'SD'
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# MAIN: TRIAL EXTENSION
+# TRIAL EXTENSION
 # Extending the trial period.
 # -------------------------------------------------------------------------------------------------------------------- #
 
