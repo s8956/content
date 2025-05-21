@@ -60,24 +60,20 @@ draft: 0
 
 ## Установка
 
-- Экспортировать параметры в переменные окружения и установить необходимые пакеты:
+- Установить пакеты:
 
 ```bash
-export LIB_SRC='https://lib.onl/ru/2025/05/57f8f8c0-b963-5708-b310-129ea98a2423' && apt install --yes sshpass
+apt install --yes sshpass
+```
+
+- Скачать и распаковать скрипт:
+
+```bash
+export GH_NAME='bash-backup-db'; export GH_URL="https://github.com/pkgstore/${GH_NAME}/archive/refs/heads/main.tar.gz"; curl -Lo "${GH_NAME}-main.tar.gz" "${GH_URL}" && tar -xzf "${GH_NAME}-main.tar.gz" && chmod +x "${GH_NAME}-main"/*.sh
 ```
 
 - Скопировать файлы `app.backup.db.conf` и `app.backup.db.sh` в директорию `/root/apps/backup/`.
-
-```bash
-f=('app.backup.db.conf' 'app.backup.db.sh'); d='/root/apps/backup'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
-```
-
 - Скопировать файл `app_backup_db` в директорию `/etc/cron.d/`.
-
-```bash
-f=('app_backup_db'); d='/etc/cron.d'; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done
-```
-
 - Настроить параметры скрипта в файле `app.backup.db.conf`.
 
 ### MariaDB
@@ -100,15 +96,11 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 
 Скрипт состоит из трёх компонентов:
 
-- Файл с настройками.
-- Приложение.
-- Задание для CRON.
+- `app.backup.db.conf` - файл с настройками.
+- `app.backup.db.sh` - приложение.
+- `app_backup_db` - задание для CRON.
 
 ### Настройка
-
-{{< file "app.backup.db.conf" "ini" >}}
-
-#### Параметры
 
 {{< alert "tip" >}}
 Некоторые параметры, указанные здесь, отсутствуют в конфигурационном файле. Это означает, что они имеют значения, установленные по умолчанию. Для переопределения этих значений, необходимо добавить отсутствующие параметры в конфигурационный файл.
@@ -161,13 +153,9 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 
 Приложение забирает параметры из файла настроек и обрабатывает значения.
 
-{{< file "app.backup.db.sh" "bash" >}}
-
 ### Задание
 
 Задание запускает скрипт каждый день в `22:15` (после рабочего дня).
-
-{{< file "app_backup_db" "bash" >}}
 
 ## Восстановление
 

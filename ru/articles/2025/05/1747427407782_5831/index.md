@@ -45,45 +45,31 @@ slug: '302e6636-dc21-5585-9bc9-b8dd757b6ee1'
 draft: 0
 ---
 
-Сделал скрипт для резервного копировать файловой системы. Скрипт может шифровать полученный архив и передавать его в удалённое хранилище.
+Сделал [скрипт](https://github.com/pkgstore/bash-backup-fs) для резервного копировать файловой системы. Скрипт может шифровать полученный архив и передавать его в удалённое хранилище.
 
 <!--more-->
 
 ## Установка
 
-- Экспортировать параметры в переменные окружения и установить необходимые пакеты:
+- Скачать и распаковать скрипт:
 
 ```bash
-export LIB_SRC='https://lib.onl/ru/2025/05/302e6636-dc21-5585-9bc9-b8dd757b6ee1'
+export GH_NAME='bash-backup-fs'; export GH_URL="https://github.com/pkgstore/${GH_NAME}/archive/refs/heads/main.tar.gz"; curl -Lo "${GH_NAME}-main.tar.gz" "${GH_URL}" && tar -xzf "${GH_NAME}-main.tar.gz" && chmod +x "${GH_NAME}-main"/*.sh
 ```
 
 - Скопировать файлы `app.backup.fs.conf` и `app.backup.fs.sh` в директорию `/root/apps/backup/`.
-
-```bash
-f=('app.backup.fs.conf' 'app.backup.fs.sh'); d='/root/apps/backup'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
-```
-
 - Скопировать файл `app_backup_fs` в директорию `/etc/cron.d/`.
-
-```bash
-f=('app_backup_fs'); d='/etc/cron.d'; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done
-```
-
 - Настроить параметры скрипта в файле `app.backup.fs.conf`.
 
 ## Скрипт
 
 Скрипт состоит из трёх компонентов:
 
-- Файл с настройками.
-- Приложение.
-- Задание для CRON.
+- `app.backup.fs.conf` - файл с настройками.
+- `app.backup.fs.sh` - приложение.
+- `app_backup_fs` - задание для CRON.
 
 ### Настройка
-
-{{< file "app.backup.fs.conf" "ini" >}}
-
-#### Параметры
 
 {{< alert "tip" >}}
 Некоторые параметры, указанные здесь, отсутствуют в конфигурационном файле. Это означает, что они имеют значения, установленные по умолчанию. Для переопределения этих значений, необходимо добавить отсутствующие параметры в конфигурационный файл.
@@ -129,13 +115,9 @@ f=('app_backup_fs'); d='/etc/cron.d'; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig"
 
 Приложение забирает параметры из файла настроек и обрабатывает значения.
 
-{{< file "app.backup.fs.sh" "bash" >}}
-
 ### Задание
 
 Задание запускает скрипт каждое воскресенье в `01:15`.
-
-{{< file "app_backup_fs" "bash" >}}
 
 # Восстановление
 
