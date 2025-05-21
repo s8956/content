@@ -43,7 +43,7 @@ slug: '0a633c87-935c-54ba-bedf-9c95152b6b51'
 draft: 0
 ---
 
-Скрипт закрывающий конференц-комнату при условии, что в ней остаётся один конкретный номер участника.
+[Скрипт](https://github.com/pkgstore/bash-asterisk-room-close), закрывающий конференц-комнату при условии, что в ней остаётся один конкретный номер участника.
 
 <!--more-->
 
@@ -51,39 +51,25 @@ draft: 0
 
 ## Установка
 
-- Экспортировать параметры в переменные окружения:
+- Скачать и распаковать скрипт:
 
 ```bash
-export LIB_SRC='https://lib.onl/ru/2024/10/0a633c87-935c-54ba-bedf-9c95152b6b51'
+export GH_NAME='bash-asterisk-room-close'; export GH_URL="https://github.com/pkgstore/${GH_NAME}/archive/refs/heads/main.tar.gz"; curl -Lo "${GH_NAME}-main.tar.gz" "${GH_URL}" && tar -xzf "${GH_NAME}-main.tar.gz" && chmod +x "${GH_NAME}-main"/app.*.sh
 ```
 
 - Скопировать файлы `app.asterisk.room_close.conf` и `app.asterisk.room_close.sh` в директорию `/root/apps/asterisk/`.
-
-```bash
-f=('app.asterisk.room_close.conf' 'app.asterisk.room_close.sh'); d='/root/apps/asterisk'; [[ ! -d "${d}" ]] && mkdir -p "${d}"; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done && chmod +x "${d}"/*.sh
-```
-
 - Скопировать файл `app_asterisk_room_close` в директорию `/etc/cron.d/`.
-
-```bash
-f=('app_asterisk_room_close'); d='/etc/cron.d'; [[ -f "${d}/${i}" && ! -f "${d}/${i}.orig" ]] && mv "${d}/${i}" "${d}/${i}.orig"; for i in "${f[@]}"; do curl -fsSLo "${d}/${i}" "${LIB_SRC}/${i}"; done
-```
-
 - Настроить параметры скрипта в файле `app.asterisk.room_close.conf`.
 
 ## Скрипт
 
 Скрипт состоит из трёх компонентов:
 
-- Файл с настройками.
-- Приложение.
-- Задание для CRON.
+- `app.asterisk.room_close.conf` - файл с настройками.
+- `app.asterisk.room_close.sh` - приложение.
+- `app_asterisk_room_close` - задание для CRON.
 
 ### Настройка
-
-{{< file "app.asterisk.room_close.conf" "bash" >}}
-
-#### Параметры
 
 - `PHONES` - массив, в котором содержаться номера телефонов. Если один из указанных номеров телефонов остаётся в конференции без остальных участников, то конференция закрывается.
 
@@ -91,10 +77,6 @@ f=('app_asterisk_room_close'); d='/etc/cron.d'; [[ -f "${d}/${i}" && ! -f "${d}/
 
 Приложение забирает параметры из файла настроек и обрабатывает значения.
 
-{{< file "app.asterisk.room_close.sh" "bash" >}}
-
 ### Задание
 
 Задание запускает скрипт каждые 10 секунд для проверки конференц-комнат.
-
-{{< file "app_asterisk_room_close" "bash" >}}
