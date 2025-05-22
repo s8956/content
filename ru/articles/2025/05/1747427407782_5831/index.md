@@ -49,7 +49,15 @@ draft: 0
 
 <!--more-->
 
-## Установка
+## Скрипт
+
+Скрипт состоит из трёх компонентов:
+
+- `app.backup.fs.conf` - файл с настройками.
+- `app.backup.fs.sh` - приложение.
+- `app_backup_fs` - задание для CRON.
+
+### Установка
 
 - Скачать и распаковать скрипт:
 
@@ -60,14 +68,6 @@ export GH_NAME='bash-backup-fs'; export GH_URL="https://github.com/pkgstore/${GH
 - Скопировать файлы `app.backup.fs.conf` и `app.backup.fs.sh` в директорию `/root/apps/backup/`.
 - Скопировать файл `app_backup_fs` в директорию `/etc/cron.d/`.
 - Настроить параметры скрипта в файле `app.backup.fs.conf`.
-
-## Скрипт
-
-Скрипт состоит из трёх компонентов:
-
-- `app.backup.fs.conf` - файл с настройками.
-- `app.backup.fs.sh` - приложение.
-- `app_backup_fs` - задание для CRON.
 
 ### Настройка
 

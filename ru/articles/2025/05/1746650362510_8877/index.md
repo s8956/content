@@ -58,7 +58,15 @@ draft: 0
 
 <!--more-->
 
-## Установка
+## Скрипт
+
+Скрипт состоит из трёх компонентов:
+
+- `app.backup.db.conf` - файл с настройками.
+- `app.backup.db.sh` - приложение.
+- `app_backup_db` - задание для CRON.
+
+### Установка
 
 - Установить пакеты:
 
@@ -76,7 +84,7 @@ export GH_NAME='bash-backup-db'; export GH_URL="https://github.com/pkgstore/${GH
 - Скопировать файл `app_backup_db` в директорию `/etc/cron.d/`.
 - Настроить параметры скрипта в файле `app.backup.db.conf`.
 
-### MariaDB
+#### MariaDB
 
 - Создать пользователя `backup@127.0.0.1` с паролем `PASSWORD` и дать ему разрешения на все базы данных:
 
@@ -84,21 +92,13 @@ export GH_NAME='bash-backup-db'; export GH_URL="https://github.com/pkgstore/${GH
 echo "create user 'backup'@'127.0.0.1' identified by 'PASSWORD'; grant all on *.* to 'backup'@'127.0.0.1'; flush privileges;" | mariadb --user='root' --password
 ```
 
-### PostgreSQL
+#### PostgreSQL
 
 - Создать пользователя `backup` и сделать его супер-пользователем:
 
 ```bash
 sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 'alter role backup superuser;'
 ```
-
-## Скрипт
-
-Скрипт состоит из трёх компонентов:
-
-- `app.backup.db.conf` - файл с настройками.
-- `app.backup.db.sh` - приложение.
-- `app_backup_db` - задание для CRON.
 
 ### Настройка
 
