@@ -48,23 +48,28 @@ Windows Server Backup хороша в качестве компонента ре
 
 <!--more-->
 
-Я написал небольшой скрипт, позволяющий по крону отслеживать системный журнал и находить записи по работе **Windows Server Backup**.
+Я написал небольшой [скрипт](https://github.com/pkgstore/pwsh-backup-wsb), позволяющий по крону отслеживать системный журнал и находить записи по работе **Windows Server Backup**.
 
 ## Скрипт
 
 Скрипт анализирует системный журнал и фиксирует записи, принадлежащие {{< tag "Windows" >}} Server Backup. Скрипт состоит из файла настроек, к которому можно ограничить доступ, приложения и двух задач.
 
+Скрипт состоит из трёх компонентов:
+
+- `app.backup.wsb.mail.ini` - файл с настройками.
+- `app.backup.wsb.mail.ps1` - приложение.
+- `task.backup.wsb.mail.error.xml` - задача при ошибке Windows Server Backup.
+- `task.backup.wsb.mail.success.xml` - задача при успешном выполнении Windows Server Backup.
+
 ### Установка
 
-- Скопировать файлы `app.backup.wsb.mail.ps1` и `app.backup.wsb.mail.ini` в директорию `C:\Scripts\`.
+- Скопировать файлы `app.backup.wsb.mail.ps1` и `app.backup.wsb.mail.ini` в директорию `C:\Apps\backup`.
 - Импортировать задания `task.backup.wsb.mail.error.xml` и `task.backup.wsb.mail.success.xml` в **Windows Task Scheduler** и откорректировать параметры вызова скрипта.
 - Изменить параметры скрипта в файле `app.backup.wsb.mail.ini`.
 
 ### Настройка
 
 Файл настройки представляет собой простой файл `.ini`, содержащий в себе приватные параметры.
-
-{{< file "app.backup.wsb.mail.ini" "ini" >}}
 
 #### Параметры
 
@@ -77,7 +82,7 @@ Windows Server Backup хороша в качестве компонента ре
 
 ### Приложение
 
-{{< file "app.backup.wsb.mail.ps1" "pwsh" >}}
+Приложение забирает параметры из файла настроек и обрабатывает значения.
 
 #### Параметры
 
@@ -93,10 +98,6 @@ Windows Server Backup хороша в качестве компонента ре
 
 Задание присылает уведомление в том случае, когда в журнале событий появляется запись об ошибке выполнения {{< tag "Windows" >}} Server Backup.
 
-{{< file "task.backup.wsb.mail.error.xml" "xml" >}}
-
 #### Успешно
 
 Задание присылает уведомление в том случае, когда в журнале событий появляется запись об успешном выполнении {{< tag "Windows" >}} Server Backup.
-
-{{< file "task.backup.wsb.mail.success.xml" "xml" >}}
