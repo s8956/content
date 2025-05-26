@@ -58,7 +58,7 @@ draft: 0
 ## Установка LeGo
 
 - [Скачать](https://github.com/go-acme/lego/releases/latest) {{< tag "LeGo" >}} и распаковать в директорию `/root/apps/acme/`.
-- [Создать](#hook) файл `hook.sh` в директории `/root/apps/acme/`.
+- [Установить](#hook) файл `app.hook.sh` в директорию `/root/apps/acme/`.
 - Изучить [документацию](https://go-acme.github.io/lego/) и [справку](https://github.com/go-acme/lego/blob/master/docs/data/zz_cli_help.toml) по командам для составления запросов на получение и обновление сертификатов.
 - Выбрать метод получения и обновления сертификатов.
 
@@ -99,7 +99,7 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 - Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port=':8080' --renew-hook="${HOME}/apps/acme/hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port=':8080' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
 
 #### Параметры
@@ -149,7 +149,7 @@ CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/
 - Обновить сертификат для доменов `example.com` и `*.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/hook.sh" renew
+CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
 
 #### Параметры
@@ -225,7 +225,7 @@ stream {
 - Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
 
 #### Параметры
@@ -240,13 +240,11 @@ stream {
 
 ## Hook
 
-- Создать файл приложения `/root/apps/acme/hook.sh` со следующим содержанием:
+Я написал [специальный hook](https://github.com/pkgstore/bash-acme), который должен выполняться при успешном получении сертификата. В основном, работа hook'а заключается в том, чтобы перемещать файлы сертификатов необходимые директории и перезапускать сервисы.
 
-{{< file "hook.sh" "bash" >}}
+### Установка
 
-- Создать файл настроек `/root/apps/acme/hook.conf` со следующим содержанием:
-
-{{< file "hook.conf" "ini" >}}
+- Сохранить файлы `app.hook.conf` и `app.hook.sh` в директорию `/root/apps/acme/`.
 
 ## Конфигурация приложений
 
