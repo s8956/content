@@ -54,11 +54,11 @@ draft: 0
 - Скачать и распаковать скрипт:
 
 ```bash
-export GH_NAME='bash-asterisk-room-close'; export GH_URL="https://github.com/pkgstore/${GH_NAME}/archive/refs/heads/main.tar.gz"; curl -Lo "${GH_NAME}-main.tar.gz" "${GH_URL}" && tar -xzf "${GH_NAME}-main.tar.gz" && chmod +x "${GH_NAME}-main"/app.*.sh
+export SET_DIR='/root/apps/asterisk'; export GH_NAME='bash-asterisk-room-close'; export GH_URL="https://github.com/pkgstore/${GH_NAME}/archive/refs/heads/main.tar.gz"; curl -Lo "${GH_NAME}-main.tar.gz" "${GH_URL}" && tar -xzf "${GH_NAME}-main.tar.gz" && { cd "${GH_NAME}-main" || exit; } && { for i in app.*; do install -m 644 -Dt "${SET_DIR}" "${i}"; done; } && { for i in cron_*; do install -m 644 -Dt '/etc/cron.d' "${i}"; done; } && chmod +x "${SET_DIR}"/*.sh
 ```
 
 - Скопировать файлы `app.asterisk.room_close.conf` и `app.asterisk.room_close.sh` в директорию `/root/apps/asterisk/`.
-- Скопировать файл `app_asterisk_room_close` в директорию `/etc/cron.d/`.
+- Скопировать файл `cron_asterisk_room_close` в директорию `/etc/cron.d/`.
 - Настроить параметры скрипта в файле `app.asterisk.room_close.conf`.
 
 ## Скрипт
@@ -67,7 +67,7 @@ export GH_NAME='bash-asterisk-room-close'; export GH_URL="https://github.com/pkg
 
 - `app.asterisk.room_close.conf` - файл с настройками.
 - `app.asterisk.room_close.sh` - приложение.
-- `app_asterisk_room_close` - задание для CRON.
+- `cron_asterisk_room_close` - задание для CRON.
 
 ### Настройка
 
