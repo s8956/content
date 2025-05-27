@@ -402,11 +402,16 @@ sed -i 's|ScriptedUpdates yes|ScriptedUpdates no|g' '/etc/clamav/freshclam.conf'
 
 ### Postscreen
 
-В директиву `postscreen_dnsbl_sites` добавим дополнительные спам-фильтры:
+- В директиве `postscreen_dnsbl_threshold` заменить `2` на `3`.
+- В директиву `postscreen_dnsbl_sites` добавить дополнительные спам-фильтры:
 
 ```
     bl.spamcop.net=127.0.0.2*2
     psbl.surriel.com=127.0.0.2*2
+    dnsbl-2.uceprotect.net=127.0.0.2*2
+    spam.spamrats.com=127.0.0.[2..38]*2
+    all.s5h.net=127.0.0.2*2
+    multi.surbl.org=127.0.0.[2..128]*1
 ```
 
 - `swl.spamhaus.org` и `list.dnswl.org` - это белые списки IP-адресов. Если IP-адрес почтового сервера клиента находится в этом списке, баллы спам-фильтра снимаются и письмо проходит проверку.
