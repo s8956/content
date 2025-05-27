@@ -413,5 +413,3 @@ sed -i 's|ScriptedUpdates yes|ScriptedUpdates no|g' '/etc/clamav/freshclam.conf'
     all.s5h.net=127.0.0.2*2
     multi.surbl.org=127.0.0.[2..128]*1
 ```
-
-- `swl.spamhaus.org` и `list.dnswl.org` - это белые списки IP-адресов. Если IP-адрес почтового сервера клиента находится в этом списке, баллы спам-фильтра снимаются и письмо проходит проверку.
