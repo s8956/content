@@ -49,14 +49,3 @@ draft: 1
 
 <!--more-->
 
-```
-options {
-  listen-on { 127.0.0.1; 192.168.1.2; };
-  listen-on-v6 { none; };
-  allow-query { 127.0.0.0/8; };
-  allow-recursion { 127.0.0.0/8; };
-  allow-transfer { none; };
-  qname-minimization off;
-  # forwarders { 8.8.8.8; 77.88.8.8; };
-}
-```
