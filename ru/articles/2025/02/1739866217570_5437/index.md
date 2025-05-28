@@ -408,7 +408,7 @@ sed -i 's|ScriptedUpdates yes|ScriptedUpdates no|g' '/etc/clamav/freshclam.conf'
 ```
     bl.spamcop.net=127.0.0.2*2
     psbl.surriel.com=127.0.0.2*2
-    dnsbl-2.uceprotect.net=127.0.0.2*2
+    dnsbl-3.uceprotect.net=127.0.0.2*2
     spam.spamrats.com=127.0.0.[2..38]*2
     all.s5h.net=127.0.0.2*2
     multi.surbl.org=127.0.0.[2..128]*1
