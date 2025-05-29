@@ -413,4 +413,7 @@ sed -i 's|ScriptedUpdates yes|ScriptedUpdates no|g' '/etc/clamav/freshclam.conf'
     bl.mailspike.net=127.0.0.[2..13]*2
     all.s5h.net=127.0.0.2*2
     multi.surbl.org=127.0.0.[2..254]*1
+    list.dnswl.org=127.0.[0..255].1*-2
+    list.dnswl.org=127.0.[0..255].2*-10
+    list.dnswl.org=127.0.[0..255].3*-100
 ```
