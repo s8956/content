@@ -77,7 +77,7 @@ mv '/etc/default/named' '/etc/default/named.orig' && cp '/etc/default/named.orig
 - Сделать резервную копию файлов `named.conf.options` и `named.conf.default-zones`:
 
 ```bash
-for i in 'named.conf.options' 'named.conf.default-zones'; do mv "/etc/bind/${i}" "/etc/bind/${i}.orig" && cp "/etc/bind/${i}.orig" "/etc/bind/${i}"; done
+for i in 'named.conf.options' 'named.conf.default-zones'; do mv "/etc/bind/${i}" "/etc/bind/${i}.orig" && touch "/etc/bind/${i}"; done
 ```
 
 - Привести файл `/etc/bind/named.conf.options` к следующему виду:
