@@ -92,13 +92,13 @@ for i in 'named.conf.options' 'named.conf.default-zones'; do mv "/etc/bind/${i}"
 
 {{< file "named.conf.local.master" >}}
 
-- Создать файл прямой зоны `/etc/bind/db.example.org` со следующим содержанием:
+- Создать файл прямой зоны `/etc/bind/zone.example.org` со следующим содержанием:
 
-{{< file "db.example.org" "dns" >}}
+{{< file "zone.example.org" "dns" >}}
 
-- Создать файл обратной зоны `/etc/bind/db.192.168.1` со следующим содержанием:
+- Создать файл обратной зоны `/etc/bind/zone.example.org.rev` со следующим содержанием:
 
-{{< file "db.192.168.1" "dns" >}}
+{{< file "zone.example.org.rev" "dns" >}}
 
 ### Вторичный сервер DNS
 
