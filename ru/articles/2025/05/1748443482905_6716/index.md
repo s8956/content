@@ -88,10 +88,6 @@ for i in 'named.conf.options' 'named.conf.default-zones'; do mv "/etc/bind/${i}"
 
 {{< file "named.conf.default-zones" >}}
 
-- Добавить в файл `/etc/bind/named.conf.local` описание прямой и обратной зоны `example.org`:
-
-{{< file "named.conf.local.master" >}}
-
 - Создать файл прямой зоны `/etc/bind/zone.example.org` со следующим содержанием:
 
 {{< file "zone.example.org" "dns" >}}
@@ -99,6 +95,10 @@ for i in 'named.conf.options' 'named.conf.default-zones'; do mv "/etc/bind/${i}"
 - Создать файл обратной зоны `/etc/bind/zone.example.org.rev` со следующим содержанием:
 
 {{< file "zone.example.org.rev" "dns" >}}
+
+- Добавить в файл `/etc/bind/named.conf.local` описание прямой и обратной зоны `example.org`:
+
+{{< file "named.conf.local.master" >}}
 
 ### Вторичный сервер DNS
 
