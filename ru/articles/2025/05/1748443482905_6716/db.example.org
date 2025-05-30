@@ -1,7 +1,7 @@
-$TTL 86400
-$ORIGIN example.org. ;
+$TTL 24h
+$ORIGIN example.org.
 ;
-@                 IN  SOA     ns01.example.org. root.example.org. (
+@                 IN  SOA     ns01.example.org. postmaster.example.org. (
                               2024061000  ; Serial
                               10m         ; Refresh
                               1h          ; Retry
