@@ -3,7 +3,7 @@ CloudFlare не позволяет отключить ECH удобным спо�
 Чтобы проверить наличие ECH у домена, необходимо выполнить следующий запрос:
 
 ```bash
-d='example.com'; curl -X 'GET' -H 'Accept: application/json' "https://dns.google/resolve?name=${d}&type=HTTPS"
+d='example.org'; curl -X 'GET' -H 'Accept: application/json' "https://dns.google/resolve?name=${d}&type=HTTPS"
 ```
 
 Параметры:
@@ -13,7 +13,7 @@ d='example.com'; curl -X 'GET' -H 'Accept: application/json' "https://dns.google
 Если в ответе будет присутствовать параметр `ech=`, то ECH для домена включён. Для отключения ECH можно воспользоваться следующей командой:
 
 ```bash
-m='mail@example.com'; k='GLOBAL_API_KEY'; z='ZONE_ID'; curl -X 'PATCH' "https://api.cloudflare.com/client/v4/zones/${z}/settings/ech" -H "X-Auth-Email: ${m}" -H "X-Auth-Key: ${k}" -H 'Content-Type: application/json' -d '{"id":"ech","value":"off"}'
+m='mail@example.org'; k='GLOBAL_API_KEY'; z='ZONE_ID'; curl -X 'PATCH' "https://api.cloudflare.com/client/v4/zones/${z}/settings/ech" -H "X-Auth-Email: ${m}" -H "X-Auth-Key: ${k}" -H 'Content-Type: application/json' -d '{"id":"ech","value":"off"}'
 ```
 
 Параметры:
@@ -25,7 +25,7 @@ m='mail@example.com'; k='GLOBAL_API_KEY'; z='ZONE_ID'; curl -X 'PATCH' "https://
 Для проверки текущей настройки ECH в CloudFlare, можно воспользоваться следующим запросом:
 
 ```bash
-m='mail@example.com'; k='GLOBAL_API_KEY'; z='ZONE_ID'; curl -X 'GET' "https://api.cloudflare.com/client/v4/zones/${z}/settings/ech" -H "X-Auth-Email: ${m}" -H "X-Auth-Key: ${k}" -H 'Content-Type: application/json' -d '{"id":"ech"}'
+m='mail@example.org'; k='GLOBAL_API_KEY'; z='ZONE_ID'; curl -X 'GET' "https://api.cloudflare.com/client/v4/zones/${z}/settings/ech" -H "X-Auth-Email: ${m}" -H "X-Auth-Key: ${k}" -H 'Content-Type: application/json' -d '{"id":"ech"}'
 ```
 
 Ответ будет примерно таким:

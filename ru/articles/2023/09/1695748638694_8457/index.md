@@ -95,7 +95,7 @@ MS {{< tag "Office" >}} 2021 LTSC просто так не купить, это 
 1. Указать адрес KMS-сервера для клиента MS Office:
 
 ```powershell
-cscript ospp.vbs /sethst:kms.example.com
+cscript ospp.vbs /sethst:kms.example.org
 ```
 
 2. Указать нестандартный порт (`1689`) KMS-сервера:

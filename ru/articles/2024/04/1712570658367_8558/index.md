@@ -53,11 +53,11 @@ draft: 0
 ## Исходные данные
 
 - Маршрутизатор `R1`:
-  - WAN IP: `gw1.example.com`.
+  - WAN IP: `gw1.example.org`.
   - LAN IP: `10.1.0.1`.
   - Network: `10.1.0.0/16`.
 - Маршрутизатор `R2`:
-  - WAN IP: `gw2.example.com`.
+  - WAN IP: `gw2.example.org`.
   - LAN IP: `10.2.0.1`.
   - Network: `10.2.0.0/16`.
 
@@ -74,11 +74,11 @@ draft: 0
   - Секретная фраза для IPsec: `PassWord`.
   - WAN IP-адрес локального маршрутизатора `R1`: `1.1.1.1`.
   - WAN IP-адрес удалённого маршрутизатора `R2`: `2.2.2.2`.
-  - Комментарий: `HOST: gw2.example.com`.
+  - Комментарий: `HOST: gw2.example.org`.
 
 ```text
 /interface gre
-add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=2.2.2.2 comment="HOST: gw2.example.com"
+add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=2.2.2.2 comment="HOST: gw2.example.org"
 ```
 
 - Прописываем интерфейсу IP-адрес `10.255.255.1/24`:
@@ -108,11 +108,11 @@ add distance=1 dst-address=10.2.0.0/16 gateway=10.255.255.2 comment="[GRE] GW2"
   - Секретная фраза для IPsec: `PassWord`.
   - WAN IP-адрес локального маршрутизатора `R2`: `2.2.2.2`.
   - WAN IP-адрес удалённого маршрутизатора `R1`: `1.1.1.1`.
-  - Комментарий: `HOST: gw1.example.com`.
+  - Комментарий: `HOST: gw1.example.org`.
 
 ```text
 /interface gre
-add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=1.1.1.1 comment="HOST: gw1.example.com"
+add allow-fast-path=no ipsec-secret="PassWord" name="gre-sts" remote-address=1.1.1.1 comment="HOST: gw1.example.org"
 ```
 
 - Прописываем интерфейсу IP-адрес `10.255.255.2/24`:
@@ -137,7 +137,7 @@ add distance=1 dst-address=10.1.0.0/16 gateway=10.255.255.1 comment="[GRE] GW1"
 
 ## Скрипт для динамического IP
 
-К сожалению, {{< tag "MikroTik" >}} для интерфейса {{< tag "GRE" >}} использует только IP-адреса, нельзя указать имя суб-домена. Но на форуме {{< tag "MikroTik" >}} я нашёл скрипт, который парсит доменное имя удалённого маршрутизатора в специально составленном комментарии (`HOST: sub.example.com`) к интерфейсу и запрашивает IP-адрес этого домена. Этот IP-адрес автоматически вставляется в поле `remote-address` интерфейса {{< tag "GRE" >}}.
+К сожалению, {{< tag "MikroTik" >}} для интерфейса {{< tag "GRE" >}} использует только IP-адреса, нельзя указать имя суб-домена. Но на форуме {{< tag "MikroTik" >}} я нашёл скрипт, который парсит доменное имя удалённого маршрутизатора в специально составленном комментарии (`HOST: sub.example.org`) к интерфейсу и запрашивает IP-адрес этого домена. Этот IP-адрес автоматически вставляется в поле `remote-address` интерфейса {{< tag "GRE" >}}.
 
 ### Приложение
 

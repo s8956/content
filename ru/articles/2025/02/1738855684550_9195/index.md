@@ -169,7 +169,7 @@ docker build "${HOME}/license.gen" -t 'gitlab-license-generator:main'
 - Создать ключ лицензии в директории `./license`:
 
 ```bash
-docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='GitLab' -e LICENSE_COMPANY='GitLab' -e LICENSE_EMAIL='license@example.com' -e LICENSE_PLAN='ultimate' -e LICENSE_USER_COUNT='2147483647' -e LICENSE_EXPIRE_YEAR='2500' 'gitlab-license-generator:main'
+docker run --rm -it -v './license:/license-generator/build' -e LICENSE_NAME='GitLab' -e LICENSE_COMPANY='GitLab' -e LICENSE_EMAIL='license@example.org' -e LICENSE_PLAN='ultimate' -e LICENSE_USER_COUNT='2147483647' -e LICENSE_EXPIRE_YEAR='2500' 'gitlab-license-generator:main'
 ```
 
 ### Готовая лицензия

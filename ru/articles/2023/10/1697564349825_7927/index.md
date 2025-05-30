@@ -51,7 +51,7 @@ draft: 0
 Дополнительная страница (или Custom Pages) - это страница, "совмещённая" со стилем форума и находится по адресу:
 
 ```
-http://example.com/misc.php?do=page&template=название_страницы
+http://example.org/misc.php?do=page&template=название_страницы
 ```
 
 ## Как сделать дополнительную страницу?

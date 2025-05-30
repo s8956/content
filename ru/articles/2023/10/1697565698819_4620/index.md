@@ -83,5 +83,5 @@ draft: 0
 Страница будет располагаться по адресу:
 
 ```
-https://example.com/misc.php?do=page&template=ШАБЛОН
+https://example.org/misc.php?do=page&template=ШАБЛОН
 ```

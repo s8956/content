@@ -64,7 +64,7 @@ draft: 0
 
 ## Метод HTTP-01
 
-Let’s Encrypt выдаёт клиенту токен, клиент записывает этот токен в файл на web-сервере по пути `http://example.com/.well-known/acme-challenge/<TOKEN>`.
+Let’s Encrypt выдаёт клиенту токен, клиент записывает этот токен в файл на web-сервере по пути `http://example.org/.well-known/acme-challenge/<TOKEN>`.
 
 Плюсы метода:
 
@@ -79,27 +79,27 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/root/apps/acme/`:
+- Зарегистрировать адрес `mail@example.org` и получить сертификат для доменов `example.org` и `mail.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
-"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port=':8080' run
+"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --http --http.port=':8080' run
 ```
 
 #### Параметры
 
 - `--accept-tos` - автоматически принять соглашение.
 - `--path` - путь к хранилищу сертификатов (`/root/apps/acme/`).
-- `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.com`).
-- `--domains` - список доменов для получения сертификата (`example.com` и `mail.example.co`).
+- `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.org`).
+- `--domains` - список доменов для получения сертификата (`example.org` и `mail.example.co`).
 - `--http` - получение сертификата методом `HTTP-01`.
 - `--http.port` - порт `8080`, на котором работает LeGo. Angie из статьи {{< uuid "b825cd19-f0f5-5a63-acb2-00784311b738" >}} перебрасывает запросы к `.well-known/acme-challenge` на порт `8080`.
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат для доменов `example.org` и `mail.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --http --http.port=':8080' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --http --http.port=':8080' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
 
 #### Параметры
@@ -114,7 +114,7 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 
 ## Метод DNS-01
 
-Let’s Encrypt проверяет принадлежность домена клиенту при помощи специальной TXT-записи `_acme-challenge.example.com` для доменного имени.
+Let’s Encrypt проверяет принадлежность домена клиенту при помощи специальной TXT-записи `_acme-challenge.example.org` для доменного имени.
 
 Плюсы метода:
 
@@ -129,27 +129,27 @@ Let’s Encrypt проверяет принадлежность домена к�
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `*.example.com` в директорию `/root/apps/acme/`:
+- Зарегистрировать адрес `mail@example.org` и получить сертификат для доменов `example.org` и `*.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
-CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' run
+CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='*.example.org' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' run
 ```
 
 #### Параметры
-- `CF_DNS_API_TOKEN` - токен доступа {{< tag "LeGo" >}} к редактированию зоны `example.com`.
+- `CF_DNS_API_TOKEN` - токен доступа {{< tag "LeGo" >}} к редактированию зоны `example.org`.
 - `--accept-tos` - автоматически принять соглашение.
 - `--path` - путь к хранилищу сертификатов (`/root/apps/acme`).
-- `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.com`).
-- `--domains` - список доменов для получения сертификата (`example.com` и `*.example.com`).
+- `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.org`).
+- `--domains` - список доменов для получения сертификата (`example.org` и `*.example.org`).
 - `--dns` - получение сертификата методом `DNS-01`.
 - `--dns.resolvers` - список внешних серверов DNS для доменных имён.
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.com` и `*.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат для доменов `example.org` и `*.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='*.example.com' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
+CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='*.example.org' --pem --pfx --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
 
 #### Параметры
@@ -205,27 +205,27 @@ stream {
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.com` и получить сертификат для доменов `example.com` и `mail.example.com` в директорию `/root/apps/acme/`:
+- Зарегистрировать адрес `mail@example.org` и получить сертификат для доменов `example.org` и `mail.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
-"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' run
+"${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --tls --tls.port=':10443' run
 ```
 
 #### Параметры
 
 - `--accept-tos` - автоматически принять соглашение.
 - `--path` - путь к хранилищу сертификатов (`/root/apps/acme/`).
-- `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.com`).
-- `--domains` - список доменов для получения сертификата (`example.com` и `mail.example.co`).
+- `--email` - адрес электронной почты для регистрации и восстановления сертификата Let’s Encrypt (`mail@example.org`).
+- `--domains` - список доменов для получения сертификата (`example.org` и `mail.example.co`).
 - `--tls` - получение сертификата методом `TLS-ALPN-01`.
 - `--tls.port` - номер порта для работы {{< tag "LeGo" >}} (`10443`).
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.com` и `mail.example.com` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат для доменов `example.org` и `mail.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.com' --domains='example.com' --domains='mail.example.com' --pem --pfx --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
 
 #### Параметры
@@ -252,35 +252,35 @@ stream {
 
 ### Postfix
 
-- Настроить параметры в `/etc/postfix/main.cf` для домена `example.com`:
+- Настроить параметры в `/etc/postfix/main.cf` для домена `example.org`:
 
 ```ini
 # -------------------------------------------------------------------------------------------------------------------- #
 # SSL / TLS
 # -------------------------------------------------------------------------------------------------------------------- #
 
-smtpd_tls_cert_file = /etc/ssl/acme/example.com.crt
-smtpd_tls_key_file = /etc/ssl/acme/example.com.key
-smtpd_tls_CAfile = /etc/ssl/acme/example.com.crt
+smtpd_tls_cert_file = /etc/ssl/acme/example.org.crt
+smtpd_tls_key_file = /etc/ssl/acme/example.org.key
+smtpd_tls_CAfile = /etc/ssl/acme/example.org.crt
 ```
 
 ### Dovecot
 
-- Настроить параметры в `/etc/dovecot/dovecot.conf` для домена `example.com`:
+- Настроить параметры в `/etc/dovecot/dovecot.conf` для домена `example.org`:
 
 ```ini
 # -------------------------------------------------------------------------------------------------------------------- #
 # SSL / TLS
 # -------------------------------------------------------------------------------------------------------------------- #
 
-ssl_cert = </etc/ssl/acme/example.com.crt
-ssl_key = </etc/ssl/acme/example.com.key
-ssl_ca = </etc/ssl/acme/example.com.crt
+ssl_cert = </etc/ssl/acme/example.org.crt
+ssl_key = </etc/ssl/acme/example.org.key
+ssl_ca = </etc/ssl/acme/example.org.crt
 ```
 
 ### MariaDB
 
-- Настроить параметры в `/etc/mysql/my.cnf` для домена `example.com`:
+- Настроить параметры в `/etc/mysql/my.cnf` для домена `example.org`:
 
 ```ini
 [mariadbd]
@@ -289,21 +289,21 @@ ssl_ca = </etc/ssl/acme/example.com.crt
 # SSL / TLS
 # -------------------------------------------------------------------------------------------------------------------- #
 
-ssl_cert = '/etc/ssl/acme/example.com.crt'
-ssl_key = '/etc/ssl/acme/example.com.key'
-ssl_ca = '/etc/ssl/acme/example.com.crt'
+ssl_cert = '/etc/ssl/acme/example.org.crt'
+ssl_key = '/etc/ssl/acme/example.org.key'
+ssl_ca = '/etc/ssl/acme/example.org.crt'
 ```
 
 ### OpenLDAP
 
-- Настроить параметры в `/etc/ldap/slapd.conf` для домена `example.com`:
+- Настроить параметры в `/etc/ldap/slapd.conf` для домена `example.org`:
 
 ```
 # -------------------------------------------------------------------------------------------------------------------- #
 # SSL / TLS
 # -------------------------------------------------------------------------------------------------------------------- #
 
-TLSCertificateFile /etc/ssl/acme/example.com.crt
-TLSCertificateKeyFile /etc/ssl/acme/example.com.key
-TLSCACertificateFile /etc/ssl/acme/example.com.crt
+TLSCertificateFile /etc/ssl/acme/example.org.crt
+TLSCertificateKeyFile /etc/ssl/acme/example.org.key
+TLSCACertificateFile /etc/ssl/acme/example.org.crt
 ```

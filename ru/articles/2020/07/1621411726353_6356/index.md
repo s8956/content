@@ -144,7 +144,7 @@ gpg --list-keys --keyid-format LONG --with-fingerprint
 
 pub   ed25519/JTM4BAVLPI8F0XHR 2020-02-17 [SC]
       Key fingerprint = XXXX XXXX XXXX XXXX XXXX  XXXX XXXX XXXX XXXX XXXX
-uid                 [ultimate] John Doe <john.doe@example.com>
+uid                 [ultimate] John Doe <john.doe@example.org>
 sub   cv25519/AI9NEDUOWRF016Y2 2020-02-17 [E]
 ```
 
@@ -152,7 +152,7 @@ sub   cv25519/AI9NEDUOWRF016Y2 2020-02-17 [E]
 - `JTM4BAVLPI8F0XHR` - идентификатор ключа. Он потребуется для каких-либо действий с ключом (редактирование / удаление / и т.п.).
 - `[ultimate]` - уровень доверия к ключу.
 - `John Doe` - имя хозяина ключа.
-- `<john.doe@example.com>` - почта хозяина ключа.
+- `<john.doe@example.org>` - почта хозяина ключа.
 - `ed25519` & `cv25519` - алгоритмы шифрования.
 
 ## Экспорт ключа
@@ -258,7 +258,7 @@ gpg --delete-secret-and-public-key 'JTM4BAVLPI8F0XHR'
 Эти параметры указываются друг за другом в строгом порядке:
 
 ```terminal
-bash bash.gpg.gen.sh key 'John Doe' 'john.doe@example.com' '<PASSPHRASE>'
+bash bash.gpg.gen.sh key 'John Doe' 'john.doe@example.org' '<PASSPHRASE>'
 ```
 
 После отработки скрипта, в директории где он запускался появятся два файла с публичным и приватным ключами.

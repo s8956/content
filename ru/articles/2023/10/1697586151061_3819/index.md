@@ -95,7 +95,7 @@ openssl req -new -key 'client.key' -out 'client.csr'
 - `Locality Name (e.g., city)` - город, в котором юридически находится ваша организация.
 - `Organization Name (e.g., company)` - юридически зарегистрированное название вашей организации.
 - `Organizational Unit Name (e.g., section)` - название вашего отдела в организации (опционально).
-- `Common Name (e.g., server FQDN)` - полное доменное имя (FQDN) (например, www.example.com).
+- `Common Name (e.g., server FQDN)` - полное доменное имя (FQDN) (например, www.example.org).
 - `Email Address` - ваш адрес email (опционально).
 - `A challenge password` - пароль (опционально).
 - `An optional company name` - необязательное название компании (опционально).
@@ -163,7 +163,7 @@ Certificate:
         Validity
             Not Before: Oct 18 21:31:53 2023 GMT
             Not After : Oct 15 21:31:53 2033 GMT
-        Subject: C = AU, ST = Some-State, O = Internet Widgits Pty Ltd, CN = CN-FQDN, emailAddress = mail@example.com
+        Subject: C = AU, ST = Some-State, O = Internet Widgits Pty Ltd, CN = CN-FQDN, emailAddress = mail@example.org
         Subject Public Key Info:
             Public Key Algorithm: id-ecPublicKey
                 Public-Key: (256 bit)
@@ -201,7 +201,7 @@ openssl req -in 'client.csr' -text
 Certificate Request:
     Data:
         Version: 1 (0x0)
-        Subject: C = AU, ST = Some-State, O = Internet Widgits Pty Ltd, CN = CN-FQDN, emailAddress = mail@example.com
+        Subject: C = AU, ST = Some-State, O = Internet Widgits Pty Ltd, CN = CN-FQDN, emailAddress = mail@example.org
         Subject Public Key Info:
             Public Key Algorithm: id-ecPublicKey
                 Public-Key: (256 bit)
@@ -307,11 +307,11 @@ wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash
 Например:
 
 ```bash
-curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
+curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.org' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.org, DNS:*.example.org, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
 ```
 
 ```bash
-wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.com' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.com, DNS:*.example.com, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
+wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.org' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.org, DNS:*.example.org, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
 ```
 
 Таким образом, сертификат будет сгенерирован с заданными параметрами и заверен собственной подписью.
@@ -321,7 +321,7 @@ wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash
 Чтобы создать PFX-файл, необходимо выполнить следующую команду:
 
 ```bash
-f='example.com'; openssl pkcs12 -export -certpbe PBE-SHA1-3DES -keypbe PBE-SHA1-3DES -nomac -inkey "${f}.key" -in "${f}.crt" -out "${f}.pfx"
+f='example.org'; openssl pkcs12 -export -certpbe PBE-SHA1-3DES -keypbe PBE-SHA1-3DES -nomac -inkey "${f}.key" -in "${f}.crt" -out "${f}.pfx"
 ```
 
 Где:

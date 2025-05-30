@@ -58,7 +58,7 @@ cat /var/log/jitsi/jicofo.log
 2024-11-05 11:36:06.116 INFO: [33] SipGateway.registrationStateChanged#120: REG STATE CHANGE ProtocolProviderServiceSipImpl(SIP:1234@192.168.1.2) -> RegistrationStateChangeEvent[ oldState=Unregistered; newState=RegistrationState=Registering; userRequest=false; reasonCode=-1; reason=null]
 2024-11-05 11:36:06.179 INFO: [43] SipGateway.registrationStateChanged#120: REG STATE CHANGE ProtocolProviderServiceSipImpl(SIP:1234@192.168.1.2) -> RegistrationStateChangeEvent[ oldState=Registering; newState=RegistrationState=Registered; userRequest=false; reasonCode=-1; reason=null]
 2024-11-05 11:36:06.180 WARNING: [43] SipHealthPeriodicChecker.create#170: No health check started, no HEALTH_CHECK_SIP_URI prop.
-2024-11-05 11:36:06.231 SEVERE: [40] net.java.sip.communicator.impl.protocol.jabber.ProtocolProviderServiceJabberImpl.connectAndLogin: Failed to connect to XMPP service for:ProtocolProviderServiceJabberImpl(Jabber:jigasi@auth.sub.example.com)
+2024-11-05 11:36:06.231 SEVERE: [40] net.java.sip.communicator.impl.protocol.jabber.ProtocolProviderServiceJabberImpl.connectAndLogin: Failed to connect to XMPP service for:ProtocolProviderServiceJabberImpl(Jabber:jigasi@auth.sub.example.org)
 org.jivesoftware.smack.SmackException$EndpointConnectionException: The following addresses failed: 'RFC 6120 A/AAAA Endpoint + [127.0.0.1/127.0.0.1:5222] (127.0.0.1/127.0.0.1:5222)' failed because: java.net.ConnectException: Connection refused
         at org.jivesoftware.smack.SmackException$EndpointConnectionException.from(SmackException.java:334)
         at org.jivesoftware.smack.tcp.XMPPTCPConnection.connectUsingConfiguration(XMPPTCPConnection.java:664)

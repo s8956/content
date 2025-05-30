@@ -69,10 +69,10 @@ draft: 0
 /ip firewall address-list add list=acme address=0.0.0.0/0 timeout=00:02:00 comment="[ROS] ACME running..."
 ```
 
-- Запустить получение сертификата для домена `sub.example.com`:
+- Запустить получение сертификата для домена `sub.example.org`:
 
 ```
-/certificate enable-ssl-certificate dns-name=sub.example.com
+/certificate enable-ssl-certificate dns-name=sub.example.org
 ```
 
 - Отключить сервис `WWW`:

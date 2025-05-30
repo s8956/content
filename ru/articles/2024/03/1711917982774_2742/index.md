@@ -52,11 +52,11 @@ draft: 0
 ## Исходные данные
 
 - Маршрутизатор `R1`:
-  - WAN IP: `gw1.example.com`.
+  - WAN IP: `gw1.example.org`.
   - LAN IP: `10.1.0.1`.
   - Network: `10.1.0.0/16`.
 - Маршрутизатор `R2`:
-  - WAN IP: `gw2.example.com`.
+  - WAN IP: `gw2.example.org`.
   - LAN IP: `10.2.0.1`.
   - Network: `10.2.0.0/16`.
 
@@ -87,14 +87,14 @@ add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=e
 
 - Добавляем {{< tag "IPsec" >}} peer:
   - Имя peer'а: `GW2`.
-  - Внешний адрес `R2`: `gw2.example.com`.
+  - Внешний адрес `R2`: `gw2.example.org`.
   - Профиль: `ipsec-sts`.
   - Режим обмена: `ike2`.
   - Комментарий: `GW2`.
 
 ```text
 /ip ipsec peer
-add address="gw2.example.com" exchange-mode=ike2 name=GW2 profile=ipsec-sts comment="GW2"
+add address="gw2.example.org" exchange-mode=ike2 name=GW2 profile=ipsec-sts comment="GW2"
 ```
 
 - Добавляем идентификацию:
@@ -177,14 +177,14 @@ add auth-algorithms=sha256 enc-algorithms=aes-256-cbc name=ipsec-sts pfs-group=e
 
 - Добавляем {{< tag "IPsec" >}} peer:
   - Имя peer'а: `GW1`.
-  - Внешний адрес `R1`: `gw1.example.com`.
+  - Внешний адрес `R1`: `gw1.example.org`.
   - Профиль: `ipsec-sts`.
   - Режим обмена: `ike2`.
   - Комментарий: `GW1`.
 
 ```text
 /ip ipsec peer
-add address="gw1.example.com" exchange-mode=ike2 name=GW1 profile=ipsec-sts comment="GW1"
+add address="gw1.example.org" exchange-mode=ike2 name=GW1 profile=ipsec-sts comment="GW1"
 ```
 
 - Добавляем идентификацию:

@@ -56,7 +56,7 @@ git config --global user.name "John Doe"
 2. Указать свой адрес e-mail:
 
 ```bash
-git config --global user.email "johndoe@example.com"
+git config --global user.email "johndoe@example.org"
 ```
 
 ## Настройка подписи

@@ -161,13 +161,13 @@ draft: 0
 Переадресация запроса с одного ресурса (или страницы) на другой ресурс (или страницу).
 
 {{< accordion >}}
-{{< accordion-item "example.com | www.example.com" >}}
-`https://example.com` `->` `https://www.example.com`
+{{< accordion-item "example.org | www.example.org" >}}
+`https://example.org` `->` `https://www.example.org`
 
 **When incoming requests match:**
 
 ```lua
-(http.host eq "example.com")
+(http.host eq "example.org")
 ```
 
 **Then...**
@@ -181,13 +181,13 @@ draft: 0
 concat("https://www.", http.host, http.request.uri.path)
 ```
 {{< /accordion-item >}}
-{{< accordion-item "www.example.com | example.com" >}}
-`https://www.example.com` `->` `https://example.com`
+{{< accordion-item "www.example.org | example.org" >}}
+`https://www.example.org` `->` `https://example.org`
 
 **When incoming requests match:**
 
 ```lua
-(http.host eq "www.example.com")
+(http.host eq "www.example.org")
 ```
 
 **Then...**
@@ -201,13 +201,13 @@ concat("https://www.", http.host, http.request.uri.path)
 concat("https://", http.host, http.request.uri.path)
 ```
 {{< /accordion-item >}}
-{{< accordion-item "example.com/path | example.org/path">}}
-`https://example.com/path` `->` `https://example.org/path`
+{{< accordion-item "example.org/path | example.org/path">}}
+`https://example.org/path` `->` `https://example.org/path`
 
 **When incoming requests match:**
 
 ```lua
-(http.host eq "example.com")
+(http.host eq "example.org")
 ```
 
 **Then...**
@@ -221,13 +221,13 @@ concat("https://", http.host, http.request.uri.path)
 concat("https://example.org", http.request.uri.path)
 ```
 {{< /accordion-item >}}
-{{< accordion-item "example.com | example.org">}}
-`https://example.com` `->` `https://example.org`
+{{< accordion-item "example.org | example.org">}}
+`https://example.org` `->` `https://example.org`
 
 **When incoming requests match:**
 
 ```lua
-(http.host contains "example.com")
+(http.host contains "example.org")
 ```
 
 **Then...**
@@ -241,13 +241,13 @@ concat("https://example.org", http.request.uri.path)
 https://example.org/
 ```
 {{< /accordion-item >}}
-{{< accordion-item "sub.example.com | example.com/sub">}}
-`https://sub.example.com` `->` `https://example.com/sub`
+{{< accordion-item "sub.example.org | example.org/sub">}}
+`https://sub.example.org` `->` `https://example.org/sub`
 
 **When incoming requests match:**
 
 ```lua
-(http.host eq "sub.example.com")
+(http.host eq "sub.example.org")
 ```
 
 **Then...**
@@ -261,8 +261,8 @@ https://example.org/
 concat("https://", http.host, "/sub", http.request.uri.path)
 ```
 {{< /accordion-item >}}
-{{< accordion-item "example.com/sub | sub.example.com">}}
-`https://example.com/sub` `->` `https://sub.example.com`
+{{< accordion-item "example.org/sub | sub.example.org">}}
+`https://example.org/sub` `->` `https://sub.example.org`
 
 **When incoming requests match:**
 
@@ -283,8 +283,8 @@ concat("https://sub.", http.host, substring(http.request.uri.path, 6))
 
 Число в функции `substring()` - это количество символов в названии директории `sub` + 1 символ.
 {{< /accordion-item >}}
-{{< accordion-item "example.com/contact-us/ | example.com/contact/">}}
-`https://example.com/contact-us/` `->` `https://example.com/contact/`
+{{< accordion-item "example.org/contact-us/ | example.org/contact/">}}
+`https://example.org/contact-us/` `->` `https://example.org/contact/`
 
 **When incoming requests match:**
 
@@ -311,7 +311,7 @@ concat("https://sub.", http.host, substring(http.request.uri.path, 6))
 
 {{< accordion >}}
 {{< accordion-item "Переадресовать запрос к любым портам (кроме '80' и '443') на порт '443' (HTTPS)" >}}
-`https://example.com:1212` `->` `https://example.com`
+`https://example.org:1212` `->` `https://example.org`
 
 **When incoming requests match:**
 
@@ -338,7 +338,7 @@ concat("https://", http.host, http.request.uri.path)
 
 {{< accordion >}}
 {{< accordion-item "Переадресовать пользователей из стран RU/BY/UA в директорию '/ru'" >}}
-`https://example.com` `->` `https://example.com/ru/`
+`https://example.org` `->` `https://example.org/ru/`
 
 **When incoming requests match:**
 
@@ -358,7 +358,7 @@ lower(concat("https://", http.host, "/ru/"))
 ```
 {{< /accordion-item >}}
 {{< accordion-item "Переадресовать пользователей НЕ из стран RU/BY/UA в директорию '/en'" >}}
-`https://example.com` `->` `https://example.com/en/`
+`https://example.org` `->` `https://example.org/en/`
 
 **When incoming requests match:**
 

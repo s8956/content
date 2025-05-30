@@ -134,8 +134,8 @@ draft: 0
   - `ACL_SNMP_RO` - лист доступа для подключения к SNMP Cisco.
 - `snmp-server location Petrovka 37, 2 floor, room 220` - указать информацию по местонахождению устройства в SNMP-сервере Cisco.
   - `Petrovka 37, 2 floor, room 220` - адрес устройства Cisco.
-- `snmp-server contact mail@example.com` - указать контактную информацию в SNMP-сервере Cisco.
-  - `mail@example.com` - контактный адрес электронной почты.
+- `snmp-server contact mail@example.org` - указать контактную информацию в SNMP-сервере Cisco.
+  - `mail@example.org` - контактный адрес электронной почты.
 
 ### Интерфейсы
 

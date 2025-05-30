@@ -53,8 +53,8 @@ draft: 1
 
 - IP-адрес DNS-сервера `NS01`: `192.168.1.2`.
 - IP-адрес DNS-сервера `NS02`: `192.168.1.3`.
-- IP-адрес домена `example.com`: `192.168.1.5`.
-- IP-адрес домена `mail.example.com`: `192.168.1.6`.
+- IP-адрес домена `example.org`: `192.168.1.5`.
+- IP-адрес домена `mail.example.org`: `192.168.1.6`.
 
 ## Установка
 
@@ -88,13 +88,13 @@ for i in 'named.conf.options' 'named.conf.default-zones'; do mv "/etc/bind/${i}"
 
 {{< file "named.conf.default-zones" >}}
 
-- Добавить в файл `/etc/bind/named.conf.local` описание прямой и обратной зоны `example.com`:
+- Добавить в файл `/etc/bind/named.conf.local` описание прямой и обратной зоны `example.org`:
 
 {{< file "named.conf.local.master" >}}
 
-- Создать файл прямой зоны `/etc/bind/db.example.com` со следующим содержанием:
+- Создать файл прямой зоны `/etc/bind/db.example.org` со следующим содержанием:
 
-{{< file "db.example.com" "dns" >}}
+{{< file "db.example.org" "dns" >}}
 
 - Создать файл обратной зоны `/etc/bind/db.192.168.1` со следующим содержанием:
 

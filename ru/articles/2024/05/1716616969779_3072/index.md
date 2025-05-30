@@ -78,31 +78,31 @@ python3 '/opt/iredapd/tools/wblist_admin.py' --list --whitelist
 - Добавить в белый список IP-адрес, email, домен и суб-домен:
 
 ```bash
-python3 '/opt/iredapd/tools/wblist_admin.py' --add --whitelist '192.168.1.10' 'user@domain.com' '@iredmail.org' '@.example.com'
+python3 '/opt/iredapd/tools/wblist_admin.py' --add --whitelist '192.168.1.10' 'user@domain.com' '@iredmail.org' '@.example.org'
 ```
 
 - Удалить из белого списка IP-адрес, email, домен и суб-домен:
 
 ```bash
-python3 '/opt/iredapd/tools/wblist_admin.py' --delete --whitelist '192.168.1.10' 'user@domain.com' '@iredmail.org' '@.example.com'
+python3 '/opt/iredapd/tools/wblist_admin.py' --delete --whitelist '192.168.1.10' 'user@domain.com' '@iredmail.org' '@.example.org'
 ```
 
-- Создать для локального почтового домена `@domain.com` белый список и внести в него IP-адрес `192.168.1.10` и email `user@example.com`:
+- Создать для локального почтового домена `@domain.com` белый список и внести в него IP-адрес `192.168.1.10` и email `user@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/wblist_admin.py' --account '@domain.com' --add --whitelist '192.168.1.10' 'user@example.com'
+python3 '/opt/iredapd/tools/wblist_admin.py' --account '@domain.com' --add --whitelist '192.168.1.10' 'user@example.org'
 ```
 
-- Создать для локального почтового домена `@domain.com` и всех его суб-доменов белый список и внести в него IP-адрес `192.168.1.10` и email `user@example.com`:
+- Создать для локального почтового домена `@domain.com` и всех его суб-доменов белый список и внести в него IP-адрес `192.168.1.10` и email `user@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/wblist_admin.py' --account '@.domain.com' --add --whitelist '192.168.1.10' 'user@example.com'
+python3 '/opt/iredapd/tools/wblist_admin.py' --account '@.domain.com' --add --whitelist '192.168.1.10' 'user@example.org'
 ```
 
-- Создать для локального пользователя `user@domain.com` белый список и внести в него IP-адрес `192.168.1.10` и email `user@example.com`:
+- Создать для локального пользователя `user@domain.com` белый список и внести в него IP-адрес `192.168.1.10` и email `user@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/wblist_admin.py' --account 'user@domain.com' --add --whitelist '192.168.1.10' 'user@example.com'
+python3 '/opt/iredapd/tools/wblist_admin.py' --account 'user@domain.com' --add --whitelist '192.168.1.10' 'user@example.org'
 ```
 
 - Показать записи из белого списка для локального почтового домена `@domain.com`:
@@ -143,22 +143,22 @@ python3 '/opt/iredapd/tools/wblist_admin.py' --add --blacklist 'sender@*'
 python3 '/opt/iredapd/tools/wblist_admin.py' --delete --blacklist '202.96.134.133' 'bad-user@domain.com' '@bad-domain.com' '@.sub-domain.com'
 ```
 
-- Создать для локального почтового домена `@domain.com` чёрный список и внести в него IP-адрес `172.16.1.10` и email `bad-user@example.com`:
+- Создать для локального почтового домена `@domain.com` чёрный список и внести в него IP-адрес `172.16.1.10` и email `bad-user@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/wblist_admin.py' --account '@domain.com' --add --blacklist '172.16.1.10' 'bad-user@example.com'
+python3 '/opt/iredapd/tools/wblist_admin.py' --account '@domain.com' --add --blacklist '172.16.1.10' 'bad-user@example.org'
 ```
 
-- Создать для локального почтового домена `@domain.com` и всех его суб-доменов чёрный список и внести в него IP-адрес `172.16.1.10` и email `bad-user@example.com`:
+- Создать для локального почтового домена `@domain.com` и всех его суб-доменов чёрный список и внести в него IP-адрес `172.16.1.10` и email `bad-user@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/wblist_admin.py' --account '@.domain.com' --add --blacklist '172.16.1.10' 'bad-user@example.com'
+python3 '/opt/iredapd/tools/wblist_admin.py' --account '@.domain.com' --add --blacklist '172.16.1.10' 'bad-user@example.org'
 ```
 
-- Создать для локального пользователя `user@domain.com` чёрный список и внести в него IP-адрес `172.16.1.10` и email `bad-user@example.com`:
+- Создать для локального пользователя `user@domain.com` чёрный список и внести в него IP-адрес `172.16.1.10` и email `bad-user@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/wblist_admin.py' --account 'user@domain.com' --add --blacklist '172.16.1.10' 'bad-user@example.com'
+python3 '/opt/iredapd/tools/wblist_admin.py' --account 'user@domain.com' --add --blacklist '172.16.1.10' 'bad-user@example.org'
 ```
 
 - Показать записи из чёрного списка для локального пользователя `user@domain.com`:
@@ -197,34 +197,34 @@ python3 '/opt/iredapd/tools/greylisting_admin.py' --list-whitelist-domains
 python3 '/opt/iredapd/tools/greylisting_admin.py' --list-whitelists
 ```
 
-- Добавить домен отправителя `@example.com` в белый список:
+- Добавить домен отправителя `@example.org` в белый список:
 
 ```bash
-python3 '/opt/iredapd/tools/greylisting_admin.py' --whitelist-domain --from '@example.com'
+python3 '/opt/iredapd/tools/greylisting_admin.py' --whitelist-domain --from '@example.org'
 ```
 
-- Удалить домен отправителя `@example.com` из белого списка:
+- Удалить домен отправителя `@example.org` из белого списка:
 
 ```bash
-python3 '/opt/iredapd/tools/greylisting_admin.py' --remove-whitelist-domain --from '@example.com'
+python3 '/opt/iredapd/tools/greylisting_admin.py' --remove-whitelist-domain --from '@example.org'
 ```
 
-- Включить серый список для локального почтового домена `@example.com`:
+- Включить серый список для локального почтового домена `@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/greylisting_admin.py' --enable --to '@example.com'
+python3 '/opt/iredapd/tools/greylisting_admin.py' --enable --to '@example.org'
 ```
 
-- Отключить серый список для локального пользователя `user@example.com`:
+- Отключить серый список для локального пользователя `user@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/greylisting_admin.py' --disable --to 'user@example.com'
+python3 '/opt/iredapd/tools/greylisting_admin.py' --disable --to 'user@example.org'
 ```
 
-- Отключить серый список для писем, отправленных с домена `@gmail.com` локальному пользователю `user@example.com`:
+- Отключить серый список для писем, отправленных с домена `@gmail.com` локальному пользователю `user@example.org`:
 
 ```bash
-python3 '/opt/iredapd/tools/greylisting_admin.py' --disable --from '@gmail.com' --to 'user@example.com'
+python3 '/opt/iredapd/tools/greylisting_admin.py' --disable --from '@gmail.com' --to 'user@example.org'
 ```
 
 - Отключить серый список для писем, отправленных с IP-адреса `45.56.127.226`:

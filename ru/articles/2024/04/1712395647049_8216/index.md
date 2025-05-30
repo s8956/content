@@ -53,11 +53,11 @@ draft: 0
 ## Исходные данные
 
 - Маршрутизатор `R1`:
-  - WAN IP: `gw1.example.com`.
+  - WAN IP: `gw1.example.org`.
   - LAN IP: `10.1.0.1`.
   - Network: `10.1.0.0/16`.
 - Маршрутизатор `R2`:
-  - WAN IP: `gw2.example.com`.
+  - WAN IP: `gw2.example.org`.
   - LAN IP: `10.2.0.1`.
   - Network: `10.2.0.0/16`.
 
@@ -165,7 +165,7 @@ add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 
   - Интерфейс: `wireguard-sts`.
   - Публичный ключ маршрутизатора `R2`: `<public-key>`.  
     *Публичный ключ берём от маршрутизатора `R2`.*
-  - Адрес EndPoint маршрутизатора `R2`: `gw2.example.com`.
+  - Адрес EndPoint маршрутизатора `R2`: `gw2.example.org`.
   - Порт EndPoint маршрутизатора `R2`: `51820`.
   - Разрешённые адреса:
     - `10.2.0.0/16` - адрес удалённой сети маршрутизатора `R2`.
@@ -176,7 +176,7 @@ add action=accept chain=forward src-address=10.2.0.0/16 dst-address=10.1.0.0/16 
 
 ```text
 /interface wireguard peers
-add allowed-address=10.2.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw2.example.com endpoint-port=51820 interface=wireguard-sts public-key="<public-key>" comment="[WG] GW2"
+add allowed-address=10.2.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw2.example.org endpoint-port=51820 interface=wireguard-sts public-key="<public-key>" comment="[WG] GW2"
 ```
 
 ### Router #2
@@ -185,7 +185,7 @@ add allowed-address=10.2.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw
   - Интерфейс: `wireguard-sts`.
   - Публичный ключ маршрутизатора `R1`: `<public-key>`.  
     *Публичный ключ берём от маршрутизатора `R1`.*
-  - Адрес EndPoint маршрутизатора `R1`: `gw1.example.com`.
+  - Адрес EndPoint маршрутизатора `R1`: `gw1.example.org`.
   - Порт EndPoint маршрутизатора `R1`: `51820`.
   - Разрешённые адреса:
     - `10.1.0.0/16` - адрес удалённой сети маршрутизатора `R1`.
@@ -196,7 +196,7 @@ add allowed-address=10.2.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw
 
 ```text
 /interface wireguard peers
-add allowed-address=10.1.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw1.example.com endpoint-port=51820 interface=wireguard-sts public-key="<public-key>" comment="[WG] GW1"
+add allowed-address=10.1.0.0/16,10.255.255.0/24,224.0.0.5/32 endpoint-address=gw1.example.org endpoint-port=51820 interface=wireguard-sts public-key="<public-key>" comment="[WG] GW1"
 ```
 
 ## Настройка OSPF

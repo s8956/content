@@ -58,7 +58,7 @@ draft: 0
 Получить общую информацию по домену в `Dig`:
 
 ```bash
-dig example.com
+dig example.org
 ```
 
 Результат запроса:
@@ -99,7 +99,7 @@ google.com.             112     IN      A       173.194.222.102
 Получить общую информацию по домену в `Drill`:
 
 ```bash
-drill example.com
+drill example.org
 ```
 
 Результат запроса:
@@ -133,7 +133,7 @@ google.com.     184     IN      A       216.58.210.142
 Получить общую информацию по домену в `NSLookUp`:
 
 ```bash
-nslookup example.com
+nslookup example.org
 ```
 
 Результат запроса:
@@ -179,7 +179,7 @@ Address: 2a00:1450:4010:c0b::65
 Получить информацию по MX-записи домена в `Dig`:
 
 ```bash
-dig mx example.com
+dig mx example.org
 ```
 
 Результат запроса:
@@ -226,7 +226,7 @@ smtp.google.com.        300     IN      AAAA    2a00:1450:4010:c06::1b
 Получить информацию по MX-записи домена в `Drill`:
 
 ```bash
-drill mx example.com
+drill mx example.org
 ```
 
 Результат запроса:
@@ -265,7 +265,7 @@ smtp.google.com.        30      IN      A       142.250.150.26
 Получить информацию по MX-записи домена в `NSLookUp`:
 
 ```bash
-nslookup -type=mx example.com
+nslookup -type=mx example.org
 ```
 
 Результат запроса:
@@ -298,7 +298,7 @@ smtp.google.com internet address = 173.194.220.26
 Получить информацию по трассировке запросов к домену в `Dig`:
 
 ```bash
-dig +trace example.com
+dig +trace example.org
 ```
 
 Результат запроса:
@@ -364,7 +364,7 @@ google.com.             300     IN      A       74.125.131.101
 Получить информацию по трассировке запросов к домену в `Drill`:
 
 ```bash
-drill -T example.com
+drill -T example.org
 ```
 
 Результат запроса:

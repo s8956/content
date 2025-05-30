@@ -129,8 +129,8 @@ curl -X GET "https://api.cloudflare.com/client/v4/zones/<...>/dns_records" -H "A
         {
             "id": "gJDSG5la4IWNOEVn6K2PHyope8Q9YhzC",
             "zone_id": "<...>",
-            "zone_name": "example.com",
-            "name": "example.com",
+            "zone_name": "example.org",
+            "name": "example.org",
             "type": "A",
             "content": "192.168.10.232",
             "proxiable": true,
