@@ -88,28 +88,10 @@ f=('mongod'); d='/etc'; s='https://lib.onl/ru/2025/02/08fbbde7-70fc-56d5-aa9e-2f
 
 ### Включение авторизации
 
-- Запустить командную оболочку `mongosh`:
+- Запустить командную оболочку `mongosh`, создать пользователя `root` с паролем `PASSWORD` и ролью `root`:
 
 ```bash
-mongosh
-```
-
-- Перейти в базу данных `admin`:
-
-```js
-use admin
-```
-
-- Создать пользователя `admin` с паролем `PASSWORD` и ролью `root` для базы данных `admin`:
-
-```js
-db.createUser({user: "admin", pwd: "PASSWORD", roles: [{role: "root", db: "admin"}]})
-```
-
-- Выйти из командной оболочки `mongosh`:
-
-```js
-quit()
+mongosh --eval 'use admin' --eval 'db.createUser({user: "root", pwd: "PASSWORD", roles: [{role: "root", db: "admin"}]})'
 ```
 
 - Добавить в файл `/etc/mongod.conf` следующие строки для включения авторизации:
@@ -128,5 +110,5 @@ systemctl restart mongod
 - Запустить командную оболочку `mongosh` с включённой авторизацией:
 
 ```bash
-mongosh 'mongodb://localhost:27017' --username 'admin' --authenticationDatabase 'admin'
+mongosh --username 'root' --authenticationDatabase 'admin'
 ```

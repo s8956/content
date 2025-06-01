@@ -84,6 +84,14 @@ export SET_DIR='/root/apps/backup'; export GH_NAME='bash-backup-db'; export GH_U
 - Скопировать файл `cron_backup_db` в директорию `/etc/cron.d/`.
 - Настроить параметры скрипта в файле `app.backup.db.conf`.
 
+#### MongoDB
+
+- Запустить командную оболочку `mongosh`, создать пользователя `backup` с паролем `PASSWORD` и дать ему роль `backup`:
+
+```bash
+mongosh --username 'root' --authenticationDatabase 'admin' --eval 'use admin' --eval 'db.createUser({user: "backup", pwd: "PASSWORD", roles: [{role: "backup", db: "admin"}]})'
+```
+
 #### MariaDB
 
 - Создать пользователя `backup@127.0.0.1` с паролем `PASSWORD` и дать ему разрешения на все базы данных:
@@ -195,10 +203,10 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 
 ### GPG
 
-- Расшифровать архив базы данных `DB_NAME.sql.xz.gpg` при помощи секретной фразы `SECRET`:
+- Расшифровать архив базы данных `DB_NAME.xz.gpg` при помощи секретной фразы `SECRET`:
 
 ```bash
-f='DB_NAME.sql.xz.gpg'; p='SECRET'; gpg --batch --passphrase "${p}" --output "${f%.*}" --decrypt "${f}"
+f='DB_NAME.xz.gpg'; p='SECRET'; gpg --batch --passphrase "${p}" --output "${f%.*}" --decrypt "${f}"
 ```
 
 ### OpenSSL
@@ -207,10 +215,18 @@ f='DB_NAME.sql.xz.gpg'; p='SECRET'; gpg --batch --passphrase "${p}" --output "${
 При использовании OpenSSL параметры дешифрования должны соответствовать параметрам шифрования. Без знания параметров шифрования, дешифровать данные не получится.
 {{< /alert >}}
 
-- Расшифровать архив базы данных `DB_NAME.sql.xz.ssl` при помощи секретной фразы `SECRET`, дайджеста (`-md`) `sha512` и количества итераций (`-iter`) `65536`:
+- Расшифровать архив базы данных `DB_NAME.xz.ssl` при помощи секретной фразы `SECRET`, дайджеста (`-md`) `sha512` и количества итераций (`-iter`) `65536`:
 
 ```bash
-f='DB_NAME.sql.xz.ssl'; p='SECRET'; openssl enc -aes-256-cfb -in "${f}" -out "${f%.*}" -pass "pass:${p}" -d -md 'sha512' -iter '65536' -salt -pbkdf2
+f='DB_NAME.xz.ssl'; p='SECRET'; openssl enc -aes-256-cfb -in "${f}" -out "${f%.*}" -pass "pass:${p}" -d -md 'sha512' -iter '65536' -salt -pbkdf2
+```
+
+### MongoDB
+
+- Восстановить базу данных `DB_NAME` из архива `DB_NAME.xz`:
+
+```bash
+mongorestore --username='root' --authenticationDatabase='admin' --archive='DB_NAME.xz' --nsInclude='DB_NAME.*' --oplogReplay --drop
 ```
 
 ### MariaDB
@@ -233,7 +249,7 @@ echo "create database if not exists DB_NAME character set 'utf8mb4' collate 'utf
 echo "grant all privileges on DB_NAME.* to 'DB_USER'@'127.0.0.1'; flush privileges;" | mariadb --user='root' --password
 ```
 
-- Импортировать данные в новую базу данных `DB_NAME` из файла `DB_NAME.sql.xz`:
+- Импортировать данные в новую базу данных `DB_NAME` из файла `DB_NAME.xz`:
 
 ```bash
 d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && mariadb --user='root' --password --database="${d}" < "${f}"
@@ -253,7 +269,7 @@ sudo -u 'postgres' dropdb --if-exists 'DB_NAME'
 sudo -u 'postgres' createdb --owner='DB_USER' 'DB_NAME'
 ```
 
-- Восстановить базу данных `DB_NAME` под пользователем `DB_USER` из файла `DB_NAME.sql.xz`:
+- Восстановить базу данных `DB_NAME` под пользователем `DB_USER` из файла `DB_NAME.xz`:
 
 ```bash
 u='DB_USER'; d='DB_NAME'; f="${d}.sql"; xz -d "${f}.xz" && psql --host='127.0.0.1' --port='5432' --username="${u}" --password --dbname="${d}" --file="${f}" --no-psqlrc --single-transaction
