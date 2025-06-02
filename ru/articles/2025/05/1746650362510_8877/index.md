@@ -142,7 +142,7 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 
 Индивидуальные параметры для резервного копирования базы дынных СУБД PostgreSQL.
 
-- `PGSQL_CL` - добавить опцию `--clean` при создании резервной копии БД PgSQL.
+- `PGSQL_CLN` - добавить опцию `--clean` при создании резервной копии БД PgSQL.
   - `0` - убрать опцию.
   - `1` - добавить опцию (по умолчанию).
 - `PGSQL_FMT` - добавить опцию `--format=FORMAT`.
