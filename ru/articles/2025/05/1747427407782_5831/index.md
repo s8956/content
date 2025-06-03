@@ -140,5 +140,5 @@ f='FILE_NAME.tar.xz.gpg'; p='SECRET'; gpg --batch --passphrase "${p}" --output "
 - Расшифровать архив базы данных `DB_NAME.sql.xz.ssl` при помощи секретной фразы `SECRET`, дайджеста (`-md`) `sha512` и количества итераций (`-iter`) `65536`:
 
 ```bash
-f='DB_NAME.sql.xz.ssl'; p='SECRET'; openssl enc -aes-256-cfb -in "${f}" -out "${f%.*}" -pass "pass:${p}" -d -md 'sha512' -iter '65536' -salt -pbkdf2
+f='FILE_NAME.tar.xz.ssl'; p='SECRET'; openssl enc -aes-256-cfb -in "${f}" -out "${f%.*}" -pass "pass:${p}" -d -md 'sha512' -iter '65536' -salt -pbkdf2
 ```
