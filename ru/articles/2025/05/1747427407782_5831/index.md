@@ -53,8 +53,8 @@ draft: 0
 
 Скрипт состоит из трёх компонентов:
 
-- `app.backup.fs.conf` - файл с настройками.
-- `app.backup.fs.sh` - приложение.
+- `app_backup_fs.conf` - файл с настройками.
+- `app_backup_fs.sh` - приложение.
 - `cron_backup_fs` - задание для CRON.
 
 ### Установка
@@ -62,12 +62,12 @@ draft: 0
 - Скачать и распаковать скрипт:
 
 ```bash
-export SET_DIR='/root/apps/backup'; export GH_NAME='bash-backup-fs'; export GH_URL="https://github.com/pkgstore/${GH_NAME}/archive/refs/heads/main.tar.gz"; curl -Lo "${GH_NAME}-main.tar.gz" "${GH_URL}" && tar -xzf "${GH_NAME}-main.tar.gz" && { cd "${GH_NAME}-main" || exit; } && { for i in app.*; do install -m 644 -Dt "${SET_DIR}" "${i}"; done; } && { for i in cron_*; do install -m 644 -Dt '/etc/cron.d' "${i}"; done; } && chmod +x "${SET_DIR}"/*.sh
+export SET_DIR='/root/apps/backup'; export GH_NAME='bash-backup-fs'; export GH_URL="https://github.com/pkgstore/${GH_NAME}/archive/refs/heads/main.tar.gz"; curl -Lo "${GH_NAME}-main.tar.gz" "${GH_URL}" && tar -xzf "${GH_NAME}-main.tar.gz" && { cd "${GH_NAME}-main" || exit; } && { for i in app_*; do install -m 644 -Dt "${SET_DIR}" "${i}"; done; } && { for i in cron_*; do install -m 644 -Dt '/etc/cron.d' "${i}"; done; } && chmod +x "${SET_DIR}"/*.sh
 ```
 
-- Скопировать файлы `app.backup.fs.conf` и `app.backup.fs.sh` в директорию `/root/apps/backup/`.
+- Скопировать файлы `app_backup_fs.conf` и `app_backup_fs.sh` в директорию `/root/apps/backup/`.
 - Скопировать файл `cron_backup_fs` в директорию `/etc/cron.d/`.
-- Настроить параметры скрипта в файле `app.backup.fs.conf`.
+- Настроить параметры скрипта в файле `app_backup_fs.conf`.
 
 ### Настройка
 
