@@ -79,11 +79,13 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.org` и получить сертификат для доменов `example.org` и `mail.example.org` в директорию `/root/apps/acme/`:
+- Зарегистрировать адрес `mail@example.org` и получить сертификат с типом ключа `ec256` для доменов `example.org` и `mail.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
 "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='ec256' --http --http.port=':8080' run
 ```
+
+- Зарегистрировать адрес `mail@example.org` и получить сертификат с типом ключа `rsa4096` для доменов `example.org` и `mail.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
 "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='rsa4096' --http --http.port=':8080' run
@@ -100,11 +102,13 @@ Let’s Encrypt выдаёт клиенту токен, клиент запис�
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.org` и `mail.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат с типом ключа `ec256` для доменов `example.org` и `mail.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
-"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='ec256' --http --http.port=':8080' -renew-hook="${HOME}/apps/acme/app.hook.sh" renew
+"${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='ec256' --http --http.port=':8080' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
+
+- Обновить сертификат с типом ключа `rsa4096` для доменов `example.org` и `mail.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
 "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='rsa4096' --http --http.port=':8080' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
@@ -137,11 +141,13 @@ Let’s Encrypt проверяет принадлежность домена к�
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.org` и получить сертификат для доменов `example.org` и `*.example.org` в директорию `/root/apps/acme/`:
+- Зарегистрировать адрес `mail@example.org` и получить сертификат с типом ключа `ec256` для доменов `example.org` и `*.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
 CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='*.example.org' --pem --pfx --key-type='ec256' --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' run
 ```
+
+- Зарегистрировать адрес `mail@example.org` и получить сертификат с типом ключа `rsa4096` для доменов `example.org` и `*.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
 CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='*.example.org' --pem --pfx --key-type='rsa4096' --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' run
@@ -158,11 +164,13 @@ CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.org` и `*.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат с типом ключа `ec256` для доменов `example.org` и `*.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
 CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='*.example.org' --pem --pfx --key-type='ec256' --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
+
+- Обновить сертификат с типом ключа `rsa4096` для доменов `example.org` и `*.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
 CF_DNS_API_TOKEN='TOKEN'; "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='*.example.org' --pem --pfx --key-type='rsa4096' --dns='cloudflare' --dns.resolvers '1.1.1.1:53' --dns.resolvers '8.8.8.8:53' --dns.resolvers '77.88.8.8:53' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
@@ -221,11 +229,13 @@ stream {
 
 ### Получение сертификата
 
-- Зарегистрировать адрес `mail@example.org` и получить сертификат для доменов `example.org` и `mail.example.org` в директорию `/root/apps/acme/`:
+- Зарегистрировать адрес `mail@example.org` и получить сертификат с типом ключа `ec256` для доменов `example.org` и `mail.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
 "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='ec256' --tls --tls.port=':10443' run
 ```
+
+- Зарегистрировать адрес `mail@example.org` и получить сертификат с типом ключа `rsa4096` для доменов `example.org` и `mail.example.org` в директорию `/root/apps/acme/`:
 
 ```bash
 "${HOME}/apps/acme/lego" --accept-tos --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='rsa4096' --tls --tls.port=':10443' run
@@ -242,11 +252,13 @@ stream {
 
 ### Обновление сертификата
 
-- Обновить сертификат для доменов `example.org` и `mail.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
+- Обновить сертификат с типом ключа `ec256` для доменов `example.org` и `mail.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
 "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='ec256' --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
 ```
+
+- Обновить сертификат с типом ключа `rsa4096` для доменов `example.org` и `mail.example.org` в директории `/root/apps/acme/` и запустить файл `hook.sh` при успешном обновлении:
 
 ```bash
 "${HOME}/apps/acme/lego" --path="${HOME}/apps/acme" --email='mail@example.org' --domains='example.org' --domains='mail.example.org' --pem --pfx --key-type='rsa4096' --tls --tls.port=':10443' --renew-hook="${HOME}/apps/acme/app.hook.sh" renew
@@ -288,15 +300,17 @@ smtpd_tls_key_file = /etc/ssl/acme/example.org.key
 smtpd_tls_CAfile = /etc/ssl/acme/example.org.crt
 ```
 
+- Настроить параметры в `/etc/postfix/main.cf` для домена `example.org`:
+
 ```ini
 # -------------------------------------------------------------------------------------------------------------------- #
 # SSL / TLS
 # -------------------------------------------------------------------------------------------------------------------- #
 smtpd_tls_chain_files =
-    /etc/ssl/acme/example.org.key,
-    /etc/ssl/acme/example.org.crt,
-    /etc/ssl/acme/example.org.key,
-    /etc/ssl/acme/example.org.crt
+    /etc/ssl/acme/example.org.rsa.key,
+    /etc/ssl/acme/example.org.rsa.crt,
+    /etc/ssl/acme/example.org.ecc.key,
+    /etc/ssl/acme/example.org.ecc.crt
 ```
 
 ### Dovecot
