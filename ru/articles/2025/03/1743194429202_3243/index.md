@@ -300,12 +300,13 @@ smtpd_tls_key_file = /etc/ssl/acme/example.org.key
 smtpd_tls_CAfile = /etc/ssl/acme/example.org.crt
 ```
 
-- Настроить параметры в `/etc/postfix/main.cf` для домена `example.org`:
+- Настроить параметры в `/etc/postfix/main.cf` для домена `example.org` с использованием сертификатов с несколькими шифрами:
 
 ```ini
 # -------------------------------------------------------------------------------------------------------------------- #
 # SSL / TLS
 # -------------------------------------------------------------------------------------------------------------------- #
+
 smtpd_tls_chain_files =
     /etc/ssl/acme/example.org.rsa.key,
     /etc/ssl/acme/example.org.rsa.crt,
