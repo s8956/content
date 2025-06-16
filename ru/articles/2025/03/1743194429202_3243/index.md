@@ -362,20 +362,20 @@ TLSCACertificateFile /etc/ssl/acme/example.org.crt
 
 [Скрипт](https://github.com/pkgstore/bash-acme) состоит из следующих компонентов:
 
-- `app_acme.conf` - файл с общими настройками.
-- `app_acme.sh` - приложение ACME.
-- `cron_acme` - задание для CRON.
-- `app_hook.conf` - файл с настройками hook'а.
-- `app_hook.sh` - приложение hook'а.
+- `app.acme.conf` - файл с общими настройками.
+- `app.acme.sh` - приложение ACME.
+- `app.hook.conf` - файл с настройками hook'а.
+- `app.hook.sh` - приложение hook'а.
+- `cron.acme` - задание для CRON.
 - `example.org_dns` - пример конфигурации домена `example.org` для метода DNS-01.
 - `example.org_http` - пример конфигурации домена `example.org` для метода HTTP-01.
 
 ### Установка
 
-- Скачать и распаковать скрипт:
+- Скачать и установить скрипт:
 
 ```bash
-export SET_DIR='/root/apps/acme'; export GH_NAME='bash-acme'; export GH_URL="https://github.com/pkgstore/${GH_NAME}/archive/refs/heads/main.tar.gz"; curl -Lo "${GH_NAME}-main.tar.gz" "${GH_URL}" && tar -xzf "${GH_NAME}-main.tar.gz" && { cd "${GH_NAME}-main" || exit; } && { for i in app_*; do install -m '0644' -Dt "${SET_DIR}" "${i}"; done; } && { for i in cron_*; do install -m '0644' -Dt '/etc/cron.d' "${i}"; done; } && chmod +x "${SET_DIR}"/*.sh
+curl -sL 'https://raw.githubusercontent.com/pkgstore/bash-install/refs/heads/main/install.sh' | bash -s -- '/root/apps/acme' 'bash-acme' 'main'
 ```
 
 - [Скачать](https://github.com/go-acme/lego/releases/latest) {{< tag "LeGo" >}} и распаковать в директорию `/root/apps/acme/`.
