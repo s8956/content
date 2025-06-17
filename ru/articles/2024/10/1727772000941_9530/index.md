@@ -55,7 +55,7 @@ draft: 0
 
 - `app.asterisk_room_close.conf` - файл с настройками.
 - `app.asterisk_room_close.sh` - приложение.
-- `cron.asterisk_room_close` - задание для CRON.
+- `job.asterisk_room_close` - задание для CRON.
 
 ### Установка
 

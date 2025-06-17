@@ -366,7 +366,7 @@ TLSCACertificateFile /etc/ssl/acme/example.org.crt
 - `app.acme.sh` - приложение ACME.
 - `app.hook.conf` - файл с настройками hook'а.
 - `app.hook.sh` - приложение hook'а.
-- `cron.acme` - задание для CRON.
+- `job.acme` - задание для CRON.
 - `example.org_dns` - пример конфигурации домена `example.org` для метода DNS-01.
 - `example.org_http` - пример конфигурации домена `example.org` для метода HTTP-01.
 

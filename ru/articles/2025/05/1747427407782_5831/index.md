@@ -55,7 +55,7 @@ draft: 0
 
 - `app.backup_fs.conf` - файл с настройками.
 - `app.backup_fs.sh` - приложение.
-- `cron.backup_fs` - задание для CRON.
+- `job.backup_fs` - задание для CRON.
 
 ### Установка
 

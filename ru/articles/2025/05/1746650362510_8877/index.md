@@ -64,7 +64,7 @@ draft: 0
 
 - `app.backup_db.conf` - файл с настройками.
 - `app.backup_db.sh` - приложение.
-- `cron.backup_db` - задание для CRON.
+- `job.backup_db` - задание для CRON.
 
 ### Установка
 
