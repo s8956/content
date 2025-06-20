@@ -317,7 +317,7 @@ export RC_OLD='1.6.9'; export RC_NEW='1.6.10'
 - Запустить команду обновления {{< tag "RoundCube" >}}:
 
 ```bash
-export IRM_DIR="${HOME}/iRM.RoundCube.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_NEW}/roundcubemail-${RC_NEW}-complete.tar.gz" && tar -xzf "roundcubemail-${RC_NEW}-complete.tar.gz" && mv "roundcubemail-${RC_NEW}" '/opt/www/' && cp "/opt/www/roundcubemail-${RC_OLD}/config/config.inc.php" "/opt/www/roundcubemail-${RC_NEW}/config/config.inc.php" && chown -R root:root "/opt/www/roundcubemail-${RC_NEW}" && chown www-data:www-data "/opt/www/roundcubemail-${RC_NEW}"/{logs,temp,config/config.inc.php} && unlink '/opt/www/roundcubemail' && ln -s "/opt/www/roundcubemail-${RC_NEW}" '/opt/www/roundcubemail' && "/opt/www/roundcubemail/bin/update.sh" -v "${RC_OLD}"
+export IRM_DIR="${HOME}/iRM.RoundCube.$( date +%s )"; mkdir "${IRM_DIR}" && cd "${IRM_DIR}" && curl -fSLOJ "https://github.com/roundcube/roundcubemail/releases/download/${RC_NEW}/roundcubemail-${RC_NEW}-complete.tar.gz" && tar -xzf "roundcubemail-${RC_NEW}-complete.tar.gz" && mv "roundcubemail-${RC_NEW}" '/opt/www/' && cp "/opt/www/roundcubemail-${RC_OLD}/config/config.inc.php" "/opt/www/roundcubemail-${RC_NEW}/config/config.inc.php" && chown -R root:root "/opt/www/roundcubemail-${RC_NEW}" && chown www-data:www-data "/opt/www/roundcubemail-${RC_NEW}"/{logs,temp,config/config.inc.php} && unlink '/opt/www/roundcubemail' && ln -s "/opt/www/roundcubemail-${RC_NEW}" '/opt/www/roundcubemail' && '/opt/www/roundcubemail/bin/update.sh' -v "${RC_OLD}"
 ```
 
 {{< alert "tip" >}}
