@@ -47,7 +47,7 @@ draft: 0
 Пример кодирования:
 
 ```bash
-echo "ext_$(date +%s%N | sha512sum | fold -w 8 | head -n 1)"
+echo "ext_$(date '+%s%N' | sha512sum | fold -w 8 | head -n 1)"
 ```
 
 Вывод: `ext_96824896`
@@ -55,7 +55,7 @@ echo "ext_$(date +%s%N | sha512sum | fold -w 8 | head -n 1)"
 Если необходимо, можно конвертировать в верхний регистр:
 
 ```bash
-echo "EXT_$(date +%s%N | sha512sum | fold -w 8 | head -n 1 | tr '[:lower:]' '[:upper:]')"
+echo "EXT_$(date '+%s%N' | sha512sum | fold -w 8 | head -n 1 | tr '[:lower:]' '[:upper:]')"
 ```
 
 Вывод: `EXT_950E60E1`
