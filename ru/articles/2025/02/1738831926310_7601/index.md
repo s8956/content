@@ -62,7 +62,7 @@ export OPENSEARCH_VER='3.1.0'; export OPENSEARCH_INITIAL_ADMIN_PASSWORD='PASSWOR
 - Скачать и установить ключ репозитория:
 
 ```bash
-curl -fsSL 'https://artifacts.opensearch.org/publickeys/opensearch.pgp' | gpg --dearmor -o '/etc/apt/keyrings/opensearch.gpg'
+curl -fsSL 'https://artifacts.opensearch.org/publickeys/opensearch-release.pgp' | gpg --dearmor -o '/etc/apt/keyrings/opensearch.gpg'
 ```
 
 - Создать файл репозитория `/etc/apt/sources.list.d/opensearch.sources`:
