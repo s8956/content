@@ -84,7 +84,7 @@ curl -fsSL 'https://artifacts.opensearch.org/publickeys/opensearch-release.pgp' 
 - Скачать файл основной конфигурации `opensearch.yml` в `/etc/opensearch/`:
 
 ```bash
-f=('opensearch'); d='/etc/opensearch'; s='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do [[ -f "${d}/${i}.yml" && ! -f "${d}/${i}.yml.orig" ]] && mv "${d}/${i}.yml" "${d}/${i}.yml.orig"; curl -fsSLo "${d}/${i}.yml" "${s}/${i}.yml" && chown opensearch:opensearch "${d}/${i}.yml" && chmod 640 "${d}/${i}.yml"; done
+f=('opensearch'); d='/etc/opensearch'; s='https://lib.onl/ru/2025/02/0c18558e-b4e1-5713-aead-9b767d14e99c'; for i in "${f[@]}"; do [[ -f "${d}/${i}.yml" && ! -f "${d}/${i}.yml.orig" ]] && mv "${d}/${i}.yml{,.orig}" curl -fsSLo "${d}/${i}.yml" "${s}/${i}.yml" && chown opensearch:opensearch "${d}/${i}.yml" && chmod 640 "${d}/${i}.yml"; done
 ```
 
 - Скачать файлы локальной конфигурации в `/etc/opensearch/jvm.options.d/`:
