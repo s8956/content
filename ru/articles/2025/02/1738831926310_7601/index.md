@@ -54,7 +54,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
-export OPENSEARCH_VER='2.19.0'
+export OPENSEARCH_VER='3.1.0'; export OPENSEARCH_INITIAL_ADMIN_PASSWORD='PASSWORD'
 ```
 
 ## Репозиторий
