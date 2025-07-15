@@ -190,7 +190,7 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 - `MAIL_FROM='mail@example.org'` - адрес отправителя.
 - `MAIL_TO=('mail@example.com' 'mail@example.info')` - массив адресов получателей.
 - `MAIL_SMTP_SERVER='smtp[s]://[USER[:PASS]@]SERVER[:PORT]'` - адрес внешнего SMTP-сервера с авторизацией.
-- `MAIL_SMTP_AUTH='login[/plain]'` - тип авторизации на внешний SMTP-сервер. По умолчанию: `none`. Принимаемые значения: `none`, `plain`, `login`, `oauthbearer`.
+- `MAIL_SMTP_AUTH='none'` - тип авторизации на внешний SMTP-сервер. По умолчанию: `none`. Принимаемые значения: `none`, `plain`, `login`, `oauthbearer`.
 
 #### GitLab
 
