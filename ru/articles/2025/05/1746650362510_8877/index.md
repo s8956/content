@@ -142,6 +142,10 @@ sudo -u 'postgres' createuser --pwprompt 'backup' && sudo -u 'postgres' psql -c 
 - `PGSQL_NO=1` - добавить опцию `--no-owner` при создании резервной копии БД PgSQL.
 - `PGSQL_NP=1` - добавить опцию `--no-privileges` при создании резервной копии БД PgSQL.
 - `PGSQL_QAI=1` - добавить опцию `--quote-all-identifiers` при создании резервной копии БД PgSQL.
+- `PGSQL_Z=zstd:5` - устанавливает метод и уровень сжатия. Используется только при формате резервного копирования `custom`. По умолчанию: `zstd:5`.
+  - `gzip` - метод сжатия `GZip`.
+  - `lz4` - метод сжатия `LZ4`.
+  - `zstd` - метод сжатия `ZSTD`.
 
 #### Шифрование
 
