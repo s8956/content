@@ -97,16 +97,16 @@ mkfs.xfs "/dev/${VG}/${LV}"
 
 ### Монтирование LV
 
-Создание точки монтирования и монтирование логического тома **LV** в директорию `/home/storage` с файловой системой **EXT4**:
+Создание точки монтирования и монтирование логического тома **LV** в директорию `/mnt/storage` с файловой системой **EXT4**:
 
 ```bash
-mkdir '/home/storage' && echo "/dev/${VG}/${LV} /home/storage ext4 defaults 0 0" >> '/etc/fstab' && mount "/dev/${VG}/${LV}" '/home/storage'
+mkdir '/mnt/storage' && echo "/dev/${VG}/${LV} /mnt/storage ext4 defaults 0 0" >> '/etc/fstab' && mount "/dev/${VG}/${LV}" '/mnt/storage'
 ```
 
-Создание точки монтирования и монтирование логического тома **LV** в директорию `/home/storage` с файловой системой **XFS**:
+Создание точки монтирования и монтирование логического тома **LV** в директорию `/mnt/storage` с файловой системой **XFS**:
 
 ```bash
-mkdir '/home/storage' && echo "/dev/${VG}/${LV} /home/storage xfs defaults 0 0" >> '/etc/fstab' && mount "/dev/${VG}/${LV}" '/home/storage'
+mkdir '/mnt/storage' && echo "/dev/${VG}/${LV} /mnt/storage xfs defaults 0 0" >> '/etc/fstab' && mount "/dev/${VG}/${LV}" '/mnt/storage'
 ```
 
 ## Расширение LVM
