@@ -225,9 +225,7 @@ Certificate Request:
 
 ## Автоматизация
 
-Команд много. Поэтому я как обычно, решил всё автоматизировать и загнать в скрипт.
-
-{{< file "bash.openssl.ca.sh" "bash" >}}
+Команд много. Поэтому я как обычно, решил всё автоматизировать и загнать в [скрипт](https://github.com/pkgstore/bash-ssl/blob/main/app.ca.ssc.sh).
 
 Скрипт содержит две функции, вызывать которых можно по отдельности. Функция `ca()` позволяет сгенерировать ключ и сертификат центра сертификации, а функция `cert()`, соответственно, генерирует клиентские сертификаты.
 
@@ -236,13 +234,13 @@ Certificate Request:
 1. Создать ключ и сертификат центра сертификации:
 
 ```terminal
-bash bash.openssl.ca.sh ca
+bash app.ca.ssc.sh ca
 ```
 
 2. Создать клиентские ключи и сертификаты:
 
 ```terminal
-bash bash.openssl.ca.sh cert
+bash app.ca.ssc.sh cert
 ```
 
 Немного расскажу про алгоритм генерации сертификатов.
@@ -258,9 +256,7 @@ bash bash.openssl.ca.sh cert
 
 ### Скрипт
 
-Генератор корректных SSL-сертификатов. Перед генерацией сертификата, необходимо откорректировать переменные в скрипте под проект.
-
-{{< file "bash.openssl.ssc.sh" "bash" >}}
+[Генератор](https://github.com/pkgstore/bash-ssl/blob/main/app.ssc.sh) корректных SSL-сертификатов. Перед генерацией сертификата, необходимо откорректировать переменные в скрипте под проект.
 
 #### Использование
 
@@ -297,21 +293,21 @@ bash bash.openssl.ca.sh cert
 В терминале выполнить команду, подставив свои значения:
 
 ```bash
-curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>' '<keyUsage>' '<extendedKeyUsage>' '[TRUE|FALSE]'
+curl -sL 'https://raw.githubusercontent.com/pkgstore/bash-ssl/refs/heads/main/app.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>' '<keyUsage>' '<extendedKeyUsage>' '[TRUE|FALSE]'
 ```
 
 ```bash
-wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>' '<keyUsage>' '<extendedKeyUsage>' '[TRUE|FALSE]'
+wget -qO - 'https://raw.githubusercontent.com/pkgstore/bash-ssl/refs/heads/main/app.ssc.sh' | bash -s -- '<CN>' '<subjectAltName>' '<keyUsage>' '<extendedKeyUsage>' '[TRUE|FALSE]'
 ```
 
 Например:
 
 ```bash
-curl -sL 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.org' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.org, DNS:*.example.org, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
+curl -sL 'https://raw.githubusercontent.com/pkgstore/bash-ssl/refs/heads/main/app.ssc.sh' | bash -s -- 'example.org' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.org, DNS:*.example.org, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
 ```
 
 ```bash
-wget -qO - 'https://lib.onl/ru/2023/10/6733cb51-62a0-5ed9-b421-8f08c4e0cb18/bash.openssl.ssc.sh' | bash -s -- 'example.org' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.org, DNS:*.example.org, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
+wget -qO - 'https://raw.githubusercontent.com/pkgstore/bash-ssl/refs/heads/main/app.ssc.sh' | bash -s -- 'example.org' 'DNS:localhost, DNS:*.localhost, DNS:*.localdomain, DNS:*.local, DNS:example.org, DNS:*.example.org, IP:127.0.0.1, IP:192.168.1.2' 'digitalSignature, nonRepudiation, keyEncipherment'
 ```
 
 Таким образом, сертификат будет сгенерирован с заданными параметрами и заверен собственной подписью.
