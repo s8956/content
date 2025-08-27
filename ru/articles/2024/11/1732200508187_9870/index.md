@@ -57,7 +57,7 @@ draft: 0
 - Экспортировать заранее подготовленные параметры в переменные окружения:
 
 ```bash
-export ZABBIX_VER='7.0'
+export ZABBIX_VER='7.4'
 ```
 
 ## Репозиторий
@@ -71,7 +71,7 @@ curl -fsSL 'https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-B5333005' | gpg --dearmor
 - Создать файл репозитория `/etc/apt/sources.list.d/zabbix.sources`:
 
 ```bash
-. '/etc/os-release' && echo -e "X-Repolib-Name: Zabbix\nTypes: deb\nURIs: https://repo.zabbix.com/zabbix/${ZABBIX_VER}/${ID}\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/zabbix.gpg\n" | tee '/etc/apt/sources.list.d/zabbix.sources' > '/dev/null'
+. '/etc/os-release' && echo -e "X-Repolib-Name: Zabbix\nTypes: deb\nURIs: https://repo.zabbix.com/zabbix/${ZABBIX_VER}/stable/debian\nSuites: ${VERSION_CODENAME}\nComponents: main\nSigned-By: /etc/apt/keyrings/zabbix.gpg\n" | tee '/etc/apt/sources.list.d/zabbix.sources' > '/dev/null'
 ```
 
 ## Zabbix Server
@@ -102,13 +102,13 @@ apt update && apt install --yes zabbix-server-pgsql zabbix-frontend-php zabbix-s
 - Создать пользователя и базу данных `zabbix`, импортировать схему для базы данных `zabbix`:
 
 ```bash
-u='zabbix'; d='zabbix'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}" && zcat '/usr/share/zabbix-sql-scripts/postgresql/server.sql.gz' | sudo -u "${u}" psql "${d}"
+u='zabbix'; d='zabbix'; sudo -u 'postgres' createuser --pwprompt "${u}" && sudo -u 'postgres' createdb -O "${u}" "${d}" && zcat '/usr/share/zabbix/sql-scripts/postgresql/server.sql.gz' | sudo -u "${u}" psql "${d}"
 ```
 
-- Добавить расширение, импортировать схему TimescaleDB для базы данных `zabbix`:
+- Добавить расширение, импортировать схему **TimescaleDB** для базы данных `zabbix`:
 
 ```bash
-u='zabbix'; d='zabbix'; echo 'create extension if not exists timescaledb cascade;' | sudo -u 'postgres' psql "${d}" && cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u "${u}" psql "${d}"
+u='zabbix'; d='zabbix'; echo 'create extension if not exists timescaledb cascade;' | sudo -u 'postgres' psql "${d}" && cat '/usr/share/zabbix/sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u "${u}" psql "${d}"
 ```
 
 - Открыть файл `/etc/zabbix/zabbix_server.conf` и отредактировать параметр:
@@ -235,7 +235,7 @@ systemctl stop zabbix-server zabbix-agent2
 - Обновление схемы TimescaleDB:
 
 ```bash
-cat '/usr/share/zabbix-sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u 'zabbix' psql 'zabbix'
+cat '/usr/share/zabbix/sql-scripts/postgresql/timescaledb/schema.sql' | sudo -u 'zabbix' psql 'zabbix'
 ```
 
 {{< alert "tip" >}}
