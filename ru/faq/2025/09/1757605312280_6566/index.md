@@ -3,19 +3,20 @@
 # GENERAL
 # -------------------------------------------------------------------------------------------------------------------- #
 
-title: '1757605312280_6566'
+title: 'VLAN для интерфейса Proxmox'
 description: ''
 images:
   - 'https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d'
 tags:
-  - 'tag_01'
-  - 'tag_02'
-  - 'tag_03'
+  - 'linux'
+  - 'proxmox'
+  - 'pve'
+  - 'vlan'
 authors:
-  - 'JohnDoe'
-  - 'JaneDoe'
+  - 'KaiKimera'
 sources:
-  - ''
+  - 'https://pve.proxmox.com/wiki/Network_Configuration#sysadmin_network_vlan'
+  - 'https://forum.proxmox.com/threads/119299'
 
 # -------------------------------------------------------------------------------------------------------------------- #
 # DATE
@@ -34,9 +35,9 @@ hash: 'e7bc05c5ca124476e0136fa85900378b83a57308'
 uuid: 'e7bc05c5-ca12-5476-8013-6fa85900378b'
 slug: 'e7bc05c5-ca12-5476-8013-6fa85900378b'
 
-draft: 1
+draft: 0
 ---
 
-
+Сеть построена на vlan-ах. Необходимо настроить Proxmox для работы с vlan-ами. Как сделать?
 
 <!--more-->
