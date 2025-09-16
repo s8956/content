@@ -45,6 +45,10 @@ slug: 'f892bebc-3ecd-518a-a948-27eed31649da'
 draft: 0
 ---
 
+{{< alert "important" >}}
+MikroTik [научился](https://help.mikrotik.com/docs/spaces/ROS/pages/2555969/Certificates) автоматически продлевать сертификат Let's Encrypt по истечении 80% срока действия.
+{{< /alert >}}
+
 Алгоритм получения сертификата Let's Encrypt и последующего его продления при помощи скрипта.
 
 <!--more-->
