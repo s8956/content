@@ -12,7 +12,6 @@ $ORIGIN hostname.local.
 ns01                IN  A       127.0.0.1
 ; MAIN
 @                   IN  A       127.0.0.1
-@                   IN  AAAA    ::1
 ; MAIL
 @                   IN  MX  10  mail.hostname.local.
 mail                IN  A       127.0.0.1
