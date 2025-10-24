@@ -1,5 +1,5 @@
-view "local" {
-  match-clients { local; };
+view "default" {
+  match-clients { any; };
 
   // Prime the server with knowledge of the root servers.
   zone "." { type hint; file "/usr/share/dns/root.hints"; };
